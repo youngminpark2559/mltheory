@@ -24,21 +24,21 @@
 08. softmax function<br/>
 <br/>
 @<br/>
-softmax function $y = \frac{e^{wx}}{\sum{e^{wx}}}$ \\<br/>
+softmax function $y = \frac{e^{wx}}{\sum{e^{wx}}}$ <br/>
 <br/>
-sigmoid function이랑 비슷한 성질을 가지고 있다. activation function 이라고 생각하면 된다. \\<br/>
+sigmoid function이랑 비슷한 성질을 가지고 있다. activation function 이라고 생각하면 된다. <br/>
 <br/>
 @<br/>
-softmax function 의 역할을 알아보기위해 간단한 NN을 그려보자.\\<br/>
+softmax function 의 역할을 알아보기위해 간단한 NN을 그려보자.<br/>
 <br/>
-input : $x_{1}, x_{2}$\\<br/>
-activation functions ( in hidden layer ) : 노드 3개\\<br/>
-output layer : 노드 6개\\<br/>
+input : $x_{1}, x_{2}$<br/>
+activation functions ( in hidden layer ) : 노드 3개<br/>
+output layer : 노드 6개<br/>
 <br/>
 @<br/>
 현재까지 hidden layer와 output layer 에서 sigmoid activation function 을 사용해 왔었다. 거기서 cost function 를 구하고 gradient descent로 기울기를 구해서 hypothesis function의 weight를 업데이트 시키는 방법으로 hypothesis function의 line을 fitting 시키시면서 학습을 시켜왔다. <br/>
 <br/>
-그런데 과학자들이 연구를 하다보니까 output layer에는 softmax function 사용했을 때 output layer 에 sigmoid function을 쓰는것보다 성능이 더 잘나온다 라는 결론이 나왔다. 그래서 이제부터는 output layer 에는 왠만하면 sigmoid function보다 softmax function 을 쓰도록 하자 라는 방법론이 제기가 되었다. \\<br/>
+그런데 과학자들이 연구를 하다보니까 output layer에는 softmax function 사용했을 때 output layer 에 sigmoid function을 쓰는것보다 성능이 더 잘나온다 라는 결론이 나왔다. 그래서 이제부터는 output layer 에는 왠만하면 sigmoid function보다 softmax function 을 쓰도록 하자 라는 방법론이 제기가 되었다. <br/>
 <br/>
 @<br/>
 우리가 해 볼것은. output layer에 sigmoid function을 사용할 때와 softmax function을 사용할때 어떤 차이가 있나 확인해보자. <br/>
@@ -46,10 +46,10 @@ output layer : 노드 6개\\<br/>
 @<br/>
 우선 output layer 에서 sigmoid function을 적용한것과 softmax function을 적용한 것 모두에서 각각의 클래스(output layer에서 output 값 y를 출력하는 노드)들은 [0,1] 범위의 output 값을 출력한다는 것은 동일하다. <br/>
 <br/>
-그런데 softmax function을 보면 알겠지만, \\<br/>
-$y = \frac{e^{wx}}{\sum{e^{wx}}}$\\<br/>
-분모가 $e^{wx}$ 의 합($\sum{e^{wx}}$)이다. \\<br/>
-예를들어, output layer Y의 모든 노드에는 $y = \frac{e^{wx}}{\sum{e^{wx}}}$ 이와 같은 softmax function이 있게 되고, output 값인 클래스를 출력하게 되는데, $y_{1} = 0.7$ 이면 $y_{2}, ..., y_{6}$ 까지 클래스들이 0.3을 나눠갖아야한다.\\<br/>
+그런데 softmax function을 보면 알겠지만, <br/>
+$y = \frac{e^{wx}}{\sum{e^{wx}}}$<br/>
+분모가 $e^{wx}$ 의 합($\sum{e^{wx}}$)이다. <br/>
+예를들어, output layer Y의 모든 노드에는 $y = \frac{e^{wx}}{\sum{e^{wx}}}$ 이와 같은 softmax function이 있게 되고, output 값인 클래스를 출력하게 되는데, $y_{1} = 0.7$ 이면 $y_{2}, ..., y_{6}$ 까지 클래스들이 0.3을 나눠갖아야한다.<br/>
 <br/>
 정규분포 이런데서 얘기하는 정규화 개념과 비슷하다고 보면 된다. <br/>
 <br/>
