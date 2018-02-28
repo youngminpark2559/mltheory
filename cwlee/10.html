@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+@Chapter<br/>
+10. CNN Back Propagation<br/>
+<br/>
+@<br/>
+지난 시간에서 논의 했던 CNN에서의 forward propagation 에 이어서 오류를 찾아서 학습을 할 수 있게 해주는 CNN에서의 back propagation 에 대해서 알아보자.<br/>
+<br/>
+기본적인 원리는 일반적인 NN과 동일하다. 연산이 구조에 의해서 조금 바뀌는게 있는데, 일반적인 NN을 기억한다면 이거랑 매치 해보면 금방 이해 될 거다. <br/>
+<br/>
+@<br/>
+간단한 CNN을 그려보면서 살펴보도록 하자.<br/>
+X $\overset{w_{1}}{\rightarrow}$ (a : ReLu) $\rightarrow$ pooling $\overset{w_{2}}{\rightarrow}$ Y <br/>
+<br/>
+X : input layer<br/>
+x : output value from input layer<br/>
+w : weight<br/>
+(a) : activation function in hidden layer. 일반적인 신경망에서는 hidden layer에서 sigmoid function으로 이루어져있었는데 CNN의 경우 ReLu function을 사용한다.<br/>
+pooling : in hidden layer. ReLu function을 통과하고 나서는 CNN에서는 이 과정이 있다. <br/>
+a + pooling = 하나의 hidden layer.<br/>
+hidden layer 반복.<br/>
+drop out : in output layer. 트레이닝 시 feature를 감소시켜 정확도, 성능을 향상시킴<br/>
+Y : output layer.<br/>
+y : output value from output layer.<br/>
+<br/>
+@<br/>
+hidden layer 에서 일반적인 NN에서는 $\delta$ 를 업데이트 해줬었다. <br/>
+우선 기울기를 구하기 위해 입력을 곱하기 전에 미분한 상태의 sigmoid function $g'(x) = g(x)(1-g(x))$ 가 각각의 항(weight)에 곱해지는것 기억해라. 이게 $\delta$를 업데이트 하는 방법이었다.<br/>
+$\delta_{l+1}$ : l번째 다음 layer 의 $\delta$<br/>
+$\delta_{l}= w\delta_{l+1}g'(x)$<br/>
+<br/>
+@<br/>
+CNN에서도 위 수식과 유사하게 적용이 된다. 위의 수식에서 weight인 w가 CNN에서는 한개의 patch니까 이 patch를 묘사하는 것은 차원이 있는 일종의 벡터나 행렬이 될 거다. 위 수식에서는 하나의 상수지만.<br/>
+<br/>
+@<br/>
+2*2 행렬A와 2*2 행렬B를 곱해서 2*2 행렬C가 나올 때 $AB= C$ 행렬C안의 원소들 하나하나는 스칼라지만 두 행렬의 곱하기 연산으로부터 행렬C자체는 2차원 행렬로 정의할 수 있다. A*P=R, 행렬A, patch P, result R일때, convolution도 2차원벡터와 2차원벡터의 연산이므로 R도 2차원적인 텐서가 나오게 되어있다. 연산자체가 2차원연산이면 결과항을 하나의 2차원적인 성분으로 보면된다. 굳이 w가 상수값처럼 하나여야한다. 이렇게 해석하기 보다는 하나의 행렬로 받아들여라. <br/>
+<br/>
+@<br/>
+이 이야기를 하는 이유가 미분을 해야되서 그렇다. 이제 미분을 해야되는데 지금까지 스칼라에 대해 미분을 해왔지 patch에 대해 미분을 한다는 것에 대해 상상이 잘 안될거다. 그런데 사람이 생각하는 미분공식과 개념보다 컴퓨터가 이해하는 미분의 정의에 입각한 미분방법(차에의한 기울기)이 있기때문에 문제는 안된다. patch라도 하나의 항으로 봐라. convolution 연산이라면 그렇게 생각하는게 가능하다. 벡터연산에서 위 수식에 대해 미분해라 면 문제가 될 수 있는데 convolution연산에서 w patch 행렬에 대해 미분해라 이렇게 하면 일반적인 곱에서 어떤 상수값을 미분하는거랑 별반 차이없다. <br/>
+<br/>
+@<br/>
+위의 수식을 다시 쓰자. g(x)를 ReLu function으로 재정의 하면서.<br/>
+X $\overset{w_{1}}{\rightarrow}$ (a : ReLu) $\rightarrow$ pooling $\overset{w_{2}}{\rightarrow}$ Y <br/>
+DNN에서는 일반적인 행렬곱($\delta_{l} = w\delta_{l+1}g'(x)$)을 했지만 CNN에서는 weight와 $\delta$를 행렬곱이 아니라 convolution 연산을 한다.<br/>
+<br/>
+$\delta_{l} = w*\delta_{l+1}\circ{g'(x)}$<br/>
+<br/>
+조금 구체적으로 말해본다면, $\delta_{l} = w_{2}*\delta_{y}\circ{g'(x)}$<br/>
+$w_{2}$는 weight2에 해당하는 patch2이며 convolution연산한 결과값에 ReLu function의 미분형을 element product한다.<br/>
+<br/>
+@<br/>
+그런데 여기서 문제가 생긴다. pooling이라는 과정을 거친다고 했다. 그런데 $\delta$라는게 정의되는게 ReLu function이 들어가 있는 hidden layer에서 $\delta$가 정의가 되는 것이다. hidden layer의 $\delta$에서 pooling과정을 거친 후에 다음 layer로 넘어가게 되면 행렬의 크기가 변하게 된다. 만약 hidden layer에서 $\delta$ 가 24*24 였다면 2*2로 pooling하면 12*12크기행렬로 줄어들게 된다. $\delta_{l+1}$은 다음 layer에 대한 $\delta$이고, 여기에 weight patch 행렬이랑 convolution 연산을 하는건 상관이없는데 g'(x)의 미분형을 element wise multiplication을 할때에는 크기가 달라서 문제가 생긴다. g'(x)는 ReLu function의 미분형이기때문에 hidden layer에서 각각의 노드의 미분형이다. 행렬연산중 크기를 늘려주는 scaling 테크닉을 써야한다. 행렬연산중 크기를 늘려주는 연산인 Kronecker product 테크닉을 써야한다.<br/>
+<br/>
+$A\otimes{B} = \begin{bmatrix} 1&2 \\ 3&4 \end{bmatrix} \otimes \begin{bmatrix} 4&5 \\ 6&7 \end{bmatrix}$<br/>
+$= \begin{bmatrix} 1*4&2*4&1*5&2*5 \\ 3*4&4*4&3*5&4*5 \\ 1*6&2*6&1*7&2*7 \\ 3*6&4*6&3*7&4*7 \end{bmatrix}$<br/>
+$= \begin{bmatrix} 4&8&5&10 \\ 12&16&15&20 \\ 6&12&7&14 \\ 18&24&21&28 \end{bmatrix}$<br/>
+<br/>
+@<br/>
+Kronecker product를 위 상황에서 사용하면 A자리에 g'(x)를 대입하고 B자리에 원소가 모두 1인 행렬을 대입한다.<br/>
+예를들어서, $\begin{bmatrix} a&b \\ c&d \end{bmatrix}$ 에 $\begin{bmatrix} 1&1 \\ 1&1 \end{bmatrix}$ 을 Kronecker product를 하면,<br/>
+$ \begin{bmatrix} a&b \\ c&d \end{bmatrix} \otimes \begin{bmatrix} 1&1 \\ 1&1 \end{bmatrix}$<br/>
+$= \begin{bmatrix} a&a&b&b \\ a&a&b&b \\ c&c&d&d \\ c&c&d&d \end{bmatrix}$<br/>
+<br/>
+그러면 2*2 -> 4*4 된다. 함수가 scaled up된것을 up function이라고 부른다.<br/>
+<br/>
+@<br/>
+$\delta_{l} = w*\delta_{l+1}\circ{g'(x)}$<br/>
+$= w*\delta_{l+1}\circ{up(g'(x))}$<br/>
+<br/>
+이렇게 간단하게 $\delta$ 를 업데이트 했다. $\delta$ 를 업데이트 했으면 cost를 구해야한다. cost를 구한다는 것은 $\delta$ 에다가 그 전 레이어으로 부터의 입력을 곱해주면 된다. <br/>
+<br/>
+해당 weight에 대한 E의 미분(기울기)는 $\delta$ 곱하기 그 전 레이어로부터의 입력이다.<br/>
+$\frac{\partial{E}}{\partial{w}} = \delta*a$ <br/>
+<br/>
+$\delta$와 a 곱할때도 convolution이다. 그러면 업데이트가 된다.<br/>
+<br/>
+@<br/>
+간단하게 해결이 됐는데, 일반적인 NN과 차이점이라면 곱하기 연산을 일반 행렬곱 말고 convolution 연산으로 해준것 차이밖에 없다. <br/>
+<br/>
+또, patch에 대해 미분하면 어떻게 될 지 몰랐지만 patch도 size만 맞으면 convolution에 대해서 미분을 해주는 거니까 일반적인 우리가 아는 미분연산으로 해도 관계가 없다. 라고 생각하면 된다. <br/>
+<br/>
+@<br/>
+하지만 생략한 부분이 좀 있는데, 정확히는 convolution이 아니라 correlation하게 되는거다. 두개는 크게 다른게 아니다. <br/>
+<br/>
+forward propagation할때는 weight sum하기때문에 일반적인 convolution이라고 생각해도 좋다. <br/>
+<br/>
+patch가 이미지 위로 붙고 슬라이딩 한다. 원소끼리의 곱을 전부 더해서 하나의 값으로 정의하고 계속하면 사이즈가 조금 줄어든 이미지가 된다. 이게 convolution이다.<br/>
+<br/>
+correlation은 convolution과 연산 방법은 똑같다. 단지 patch를 flip을 시킨다. <br/>
+<br/>
+patch가 1 2 3 4 이고<br/>
+image가 5 6 7 8 이면 왼쪽에서 오른쪽으로 patch를 이동시키면서 하는게 convolution연산이다.<br/>
+<br/>
+patch를 180도 회전(flip)을 시켜서 4 3 2 1 을 만든뒤 이미지 5 6 7 8 convolution을 하면 이건 correlation 이다. correlation은 convolution연산의 한 방법<br/>
+<br/>
+@<br/>
+correlation<br/>
+	cross correlation<br/>
+	auto correlation : 자기 자신과 correlation연산을 할때 <br/>
+	<br/>
+convolution과 correlation의 차이는 convolution과 cross correlation의 차이라고 보면 된다.<br/>
+<br/>
+@<br/>
+직각이 오른쪽에 있는 삼각형을 patch라고 생각하고 직각이 왼쪽에 있는 삼각형을 이미지라고 했을 때, 일반적인 convolution 연산을 하면 슬라이딩할때좋지가 않다. convolution 결과가 점점 증가하다가 최고점찍고 감소하다 0이되는 산모양 삼각형이 나온다. <br/>
+<br/>
+correlation을 하게되면 patch 가 flip되어서 직각이 이미지와 같이 왼쪽에 있는 삼각형 모양이 된다. 가다가 두개 모양이 겹쳐지는 구간이 있다. <br/>
+<br/>
+모양이 완전히 다를때는 convolution과 별반 다를게 없다. 모양이 비슷할때 correlation의 성능향상이 발생한다. <br/>
+<br/>
+patch와 이미지의 모양이 일치할 때 가장 높은 값을 갖게된다. 산종모양에서 최고점을 찍는 것과 비슷한데 이때의 최고점보다도 훨씬 더 높은 값을 가질 확률이 높다.<br/>
+<br/>
+@<br/>
+따라서, correlation은 주로 템플릿매칭이나 유사도를 체크할때 많이 사용된다. 자기 자신을 flip해서 correlation을 할때는 균일도 체크나 자기자신의 신호가 불확실성이 있을때, 이럴때 auto correlation을 하면 자기 신호에 대한 분산도 알 수 있다. 유용한 분석에서 파라미터를 구할 때 널리 쓰이고 있다. 일치율을 체크할때 correlation이 적합하다. <br/>
+<br/>
+@<br/>
+back propagation할 때, $\delta_{l} = w*\delta_{l+1}\circ{up(g'(x))}$ 에서 weight w patch를 flip을 해서 correlation을 한다. correlation을 하는 내부적 이유는 convolution에 대해서 미분을 하려고 하니까 방향에 대해서 보정을 해주는 이유이다. <br/>
+
+
+      
+   </BODY>
+</HTML>
