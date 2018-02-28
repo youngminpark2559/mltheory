@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+@Chapter.<br/>
+11. Local Minima<br/>
+<br/>
+@<br/>
+gradient descent 의 문제점은 초기값을 어떻게 랜덤하게 설정하느냐에 따라 로컬 미니멈에 빠질 우려가 있다. <br/>
+<br/>
+cost funcion $C = \frac{1}{2m}\sum{(h_{\theta}(x)-y')}^{2}$ 라고 하면, weight를 $\theta$로 갖는 hypothesis function $h_{\theta}(x)$ 은 x에 대해 2차식이나 3차식 어떤 데이터 형태를 가져도 상관이 없다. 단 $\theta$에 대해서는 linear해야한다. 그래서 linear regression이다. 그 말은 C에서 $\theta$는 2차가 될수 밖에 없다. 제곱만 해주므로. 그러면 여기서 의문이 생긴다. $\theta$ 의 최고차항이 2차이면 벡터공간에서 $\theta$에 대해서 cost function의 그래프는 convex형의 그래프 개형이 나와야하는것이고 convex 형의 경우 로컬 미니가 존재할 수 없다. <br/>
+<br/>
+@<br/>
+$\theta$에 대해서 cost function의 그래프가 convex형의 그래프 개형이 나오려면 전제조건이 있다. 이 convex형의 그래프는 어떤 한 시점 t에서의 그래프이다. 앤드류의 강의에서는 데이터를 다 모았다고 가정하고 다 모은 시점에서 gradient descent를 설명했다. 우리는 실시간으로 데이터를 계속 받는다고 생각해보자. 그럼 로컬 미니마가 있는 그래프가 생긴다.<br/>
+<br/>
+@<br/>
+$y = ax+b$ 의 일차 선형 그래프를 생각해보자. 여기에 상수에 초기값 대입해서 특정 그래프를 얻는다. 이런 그래프를 설정해놓고 데이터를 넣어주면서 그래프를 업데이트 하는 것이다. <br/>
+<br/>
+@<br/>
+로컬미니마에는 어떻게 빠지게 되나. 데이터가 그래프가 fitting되기 쉽도록 착하게 들어온다는 보장이 없다. 원래 데이터 셋의 이상적 분포가 위에 있는데 그래서 윗쪽에서 글로벌미니마에 빠져야하는데 처음에 아랫쪽에 분포하는 데이터가 많이 들어와서 아랫쪽에서 그래프가 완전히 fitting되면 cost function에서 기울기가 0이 되고 그 뒤에 윗쪽에서 아무리 많이 데이터가 들어와도 로컬미니마에 빠져서 움직이지 않는다. <br/>
+<br/>
+@<br/>
+벡터 공간에서 생각해 보면 특정 시점에서 각각의 convex가 생긴다. 각각이 로컬 미니마이다. 이런데 그러한 convex들을 다 모으면 평균적인 convex가 나오고 여기에서 글로벌 미니마를 찾을 수 있는거다. 그런데 특정 시점에서 로컬 미니마를 이미 빠져버리면 기울기가 0이되고 $\alpha$ 값이 작아져서 글로벌 미니마로 움직일 수가 없게 된다.<br/>
+<br/>
+@<br/>
+그래서 데이터가 가우시안 정규분포를 따를때 글로벌 미니마를 찾을 가능성이 높아진다고 볼수 있는 것이다. 가우시안 정규분포에서 벗어난 데이터일 수록 로컬 미니마에 빠질 확률이 커지게 된다. 물론 데이터가 가우시안 정규분포를 따른다고 로컬 미니마에 안빠지는 건 아니다. 처음에 로컬 데이터가 많이 들어와서 그쪽에서 빠질 수 있다. <br/>
+
+      
+   </BODY>
+</HTML>
