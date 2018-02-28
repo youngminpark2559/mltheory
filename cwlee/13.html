@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+   @Chapter<br/>
+13. RNN Introduction<br/>
+<br/>
+@<br/>
+기본적인 NN 리뷰해보고 이게 어떻게 RNN으로 바뀌는지 확인해보자. RNN도 NN이다. 둘이 어떤 연관이고 NN이 어떻게 RNN이 되는지 알아보자. <br/>
+<br/>
+@<br/>
+일반적인 NN.<br/>
+<br/>
+X $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ Y <br/>
+<br/>
+@<br/>
+feature나 레이어가 여러개가 되면, 더 복잡해지는 다차원의 NN이 될 수 있다.<br/>
+<br/>
+@<br/>
+만약 (H)를 output layer 로 본다면 y는 output data가 되고 $w_{2}$는 필요없다. 간략화하기 위해 다음과 같이 NN을 가정하자.<br/>
+<br/>
+X $\overset{w}{\rightarrow}$ (Y) $\rightarrow$ y <br/>
+<br/>
+@<br/>
+X에다 데이터를 넣을 수 있다.<br/>
+<br/>
+CNN의 경우 이미지를 넣을 수 있다. 일반적 NN이 경우 x, y좌표가 들어갈 수 있고 여러가지 데이터가 차원의 형태로 들어가게 될 것이다. <br/>
+<br/>
+@<br/>
+x에 데이터를 넣는다.<br/>
+$\begin{bmatrix} x_{1}\\x_{2}\\x_{3}\\... \end{bmatrix}$<br/>
+<br/>
+w는 상수로 이미 정해져 있다. 단순한 스칼라 형태의 상수로 생각을 해보자. <br/>
+(Y)에서는 sigmoid function 으로 g(x) 라고 가정하자. 그러면, $y = g(wx)$이 된다.<br/>
+<br/>
+위와 같은 것이 신경망(NN)이라는 구조이다.<br/>
+<br/>
+@<br/>
+이렇게 구조화를 했으면 back propagation할때도 먼저 y에 대한 오차를 구한다. 오차를 구해서 제곱을 하여 cost 를 구한뒤 w에 대하여 cost를 미분해서 기울기에 따라 w를 업데이트 해주고, 업데이트된 w를 가지고 forward propagation and then back propagation, forward propagation, 반복하면서 w를 업데이트 시켜 나간다. <br/>
+<br/>
+@<br/>
+RNN에 대하여.<br/>
+<br/>
+X $\overset{w}{\rightarrow}$ (Y) $\rightarrow$ y <br/>
+<br/>
+Y layer에는 activation function이 sigmoid function 으로서 g(x)이다.<br/>
+따라서, $y = g(wx)$<br/>
+$\begin{bmatrix} x_{1}\\x_{2}\\x_{3}\\... \end{bmatrix}$<br/>
+<br/>
+@<br/>
+아까 전에 본 DNN의 구조와 똑같이 보인다. 맞다 RNN은 일반 DNN이랑 다를게 없다. 하지만 조금 더 자세히 들어가보자.<br/>
+<br/>
+@<br/>
+첫번째 NN 예에서 input output 데이터를 2차원 xy 직교좌표계에서 표현하면 여러 점 형태로 표현된다. <br/>
+<br/>
+@<br/>
+RNN에서는 input 데이터가 특이하다.<br/>
+<br/>
+$\begin{bmatrix} x_{1}\\x_{2}\\x_{3}\\... \end{bmatrix}$<br/>
+에서 $x_{1}, x_{2}, x_{3}, ...$ 들이 모두 같은 무엇(예를들어 똑같은 집의 가격)을 나타내는 데이터들이다. 다 다른 데이터(시기별로 같은 집의 가격이 다 다르지만) 인데 같은 데이터(같은 집의 가격을 묘사하는 데이터)다. <br/>
+<br/>
+@<br/>
+무슨말이냐면, x-t 직교좌표계를 생각했을 때, x가 변한다 time 도메인에서. 물론, 꼭, time domain 이라는 법은 없다. <br/>
+<br/>
+@<br/>
+NN에서는 x(집가격) 을 다 조사하고 거기에 따른 y(집넓이)를 구한 여러 데이터들의 데이터셋이라면 <br/>
+RNN에서 데이터들의 느낌은 이러하다. 한집의 가격(x)을 계속 관찰하는 것이다. 그럼 그 한집의 가격이 변할것인데, 변화된 가격을 시간에 대해 예측하는 그러한 방식이다. 그러니까 x들은 시간(t)에 따른 같은집의 가격에 대한 데이터의 셋이다. <br/>
+<br/>
+@<br/>
+어떤 것이 어떤 도메인에 대해서 그 속성이 변할 때, 그 도메인에서의 데이터에 관하여 학습을 시키는 게 RNN이다.<br/>
+<br/>
+@<br/>
+RNN과 CNN을 합친다면 동영상 처리를 할 수 있을것 같다. CNN으로 이미지컷 하나를 분석한다. 이 이미지가 동영상으로 움직이게 하는 것이다, time 도메인에서. 그러면 여러장의 프레임 이미지들을 생성할 수 있다, time 도메인에 대해서. <br/>
+이러한 방식으로 연속적인 모션을 포착하는데 적합한 모델이 RNN이다. <br/>
+<br/>
+동영상처리말고도 자연어 처리하는데도 RNN이 적합하다. 문법특성때문에 그렇다. 주어 동사 목적어 등의 문법 순서를 일종의 도메인으로 본다. 도메인이 정해지면 단어의 패턴들이 변한다. 패턴을 읽어서 뒤에 뭐가 올지 예측하는 용도로 RNN을 사용하고 있다. <br/>
+<br/>
+@<br/>
+구조도를 더 자세히 알아보자.<br/>
+<br/>
+일반적인 NN.<br/>
+$X \rightarrow x \overset{w_{1}}{\rightarrow} (H_{1}) \overset{w_{2}}{\rightarrow} (H_{2}) \overset{w_{3}}{\rightarrow} (H_{3}) \overset{w_{4}}{\rightarrow} (Y) \rightarrow y \\$<br/>
+<br/>
+RNN.<br/>
+$X \rightarrow (H) \rightarrow Y \rightarrow y \rightarrow (H)$<br/>
+<br/>
+activation function을 같은걸 쓴다는 얘기다. <br/>
+<br/>
+위의 일반적인 NN의 경우에는 각각 $H_{1}, H_{2}, H_{3}$일때 각각은 activation function과 각각의 상수들도 다를것이다. 예를들어 activation function이 $ax+b$ 꼴일 때, 이렇게 다를 수 있다. $2x+3, 4x+5, -3x+1$ 이런 식으로.<br/>
+<br/>
+그런데 RNN에서는 (H)에서의 activation function이 만약 $3x-5$ 라면 이 하나의 activation function을 계속 돌리는 거다. 이 하나의 activation function 만 계속 학습 시키는 것이다. <br/>
+<br/>
+순환하니까 Recurrent neural net 이라고 불리는 것이다.<br/>
+   
+   </BODY>
+</HTML>
