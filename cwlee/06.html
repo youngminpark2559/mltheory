@@ -51,7 +51,7 @@ RNN <br/>
 @<br/>
 activation function(sigmoid function)에 x_{1}, x_{2}, x_{3} 가 input data로 들어간다고 해보자. 그러면 <br/>activation function(sigmoid function)은 y를 출력할 것이다. <br/>
 <br/>
-sigmoid function의 정의에 따라,\\<br/>
+sigmoid function의 정의에 따라,<br/>
 $y = \frac{1}{1 + e^{-(x_{1} + x_{2} + x_{3})}} $<br/>
 <br/>
 @<br/>
@@ -76,7 +76,7 @@ $y = \frac{1}{1 + e^-{(x_{1}w_{1} + x_{2}w_{2} + x_{3}w_{3})}} $<br/>
 <br/>
 @<br/>
 위의 그래프처럼 많은 신경망을 x와 w의 곱과 합으로 다 표현하기 힘들다.<br/>
-손쉽게 표현할수있는 기가막힌 좋은 방법이 있다. 행렬과 벡터를 이용하는 것이다. \\<br/>
+손쉽게 표현할수있는 기가막힌 좋은 방법이 있다. 행렬과 벡터를 이용하는 것이다. <br/>
 <br/>
 신경망은 행렬 연산의 연속이다 라고 이해해도 무방할정도다.<br/>
 <br/>
@@ -84,13 +84,13 @@ input layer, hidden layer, output layer.<br/>
 <br/>
 위의 layer 들을 행렬과 벡터로 표현할 수 있다.<br/>
 <br/>
-input layer\\<br/>
+input layer<br/>
 $\begin{bmatrix} x_{1}&x_{2}&x_{3} \end{bmatrix}$<br/>
 <br/>
-hidden layer\\<br/>
+hidden layer<br/>
 $\begin{bmatrix} h_{1}&h_{2}&h_{3} \end{bmatrix}$<br/>
 <br/>
-output layer\\<br/>
+output layer<br/>
 $\begin{bmatrix} y_{1}&y_{2} \end{bmatrix}$<br/>
 <br/>
 벡터를 표현해줬으니까 이제 행렬로 weight를 표현해 줄수 있다.<br/>
@@ -111,7 +111,7 @@ $= \begin{bmatrix} w_{1}&w_{2}&w_{3} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\
 <br/>
 $= \begin{bmatrix} w_{1}&w_{2}&w_{3} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\x_{3} \end{bmatrix} <br/>\rightarrow$ cell3(sigmoid function as an activation function) $\rightarrow h_{3}$    <br/>
 <br/>
-세개의 cell 에서 나온 output h들을 행렬로 묶어서 표현하면,\\<br/>
+세개의 cell 에서 나온 output h들을 행렬로 묶어서 표현하면,<br/>
 $\begin{bmatrix} h_{1}\\h_{2}\\h_{3} \end{bmatrix}$<br/>
 <br/>
  <br/>
@@ -124,7 +124,7 @@ hidden layer 에서 output layer로 처리하는 단계를 해보자.<br/>
 $\begin{bmatrix} w_{11}&w_{12}&w_{13} \\ w_{21}&w_{22}&w_{23} \\ w_{31}&w_{32}&w_{33} \end{bmatrix} <br/>\begin{bmatrix} h_{1}\\h_{2}\\h_{3} \end{bmatrix} = \begin{bmatrix} a\\b\\c \end{bmatrix} $<br/>
 a, b, c는 임의의 실수인 행렬이 나오게 된다. 이것을 cell1 in output layer 에 통과시키면 sigmoid function as <br/>an activation function 으로 인해 각각의 원소가 [0,1]인 $\begin{bmatrix} y_{1}\\y_{2}\\y_{3} \end{bmatrix}<br/>$ 행렬이 나온다.<br/>
 <br/>
-gradient descent로 w 값들을 바꿔가며 각각의 sigmoid function as an activation function 을 fitting 한다. <br/>\\<br/>
+gradient descent로 w 값들을 바꿔가며 각각의 sigmoid function as an activation function 을 fitting 한다. <br/><br/>
 <br/>
 @<br/>
 수식으로 최종적 정리.<br/>
