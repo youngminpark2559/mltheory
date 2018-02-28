@@ -33,7 +33,7 @@
                 back propagation.<br/>
 <br/>
 @<br/>
-Back propagation 에서는 수식이 길고 복잡해 질 수 있어서 간단한 NN인 다음과 같은 모델을 가정하자.\\<br/>
+Back propagation 에서는 수식이 길고 복잡해 질 수 있어서 간단한 NN인 다음과 같은 모델을 가정하자.<br/>
 <br/>
 x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y<br/>
 <br/>
@@ -50,7 +50,7 @@ Logistic regression에서 forward propagation 을 해서 y'을 구하고 y'과 y
 @<br/>
 back propagation 목적 자체가 gradient descent을 하기 위한건데 weight를 업데이트 시킬 수 있는 가장 좋은 방법이 (거의 유일한 방법이) gradient descent이다. (normal equation같은 알고리즘은 비효율적.)<br/>
 <br/>
-$w_{2} \leftarrow w_{2} - \alpha (\frac{\partial{c}}{\partial{w_{2}}})$\\<br/>
+$w_{2} \leftarrow w_{2} - \alpha (\frac{\partial{c}}{\partial{w_{2}}})$<br/>
 <br/>
 gradient descent를 하기 위해서는 그 weight에 대한 ($w_{2}$) cost function의 기울기 ($\frac{\partial{c}}{\partial{w_{2}}}$) 를 알아야한다.<br/>
 <br/>
@@ -59,139 +59,139 @@ weight $w_{2}$ 에 대한 cost function 의 기울기 $\frac{\partial{c}}{\parti
 그러기 위해서는 미분( 특히, chain rule )을 할 줄 알아야 된다.<br/>
 <br/>
 @<br/>
-x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서,\\<br/>
+x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서,<br/>
 cost 는 $y-y'$ 으로써 y 쪽에서 발생할 텐데 y 라는 것은 hidden layer에서의 output h와 $w_{2}$ 를 곱한 함수이다. 따라서, output h와 $w_{2}$ 를 곱한 함수에서 $w_{2}$ 에 대해 y를 미분하면서 $w_{2}$ 를 업데이트 시켜주고, 나아가 hidden layer H에서 cost가 나오면 cost를 $w_{1}$에 대하여 미분해서 $w_{1}$을 업데이트 시켜주고 이런식으로 뒤에서 앞으로 (출력y로부터 에서 입력x 쪽으로) 가면서 weight들 $w_{2}, w_{1}$를 업데이트 시켜준다. 이게 back propagation이다.<br/>
 <br/>
 @<br/>
-실제로 mean square cost function을 미분해보자.\\<br/>
+실제로 mean square cost function을 미분해보자.<br/>
 $c = \frac{1}{2}(y-y')^{2}$<br/>
 이것은 cost function이고 weight 는 hypothesis function 안에 있다. 합성합수의 미분을 쓴다.<br/>
-$y'$은 hypothesis function의 예측 데이터 셋$(x, y')$에 있는 것이다. $y'$은 weight에 대해 상수라는 뜻이다. $w_{2}$에 대하여 c를 편미분할때 $y'$은 상수로 취급된다. \\<br/>
+$y'$은 hypothesis function의 예측 데이터 셋$(x, y')$에 있는 것이다. $y'$은 weight에 대해 상수라는 뜻이다. $w_{2}$에 대하여 c를 편미분할때 $y'$은 상수로 취급된다. <br/>
 <br/>
-$w_{2}$ 에 대해 함수c를 편미분 하면,\\<br/>
+$w_{2}$ 에 대해 함수c를 편미분 하면,<br/>
 $\frac{\partial{c}}{\partial{w_{2}}} = (y-y') \frac{\partial{y}}{\partial{w_{2}}}$<br/>
 <br/>
 $\partial{y}$ 에서 $y$가 <br/>
 <br/>
 x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서 y는 sigmoid function 이고 이 sigmoid function 안에는 hidden layer의 output h와 $w_{2}$를 곱해진 형태로 입력이 되어있다.<br/>
 <br/>
-우리가 sigmoid function을 g함수로 표현했었다. 이걸 이용해 조금 풀어써보자.\\<br/>
-y = g($w_{2}$h) 이라는 정의에 따라 이것을 이용해 y를 치환하면,\\<br/>
+우리가 sigmoid function을 g함수로 표현했었다. 이걸 이용해 조금 풀어써보자.<br/>
+y = g($w_{2}$h) 이라는 정의에 따라 이것을 이용해 y를 치환하면,<br/>
 <br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = (y-y') \frac{\partial{y}}{\partial{w_{2}}}$\\<br/>
-$ = (y-y')\frac{\partial{g(w_{2}h)}}{\partial{w_{2}}}$\\<br/>
-$ = (y-y')\frac{\partial}{\partial{w_{2}}}{g(w_{2}h)}$\\<br/>
-합성합수의 미분법을 적용하면,\\<br/>
-$ = (y-y')g'(w_{2}h) \frac{\partial{w_{2}h}}{\partial{w_{2}}} $\\<br/>
-$w_{2}$에 대하여 g함수를 편미분 해야하므로,\\<br/>
-sigmoid function g 를 미분하면,\\<br/>
-$g'(x) = g(x)( 1 - g(x) )$\\<br/>
-$g(x) = y$ 이므로, 다음과 같이 쓸수 있다.\\<br/>
-$= y(1-y)$\\<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = (y-y') \frac{\partial{y}}{\partial{w_{2}}}$<br/>
+$ = (y-y')\frac{\partial{g(w_{2}h)}}{\partial{w_{2}}}$<br/>
+$ = (y-y')\frac{\partial}{\partial{w_{2}}}{g(w_{2}h)}$<br/>
+합성합수의 미분법을 적용하면,<br/>
+$ = (y-y')g'(w_{2}h) \frac{\partial{w_{2}h}}{\partial{w_{2}}} $<br/>
+$w_{2}$에 대하여 g함수를 편미분 해야하므로,<br/>
+sigmoid function g 를 미분하면,<br/>
+$g'(x) = g(x)( 1 - g(x) )$<br/>
+$g(x) = y$ 이므로, 다음과 같이 쓸수 있다.<br/>
+$= y(1-y)$<br/>
 <br/>
-$g'(w_{2}h) = g(w_{2}h)(1-g(w_{2}h))$ \\<br/>
-위의 수식을 이용해서 수식을 정리하자.\\<br/>
+$g'(w_{2}h) = g(w_{2}h)(1-g(w_{2}h))$ <br/>
+위의 수식을 이용해서 수식을 정리하자.<br/>
 <br/>
-$= (y-y')g'(w_{2}h) \frac{\partial{w_{2}h}}{\partial{w_{2}}} $\\<br/>
-$= (y-y')g(w_{2}h)(1-g( w_{2}h))\frac{\partial{w_{2}h}}{\partial{w_{2}}}$\\<br/>
+$= (y-y')g'(w_{2}h) \frac{\partial{w_{2}h}}{\partial{w_{2}}} $<br/>
+$= (y-y')g(w_{2}h)(1-g( w_{2}h))\frac{\partial{w_{2}h}}{\partial{w_{2}}}$<br/>
 <br/>
-$g(w_{2}h)=y$ 를 이용해 정리하면,\\<br/>
+$g(w_{2}h)=y$ 를 이용해 정리하면,<br/>
 <br/>
-$= (y-y')y(1-y)\frac{\partial{w_{2}h}}{\partial{w_{2}}}$\\<br/>
+$= (y-y')y(1-y)\frac{\partial{w_{2}h}}{\partial{w_{2}}}$<br/>
 <br/>
-x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서,\\<br/>
-$w_{2}$가 h에 입력으로 들어가는 것이 아니므로 $w_{2}$는 h에 대하여 상관 없는 상수이다.\\<br/>
+x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서,<br/>
+$w_{2}$가 h에 입력으로 들어가는 것이 아니므로 $w_{2}$는 h에 대하여 상관 없는 상수이다.<br/>
 $\frac{\partial{w_{2}}}{\partial{w_{2}}} = 1$ 이므로,<br/>
 <br/>
-$= (y-y')y(1-y)h$\\<br/>
+$= (y-y')y(1-y)h$<br/>
 <br/>
-$w_{2}$를 업데이트 시키기 위하여 $w_{2}$에 대한 기울기를 구했더니 위와같이 나왔다.\\<br/>
+$w_{2}$를 업데이트 시키기 위하여 $w_{2}$에 대한 기울기를 구했더니 위와같이 나왔다.<br/>
 <br/>
 @<br/>
-x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y \\<br/>
+x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y <br/>
 <br/>
-$w_{2}$ 에 대한 기울기를 구했으니 $w_{1}$ 에 대한 기울기를 구해보자.\\<br/>
-$w_{1}$ 에 대한 기울기를 구하기위해 (H)부터 시작하면 좋지만 그렇게 할수가 없다. 그래서 hidden이다. 여기서 알 수 있는게 별로 없다. y에서 backwards 로 가면서 유추해야한다.\\<br/>
+$w_{2}$ 에 대한 기울기를 구했으니 $w_{1}$ 에 대한 기울기를 구해보자.<br/>
+$w_{1}$ 에 대한 기울기를 구하기위해 (H)부터 시작하면 좋지만 그렇게 할수가 없다. 그래서 hidden이다. 여기서 알 수 있는게 별로 없다. y에서 backwards 로 가면서 유추해야한다.<br/>
 <br/>
-cost function을 $w_{1}$에 대하여 미분한다.\\<br/>
+cost function을 $w_{1}$에 대하여 미분한다.<br/>
 $\frac{\partial{c}}{\partial{w_{1}}} = (y-y')\frac{\partial{y}}{\partial{w_{1}}}$<br/>
 <br/>
-output layer에 있는 $y = g(w_{2}h)$ 임을 이용하여, g function으로 바꿔보자.\\<br/>
-$= (y-y')\frac{\partial}{\partial{w_{1}}}g(w_{2}h)$\\<br/>
+output layer에 있는 $y = g(w_{2}h)$ 임을 이용하여, g function으로 바꿔보자.<br/>
+$= (y-y')\frac{\partial}{\partial{w_{1}}}g(w_{2}h)$<br/>
 <br/>
-아까 위에서 했던것과 똑같이 한다. $\frac{\partial{w_{2}h}}{\partial{w_{1}}}$ 이부분만 조금 다르다. $w_{1}$에 대하여.\\<br/>
-$= (y-y')g(w_{2}h)(1-g(w_{2}h))\frac{\partial{w_{2}h}}{\partial{w_{1}}}$\\<br/>
+아까 위에서 했던것과 똑같이 한다. $\frac{\partial{w_{2}h}}{\partial{w_{1}}}$ 이부분만 조금 다르다. $w_{1}$에 대하여.<br/>
+$= (y-y')g(w_{2}h)(1-g(w_{2}h))\frac{\partial{w_{2}h}}{\partial{w_{1}}}$<br/>
 <br/>
-y로 바꿔준다.\\<br/>
-$= (y-y')y(1-y)\frac{\partial{w_{2}h}}{\partial{w_{1}}}$\\<br/>
+y로 바꿔준다.<br/>
+$= (y-y')y(1-y)\frac{\partial{w_{2}h}}{\partial{w_{1}}}$<br/>
 <br/>
-$w_{2}$는 $w_{1}$에 대해서 상관없는 상수이다. 그래서 상수곱으로 생각해서 앞으로 빼줄수 있다. 상수자체를 미분하면 0이 되지면 상수곱이 되어있는 걸 미분할때는 미분한 결과에 앞으로 빼낸 상수곱만 해주면 되는것이다.\\<br/>
-$= (y-y')y(1-y)w_{2}\frac{\partial{h}}{\partial{w_1}}$\\<br/>
+$w_{2}$는 $w_{1}$에 대해서 상관없는 상수이다. 그래서 상수곱으로 생각해서 앞으로 빼줄수 있다. 상수자체를 미분하면 0이 되지면 상수곱이 되어있는 걸 미분할때는 미분한 결과에 앞으로 빼낸 상수곱만 해주면 되는것이다.<br/>
+$= (y-y')y(1-y)w_{2}\frac{\partial{h}}{\partial{w_1}}$<br/>
 <br/>
-$h$는 $w_{1}$ 이 $x$와 함께 곱해져서 입력으로 들어와서 sigmoid function을 통과한 후 출력된 함수이다. 따라서 $w_{1}$이랑 $h$는 상관이 있다.\\<br/>
+$h$는 $w_{1}$ 이 $x$와 함께 곱해져서 입력으로 들어와서 sigmoid function을 통과한 후 출력된 함수이다. 따라서 $w_{1}$이랑 $h$는 상관이 있다.<br/>
 <br/>
-$h = g(w_{1}x)$ 임을 이용하여 h 를 g function으로 나타내자.\\<br/>
-$= (y-y')y(1-y)w_{2}\frac{\partial{g(w_{1}x)}}{\partial{w_1}}$\\<br/>
-$= (y-y')y(1-y)w_{2}\frac{\partial{}}{\partial{w_1}}g(w_{1}x)$\\<br/>
+$h = g(w_{1}x)$ 임을 이용하여 h 를 g function으로 나타내자.<br/>
+$= (y-y')y(1-y)w_{2}\frac{\partial{g(w_{1}x)}}{\partial{w_1}}$<br/>
+$= (y-y')y(1-y)w_{2}\frac{\partial{}}{\partial{w_1}}g(w_{1}x)$<br/>
 <br/>
-위에서 했건것이랑 똑같다. 다만 y가 h의 관점으로 바뀐다는 점만 다르다.\\<br/>
-$= (y-y')y(1-y)w_{2}h(1-h)\frac{\partial{w_{1}x}}{\partial{w_1}}$\\<br/>
+위에서 했건것이랑 똑같다. 다만 y가 h의 관점으로 바뀐다는 점만 다르다.<br/>
+$= (y-y')y(1-y)w_{2}h(1-h)\frac{\partial{w_{1}x}}{\partial{w_1}}$<br/>
 <br/>
-$w_{1}$을 $w_{1}$으로 미분해주는 것이니까, 1이 될것이다.\\<br/>
-$\frac{\partial{w_{1}}}{\partial{w_{1}}} = 1$\\<br/>
+$w_{1}$을 $w_{1}$으로 미분해주는 것이니까, 1이 될것이다.<br/>
+$\frac{\partial{w_{1}}}{\partial{w_{1}}} = 1$<br/>
 <br/>
-따라서, 정리하면,\\<br/>
-$= (y-y')y(1-y)w_{2}h(1-h)x$\\<br/>
-<br/>
-@<br/>
-이제 우리가 이렇게 도출한 식으로부터 무엇을 알수있는가 고찰을 해보자. 두 식을 비교해보자.\\<br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$\\<br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)w_{2}h(1-h)x$\\<br/>
-<br/>
-위의 $w_{1}, w_{2}$와 관련된 2개의 수식을 비교해보면 알수있는것은 2개의 수식이 비슷하다는 것이다. 비슷한데 뭔가 계속 붙어나가는 형태로 되어있다. \\<br/>
-<br/>
-x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서\\<br/>
-y를 미분한다음에 입력 h가 곱해지고 있다. 그랬더니 $w_{2}$에 대한 cost function의 기울기를 구할 수 있었다.\\<br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$\\<br/>
-<br/>
-마찬가지로 입력 x를 곱해줬더니, hidden layer H에서의 cost function의 기울기가 나왔다.\\<br/>
-cost를 직접 바로 알수는 없지만 cost function의 기울기를 알수 있다는 것이다.\\<br/>
-기울기를 알수 있다는 것은 gradient descent가 가능하다는 것이다.\\<br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)w_{2}h(1-h)x$\\<br/>
-<br/>
-2개의 식에서 중첩되는 부분 $(y-y')y(1-y)$ 이 있다.\\<br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)w_{2}h(1-h)x$ 를 조금 정리하면,\\<br/>
-$= (y-y')y(1-y)h(1-h)w_{2}x$\\<br/>
-<br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$에서 $w_{2}$를 업데이트 해 줄 때는 입력인 h만 곱해주면 된다. \\<br/>
-<br/>
-$w_{1}$ 을 업데이트 할 때에는 $x$와 $w_{2}$를 같이 곱해주는 형태이다. $(1-h)$ 도 추가적으로 붙은 형태이다.\\<br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)h(1-h)w_{2}x$ \\<br/>
+따라서, 정리하면,<br/>
+$= (y-y')y(1-y)w_{2}h(1-h)x$<br/>
 <br/>
 @<br/>
-정리하기 위하여,\\<br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$ 에서 $(y-y')y(1-y)$ 를 초기값 $\delta_{y}$ (y에 대한 $\delta$) 로 생각할 수 있다. 치환해 볼 수 있다. \\<br/>
+이제 우리가 이렇게 도출한 식으로부터 무엇을 알수있는가 고찰을 해보자. 두 식을 비교해보자.<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)w_{2}h(1-h)x$<br/>
 <br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)h(1-h)w_{2}x$ 에서 $(y-y')y(1-y)h(1-h)w_{2}$를 $\delta_{h}$ 이라고 치환한다.\\<br/>
+위의 $w_{1}, w_{2}$와 관련된 2개의 수식을 비교해보면 알수있는것은 2개의 수식이 비슷하다는 것이다. 비슷한데 뭔가 계속 붙어나가는 형태로 되어있다. <br/>
 <br/>
-그러면 결론적으로, 두 식이 똑같은 논리를 따르게 된다.\\<br/>
+x $\overset{w_{1}}{\rightarrow}$ (H) $\overset{w_{2}}{\rightarrow}$ y 에서<br/>
+y를 미분한다음에 입력 h가 곱해지고 있다. 그랬더니 $w_{2}$에 대한 cost function의 기울기를 구할 수 있었다.<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$<br/>
 <br/>
-$w_{2}$에 대한 output layer에서의 cost function의 기울기를 구하기 위해서는 $\delta_{y}$ 에 입력 h 를 곱한다.\\<br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = \delta_{y}h$\\<br/>
-$w_{1}$에 대한 hidden layer에서의 cost function의 기울기를 구하기 위해서는 $\delta_{h}$ 에 입력 x 를 곱한다.\\<br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = \delta_{h}x$\\<br/>
+마찬가지로 입력 x를 곱해줬더니, hidden layer H에서의 cost function의 기울기가 나왔다.<br/>
+cost를 직접 바로 알수는 없지만 cost function의 기울기를 알수 있다는 것이다.<br/>
+기울기를 알수 있다는 것은 gradient descent가 가능하다는 것이다.<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)w_{2}h(1-h)x$<br/>
 <br/>
-연속성을 위와같이 정의할 수 있다. \\<br/>
-논리적으로 다음과 같이 생각해 볼 수 있다. 각각의 $\delta$ 를 구할 수 있으면 거기에 맞는 입력을 곱해주면 내가 업데이트 하고자 하는 weight에 대한 cost function의 기울기를 구할 수 있다는 공식이 성립한다. 이제부터 내가 업데이트 하고자 하는 weight에 대한 cost function의 기울기를 구하는 문제에서 $\delta$ 를 어떻게 구하는가 에 대한 문제로 바뀌게 된다.\\<br/>
+2개의 식에서 중첩되는 부분 $(y-y')y(1-y)$ 이 있다.<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)w_{2}h(1-h)x$ 를 조금 정리하면,<br/>
+$= (y-y')y(1-y)h(1-h)w_{2}x$<br/>
+<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$에서 $w_{2}$를 업데이트 해 줄 때는 입력인 h만 곱해주면 된다. <br/>
+<br/>
+$w_{1}$ 을 업데이트 할 때에는 $x$와 $w_{2}$를 같이 곱해주는 형태이다. $(1-h)$ 도 추가적으로 붙은 형태이다.<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)h(1-h)w_{2}x$ <br/>
 <br/>
 @<br/>
-$\delta$ 는 어떻게 구하는가. 일단 $\delta_{y}$부터 살펴보자.\\<br/>
-$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h = \delta_{y}h$\\<br/>
-$\delta_{y}$ 는 랜덤하게 주어지는 초기값이기 때문에 다 알고 있는 값이다. 따라서, 자연스럽게 다음과 같이 $\delta_{y}$를 정의한다. $\delta_{y} = (y-y')y(1-y)$ 이것은 output layer에서의 $\delta$이다.\\<br/>
+정리하기 위하여,<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h$ 에서 $(y-y')y(1-y)$ 를 초기값 $\delta_{y}$ (y에 대한 $\delta$) 로 생각할 수 있다. 치환해 볼 수 있다. <br/>
 <br/>
-$\frac{\partial{c}}{\partial{w_{1}}} = ((y-y')y(1-y))h(1-h)w_{2}x$ = $\delta_{h}x$ 으로부터,\\<br/>
-위에서 정의한 $\delta_{y} = (y-y')y(1-y)$를 이용하면,\\<br/>
-hidden layer에서의 $\delta_{h}$는 $\delta_{y}$에 sigmoid function의 미분 $g'(x)$ 을 곱해주고 weight, 그중에서 y쪽이니까 $w_{2}$를 곱해주면 된다.\\<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = (y-y')y(1-y)h(1-h)w_{2}x$ 에서 $(y-y')y(1-y)h(1-h)w_{2}$를 $\delta_{h}$ 이라고 치환한다.<br/>
+<br/>
+그러면 결론적으로, 두 식이 똑같은 논리를 따르게 된다.<br/>
+<br/>
+$w_{2}$에 대한 output layer에서의 cost function의 기울기를 구하기 위해서는 $\delta_{y}$ 에 입력 h 를 곱한다.<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = \delta_{y}h$<br/>
+$w_{1}$에 대한 hidden layer에서의 cost function의 기울기를 구하기 위해서는 $\delta_{h}$ 에 입력 x 를 곱한다.<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = \delta_{h}x$<br/>
+<br/>
+연속성을 위와같이 정의할 수 있다. <br/>
+논리적으로 다음과 같이 생각해 볼 수 있다. 각각의 $\delta$ 를 구할 수 있으면 거기에 맞는 입력을 곱해주면 내가 업데이트 하고자 하는 weight에 대한 cost function의 기울기를 구할 수 있다는 공식이 성립한다. 이제부터 내가 업데이트 하고자 하는 weight에 대한 cost function의 기울기를 구하는 문제에서 $\delta$ 를 어떻게 구하는가 에 대한 문제로 바뀌게 된다.<br/>
+<br/>
+@<br/>
+$\delta$ 는 어떻게 구하는가. 일단 $\delta_{y}$부터 살펴보자.<br/>
+$\frac{\partial{c}}{\partial{w_{2}}} = (y-y')y(1-y)h = \delta_{y}h$<br/>
+$\delta_{y}$ 는 랜덤하게 주어지는 초기값이기 때문에 다 알고 있는 값이다. 따라서, 자연스럽게 다음과 같이 $\delta_{y}$를 정의한다. $\delta_{y} = (y-y')y(1-y)$ 이것은 output layer에서의 $\delta$이다.<br/>
+<br/>
+$\frac{\partial{c}}{\partial{w_{1}}} = ((y-y')y(1-y))h(1-h)w_{2}x$ = $\delta_{h}x$ 으로부터,<br/>
+위에서 정의한 $\delta_{y} = (y-y')y(1-y)$를 이용하면,<br/>
+hidden layer에서의 $\delta_{h}$는 $\delta_{y}$에 sigmoid function의 미분 $g'(x)$ 을 곱해주고 weight, 그중에서 y쪽이니까 $w_{2}$를 곱해주면 된다.<br/>
 $\delta_{h} = \delta_{y}g'(x)w_{2}$<br/>
 <br/>
 다 했다. 만약 hidden layer H가 여러개라면? 똑같다.<br/>
@@ -199,25 +199,25 @@ $\delta_{h} = \delta_{y}g'(x)w_{2}$<br/>
 @<br/>
 hidden layer H가 여러개인 경우.<br/>
 <br/>
-x $\overset{w_{1}}\rightarrow$ (H1) $\overset{w_{2}}\rightarrow$ (H2) $\overset{w_{3}}\rightarrow$ (H3) $\overset{w_{4}}\rightarrow$ y \\<br/>
-H1에서 $\delta_{h_{1}}$\\<br/>
-H2에서 $\delta_{h_{2}}$\\<br/>
-H3에서 $\delta_{h_{3}}$\\<br/>
-y에서 $\delta_{y}$\\<br/>
+x $\overset{w_{1}}\rightarrow$ (H1) $\overset{w_{2}}\rightarrow$ (H2) $\overset{w_{3}}\rightarrow$ (H3) $\overset{w_{4}}\rightarrow$ y <br/>
+H1에서 $\delta_{h_{1}}$<br/>
+H2에서 $\delta_{h_{2}}$<br/>
+H3에서 $\delta_{h_{3}}$<br/>
+y에서 $\delta_{y}$<br/>
 <br/>
-위에서 유도된 공식으로 부터,\\<br/>
-$\delta_{h_{3}} = \delta_{y}g'(x)w_{4}$\\<br/>
-$\delta_{h_{2}} = \delta_{h_{3}}g'(x)w_{3}$\\<br/>
-$\delta_{h_{1}} = \delta_{h_{2}}g'(x)w_{2}$\\<br/>
-로 구할 수 있다.\\<br/>
+위에서 유도된 공식으로 부터,<br/>
+$\delta_{h_{3}} = \delta_{y}g'(x)w_{4}$<br/>
+$\delta_{h_{2}} = \delta_{h_{3}}g'(x)w_{3}$<br/>
+$\delta_{h_{1}} = \delta_{h_{2}}g'(x)w_{2}$<br/>
+로 구할 수 있다.<br/>
 <br/>
-결과적으로, $\delta_{y}$ 를 알고있으니 sigmoid function의 미분과 $w_{4}$를 이용해서 $\delta_{h_{3}}$를 알수 있었다.\\<br/>
+결과적으로, $\delta_{y}$ 를 알고있으니 sigmoid function의 미분과 $w_{4}$를 이용해서 $\delta_{h_{3}}$를 알수 있었다.<br/>
 <br/>
-H3에서의 $\delta_{h_{3}}$를 알게되면, H3들어가는 H2로부터의 output인 입력 $h_{2}$를 곱해준다. 그러면 이게 H3에서 $w_{3}$에 대한 cost function의 기울기가 되는 것이다.\\<br/>
-$\frac{\partial{C_{H3}}}{\partial{w_{3}}} = \delta_{h_{3}}h_{2}$\\<br/>
+H3에서의 $\delta_{h_{3}}$를 알게되면, H3들어가는 H2로부터의 output인 입력 $h_{2}$를 곱해준다. 그러면 이게 H3에서 $w_{3}$에 대한 cost function의 기울기가 되는 것이다.<br/>
+$\frac{\partial{C_{H3}}}{\partial{w_{3}}} = \delta_{h_{3}}h_{2}$<br/>
 <br/>
-$\delta$ 에다 입력h를 곱해주면 내가 업데이트 시키고자 하는 weight에 대한 cost function의 기울기를 알 수 있다.\\<br/>
-기울기를 알면 이게 0인지 아닌지 판별해서 0이 아니면 gradient descent를 적용해서 weight를 업데이트 시킬 수 있는 것이다.\\<br/>
+$\delta$ 에다 입력h를 곱해주면 내가 업데이트 시키고자 하는 weight에 대한 cost function의 기울기를 알 수 있다.<br/>
+기울기를 알면 이게 0인지 아닌지 판별해서 0이 아니면 gradient descent를 적용해서 weight를 업데이트 시킬 수 있는 것이다.<br/>
 <br/>
 @<br/>
 위의 설명된 딥러닝 신경망(NN)에서 학습이 되는 매커니즘(forward propagation, back propagation) 을 이해하면, classify가 되는 activation function 들이 이렇게 변할 수 있는 거구나, 이게 감이 잡히면 나중에 CNN, RNN, 할때 학습매커니즘자체가 머릿속에 그려지게 된다. 굉장히 편하게공부할수 있다. 이해도 쉽고.<br/>
