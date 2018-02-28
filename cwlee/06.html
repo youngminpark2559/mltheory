@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+   
+@Chapter<br/>
+06. Implementing a neural net(NN)<br/>
+<br/>
+@<br/>
+딥러닝에서 다뤄지는 개념 중 하나가 신경망이라는 부분이다. <br/>
+<br/>
+인공지능<br/>
+    머신러닝<br/>
+        딥러닝<br/>
+            신경망<br/>
+<br/>
+신경망은 신경이라고 생각해도 좋지만 함수라 생각하는게 더 편하다. 입력과 출력을 매개하는 cell을 function으로 <br/>보면 됨. 이것을 activation function이라고 부른다. activation function 으로 sigmoid function을 사용한다. <br/>
+<br/>
+DNN <br/>
+	activation function : sigmoid <br/>
+<br/>
+CNN <br/>
+<br/>
+RNN <br/>
+<br/>
+@<br/>
+왜 신경망이 사람 신경을 모델링 했다고 하지?<br/>
+<br/>
+예를들어보자. 통각신경의 경우, 살살치면 통각(아픈느낌, 촉각이랑 다름.)을 못느낀다.<br/>
+<br/>
+일정세기 이상되면 통각을 느끼기 시작한다. 이 모델을 machine learning 에서는 activation function으로 구현한 <br/>것이다. <br/>
+<br/>
+@<br/>
+activation function(sigmoid function)에 x_{1}, x_{2}, x_{3} 가 input data로 들어간다고 해보자. 그러면 <br/>activation function(sigmoid function)은 y를 출력할 것이다. <br/>
+<br/>
+sigmoid function의 정의에 따라,\\<br/>
+$y = \frac{1}{1 + e^{-(x_{1} + x_{2} + x_{3})}} $<br/>
+<br/>
+@<br/>
+그냥 데이터만 입력시키면 재미가 없다. 이전의 linear regression과 logistic regression 모델에서 각각의 <br/>hypothesis function에서 weight 를 업데이트 해줬었다. sigmoid function 특성에 따라 weight가 달라지는거고 <br/>weight 가 달라지면서 sigmoid function 의 특성이 변했었다. sigmoid의 특성을 결정짓는 요소중 가장 중요한게 <br/>weight라고 얘기했다. <br/>
+<br/>
+신경망에서도 결국 우리가 원하는건 input data를 넣었을 때 학습된 알고리즘(weight들이 업데이트되어 fitting된 <br/>hypothesis function)을 통과해 input data를 알맞은 카테고리로 classification하는것이다. classification을 <br/>할수 있는 알고리즘을 갖기위해서는 트레이닝 데이터를 통해 학습을 시켜 sigmoid function을 fitting을 해야한다. <br/>
+<br/>
+그러니까 sigmoid function의 모양을 변화시켜줘야하니까 weight를 하나씩 곱해주자.<br/>
+<br/>
+@<br/>
+$x_{1}w_{1}, x_{2}w_{2}, x_{3}w_{3}$<br/>
+<br/>
+input data에 weight를 곱해서 sigmoid function 에 넣는다.<br/>
+<br/>
+$y = \frac{1}{1 + e^-{(x_{1}w_{1} + x_{2}w_{2} + x_{3}w_{3})}} $<br/>
+<br/>
+출력값 y의 범위는 $0 \leq y \leq 1$ 이다.<br/>
+<br/>
+@<br/>
+신경하나를 봤으니까 이러한 신경을 여러개를 사용해보자. <br/>
+예를 들어, 신경 3개(hidden layer)가 input layer 에서 input data를 받아서 hidden layer 나온 output을 다음 <br/>신경들 2개(output layer)에 전달한다. output layer에 있는 2개의 신경은 각각 $y_{1}, y_{2}$ 를 output 한다.<br/>
+<br/>
+@<br/>
+위의 그래프처럼 많은 신경망을 x와 w의 곱과 합으로 다 표현하기 힘들다.<br/>
+손쉽게 표현할수있는 기가막힌 좋은 방법이 있다. 행렬과 벡터를 이용하는 것이다. \\<br/>
+<br/>
+신경망은 행렬 연산의 연속이다 라고 이해해도 무방할정도다.<br/>
+<br/>
+input layer, hidden layer, output layer.<br/>
+<br/>
+위의 layer 들을 행렬과 벡터로 표현할 수 있다.<br/>
+<br/>
+input layer\\<br/>
+$\begin{bmatrix} x_{1}&x_{2}&x_{3} \end{bmatrix}$<br/>
+<br/>
+hidden layer\\<br/>
+$\begin{bmatrix} h_{1}&h_{2}&h_{3} \end{bmatrix}$<br/>
+<br/>
+output layer\\<br/>
+$\begin{bmatrix} y_{1}&y_{2} \end{bmatrix}$<br/>
+<br/>
+벡터를 표현해줬으니까 이제 행렬로 weight를 표현해 줄수 있다.<br/>
+<br/>
+아까도 봤지만 각각의 weight들 $w_{1}, w_{2}, w_{3}$ 들이 각각의 input data $x_{1}, x_{2}, x_{3}$에 아래와 <br/>같이 곱해진 후 그 합이 hidden layer에 있는 sigmoid function을 activation function으로 하는 하나의 셀 $h_{1}<br/>$에 들어갔다.<br/>
+$h_{1} = \frac{1}{1 + e^-{(x_{1}w_{1} + x_{2}w_{2} + x_{3}w_{3})}} $<br/>
+<br/>
+위의 수식에서 $x_{1}w_{1} + x_{2}w_{2} + x_{3}w_{3}$ 부분을 고찰해보면 사실 아래와 같은 행렬곱이다.<br/>
+$x_{1}w_{1} + x_{2}w_{2} + x_{3}w_{3}$<br/>
+$= \begin{bmatrix} w_{1}&w_{2}&w_{3} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\x_{3} \end{bmatrix}$<br/>
+<br/>
+@<br/>
+hidden layer에 있는 3개의 신경에서 나오는 output $h_{1}, h_{2}, h_{3}$ 를 행렬을 이용해서 모두 표현해보자.<br/>
+<br/>
+$= \begin{bmatrix} w_{1}&w_{2}&w_{3} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\x_{3} \end{bmatrix} <br/>\rightarrow$ cell1(sigmoid function as an activation function) $\rightarrow h_{1}$<br/>
+<br/>
+$= \begin{bmatrix} w_{1}&w_{2}&w_{3} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\x_{3} \end{bmatrix} <br/>\rightarrow$ cell2(sigmoid function as an activation function) $\rightarrow h_{2}$<br/>
+<br/>
+$= \begin{bmatrix} w_{1}&w_{2}&w_{3} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\x_{3} \end{bmatrix} <br/>\rightarrow$ cell3(sigmoid function as an activation function) $\rightarrow h_{3}$    <br/>
+<br/>
+세개의 cell 에서 나온 output h들을 행렬로 묶어서 표현하면,\\<br/>
+$\begin{bmatrix} h_{1}\\h_{2}\\h_{3} \end{bmatrix}$<br/>
+<br/>
+ <br/>
+위의 3개 cell의 시도를 따로 하지 말고 행렬을 만들어서 해보자.<br/>
+$\begin{bmatrix} w_{11}&w_{12}&w_{13} \\ w_{21}&w_{22}&w_{23} \\ w_{31}&w_{32}&w_{33} \end{bmatrix} <br/>\begin{bmatrix} x_{1}\\x_{2}\\x_{3} \end{bmatrix} = \begin{bmatrix} a\\b\\c \end{bmatrix} $<br/>
+a, b, c는 임의의 실수인 행렬이 나오게 된다. 이것을 cell1에 통과시키면 sigmoid function as an activation <br/>function 으로 인해 각각의 원소가 [0,1]인 $\begin{bmatrix} h_{1}\\h_{2}\\h_{3} \end{bmatrix}$ 행렬이 <br/>나온다.<br/>
+@<br/>
+hidden layer 에서 output layer로 처리하는 단계를 해보자.<br/>
+<br/>
+$\begin{bmatrix} w_{11}&w_{12}&w_{13} \\ w_{21}&w_{22}&w_{23} \\ w_{31}&w_{32}&w_{33} \end{bmatrix} <br/>\begin{bmatrix} h_{1}\\h_{2}\\h_{3} \end{bmatrix} = \begin{bmatrix} a\\b\\c \end{bmatrix} $<br/>
+a, b, c는 임의의 실수인 행렬이 나오게 된다. 이것을 cell1 in output layer 에 통과시키면 sigmoid function as <br/>an activation function 으로 인해 각각의 원소가 [0,1]인 $\begin{bmatrix} y_{1}\\y_{2}\\y_{3} \end{bmatrix}<br/>$ 행렬이 나온다.<br/>
+<br/>
+gradient descent로 w 값들을 바꿔가며 각각의 sigmoid function as an activation function 을 fitting 한다. <br/>\\<br/>
+<br/>
+@<br/>
+수식으로 최종적 정리.<br/>
+<br/>
+weight 행렬 $\begin{bmatrix} w_{1}&w_{2} \end{bmatrix}$<br/>
+input data 행렬 $\begin{bmatrix} x_{1}\\x_{2} \end{bmatrix}$<br/>
+sigmoid function g as an activation function in the cell.<br/>
+output layer Y and its output y.<br/>
+hidden layer H and its output h.<br/>
+<br/>
+$h = g(WX)$<br/>
+$y = g(WH)$<br/>
+<br/>
+@<br/>
+weight in input layer 를 알고 input data x 를 알고있을 때 weight와 input data를 곱해서 sigmoid function에 <br/>넣고 나온 h를 다시 weight in output layer 랑 곱해서 나온걸 sigmoid function in output layer 에 넣고 ouput <br/>layer에서 y 까지 나오는 과정을 신경망에서는 순전파(forward propagation ) 이라고 한다. <br/>
+<br/>
+@<br/>
+NN을 구성하는 sigmoid function 으로 이루어진 cell 들의 알고리즘을 학습시키기 위해서, 즉, hypothesis <br/>function으로 부터 발생하는 cost를 최소로 만들어주는 weight들을 sigmoid function 에 설정하기 위해서는 역전파<br/>(back propagation) 을 해야한다. <br/>
+순전파를 한다는것은 데이터 x를 입력시켰을때 내가 원하는 아웃풋을 예측하는, 예측값 (y') 을 얻어내기 위한 <br/>과정이다. <br/>
+순전파를 통해 얻어진 예측값 (y') 을 가지고, 실제값과 얼마나 다른지, hypothesis function 이 얼마나 high <br/>cost를 가지는지 이걸 측정을 해서 역으로 반대로 gradient descent를 해가면서 weight를 업데이트시키는 과정을 <br/>back propagation 이라고 한다. 이건 수식이 좀 복잡하다. 다음 동영상에서. <br/>
+<br/>
+      
+   </BODY>
+</HTML>
