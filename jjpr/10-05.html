@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+@Chapter<br/>
+비모수밀도추정5<br/>
+<br/>
+@<br/>
+비모수 밀도 추정 방법 3가지 중에서 마지막 방법인 k-NNR(Nearest Neighbor Rule) 에 대해서 알아본다. <br/>
+<br/>
+$\frac{k}{NV}$ 를 가지고 확률 밀도 함수 p(x) 를 추정했다. 분자의 k 가 고정되어있다는 뜻으로 k-NNR 이라고 부른다.<br/>
+<br/>
+@<br/>
+k-NNR 방법에서 확률 밀도를 알고 싶은 지점이 있을 것이다. 이 확률 밀도를 통해 추정하고자 하는 추정점 x를 결정하면 이 추정점 x의 주위를 둘러싸는 부피 V를 결정해야한다. 이 때 이 부피가 k 개의 데이터점이 포함되도록 부피를 결정하거나 증가시키는 방법론을 사용한다고 보면 된다. 오른쪽 아래 그림에 다양한 샘플들이 있다. 그 중에서 임의의 점 하나는 벡터로 표현되서 $\begin{bmatrix} x_{1}\\x_{2} \end{bmatrix}$ 로 특정한 값을 갖는 점일 것이다. 이 점을 x 라고 했을 때, 확률밀도값 p(x) 를 구하고 싶은 것이다. $\frac{k}{NV}$ 수식을 적용한다면 N 은 이미 주어졌다. k 와 V 가 주어져야한다. k 를 먼저 결정해놓고 시작한다. 예를들어, k=3 으로 결정한다면 점 x 와 가장 가까운 점 3개를 선택하고 이 점들이 포함되도록 원을 그린다. 이 원의 넓이가 V 이다. <br/>
+<br/>
+V 값은 데이터 x 의 위치 마다 달라진다. 모든 x 마다 원을 그리고 V 를 얻을 수 있다. <br/>
+<br/>
+@<br/>
+위의 내용을 수식으로 표현하면<br/>
+$p(x)=\frac{k}{NV}=\frac{k}{Nc_{D}R_{k}^{D}(x)}$ <br/>
+D: D dimensional space<br/>
+$c_{D}$ : coefficient at D dimension, dimension 에 따라서 다 달라진다. D 차원의 단위 구의 체적으로 볼 수 있다. 2차원일때는 원이다. 4차원 이상부터는 개념적으로 4차원의 구 혹은 sphere 라고 보면 된다. 반지름이 1 이라면 차원에 관계없이 부피는 1이다. 즉, 반지름이 1일때의 단위 구의 부피를 안다면 radius 가 커지면 실수배만 해주면 되기때문에 다음과 같이 D차원의 반지름 1인 단위 구의 부피 $C_{D}$ 를 구하는 공식을 알필요가 있다. <br/>
+이 수식은 어려운 수식이다. 수식적으로 D 차원의 단위구의 부피를 구할 수 있다는 사실만 알고 넘어가는게 좋다. <br/>
+$C_{D} = \frac{\pi^{\frac{D}{2}}}{(\frac{D}{2})!}=\frac{\pi^{\frac{D}{2}}}{\Gamma(\frac{D}{2}+1)}$<br/>
+factorial 을 정수에 적용하는건 아는데 실수에 적용하는 방법은 아직 모른다. 고차원적인 $\Gamma$ 함수라는게 있다. 이 함수를 풀어서 대신 계산할 수 있다. <br/>
+실제 계산해보면 $C_{1}=2, C_{1}=\pi, C_{1}=\frac{4\pi}{3}$ 등으로 올바른 결과가 나옴을 확인 할 수 있다.<br/>
+$R_{k}^{D}(x)$ : 주어진 특정점 x 로 부터 k 번째, 즉, 제일 멀리 있는 점과의 거리에다가 D 제곱을 하는 것이다.<br/>
+<br/>
+@<br/>
+k-NNR 방법으로 얻어지는 확률 밀도 추정은 만족 스럽지 못하다. <br/>
+특정한 지점에 적절하지 않은 데이터가 있을 경우 이 적절하지 않은 데이터가 확률밀도 추정에 큰영향을 주는 단점이 있다. 즉, 추정이 국부적인 잡음에 약하다. <br/>
+어떠한 추정점 x 이든간에 k 에 상응하는 근처에 있는 샘플들을 찾아내야하기때문에 먼곳에 있는 지점도 확률밀도추정을 계산하는데 영향을 받는다. 추정점에 영향을 주는 랜덤변수의 영역이 넓어짐을 의미하는 긴 잔여(heavy tail) 을 갖는 추정을 만든다. <br/>
+$\frac{k}{Nc_{D}R_{k}^{D}(x)}$ 에서 $R_{k}^{D}(x)$ 가 미분불가능하다. 따라서 이 수식을 사용한 밀도추정은 불연속적이다. 왜냐하면 원, 구의 radius 를 측정할때 연속적으로 측정되는게 아니라 추정점이 어디냐에 따라서 radius 의 길이는 급하게 하지만 불연속적으로 변하기때문에다. <br/>
+확률값 P(x) 는 확률밀도함수를 영역 R 에 대해서 적분한 것 $P(x)=\int_{R}p(x)dx$ 인데, 결과로 얻어지는 확률밀도함수 p(x) 는 불연속적이므로 적분을 하면 발산할 확률이 높다. 그래서 이걸 실제 확률 밀도 함수라고 할수도 없다. <br/>
+<br/>
+@<br/>
+추정점 x를 $x=\begin{bmatrix} x_{1}\\x_{2} \end{bmatrix}$ 의 형태로 표현되는 2차원에서 k-NNR 밀도추정.<br/>
+매 지점마다 확률밀도를 추정해보자. <br/>
+<br/>
+@<br/>
+원래의 확률밀도 p(x) 를 simulation 하기 쉽게 gaussian mixture model 으로 가정했다. <br/>
+GMM 은 확률밀도 두개를 합친것이다. <br/>
+예를들어서 <br/>
+GMM $p(x)=\frac{1}{2} N(\mu_{1}, \Sigma_{1}) + \frac{1}{2} N(\mu_{1}, \Sigma_{1})$ with <br/>
+평균 $\mu_{1}=\begin{bmatrix} 0\\5 \end{bmatrix}$ , 공분산행렬 $\Sigma_{1}=\begin{bmatrix} 1&1\\1&2 \end{bmatrix}$ <br/>
+평균 $\mu_{2}=\begin{bmatrix} 5\\0 \end{bmatrix}$ , 공분산행렬 $\Sigma_{2}=\begin{bmatrix} 1&-1\\-1&4 \end{bmatrix}$ <br/>
+<br/>
+@<br/>
+뾰족한게 $N(\mu_{1},\Sigma_{1})$ 이다. $N(\mu_{1},\Sigma_{1})$ 으로 그려진 가우시안 함수이다.<br/>
+이러한 가우시안 통계학적 성질을 갖는 데이터 샘플 N=200 를 얻고 k=10 으로 해서 위의 실제 GMM 가우시안 함수 모양을 추정해 보는 것이다. 해보면 삐죽삐죽한 불연속적인 특성을 보이고 높낮이가 약간 다르긴 하지만 확률밀도의 중심을 의미하는 위치는 제대로 잡는듯 하다. 3차원말고 True density contours 와 K-NNR density estimation contours 를 비교해보면 으로 보면 유사하다. <br/>
+   
+   </BODY>
+</HTML>
