@@ -34,38 +34,38 @@ Logistic regression 모델을 표현하는 hypothesis function도 여러가지�
 Linear regression에서는 우리가 일차함수인 hypothesis function을 가지고 classify를 했었다.<br/>
 <br/>
 @<br/>
-machine learning 에서 logistic regression 모델을 표현하는 hypothesis function은 크게 두가지를 사용한다.\\<br/>
-    sigmoid function.\\<br/>
-        $\frac{1}{1+e^{-x}}$ 로 나타낼수 있다. 정의역은 [-inf, inf]이고 치역은 ( 0, 1 )이다.\\<br/>
-		input data를 이게 0이냐 아니면 1이냐로 classfication 할때 주로 쓰인다.\\<br/>
-	tanh function.\\<br/>
-		$\tanh(x)$ 의 함수형태로 나타낼수 있다.\\<br/>
-		sigmoid function이 scaling 된 형태이다. 정의역은 [-inf, inf]이고 치역은 ( -1, 1 )이다.\\<br/>
-		+, - 가 정의되야할때 주로 쓰인다.\\<br/>
+machine learning 에서 logistic regression 모델을 표현하는 hypothesis function은 크게 두가지를 사용한다.<br/>
+    sigmoid function.<br/>
+        $\frac{1}{1+e^{-x}}$ 로 나타낼수 있다. 정의역은 [-inf, inf]이고 치역은 ( 0, 1 )이다.<br/>
+		input data를 이게 0이냐 아니면 1이냐로 classfication 할때 주로 쓰인다.<br/>
+	tanh function.<br/>
+		$\tanh(x)$ 의 함수형태로 나타낼수 있다.<br/>
+		sigmoid function이 scaling 된 형태이다. 정의역은 [-inf, inf]이고 치역은 ( -1, 1 )이다.<br/>
+		+, - 가 정의되야할때 주로 쓰인다.<br/>
 		<br/>
 @<br/>
-위의 logistic regression 모델에서의 hypothesis function들을 fitting 해 보자.\\<br/>
+위의 logistic regression 모델에서의 hypothesis function들을 fitting 해 보자.<br/>
 <br/>
-Linear regression 모델일때 일차함수로 만들어진 hypothesis function 의 경우 기울기와 y절편을 조절하기위해 상수<br/>($W_{1}, W_{2}$) 들을 업데이트하면서 hypothesis function의 모양을 실제 데이터에 맞게 fitting 시켰다.\\<br/>
+Linear regression 모델일때 일차함수로 만들어진 hypothesis function 의 경우 기울기와 y절편을 조절하기위해 상수<br/>($W_{1}, W_{2}$) 들을 업데이트하면서 hypothesis function의 모양을 실제 데이터에 맞게 fitting 시켰다.<br/>
 <br/>
-logistic regression에 사용되는 hypothesis function 도 fitting 하려면 함수에 들어가 있는 상수를 업데이트 <br/>하면서 hypothesis function을 fitting 하면 된다.\\<br/>
+logistic regression에 사용되는 hypothesis function 도 fitting 하려면 함수에 들어가 있는 상수를 업데이트 <br/>하면서 hypothesis function을 fitting 하면 된다.<br/>
 <br/>
-Logistic regression 에서 사용되는 hypothesis function : sigmoid funtion, $tanh(x)$\\<br/>
+Logistic regression 에서 사용되는 hypothesis function : sigmoid funtion, $tanh(x)$<br/>
 <br/>
 @<br/>
 sigmoid function $g(x)<br/>
 = \frac{1}{1+e^{-x}}$<br/>
 <br/>
-// 상수 a, b를 포함시켜 모양을 일반화 시켜보자.\\<br/>
+// 상수 a, b를 포함시켜 모양을 일반화 시켜보자.<br/>
 sigmoid function $g(x)<br/>
 = \frac{1}{1+e^{-{(ax+b)}}}$<br/>
 <br/>
-// 여전히 sigmoid function의 모양을 알기 힘드니, 인수분해를 써서 조금 고쳐보자.\\<br/>
+// 여전히 sigmoid function의 모양을 알기 힘드니, 인수분해를 써서 조금 고쳐보자.<br/>
 sigmoid function $g(x)<br/>
 = \frac{1}{1+e^{-{a(x+b)}}}$<br/>
 <br/>
 @<br/>
-a가 작으면 sigmoid function의 s 라인이 완만하고 a를 키우면 s라인의 기울기가 가파라진다.\\<br/>
+a가 작으면 sigmoid function의 s 라인이 완만하고 a를 키우면 s라인의 기울기가 가파라진다.<br/>
 b는 평행이동과 관계가 있다. b = -4 이면 sigmoid funtion을 + 4 만큼 x축 이동하는 것이다.<br/>
 <br/>
 이렇게 a, b를 바꾸면서, 즉, 기울기와 평행이동을 해가면서 hypothesis function의 모양을 바꿀 수 있으므로 <br/>hypothesis function을 데이터에 맞게 fitting을 시킬수가 있게 된다. <br/>
@@ -103,11 +103,11 @@ logistic regression의 cost function으로는 entropy를 사용한다.<br/>
 특히, 일반적으로 cross entropy 라는 log function을 사용한다.<br/>
 <br/>
 @<br/>
-Linear regression's cost function\\<br/>
-	mean square\\<br/>
+Linear regression's cost function<br/>
+	mean square<br/>
 <br/>
-Logistic regression's cost function\\<br/>
-	log function(cross entropy)\\<br/>
+Logistic regression's cost function<br/>
+	log function(cross entropy)<br/>
 <br/>
 @<br/>
 linear regression의 cost function 은 mean squre ( 제곱의 평균 ) 을 사용한다.<br/>
