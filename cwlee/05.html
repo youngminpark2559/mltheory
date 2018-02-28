@@ -46,7 +46,7 @@ logistic regression 모델에서 사용하는 cost functon C 는 다음과 같�
 <br/>
 $C = -y' \log(y) - ( 1 - y' ) \log( 1 - y )$<br/>
 <br/>
-@\\<br/>
+@<br/>
 $-y' \log(y)$와  $- ( 1 - y' ) \log( 1 - y )$의 각각의 부분을 cross entropy 라고 부른다.<br/>
 <br/>
 @<br/>
@@ -60,7 +60,7 @@ c 에서 sigma 는 생략했다. 데이터 하나하나를 관찰해도 충분�
 @<br/>
 위의 logistic regression의 cost function의 수식을 분석하기전에 log라는걸 먼저 알기위해 정보량에 대해 <br/>알아보자.<br/>
 <br/>
-정보량 I $\approx$ 데이터의수, bit의 수 (실제로 I의 단위도 bit이다.)\\<br/>
+정보량 I $\approx$ 데이터의수, bit의 수 (실제로 I의 단위도 bit이다.)<br/>
 정보량 $I = log(\frac{1}{p})$<br/>
 <br/>
 @<br/>
@@ -68,12 +68,12 @@ c 에서 sigma 는 생략했다. 데이터 하나하나를 관찰해도 충분�
 <br/>
 $\frac{1}{p}$ 는 확률 p 의 역수로 볼 수 있다. <br/>
 <br/>
-확률 p \\<br/>
+확률 p <br/>
 $= \frac{어떤 사건이 발생한 횟수}{총 경우의 수}$<br/>
 // 발생한 횟수를 1이라고 가정하면<br/>
 $= \frac{1}{총 경우의 수} $<br/>
 <br/>
-따라서, $\frac{1}{p}$ = 총 경우의 수 \\<br/>
+따라서, $\frac{1}{p}$ = 총 경우의 수 <br/>
 가 된다.<br/>
 <br/>
 결론적으로, 경우의 수가 많으면 정보량이 많다. 비례한다. 경우의 수가 많을수록 예측하기 힘들다. <br/>
@@ -81,12 +81,12 @@ $= \frac{1}{총 경우의 수} $<br/>
 @<br/>
 주사위의 확률분포함수.<br/>
 <br/>
-1 1/6 \\<br/>
-2 1/6\\<br/>
-3 1/6\\<br/>
-4 1/6\\<br/>
-5 1/6\\<br/>
-6 1/6\\<br/>
+1 1/6 <br/>
+2 1/6<br/>
+3 1/6<br/>
+4 1/6<br/>
+5 1/6<br/>
+6 1/6<br/>
 <br/>
 2(경우의 수 저장 가능)^3(bit) = 8 경우의 수 저장 가능.<br/>
 <br/>
@@ -148,7 +148,7 @@ a를 증가시킨다는 것은 기울기를 키운다는 것이다. 그럼 cost�
 @<br/>
 우리가 위에서 그린 <br/>
 <br/>
-logistic regression 모델에서의 cost function c는\\<br/>
+logistic regression 모델에서의 cost function c는<br/>
 $c = - y'\log(y) - (1-y')log(1 - y)$<br/>
 <br/>
 y-cost 그래프는 y에 대해 그린 것 이므로 바로 gradient descent 를 사용 할 수는 없다. <br/>
@@ -156,10 +156,10 @@ y-cost 그래프는 y에 대해 그린 것 이므로 바로 gradient descent 를
 우리가 원하는 것은 hypothesis function sigmoid 그래프에서 weight 에 대한 cost function의 최소값이다. cost <br/>를 weight 에 대해 미분해야되기때문에 weight 에 대해 위 수식의 cost function 이 어떻게 변할까 살펴볼 필요가 <br/>있다. <br/>
 <br/>
 @<br/>
-logistic regression 모델에서 hypothesis function인 sigmoid function을 g(x) 라 했을 때,\\<br/>
+logistic regression 모델에서 hypothesis function인 sigmoid function을 g(x) 라 했을 때,<br/>
 $g(x) = \frac{1}{1 + e^{(-a( x - b ))}} $ 이다.<br/>
 <br/>
-여기에서 b 부분을 bias 라고 나타내자. hypothesis function 에서 평행이동과 관계된 factor 를 bias 라고 <br/>하겠다. \\<br/>
+여기에서 b 부분을 bias 라고 나타내자. hypothesis function 에서 평행이동과 관계된 factor 를 bias 라고 <br/>하겠다. <br/>
 <br/>
 처음에 랜덤하게 초기화된 bias 에 의해만들어진 hypothesis function이 예측한 y'과 실제 데이터의 출력값 y의 <br/>차이인 cost 가 발생하게 되면 hypothesis function에서 cost가 최소화 될수 있도록 b를 update 하면서 계속 <br/>평행이동 시켜보는 것이다. <br/>
 <br/>
@@ -171,7 +171,7 @@ b를 작은 수로 설정하면 cost 가 높아진다. cost function 그래프�
 a 에 대한 cost 도 마찬가지. 그런데 a의 경우 이미 최적화로 설정된 b때문에 어느 순간부터는 더이상 안줄어들고 <br/>올라가지도 않는다. 점근선에 무한히 접근만 한다.<br/>
 <br/>
 @<br/>
-logistic regression 모델에서 hypothesis function 인 \\<br/>
+logistic regression 모델에서 hypothesis function 인 <br/>
 sigmoid function $g(x) = \frac{1}{1 + e^{(-a( x - b ))}}$ <br/>
 <br/>
 cost function에 영향을 주는 상수 a, b, 즉, weight 에 대한 그래프 g(x) 를 알았으니까 cost function을 <br/>최소화해주는 a, b를 찾기위해 gradient descent 를 해보자.<br/>
@@ -183,9 +183,9 @@ $b \leftarrow b - \alpha\frac{\partial{c}}{\partial{b}}$<br/>
 b에 대하여 cost function을 미분해서, 즉, 랜덤하게 초기화된 b에서 cost function의 기울기를 구한다. 기울기가 <br/>0이 아니면 최소가 아니라는 의미이므로 기울기에 $\alpha$ 를 곱해서 원래 b하고의 차이를 구해서 그 결과를 b에 <br/>할당해서 hypothesis function에서 b값을 업데이트 시킨다.<br/>
 <br/>
 @<br/>
-위 두 weight들인 a, b 가 업데이트 되면서\\ <br/>
+위 두 weight들인 a, b 가 업데이트 되면서<br/>
 <br/>
-logistic regression 모델에서 hypothesis function의 cost를 나타내주는 cost function c 함수인\\ <br/>
+logistic regression 모델에서 hypothesis function의 cost를 나타내주는 cost function c 함수인<br/>
 $c = -y'log{(y)} - (1 - y')\log({1 - y})$<br/>
 이 두 요소로 이루어진 그래프도 내려가면서 fitting 이 될 것이다. <br/>
 <br/>
