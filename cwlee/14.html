@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+@Chapter<br/>
+14. Back Propagation in RNN<br/>
+<br/>
+@<br/>
+일반적인 NN (CNN, DNN)경우에는 cost function을 구하게 되면 각각 layer 에서의 각각 독립적인 cost function이 나오게 되는데 RNN에서는 cost function이 특정 상태의 레이어에서의 cost function과 이후의 모든 레이어들의 cost function을 합친 cost function이 그 특정 레이어에서의 진짜 cost function이 된다.<br/>
+<br/>
+@<br/>
+위에서 설명한 RNN에서의 cost function의 특성때문에 back propagation 할 때 일반적인 NN과 방식이 달라지게 된다.<br/>
+<br/>
+@<br/>
+state별로 모식화한 RNN의 구조.<br/>
+<br/>
+$\overset{w}{\rightarrow} s_{t-1} \overset{w}{\rightarrow} s_{t} \overset{w}{\rightarrow} s_{t+1} \overset{w}{\rightarrow}$<br/>
+<br/>
+이렇게 있을때 3개의 state 각각에 입력 x들이 들어간다고 생각하자. $x_{t-1}, x_{t}, x_{t+1}$ <br/>
+들어가는 엣지에는 동일한 u라는 파라미터를 공유한다고 생각하자. <br/>
+<br/>
+u : 제어시스템에서 사용되는 명령이라는 역할을 parameter 라고 볼 수 있다. 제어와 관련된 일을 하는 사람들은 다이나믹 모델 같은 부분에서 물체가 움직일때 그걸 선형적으로 모델링한다고 하면 보통 속도모델과 거리변화모델 등의 방정식을 풀어서 가속도를 입력으로 준다. 일종의 명령 인수로서 주게되는데 그런 종류의 명령이라고 보면 된다. RNN에서도 u가 비슷한 역할을 한다. <br/>
+<br/>
+@<br/>
+입력이 들어갔으니 3개의 state 각각에서 output 값들이 나온다. $O_{t-1}, O_{t}, O_{t+1}$ <br/>
+나오는 엣지에 동일한 파라미터인 벡터 V가 있다고 생각하자.<br/>
+<br/>
+@<br/>
+$\overset{w}{\rightarrow} s_{t-1} \overset{w}{\rightarrow} s_{t} \overset{w}{\rightarrow} s_{t+1} \overset{w}{\rightarrow}$<br/>
+<br/>
+위의 구조는 recursive 한 모양을 포함하는 아래의 구조를 펼친 모양이다.<br/>
+<br/>
+$X \overset{u}{\rightarrow} S \overset{v}{\rightarrow} O, S \overset{w}{\rightarrow} S$ <br/>
+<br/>
+@<br/>
+recursive 형태로 돌아가다보니까 RNN에서의 cost function은 좀 다르게 생겼다. <br/>
+<br/>
+일반적인 NN에서의 cost function 은 layer들이 다음과 같이 있을 때,<br/>
+$X \overset{w_{1}}{\rightarrow} (H_{1}) \overset{w_{2}}{\rightarrow} (H_{2}) \overset{w_{3}}{\rightarrow} Y $ <br/>
+<br/>
+입력레이어 X에서는 cost function이 따로 없고 hidden layer $H_{1}, H_{2}$와 output layer Y 에서 각각 다른 독립적인 cost function 들을 구할수 있었다. <br/>
+<br/>
+@<br/>
+그런데 RNN 같은 경우는 output layer 에서는 자기 cost function이 있는데 $H_{2}$에서의 진짜 cost function 은 $H_{2}$ 에서의 cost function과 Y에서의 cost function의 합이다.<br/>
+<br/>
+@<br/>
+RNN에서는 state를 계속 업데이트를 하다보니까 앞의 레이어에서 state를 변화를 시키면 이후 레이어의 state까지 모두 변화를 시킨다는 것이다. 독립적이지 않고. 거기다가 weight도 t라는 시점에서 내가 업데이트 시켜버리면 이후에도 그 업데이트된 동일한 weight가 RNN모델 전체에서 쓰이기 때문에 cost function끼리 상관관계가 밀접하게 있다.<br/>
+<br/>
+그래서 미분을 하는 과정에서 각각의 레이어에서 cost function을 구해서 단순히 그냥 back propagation 하는 게 아니라 이런 연속적인 문제까지 고려해야한다. 이런의미에서 해당 특정 layer에서의 cost function을 $\Sigma$ 로 표현한다. 왜냐하면 특정 시점에서의 진짜 cost function은 이후의 모든 cost function의 합 이라는 뜻을 담아야하기 때문이다. <br/>
+<br/>
+@<br/>
+$\overset{w}{\rightarrow} s_{t-1} \overset{w}{\rightarrow} s_{t} \overset{w}{\rightarrow} s_{t+1} \overset{w}{\rightarrow}$<br/>
+<br/>
+state 각각에 입력(x)들이 들어간다. $x_{t-1}, x_{t}, x_{t+1}$ <br/>
+들어가는 엣지에는 u가 있다.<br/>
+<br/>
+state 각각에서 output이 나온다. $o_{t-1}, o_{t}, o_{t+1}$ <br/>
+나오는 엣지에서 v가 있다.<br/>
+<br/>
+state S에 bias b가 하나씩 들어간다고 가정.<br/>
+output O에 bias c가 하나씩 들어간다고 가정. <br/>
+<br/>
+이제 위의 내용들을 수식으로 표현해 보자.<br/>
+크게 수식 세 개가 필요하다.<br/>
+<br/>
+수식1.<br/>
+시점 t에서의 activation function $a_{t}$은 다음과 같이 정의된다. b는 $s_{t}$ 자체(모든 state에 동일한 bias b)에 있는 bias 값이다. $ws_{t-1}$는 이전의 레이어로부터 weight과 state가 곱해진게 들어오는것. $ux_{t}$는 $s_{t}$에서 u와 $x_{t}$가 곱해져서 입력으로 들어오는 것.<br/>
+$a_{t} = b + ws_{t-1} + ux_{t}$<br/>
+<br/>
+수식2.<br/>
+시점 t에서의 state인 $s_{t}$ 는 $a_{t}$ 를 tanh 함수에 넣은 값이다.<br/>
+$s_{t} = tanh(a_{t})$<br/>
+<br/>
+수식3.<br/>
+시점 t에서의 output 값인 $o_{t}$ 는 그냥 있는 그대로 쓰면된다. 일단 모든 output에는 C라는 동일한 bias 파라미터가 들어간다. 그리고 엣지에 있는 파라미터인 v와 상태인 $s_{t}$를 곱해주는 값이다.<br/>
+$o_{t} = vs_{t} + C$<br/>
+<br/>
+미분에 사용될 공식은 위 3개 정도가 될 것이다. <br/>
+위 수식을 그림으로 표현한게 위 그림이라고 보면 된다. <br/>
+<br/>
+@<br/>
+back propagation 을 해서 위 수식을 풀어보자.<br/>
+<br/>
+back propagation 을 한다는 것은 cost function에서 기울기를 구하는것인데 뭐에대한 gradient를 구하냐 에 따라서 문제가 달라진다. 뭐에대해 미분을 하냐 는 내가 업데이트하고자 하는 파라미터에 의해 결정이 된다. 업데이트 하고자 하는 파라미터는 여기서는 3개다. output으로 나가는 엣지에 있는 v, weight의 w, input으로 들어가는 엣지에 있는 u. 물론 b나 c도 할수있긴하다. 선택해서 그거에 대해서 미분을 하면된다. <br/>
+<br/>
+@<br/>
+RNN 에서 output 들이란 이 모델의 예측 결과값이고 실제 트레이닝 셋에서의 결과값이 있을 텐데, 그 두 값의 차이값을 통한 mean square나 cross entropy를 cost function이라고 정의한다. 따라서 cost function은 output에 대한 함수이다. cost function을 어떤것에 대하여 미분한다고하면 일단 output에 대해 미분이 가능해야한다. <br/>
+<br/>
+또한 cost function은 $s_{t}$에 대해서도 미분이 가능해야한다. 미분은 가능하지만 그 식을 모른다 하면 사실 그건 미분이 불가능한거다, 식을 모르기 때문이다.  <br/>
+<br/>
+$s_{t}$에서 미분이 가능하면 u와 w에서도 미분이 가능하다고 볼 수 있다. state는 ux, ws를 포함하고 있기 때문이다.<br/>
+<br/>
+@<br/>
+한 layer에서의 진짜 cost function은 이 cost function을 포함하여 그 뒤에 있는 cost function들의 합이라고 했다. <br/>
+<br/>
+현재 시점이 5이고 최종 시점이 T라면, $L_{5}$에 대한 진짜 cost function을 알고 싶다 하면 아래처럼 계산하면된다. <br/>
+진짜 cost function $C_{5} = C_{5} + C_{6} + C_{7} + ... + C_{T}$<br/>
+<br/>
+각각의 state에서 나오는 cost function들. 그걸 합쳐야 진짜 총 cost function이 된다.<br/>
+<br/>
+@<br/>
+위의 sum 을 수식으로 정리하면, t에 대해 각각의 state에서 나오는 모든 C들을 레이어 끝의 C까지 모두 더한다.<br/>
+<br/>
+$C_{real-C-at-t} = \sum\limits_{t}C_{each-C-by-end}$<br/>
+<br/>
+@<br/>
+먼저 output에 대해서 미분해보자.<br/>
+cost function C가 output에 대한 함수니까 output O에 대하여 cost function C를 그냥 미분 해주면 된다.<br/>
+t에서의 output 값 $o_{t}$에 대하여 cost function C를 미분한다.<br/>
+$\frac{\partial{C}}{\partial{O_{t}}}$<br/>
+<br/>
+여기서 cost function C at t는 위에서 보다시피 t부터 레이어 끝까지의 C들의 summation 으로 되어있다. 때문에, 각각의 cost function으로 바꿔줄 필요가있다. 그래야 그 특정 시점 t에 대한 output $O_{t}$에 대해 특정시점 t에서의 특정 cost function 을 미분을 할수있기 때문이다. 따라서, 다시적으면,<br/>
+<br/>
+$\frac{\partial{C}}{\partial{O_{t}}}=\frac{\partial{(C_{t}+C_{t+1}+C_{t+2}+...+C_{T})}}{\partial{O_{t}}}$<br/>
+<br/>
+C가 O에 대한 함수니까, 아래와 같이 바꿔쓸수 있다. $C_{t}$에 대해서 먼저 미분을 해주고, $O_{t}$에 대하여 $C_{t}$를 미분해준다.<br/>
+$\frac{\partial{C}}{\partial{O_{t}}}=\frac{\partial{(C_{t}+C_{t+1}+C_{t+2}+...+C_{T})}}{\partial{C_{t}}}\frac{\partial{C_{t}}}{\partial{O_{t}}}$<br/>
+<br/>
+이렇게 하면 이제 쉽게 풀린다. 일단 $C_{t}$ 시점에 대해서 미분을 한거니까 다른 시점에 대해서는 상수이다. 따라서 $C_{t}$ 제외한 부분은 미분하면 0으로 되고 $C_{t}$ 만 1이 된다. 그럼 남는것이, <br/>
+$= \frac{\partial{C_{t}}}{\partial{O_{t}}}$<br/>
+으로 엣지만 남는다. 이건 우리가 알수있는 미분값이다. 왜냐하면 cost function이 다른게 아니라 <br/>
+$\frac{1}{2}{(o-o')}^{2}$ (mean square) 이런 형태거나 $olog(o)$ (cross entropy) 등으로 cost function의 종류는 우리가 정하기 나름이니까 이런건 우리가 알고있는식이고 이러한 모양의 식은 미분할수있는 식이다 라는사실을 알기때문에 우리가 알수있는 미분값이다 라고 판정을 한다.<br/>
+<br/>
+@<br/>
+$O_{t}$에 대하여 cost function C를 미분 해봤으니까 이제 $S_{t}$에 관하여 cost function C를 미분 해보자.<br/>
+<br/>
+$\frac{\partial{C}}{\partial{S_{t}}}$<br/>
+<br/>
+C는 모든 시점에서의 C의 합이라고 말했다. 미분을 여러번 많이 해야한다. 따라서 다시 쓰면,<br/>
+<br/>
+$\frac{\partial{C}}{\partial{S_{t}}} = \frac{\partial{C_{t}}}{\partial{S_{t}}} + \frac{\partial{C_{t+1}}}{\partial{S_{t}}} + \frac{\partial{C_{t+2}}}{\partial{S_{t}}} + ... + \frac{\partial{C_{e}}}{\partial{S_{t}}}$<br/>
+<br/>
+$S_{t}$에 대하여 각각의 시점에서의 cost function을 미분해서 모두 더해줘야지만 $S_{t}$ 에 대하여 진짜 cost function $\frac{\partial{C}}{\partial{S_{t}}}$ 을 미분한값이다.<br/>
+<br/>
+계산이 길고 복잡하다. 또 각 항마다 계수도 다르다. 그래서 두개씩 묶어서 아는 값 구하고 아는 값 구하고 이런식으로 구하게 되는데 $\frac{\partial{C_{e}}}{\partial{S_{t}}}$ 이거는 우리가 알 수 있는값이다.<br/>
+<br/>
+우리가 구하려고 하는 것의 최종시점 $\frac{\partial{C_{e}}}{\partial{S_{t}}}$ 가<br/>
+궁극적 최종시점인 $\frac{\partial{C_{T}}}{\partial{S_{t}}}$ 의 바로 앞에 있는 시점이라면 한번만 back propagation 해서 구할수있다. $\frac{\partial{C_{T}}}{\partial{S_{t}}}$ 이 값은 쉽게 알수 있는 값이며 여기서 한번만 back propagation을 하면 된다는 것이다.<br/>
+<br/>
+그런데 사실 back propagation 을 쭉하면 모든 gradient를 구할 수 있다. 이게 RNN에서의 back propagation이다. <br/>
+<br/>
+@<br/>
+일단 앞에거 두개 묶어서 그것부터 하자.<br/>
+$\frac{\partial{C}}{\partial{S_{t}}} = \frac{\partial{C_{t}}}{\partial{S_{t}}}+\frac{\partial{C_{t+1}}}{\partial{S_{t}}}$<br/>
+여기서 우리가 이미 알고있는 부분이 있다, $O_{t}$에 대해서 cost function을 미분한 값을 우리는 알고 있다. 따라서, O에 대해서 고쳐쓰면, 참고로 첫번째 항만 바꾸고 두번째 항은 바꾸지 않는다. 나중에 식이 달라지기 때문이다.<br/>
+$= \frac{\partial{C_{t}}}{\partial{O_{t}}}\frac{\partial{O_{t}}}{\partial{S_{t}}} + \frac{\partial{C_{t+1}}}{\partial{S_{t}}}$<br/>
+$\frac{\partial{C_{t}}}{\partial{O_{t}}}$ 이 값은 앞에서 우리가 알수 있다고 체크한 식이다.<br/>
+<br/>
+$S_{t}$에 대하여 $O_{t}$를 미분하면 뭐가 될까?<br/>
+위의 미분에 필요한 3개의 식으로 부터,<br/>
+$O_{t} = VS_{t} + C$을 $S_{t}$에 대하여 미분하면, $\frac{dO_{t}}{dS_{t}} = V$ 이다.<br/>
+<br/>
+앞으로는 미분을 했다라는 의미에서 C'으로 표시하겠다. <br/>
+<br/>
+@<br/>
+첫번째 항은 위에서 처리한 대로 C'V라고 표시하고 두 번째 항에 대해서 처리를 하면, 미분을 여러번 해야한다.<br/>
+$\frac{\partial{C}}{\partial{S_{t}}} = \frac{\partial{C_{t}}}{\partial{O_{t}}}\frac{\partial{O_{t}}}{\partial{S_{t}}} + \frac{\partial{C_{t+1}}}{\partial{S_{t}}}$<br/>
+$= C'V + \frac{\partial{C_{t+1}}}{\partial{S_{t}}}$<br/>
+$= C'V + \frac{\partial{C_{t+1}}}{\partial{O_{t+1}}} \frac{\partial{O_{t+1}}}{\partial{S_{t+1}}} \frac{\partial{S_{t+1}}}{\partial{S_{t}}} $<br/>
+<br/>
+각각의 항에 대하여 생각을 해보자. 각각의 항은 우리가 아는 식인가? 사실 우리가 진짜 알고 싶은 것은 $\frac{\partial{C_{t+1}}}{\partial{O_{t+1}}} \frac{\partial{O_{t+1}}}{\partial{S_{t+1}}}$ 이다. 우리는 이 식을 알수가 없다. 왜냐하면 다음 상태에 대한 식이기 때문이다. 대신 우리가 이 식을 해석할 때 $\frac{\partial{C}}{\partial{S_{t}}}$ 의 다음 상태를 알면 우리는 $\frac{\partial{C_{t+1}}}{\partial{O_{t+1}}} \frac{\partial{O_{t+1}}}{\partial{S_{t+1}}}$ 이거를 구할 수 있겠다 라고 생각할 수 있다. <br/>
+<br/>
+따라서, $\frac{\partial{C_{t+1}}}{\partial{O_{t+1}}} \frac{\partial{O_{t+1}}}{\partial{S_{t+1}}}$ 이식을 합치면 다음과 같이 쓸 수 있다.<br/>
+$\frac{\partial{C}}{\partial{S_{t}}} = C'V + \frac{\partial{C_{t+1}}}{\partial{S_{t+1}}} \frac{\partial{S_{t+1}}}{\partial{S_{t}}}$<br/>
+<br/>
+우리가 구하고자 하는 특정 시점에서의 $S_{t}$에 관한 cost function의 미분값 $\frac{\partial{C}}{\partial{S_{t}}}$ 은 사실 표현상 $\frac{\partial{C_{t}}}{\partial{S_{t}}}$ 이렇게 쓸 수 도 있다.<br/>
+<br/>
+따라서, $\frac{\partial{C}}{\partial{S_{t}}} = C'V + \frac{\partial{C_{t+1}}}{\partial{S_{t+1}}} \frac{\partial{S_{t+1}}}{\partial{S_{t}}}$ 도 위와 같은 방식으로 표현할 수 있다.<br/>
+<br/>
+$\frac{\partial{C_{t}}}{\partial{S_{t}}}$ 과 $\frac{\partial{C_{t+1}}}{\partial{S_{t+1}}}$ 은 서로 업데이트 관계에 있다. 일반 NN에서 $\delta$ 랑 똑같은 역할을 하는 것이다. 다음 레이어의 cost를 알게되면 이전레이어 즉 현재 상태에다 업데이트 시킬 수 있다. <br/>
+<br/>
+편의상 우리가 구하고자 하는 $\frac{\partial{C}}{\partial{S_{t}}}$ 를 $\delta$ 라고 두자. 해당 레이어의 cost라는 얘기이다. 그러면 다음 레이어에서의 cost를 의미하는 $\frac{\partial{C_{t+1}}}{\partial{S_{t+1}}}$ 는 $\delta_{t+1}$ 이라고 할 수 있다. 편의상 $\delta^{+}$ 이렇게 표현해 보자.<br/>
+<br/>
+위의 내용대로 수식을 다시 써보면,<br/>
+$\delta = C'V + \delta^{+} \frac{\partial{S_{t+1}}}{\partial{S_{t}}}$ 가 된다.<br/>
+<br/>
+그럼 이제, $\frac{\partial{S_{t+1}}}{\partial{S_{t}}}$를 미분해봐야한다. <br/>
+$S_{t} = tanh(a_{t})$ 이다.<br/>
+위의 tanh 를 미분하는 것이다. $a_{t}$가 S에 관한 function이기 때문이다.<br/>
+$a_{t} = b + ws_{t-1} + ux_{t}$ 이전 상태를 입력($ws_{t-1}$)으로 받는 꼴이다.<br/>
+<br/>
+t+1 이기 때문에 바꿔서 다시 쓰면,<br/>
+$a_{t+1} = b + ws_{t} + ux_{t+1}$<br/>
+$S_{t+1} = tanh(a_{t+1})$<br/>
+$S_{t+1} = tanh(b + ws_{t} + ux_{t+1})$ 이 된다.<br/>
+<br/>
+이제 $S_{t}$에 대하여 $S_{t+1}$을 합성합수의 미분법을 사용하여 미분한다.<br/>
+참고로 $y = tanh(x)$ 를 x에 관하여 미분하면 $\frac{dy}{dx} = 1 - tanh^{2}(x)$ 이다.<br/>
+<br/>
+$\frac{\partial{S_{t+1}}}{S_{t}} = (1-tanh^{2}(b + ws_{t} + ux_{t+1})) \frac{d}{dS_{t+1}}(b + ws_{t} + ux_{t+1})$<br/>
+$= (1-tanh^{2}(b + ws_{t} + ux_{t+1})) \frac{d}{dS_{t}}(b + ws_{t} + ux_{t+1})$<br/>
+$= w(1-tanh^{2}(b + ws_{t} + ux_{t+1}))$<br/>
+$= w(1-S_{t+1}^{2})$<br/>
+<br/>
+결론적으로, $\frac{\partial{S_{t+1}}}{S_{t}} = w(1-S_{t+1}^{2})$ 이다.<br/>
+<br/>
+위의 식을 아래 식에 대입한다.<br/>
+$\delta = C'V + \delta^{+} \frac{\partial{S_{t+1}}}{S_{t}}$<br/>
+$= C'V + \delta^{+} w(1-S_{t+1}^{2})$<br/>
+<br/>
+이제 $\delta$ 를 업데이트 할 수 있으니까, 이 $\delta$ 를 가지고 위에서 우리가 업데이트 하고자 했던 3개의 파라미터들도 업데이트 할 수 있게된다. <br/>
+<br/>
+결론적으로, 해당 레이어에서의 $\delta$는 cost function을 미분한거에 V를 곱해주고 그 다음 레이어의 $\delta^{+}$ 에다가 w를 곱해주는데 여기에 추가로 1에서 뺀 그다음 레이어에서의 state의 제곱을 곱해준다.<br/>
+$\delta = C'V + \delta^{+} w(1-S_{t+1}^{2})$<br/>
+<br/>
+위의 결론을 이용하면, $\frac{\partial{C}}{\partial{w}}, \frac{\partial{C}}{\partial{V}}, \frac{\partial{C}}{\partial{u}}$ 들을 구할 수 있는데, 위에서 구한 우리가 알수 있는 값인 $\delta$ 가 앞의 3개의 수식에 들어가 있기 때문이다.<br/>
+
+   
+   </BODY>
+</HTML>
