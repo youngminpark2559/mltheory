@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+   
+@Chapter<br/>
+05. Loss function in logistic regression<br/>
+<br/>
+@<br/>
+지난 시간에 logistic regression 을 사용할때는 linear regression의 cost function 과는 조금 다른 cost <br/>function을 사용한다고 얘기 했다. <br/>
+<br/>
+일단, linear regression 의 cost function C를 구할 때는 각각의 cost의 mean square를 해서 C를 구했다.<br/>
+$C = \frac{1}{2m}( y - y' )^{2}$<br/>
+<br/>
+@<br/>
+logistic regression 모델에 있어서도 cost function으로서,<br/>
+<br/>
+$C = \frac{1}{2m}( y - y' )^{2}$<br/>
+<br/>
+이것을 사용해도 무방하다. 학습이 가능하다. <br/>
+<br/>
+다만 logistic regression 모델에서는 cost function을 $C = \frac{1}{2m}( y - y' )^{2}$ 이것으로 사용하는 <br/>것보다 더 좋은 방법이 있다.<br/>
+<br/>
+왜냐하면 logistic regression 모델의 경우 (softmax를 이용하여)정규화하는 과정이 있는데, logistic regression <br/>모델에서 정규화를 하고 cost function 으로 cross entropy 를 사용하니까 성능이 더 잘나왔기 때문이다. logistic <br/>regression에서 다른 cost function을 사용하는 이유는 이것뿐이다.<br/>
+<br/>
+@<br/>
+logistic regression 모델에서 사용하는 cost functon C 는 다음과 같다.\\<br/>
+<br/>
+$C = -y' \log(y) - ( 1 - y' ) \log( 1 - y )$<br/>
+<br/>
+@\\<br/>
+$-y' \log(y)$와  $- ( 1 - y' ) \log( 1 - y )$의 각각의 부분을 cross entropy 라고 부른다.<br/>
+<br/>
+@<br/>
+Logistic regression의 cost function은 2개의 함수로 이루어져 있다.<br/>
+<br/>
+logistic regression 모델에서의 sigmoid hypothesis function 에서 예측한 값 y'이 0 or 1 에 따라 적용되는 <br/>cost function의 기능이 달라진다.<br/>
+<br/>
+@<br/>
+c 에서 sigma 는 생략했다. 데이터 하나하나를 관찰해도 충분히 cost function 를 구할 수 있기 때문이다.<br/>
+<br/>
+@<br/>
+위의 logistic regression의 cost function의 수식을 분석하기전에 log라는걸 먼저 알기위해 정보량에 대해 <br/>알아보자.\\<br/>
+<br/>
+정보량 I $\approx$ 데이터의수, bit의 수 (실제로 I의 단위도 bit이다.)\\<br/>
+정보량 $I = log(\frac{1}{p})$<br/>
+<br/>
+@<br/>
+고찰해보자.<br/>
+<br/>
+$\frac{1}{p}$ 는 확률 p 의 역수로 볼 수 있다. <br/>
+<br/>
+확률 p \\<br/>
+$= \frac{어떤 사건이 발생한 횟수}{총 경우의 수}$\\<br/>
+// 발생한 횟수를 1이라고 가정하면<br/>
+$= \frac{1}{총 경우의 수} $<br/>
+<br/>
+따라서, $\frac{1}{p}$ = 총 경우의 수 \\<br/>
+가 된다.<br/>
+<br/>
+결론적으로, 경우의 수가 많으면 정보량이 많다. 비례한다. 경우의 수가 많을수록 예측하기 힘들다. <br/>
+<br/>
+@<br/>
+주사위의 확률분포함수.<br/>
+<br/>
+1 1/6 \\<br/>
+2 1/6\\<br/>
+3 1/6\\<br/>
+4 1/6\\<br/>
+5 1/6\\<br/>
+6 1/6\\<br/>
+<br/>
+2(경우의 수 저장 가능)^3(bit) = 8 경우의 수 저장 가능.<br/>
+<br/>
+따라서, 3bit가 있으면 주사위 확률 분포를 표현할수 있다.<br/>
+<br/>
+2bit면 4개까지만 표현 가능하므로 모자란다.<br/>
+<br/>
+@<br/>
+동전의 경우 1bit으로 확률분포를 표현할수있다.<br/>
+<br/>
+@<br/>
+엔트로피란. 수조에 잉크를 떨어뜨렸을때 잉크가 얼마나 퍼지냐 는 걸 보는것. 소수성 잉크이면 별로 안퍼질 것이다. <br/>친수성잉크면 퍼진다. 잘 퍼지는 경우 엔트로피가 높다고 한다. 분포가 넓고 분산이 크면 엔트로피가 크다고 할 수 <br/>있다. <br/>
+<br/>
+확률분포 두개를 생각해보자. 하나는 기울기0 flat. 하나는 가우시안 처럼 산종모양.<br/>
+<br/>
+전자는 균일하게 퍼저있으므로 엔트로피가 높다. 후자는 엔트로피가 낮다. <br/>
+전자는 정보량이 높다. 후자는 정보량이 낮다. 정보량이라고 하는것은 내가 예측하고자하는 그 부분의 정보를 어떻게 <br/>잘 얻을 수 있을까에 대한 고민이다. 후자는 가운데에 몰려 있는 것들 조금만 있어도 산종모양 그래프를 표현할 수 <br/>있다. <br/>
+전자는 엄청 많은 정보가 있어야 쭉 플랫한 함수를 표현할 수 있다.<br/>
+전자는 엔트로피가 높아 예측하기 어렵다. 후자는 엔트로피가 낮아 예측하기 쉽다.<br/>
+<br/>
+@<br/>
+logistic regression모델에서 cost function C 는<br/>
+$C = -y' \log(y) - ( 1 - y' ) \log( 1 - y )$<br/>
+<br/>
+cost function의 그래프를 그려보자. 모양을 알아야 cost function에 gradient descent 같은걸 적용하지.<br/>
+<br/>
+중요포인트는 아래 그래프에서 가로축이 y 이며. 세로축이 cost 이다 라는 점이다.<br/>
+<br/>
+$- y' log(y)$\\<br/>
+log 함수의 x 축 대칭.<br/>
+<br/>
+$- ( 1 - y' ) log( 1 - y )$\\<br/>
+점근선 1이며 (0,0) 지남. 증가함수.<br/>
+<br/>
+@<br/>
+sigmoid function<br/>
+$g(x)<br/>
+= \frac{1}{1+e^{-a(x-b)}}$<br/>
+<br/>
+랜덤한 초기값설정에 의해 덜 정확한 sigmoid function 이 그려진다. 이걸 실제 데이터 패턴과 유사한 모양이 되도록 <br/>만들어 주는 a, b를 업데이트 하면서 hypothesis function을 fitting 해 나가야 한다. <br/>
+<br/>
+현재 부정확한 그래프는 0을 예측해야하는데 1을 예측하고 있는 모양이다. <br/>
+<br/>
+y = 0 인 경우, logistic regression 모델의 cost function 의 두 요소 중 두번째 그래프를 사용한다. 두번째 <br/>그래프에서 y축값 cost 가 높은 상태임.<br/>
+<br/>
+이 상태에서 hypothesis function에서 a 기울기는 변화시키지 말고 b만 움직여보자. 함수위 점들이 오른쪽으로 <br/>평행이동함. 그럼 y-y' 인 cost들이 전체적으로 작아졌다는걸 알 수 있다. <br/>
+<br/>
+실제로 cost function 에서 점이 minimum을 향해 조금 밑으로 이동한다. <br/>
+<br/>
+그리고 또 hypothesis function을 오른쪽으로 평행이동 시킨다. 그러면 불행히도 hypothesis function에서 x가 0 <br/>보다 큰 쪽에서 cost 가 발생하기 시작한다. 그럼 cost function 의 첫번쨰 그래프에서 점이 올라가버린다. 처음에는 <br/>cost 가 거의 없어서 가장 밑에 였는데...<br/>
+<br/>
+계속 움직이면서 weight를 업데이트하고 cost function에서 두개를 합쳤을때 가장 낮은부분 절충안을 찾는다. 그럼 <br/>b는 fitting 이 된거다. <br/>
+<br/>
+이상태에서 a를 tunning 해야한다. <br/>
+<br/>
+a를 증가시킨다는 것은 기울기를 키운다는 것이다. 그럼 cost가 작아지는 걸 볼 수 있다. <br/>
+실제로 cost fucntion 에서도 양쪽의 점이 둘다 최소점을 향해 내려온다. <br/>
+<br/>
+@<br/>
+우리가 위에서 그린 <br/>
+<br/>
+logistic regression 모델에서의 cost function c는\\<br/>
+$c = - y'\log(y) - (1-y')log(1 - y)$<br/>
+<br/>
+y-cost 그래프는 y에 대해 그린 것 이므로 바로 gradient descent 를 사용 할 수는 없다. <br/>
+<br/>
+우리가 원하는 것은 hypothesis function sigmoid 그래프에서 weight 에 대한 cost function의 최소값이다. cost <br/>를 weight 에 대해 미분해야되기때문에 weight 에 대해 위 수식의 cost function 이 어떻게 변할까 살펴볼 필요가 <br/>있다. <br/>
+<br/>
+@<br/>
+logistic regression 모델에서 hypothesis function인 sigmoid function을 g(x) 라 했을 때,\\<br/>
+$g(x) = \frac{1}{1 + e^{(-a( x - b ))}} $ 이다.\\<br/>
+<br/>
+여기에서 b 부분을 bias 라고 나타내자. hypothesis function 에서 평행이동과 관계된 factor 를 bias 라고 <br/>하겠다. \\<br/>
+<br/>
+처음에 랜덤하게 초기화된 bias 에 의해만들어진 hypothesis function이 예측한 y'과 실제 데이터의 출력값 y의 <br/>차이인 cost 가 발생하게 되면 hypothesis function에서 cost가 최소화 될수 있도록 b를 update 하면서 계속 <br/>평행이동 시켜보는 것이다. <br/>
+<br/>
+b를 작은 수로 설정하면 cost 가 높아진다. cost function 그래프에서 점이 높게 찍힌다. 점점 갈수록 cost <br/>function에서 밑으로 점이 내려온다. 그러다 더 많이 b를 수정해서 hypothesis function을 움직일수록 다시 점이 <br/>cost function에서 올라간다. 2차 함수는 아니지만 모양은 마치 2차 함수처럼 생긴 그래프에서 점의 이동을 말하는 <br/>것이다.<br/>
+<br/>
+이게 b에 대한 cost 가 되는 것이다. <br/>
+<br/>
+@<br/>
+a 에 대한 cost 도 마찬가지. 그런데 a의 경우 이미 최적화로 설정된 b때문에 어느 순간부터는 더이상 안줄어들고 <br/>올라가지도 않는다. 점근선에 무한히 접근만 한다.<br/>
+<br/>
+@<br/>
+logistic regression 모델에서 hypothesis function 인 \\<br/>
+sigmoid function $g(x) = \frac{1}{1 + e^{(-a( x - b ))}}$ <br/>
+<br/>
+cost function에 영향을 주는 상수 a, b, 즉, weight 에 대한 그래프 g(x) 를 알았으니까 cost function을 <br/>최소화해주는 a, b를 찾기위해 gradient descent 를 해보자.<br/>
+<br/>
+$a \leftarrow a - \alpha\frac{\partial{c}}{\partial{a}}$\\<br/>
+a에 대하여 cost function을 미분해서, 즉, 랜덤하게 초기화된 a에서 cost function의 기울기를 구한다. 기울기가 <br/>0이 아니면 최소가 아니라는 의미이므로 기울기에 $\alpha$ 를 곱해서 원래 a하고의 차이를 구해서 그 결과를 a에 <br/>할당해서 hypothesis function에서 a값을 업데이트 시킨다.\\<br/>
+<br/>
+$b \leftarrow b - \alpha\frac{\partial{c}}{\partial{b}}$\\<br/>
+b에 대하여 cost function을 미분해서, 즉, 랜덤하게 초기화된 b에서 cost function의 기울기를 구한다. 기울기가 <br/>0이 아니면 최소가 아니라는 의미이므로 기울기에 $\alpha$ 를 곱해서 원래 b하고의 차이를 구해서 그 결과를 b에 <br/>할당해서 hypothesis function에서 b값을 업데이트 시킨다.\\<br/>
+<br/>
+@<br/>
+위 두 weight들인 a, b 가 업데이트 되면서\\ <br/>
+<br/>
+logistic regression 모델에서 hypothesis function의 cost를 나타내주는 cost function c 함수인\\ <br/>
+$c = -y'log{(y)} - (1 - y')\log({1 - y})$\\<br/>
+이 두 요소로 이루어진 그래프도 내려가면서 fitting 이 될 것이다. <br/>
+<br/>
+@<br/>
+위에서 배운 내용이 굉장히 중요하다. Deep NN 들어가기전에 가장 중요한 점이 있다면 이부분이라고 말하고싶다.<br/>
+<br/>
+logistic regression 모델에서의 hypothesis function(sigmoid)의 weight인 a, b 들의 변화에 따른 cost <br/>function(log function with cross entropy) 의 변화를 추적해내는것, 그걸 토대로 gradient 를 수식으로 풀어낼 <br/>수 있는것. 이 개념이 잘 되어있으면 나중에 신경망에서 back propagation 파트를 쉽게 학습하고 풀 수 있다. <br/>
+<br/>
+Deep NN 신경망 뿐만 아니라 그것의 응용버전인 CNN, RNN, LSTM, GRU 여러가지 신경망 모델들도 학습 매커니즘이 <br/>비슷하기 때문에, 위에서 배운 매커니즘에서 벗어나지 않는다, 이거에 대해서만 잘 알고 있으면 다른 매커니즘도 쉽게 <br/>이해할수 있고 수식을 보더라도 겁먹지 않을 것이다. <br/>
+      
+   </BODY>
+</HTML>
