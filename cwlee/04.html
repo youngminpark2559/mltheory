@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+   
+@Chapter<br/>
+04. Logistic Regression<br/>
+<br/>
+@<br/>
+Logistic regression.<br/>
+<br/>
+regression 을 hypothesis function을 fitting 하는 것이라고 생각해라.<br/>
+logistic은 linear와 다르게 모 아니면 도 그중에 하나 라고 생각해라.<br/>
+<br/>
+@<br/>
+Logistic regression 모델을 표현하는 hypothesis function도 여러가지가 있다.<br/>
+Linear regression에서는 우리가 일차함수인 hypothesis function을 가지고 classify를 했었다.<br/>
+<br/>
+@<br/>
+machine learning 에서 logistic regression 모델을 표현하는 hypothesis function은 크게 두가지를 사용한다.\\<br/>
+    sigmoid function.\\<br/>
+        $\frac{1}{1+e^{-x}}$ 로 나타낼수 있다. 정의역은 [-inf, inf]이고 치역은 ( 0, 1 )이다.\\<br/>
+		input data를 이게 0이냐 아니면 1이냐로 classfication 할때 주로 쓰인다.\\<br/>
+	tanh function.\\<br/>
+		$\tanh(x)$ 의 함수형태로 나타낼수 있다.\\<br/>
+		sigmoid function이 scaling 된 형태이다. 정의역은 [-inf, inf]이고 치역은 ( -1, 1 )이다.\\<br/>
+		+, - 가 정의되야할때 주로 쓰인다.\\<br/>
+		<br/>
+@<br/>
+위의 logistic regression 모델에서의 hypothesis function들을 fitting 해 보자.\\<br/>
+<br/>
+Linear regression 모델일때 일차함수로 만들어진 hypothesis function 의 경우 기울기와 y절편을 조절하기위해 상수<br/>($W_{1}, W_{2}$) 들을 업데이트하면서 hypothesis function의 모양을 실제 데이터에 맞게 fitting 시켰다.\\<br/>
+<br/>
+logistic regression에 사용되는 hypothesis function 도 fitting 하려면 함수에 들어가 있는 상수를 업데이트 <br/>하면서 hypothesis function을 fitting 하면 된다.\\<br/>
+<br/>
+Logistic regression 에서 사용되는 hypothesis function : sigmoid funtion, $tanh(x)$\\<br/>
+<br/>
+@<br/>
+sigmoid function $g(x)<br/>
+= \frac{1}{1+e^{-x}}$<br/>
+<br/>
+// 상수 a, b를 포함시켜 모양을 일반화 시켜보자.\\<br/>
+sigmoid function $g(x)<br/>
+= \frac{1}{1+e^{-{(ax+b)}}}$<br/>
+<br/>
+// 여전히 sigmoid function의 모양을 알기 힘드니, 인수분해를 써서 조금 고쳐보자.\\<br/>
+sigmoid function $g(x)<br/>
+= \frac{1}{1+e^{-{a(x+b)}}}$<br/>
+<br/>
+@<br/>
+a가 작으면 sigmoid function의 s 라인이 완만하고 a를 키우면 s라인의 기울기가 가파라진다.\\<br/>
+b는 평행이동과 관계가 있다. b = -4 이면 sigmoid funtion을 + 4 만큼 x축 이동하는 것이다.<br/>
+<br/>
+이렇게 a, b를 바꾸면서, 즉, 기울기와 평행이동을 해가면서 hypothesis function의 모양을 바꿀 수 있으므로 <br/>hypothesis function을 데이터에 맞게 fitting을 시킬수가 있게 된다. <br/>
+<br/>
+@<br/>
+어떤 종류의 데이터를 fitting 시키는가?<br/>
+<br/>
+linear regression 일때는 데이터가 정의역 실수, 치역도 실수였다. <br/>
+<br/>
+@<br/>
+logistic regression모델에서의 데이터셋을 좌표에 표시해본다. output이 0 or 1 이 되게.<br/>
+<br/>
+sigmoid hypothesis function 그래프의 모양을 실제 데이터 모양과 비슷하게 fitting 시키는게 목표다. 그리고 <br/>중심점이 부자의 기준이 된다. 중심점을 알아내는것, 그래서 어떤 input data에 대하여 이것이 0에 가까운지 1에 <br/>가까운지 판단을 할수있게되는 것, 그것이 logistic regression의 목표이다. <br/>
+<br/>
+@<br/>
+From now on, 우리는 실제 데이터셋의 output과 sigmoid hypothesis function이 예측한 output 의 차이의 <br/>패턴으로 만들어진 cost function을 사용해서 cost function이 최소값을 갖도록 하는 a, b를 구해야한다.<br/>
+<br/>
+sigmoid hypothesis function $g(x) = \frac{1}{1+e^{-a(x+b)}}$ 의 a와 b를 업데이트 시켜가면 된다. cost <br/>function에 gradient descent 알고리즘을 적용해 cost function에서 최소값을 찾는것이다.<br/>
+<br/>
+인수분해된 형태인 $g(x) = \frac{1}{1+e^{-a(x+b)}}$ 은 사람이 보기좋은 형태지만 컴퓨터는 <br/>
+$g(x) = \frac{1}{1+e^{(-ax+b)}}$ 형태를 더 좋아한다.<br/>
+<br/>
+@<br/>
+$ax + b$의 모양은 linear regression의 hypothesis function 과 똑같은 일차함수 선형 형태이다. 그러니까 <br/>linear regression 했을때와 똑같은 방법으로 logistic regression도 그 weight들을 업데이트 해나가는 것이다. <br/>
+<br/>
+@<br/>
+gradient descent 알고리즘 이용해서 업데이트해서 a, b 구하고, 그걸 반복한다. cost function 이 최소가 되어 <br/>sigmoid hypothesis function이 실제 데이터 패턴과 fitting 될때까지 반복한다.<br/>
+<br/>
+@<br/>
+linear regression의 cost function은 mean squre(제곱의 평균)을 사용한다.<br/>
+$\frac{1}{2m}(y-y')^{2}$<br/>
+<br/>
+@<br/>
+logistic regression의 cost function으로는 entropy를 사용한다.<br/>
+특히, 일반적으로 cross entropy 라는 log function을 사용한다.<br/>
+<br/>
+@<br/>
+Linear regression's cost function\\<br/>
+	mean square\\<br/>
+<br/>
+Logistic regression's cost function\\<br/>
+	log function(cross entropy)\\<br/>
+<br/>
+@<br/>
+linear regression의 cost function 은 mean squre ( 제곱의 평균 ) 을 사용한다.<br/>
+<br/>
+$C = \frac{1}{2m}(y-y')^{2}$<br/>
+<br/>
+@<br/>
+제곱의 평균을 쓰는 이유.<br/>
+<br/>
+1.<br/>
+제곱하면 - 가 없어진다.<br/>
+hypothesis function에서 예측한 값 y'과 실제 데이터셋의 y의 차이인 cost 들을 다 더할건데 cost가 있음에도 <br/>불구하고 hypothesis function이 그려진 그래프의 좌표상에서 우연적으로 대칭적으로 데이터가 분포되어 다 더했을때 <br/>0이 나오는걸 방지하기 위해서다. <br/>
+<br/>
+1.<br/>
+cost를 증폭시켜주니까 scaling 하기에도 유리하다.<br/>
+      
+   </BODY>
+</HTML>
