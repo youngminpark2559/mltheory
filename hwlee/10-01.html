@@ -82,7 +82,7 @@ sum 의 expectation 은 expectation 의 sum 인 성질을 이용해 다음과 �
 $V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} E[I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $E[I_{\{A\}}]$ 은 event A의 확률 P(A) 임을 이용한다. <br/>
-event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서<br/>
+event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서\<br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} r_{ij}(t)$ <br/>
 <br/>
 빈도로 나타내 보자. initial state $X_{0}=i$ 에서 출발해서 시간 1부터 n까지 총 n 개의 state 를 방문할것이다. 그 중에서 state j 를 방문한게 몇번이냐를 표현하는 $\frac{1}{n}V_{ij}(n)$ 를 구해보자. <br/>
@@ -135,7 +135,20 @@ conditional probability 의 Definition 을 이용해 다음과 같이 변형한�
 $q_{jk}(n)=\sum\limits_{t=1}^{n} P(X_{t-1}=j) P(X_{t}=k|X_{t-1}=j)$<br/>
 우리는 $P(X_{t}=k|X_{t-1}=j)=P_{kj}$ 임을 알고있다. 따라서,<br/>
 $q_{jk}(n)=\sum\limits_{t=1}^{n} P(X_{t-1}=j) P_{jk}$<br/>
-34<br/>
+initial state 를 모를때도 수식을 진행할 수 있다. <br/>
+initial state 를 모르는 상태에서 시각이 t-1 일때, state 가 j 에 있을 확률 $P(X_{t-1}=j)$ 이 어떻게 되는가?<br/>
+$P(X_{t-1}=j)$ 에 total probability theorem 을 써서 정리하면서 알아낼 수 있다.<br/>
+더 간편한 방법은 $X_{0}=i$ 처럼 initial state 를 i 라고 가정으르 하고 진행하는게 더 간편하다. <br/>
+그런데 여기서에서는 total probability theorem 을 써본다<br/>
+<br/>
+그리고 위 수식에 total probability theorem 을 적용해서 정리해보자.<br/>
+$q_{jk}(n)= \sum\limits_{t=1}^{n} \sum\limits_{i=1}^{m} P(X_{0}=i) P(X_{t-1}=j|X_{0}=i) P_{jk}$<br/>
+$q_{jk}(n)= \sum\limits_{t=1}^{n} \sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$<br/>
+빈도를 따져보기 위해서 lim 를 취한다.<br/>
+$\lim\limits_{n\to\infty} \frac{1}{n} q_{jk}(n) = \lim\limits_{n\to\infty} \frac{1}{n} \sum\limits_{t=1}^{n} \sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$<br/>
+t 가 무한대로 가면 $\sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$ 에서 t 에 의해 변하는 부분은 $r_{ij}(t-1)$ 부분밖에 없고 $\pi_{j}$ 로 convergence 한다. $\sum\limits_{i=1}^{m} P(X_{0}=i)=1$ 이므로 $\sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$ 은 $\pi_{j}P_{jk}$ 로 convergence 한다.<br/>
+<br/>
+43<br/>
       
    </BODY>
 </HTML>
