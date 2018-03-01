@@ -69,20 +69,20 @@ single aperiodic recurrent class 만 가진다. <br/>
 initial state i 에서 출발해서 시간 n 이 될때 까지 state j 를 방문한 빈도 혹은 횟수는 random variable $V_{ij}(n)$ 일 것이다. 따라서, 그 횟수의 expectation 을 따져보자.<br/>
 <br/>
 $V_{ij}(n)$ 은 시간 1에서 n 까지 가는동안 j 를 방문한 횟수를 다 더하고 Expectation 을 취해주면 된다.<br/>
-Indicator function 을 사용한다. Indicator function $I_\{A\}$ 는 event A 가 발생하면 1이고 일어나지 않으면 0이다. 따라서, 다음과 같이 표현할수 있다.<br/>
-$V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_\{X_{t}=j|X_{0}=i\}]$<br/>
+Indicator function 을 사용한다. Indicator function $I_{\{A\}}$ 는 event A 가 발생하면 1이고 일어나지 않으면 0이다. 따라서, 다음과 같이 표현할수 있다.<br/>
+$V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $X_{0}$ : initial state <br/>
 $X_{0}$ 가 i 에서 출발했을때 시각 t 에서 state 가 j 이면 1 그렇지 않으면 0 이라는 뜻이다. <br/>
 따라서 시간 t =1 에서 t=n 까지 다 더하면 state j 를 방문한 총 횟수가 계산된다. <br/>
 <br/>
-event A 가 있다면 $I_\{A\}$ 가 random variable 이다. <br/>
-$E[I_\{A\}]$ 은 $1\times$(1이 발생할 확률, 즉, A가 발생할 확률)+$0\times$(A가 일어나지 않을 확률) 이므로 A가 발생활 확률 P(A) 이다.  <br/>
+event A 가 있다면 $I_{\{A\}}$ 가 random variable 이다. <br/>
+$E[I_{\{A\}}]$ 은 $1\times$(1이 발생할 확률, 즉, A가 발생할 확률)+$0\times$(A가 일어나지 않을 확률) 이므로 A가 발생활 확률 P(A) 이다.  <br/>
 <br/>
 sum 의 expectation 은 expectation 의 sum 인 성질을 이용해 다음과 같이 정리한다.<br/>
-$V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_\{X_{t}=j|X_{0}=i\}]$<br/>
-$V_{ij}(n)=\sum\limits_{t=1}^{n} E[I_\{X_{t}=j|X_{0}=i\}]$<br/>
-$E[I_\{A\}]$ 은 event A의 확률 P(A) 임을 이용한다. <br/>
-event $\{X_{t}=j|X_{0}=i\}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서\<br/>
+$V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
+$V_{ij}(n)=\sum\limits_{t=1}^{n} E[I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
+$E[I_{\{A\}}]$ 은 event A의 확률 P(A) 임을 이용한다. <br/>
+event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서<br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} r_{ij}(t)$ <br/>
 <br/>
 빈도로 나타내 보자. initial state $X_{0}=i$ 에서 출발해서 시간 1부터 n까지 총 n 개의 state 를 방문할것이다. 그 중에서 state j 를 방문한게 몇번이냐를 표현하는 $\frac{1}{n}V_{ij}(n)$ 를 구해보자. <br/>
@@ -109,7 +109,33 @@ transient frequancy 는 위에서 봤던 똑같은 condition <br/>
 2. Discrete Time Markov Chain has a single aperiodic recurrent class<br/>
 과 더불어서 <br/>
 MC 가 시간 n 까지 진행됐을때, state j 에서 state k 로 transient 이 일어난 횟수(random variable, $q_{jk}(n)$ ) 의 expectation 이다.<br/>
-26 28<br/>
+<br/>
+@<br/>
+결과를 놓고 고찰해 보자. j 에서 k 로 transient 이 일어나려면 일단 state 가 j 에 있어야 한다. 이 때, 시간 n 이 무한대로 간다면 state j 에 있을 확률은 $\pi_{j}$ 이다. j 에서 k 로 transient 이 일어날 확률은 $\pi_{j} P_{jk}$ 가 된다.<br/>
+<br/>
+@<br/>
+p5<br/>
+initial state 가 randomly 하게 출발 했을때, 시간 1 까지 흘렀을때 j에서 k로 transient 이 한번 발생하려면 시간 0일때 state 가 j 에 있어야 하고 시간 1일때 state 가 k 에 있어야 한다. <br/>
+즉, $X_{0}=j \cap X_{1}=k$ 이면 j 에서 k 로 transient 가 일어나는 것이다. <br/>
+p5 e<br/>
+<br/>
+@<br/>
+위의 내용을 아래에 적용해본다.<br/>
+$q_{jk}(n)$ 은 바로 이전 시각이 j 였다가 $X_{t-1}=j$ 그 다음 시점에서의 state 가 k 가 되는 $X_{t}=k$ 인 Indicator function 을 t=1 에서 t=n 까지 진행하면서 더한것의 expectation 이 $q_{jk}(n)$ 의 정의이다.<br/>
+$q_{jk}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=k, X_{t-1}=j\}}]$<br/>
+<br/>
+@<br/>
+initial state 는 일단 고려하지 않는다. 그러면 다음과 같이 수식을 정리 할수 있다.<br/>
+$q_{jk}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=k, X_{t-1}=j\}}]$<br/>
+$q_{jk}(n)=\sum\limits_{t=1}^{n} E[I_{\{X_{t}=k, X_{t-1}=j\}}]$<br/>
+$q_{jk}(n)=\sum\limits_{t=1}^{n} P(X_{t}=k, X_{t-1}=j)$<br/>
+$q_{jk}(n)=\sum\limits_{t=1}^{n} P(X_{t}=k \cap X_{t-1}=j)$<br/>
+우리는 j 에서 k 로 transient 이 일어날 확률 $P_{jk}$ 를 알고 있다. 이때, $\pi_{j}P_{jk}$ 를 도출하고 싶다. <br/>
+conditional probability 의 Definition 을 이용해 다음과 같이 변형한다.<br/>
+$q_{jk}(n)=\sum\limits_{t=1}^{n} P(X_{t-1}=j) P(X_{t}=k|X_{t-1}=j)$<br/>
+우리는 $P(X_{t}=k|X_{t-1}=j)=P_{kj}$ 임을 알고있다. 따라서,<br/>
+$q_{jk}(n)=\sum\limits_{t=1}^{n} P(X_{t-1}=j) P_{jk}$<br/>
+34<br/>
       
    </BODY>
 </HTML>
