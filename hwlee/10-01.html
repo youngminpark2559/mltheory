@@ -50,6 +50,9 @@ MathJax.Hub.Config({
 <br/>
 
 <img src="https://raw.githubusercontent.com/youngmtool/machinelearning/master/hwlee/pics/10-01-01.png"> <br/><br/>
+image2<br/>
+<img src="https://raw.githubusercontent.com/youngmtool/machinelearning/master/hwlee/pics/10-01-02.png"> <br/><br/>
+
 
 @<br/>
 $r_{ij}(n)$ : state i 에서 출발해서 시간 n 일때 state j 에 있을 확률이다. <br/>
@@ -77,7 +80,7 @@ p3 e<br/>
 <br/>
 @<br/>
 transient behavior 중에서 absortion probability 를 알아보자.<br/>
-MC 의 recurrent class 에 들어가면 빠져나올수 없다. 이러한 recurrent class 를 통칭하여 흡수되어 빠져나올수 없다는 의미로 absorbing state 라고 한다. absortion 되기 까지 시간이 absortion time 이고 obsorbing 될 확률이 absortion probability 이다. <br/>
+MC 의 recurrent class 에 들어가면 빠져나올수 없다. 이러한 recurrent class 를 통칭하여 흡수되어 빠져나올수 없다는 의미로 absorbing state 라고 한다. absortion 되기 까지 시간이 absortion time 이고 absorbing 될 확률이 absortion probability 이다. <br/>
 <br/>
 @<br/>
 Gambler's ruin : gambling 에서 최종적으로 망할확률, 성공확률을 MC 을 이용하여 분석해볼것이다. <br/>
@@ -109,7 +112,7 @@ sum 의 expectation 은 expectation 의 sum 인 성질을 이용해 다음과 �
 $V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} E[I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $E[I_{\{A\}}]$ 은 event A의 확률 P(A) 임을 이용한다. <br/>
-event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서\\ <br/>
+event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서\<br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} r_{ij}(t)$ <br/>
 <br/>
 빈도로 나타내 보자. initial state $X_{0}=i$ 에서 출발해서 시간 1부터 n까지 총 n 개의 state 를 방문할것이다. 그 중에서 state j 를 방문한게 몇번이냐를 표현하는 $\frac{1}{n}V_{ij}(n)$ 를 구해보자. <br/>
@@ -224,6 +227,60 @@ markov chain 의 state 가 인구를 나타낸다면, 시간 n 이 무한대로 
 위에서 j 에서 k 로 transient 이 일어나는 빈도는 시간 n 이 무한대로 갈때 $\pi_{j} P_{jk}$ 로 convergence 된다고 위에서 얘기했다. <br/>
 state 1 에서 2 가는 빈도는 $\pi_{1} b$, state 2 에서 1로 가는 빈도는 $\pi_{2} d$ 이다.<br/>
 두 값은 똑같아야 한다. <br/>
-59<br/>      
+$\pi_{1}b=\pi_{2}d$<br/>
+p8<br/>
+<br/>
+@<br/>
+$\pi=\pi P$<br/>
+$\pi_{1} = \sum\limits_{k=0}^{m} \pi_{k} P_{kj}$ <br/>
+state transient 가 이웃한 state node 들끼리만 일어난다.<br/>
+state 1 에서는 0 또는 2 에서 올수밖에 없다. 따라서,<br/>
+$\pi_{1} = \pi_{0} P_{01} + \pi_{2} P_{21}$ <br/>
+$P_{01} = b, P_{21} = d$ 이므로 <br/>
+$\pi_{1} = \pi_{0} b + \pi_{2} d$ <br/>
+따라서, 정리하면 위의 $\pi_{1}b=\pi_{2}d$ 식을 유도할 수 있다.<br/>
+<br/>
+이웃한 transient 끼리 balance 가 일어나야 한다고 해서 $\pi_{1}b=\pi_{2}d$ 를 balance equation 이라고 하기도 한다. 이 balance equation 이 모든 transient 사이에서 성립함을 알 수 있다.<br/>
+<br/>
+@<br/>
+balance equation 을 일반적으로 쓰면 $\pi_{i} b = \pi_{i+1} d$, i=0, ..., n-1 <br/>
+$\pi_{i+1} = \frac{b}{d} \pi_{i}$ 이고 $\frac{b}{d}=\rho$ 라고 정의해보자. 그러면,<br/>
+$\pi_{i} = \rho^{i} \pi_{0}$ i=0,...n 으로 쓸 수 있다. <br/>
+이때, $\pi_{0}$ 값만 알면 다 알게 된다. <br/>
+$\pi_{0}$ 은 아래와 같이 구한다.<br/>
+...therem에 의해서 또는 직관적으로도 시간 n 이 무한대로 갈때, 0,1,...,n 에 있을 각각의 확률이므로 합이 1이여야하므로<br/>
+$\pi_{0} + \pi_{1} + ... + \pi_{n} = 1$ <br/>
+위 구한 식에 의해서 <br/>
+$\pi_{0}=\rho^{0} \pi_{0}$ <br/>
+$\pi_{1}=\rho^{1} \pi_{0}$ <br/>
+...<br/>
+$\pi_{n}=\rho^{n} \pi_{0}$ <br/>
+대입하면<br/>
+$\pi_{0}(1+\rho^{1}+...+\rho^{n})=1$<br/>
+따라서,<br/>
+$\pi_{0}= \frac{1-\rho}{1-\rho^{n+1}}$ when $\rho\neq 1$<br/>
+$\pi_{0}= \frac{1}{n+1}$ when $\rho= 1$<br/>
+또한, <br/>
+$\pi_{i}= \rho^{i} \frac{1-\rho}{1-\rho^{n+1}}$ when $\rho\neq 1$<br/>
+$\pi_{i}= \frac{1}{n+1}$ when $\rho= 1$ 이기도 하다.<br/>
+<br/>
+@<br/>
+$\rho=1$ 은 태어날 확률 b와 죽을 확률 d 가 같은 상황이다. 그럴때는 각각의 state 에서의 확률 $\pi_{i} = \frac{1}{n+1}$ 이다.<br/>
+<br/>
+@<br/>
+transient behavior 에 대해 알아보자.<br/>
+p9<br/>
+markov chain 을 그려보자. <br/>
+absorbing state 란 한번 들어가면 나올수 없는 1 같은 state node 이다. absortion probability 에서 관심있는 건 이러한 absorbing state 에 들어갈 확률이 얼마인가 에 관한 것이다. i에서 출발했다면 이 확률이 1은 아니다. 1에서 출발했다면 확률이 1이다. 2 에서 출발해도 확률은 0이다. initial state 에 따라서 absortion probability 가 달라진다. 3,4같이 recurrent class 로 들어가면 못 빠져 나온다. recurrent class 를 하나의 state로 바꿔서 계산해도 absortion probability 를 구할 수 있다. <br/>
+<br/>
+@<br/>
+absortion probability<br/>
+1. 1 또는 3+4 중 하나 처럼 absorbing state S 하나로 고정을 시킨다. <br/>
+absorbing state 를 확률수식으로 표현하면 $P_{ss}=1, P_{sj}=0 \forall j\neq s$<br/>
+자기한테만 trasition 만 일어나는.<br/>
+2. $a_{i}$ 은 markov chain 에서 i에서 출발해서 시간 n 에서의 state $X_{n}$ 가 궁극적으로 state s 가 되는 확률 $P(X_{n} eventually becomes S|X_{i})$ 로 정의 될 수 있다.<br/>
+$a_{i} = P(X_{n} eventually becomes S|X_{i})$ <br/>
+      
+
    </BODY>
 </HTML>
