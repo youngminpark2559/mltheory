@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+10-06 Nonparametric density estimation <br/>
+@<br/>
+k-NNR 은 정확하지 않고 추정된 것이 실제 확률 밀도 함수 라고 보기 힘들다라고 얘기를 했다. 하지만 쓸모있는 구석도 있다. k-NNR 은 bayes classifier 역할을 하거나 bayes classifier 를 적용하는데에 사용될 수 있다. <br/>
+<br/>
+@<br/>
+k-NNR 의 주된 장점은 bayes classifier 의 간단한 근사를 유도해 낼 수 있는데에 있다. <br/>
+여러가지 class 들이 포함되어있는 N 개의 자료가 있는 경우를 생각하자. $\omega_{i}$ class 로 부터 온 샘플의 갯수가 $N_{i}$ 라고 하자. 그리고 우리가 모르는 unknown 표본 $x_{u}$ 이 $\omega_{1}$ 인지 $\omega_{2}$ 인지 class 를 결정하고 싶다. <br/>
+<br/>
+3차원 이상일 경우 길이, 면적, 부피, 등의 개념을 다 포괄하는 hyper sphere 라고 표현한다. <br/>
+x 변수가 몇차원인지 모르니까 $x_{u}$ 주변에 radius 가 일정하면서 volume 이 V인 super-sphere 를 그린다. 이 부피안에 전부 k 개의 표본이 들어온다고 생각해본다. <br/>
+<br/>
+예를들어서, 2차원 평면에 샘플들이 있다고 가정해보자. 그리고 unknown 인 파란색 샘플을 찾았다고 생각해보자. 그리고 이 파란색 샘플 주변에 super sphere 영역을 설정한다. 이 안에 샘플 몇개가 포함될 것이다. 4개가 포함되어있다면 k=4 로 표현하는 것이다. <br/>
+<br/>
+이러한 상황에서 이 영역에 포함된 샘플 중 일부가 class $\omega_{i}$ 로부터 $k_{i}$ 개의 샘플이 이 영역에 포함되어있다고 가정하는 것이다. 2차원에 plot 된 데이터는 training data 이기 때문에 label 이 있는 우리가 아는 자료들이다. <br/>
+<br/>
+k-NNR 방식을 써서 주어진 $\omega_{i}$ class 로 부터 이 지점에서의 x 값이 나올 확률인 likelihood, likelihood function $P(x|\omega_{i})$ 를 구할 수 있다. $\frac{k}{NV}$ 라는 추정식을 쓴다면 i 번째 클래스를 써주면 되므로 $P(x|\omega_{i})=\frac{k_{i}}{N_{i}V}$ 이다. <br/>
+$N_{i}$ : $\omega_{i}$ class 로 부터 나온 샘플 갯수이다. <br/>
+V : super-sphere 의 volume. <br/>
+$k_{i}$ : volume 안에 포함된 갯수.<br/>
+<br/>
+@<br/>
+데이터를 다 똑같은 group 이라고 보고 $\frac{k}{NV}$ 를 결정하면 주어진 x 값이 나올 확률, 비조건적인 밀도 P(x) 이다. <br/>
+x 는 전체 샘플로서 우리가 알수 있다. V, k 도 우리가 알 수 있다. <br/>
+<br/>
+@<br/>
+prior probability도 계산 할 수 있다. $\omega_{i}$ 가 나올 확률은 전체 샘플 N 개로 class i 에 해당하는 샘플 갯수 $N_{i}$ 을 나눈 값이다. <br/>
+$\omega_{i} = \frac{N_{i}}{N}$<br/>
+<br/>
+@<br/>
+위에서 3가지 확률값, likelihood $P(x|w_{i})$, 비조건적인 밀도 $P(x)$, prior probability $P(\omega_{i})$ 을 구했다. 그 이유는 다음과 같다. <br/>
+bayes classifier 는  x 가 주어졌을때 이 x 가 $\omega_{i}$ 일 확률인 posterior probability $P(\omega_{i}|x)$ 을 구하는 것 이었다. 이것을 구하는 공식은 다음과 같았다. <br/>
+x 값이 나올 확률 분의 prior probability 곱하기 likelihood 였다. 그래서 위에서 3개의 확률값을 구했었다.<br/>
+$P(\omega_{i}|x) = \frac{P(x|\omega_{i}) P(\omega_{i})}{P(x)}$ <br/>
+$P(\omega_{i}|x) = \frac{\frac{k_{i}}{N_{i}V} \frac{N_{i}}{N}}{\frac{k}{NV}}$ <br/>
+$P(\omega_{i}|x) = \frac{k_{i}}{k}$ <br/>
+<br/>
+@<br/>
+결과를 유도하는 과정은 복잡해보였지만 결과는 당연한 얘기이다. unknown 한 x 값의 위치를 잡는다면 이 값이 i class 일 확률은 V 안에 포함된 전체 샘플 갯수 k 분의 i class 에 해당하는 샘플 갯수이다. <br/>
+<br/>
+@<br/>
+주변에 샘플값들이 여러개가 있을때 선택한 샘플이 비슷한 샘플 근처에 있다면 확률이 올라가는 것이다. <br/>
+즉, 주어진 체적안에서 특정한 group 에 속하는 샘플의 갯수와 전체 샘플 갯수의 비율만으로 posterior probability 를 추정할 수 있다는 것이다. 이러한 값은 bayes rule 에 의해서 결정되었다. 더불어, k-NNR 방식으로 결정한 확률밀도를 사용한 bayes classifier 의 간단하게 축약된 식이라고 볼수 있다. <br/>
+10
+</BODY>
+</HTML>
