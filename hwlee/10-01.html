@@ -109,7 +109,7 @@ sum 의 expectation 은 expectation 의 sum 인 성질을 이용해 다음과 �
 $V_{ij}(n)=E[\sum\limits_{t=1}^{n} I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} E[I_{\{X_{t}=j|X_{0}=i\}}]$<br/>
 $E[I_{\{A\}}]$ 은 event A의 확률 P(A) 임을 이용한다. <br/>
-event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서\<br/>
+event ${\{X_{t}=j|X_{0}=i\}}$ 의 확률은 i에서 출발해서 시각 t 에서 j 일 확률인 $r_{ij}(t)$ 이다. 따라서\\ <br/>
 $V_{ij}(n)=\sum\limits_{t=1}^{n} r_{ij}(t)$ <br/>
 <br/>
 빈도로 나타내 보자. initial state $X_{0}=i$ 에서 출발해서 시간 1부터 n까지 총 n 개의 state 를 방문할것이다. 그 중에서 state j 를 방문한게 몇번이냐를 표현하는 $\frac{1}{n}V_{ij}(n)$ 를 구해보자. <br/>
@@ -175,7 +175,55 @@ $q_{jk}(n)= \sum\limits_{t=1}^{n} \sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P
 $\lim\limits_{n\to\infty} \frac{1}{n} q_{jk}(n) = \lim\limits_{n\to\infty} \frac{1}{n} \sum\limits_{t=1}^{n} \sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$<br/>
 t 가 무한대로 가면 $\sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$ 에서 t 에 의해 변하는 부분은 $r_{ij}(t-1)$ 부분밖에 없고 $\pi_{j}$ 로 convergence 한다. $\sum\limits_{i=1}^{m} P(X_{0}=i)=1$ 이므로 $\sum\limits_{i=1}^{m} P(X_{0}=i) r_{ij}(t-1) P_{jk}$ 은 $\pi_{j}P_{jk}$ 로 convergence 한다.<br/>
 <br/>
-43<br/>
-      
+@<br/>
+우리의 intuition 에 맞는 것은 j 에서 k 로 transient 가 일어나려면 반복해 얘기하지만 먼저 state j 에서 있었어야하고 그 뒤 j 에서 k 로 transient 가 일어날 수 있다. 그래서 $\pi_{J}P_{jk}$ 이렇게 쓸 수 있는 것이다. <br/>
+<br/>
+@<br/>
+지난 시간에 $\pi_{j} = \sum\limits_{k=1}^{m} \pi_{k} P_{kj}$ 로 썼다. <br/>
+m 은 모든 state 의 갯수를 의미한다. <br/>
+첫번째 시간에 markov chain 을 정의할 때, markov chain 이 취할 수 있는 state S 가 S={1, ..., m} 이 된다고 하였다. <br/>
+<br/>
+$\pi_{k} P_{kj}$ 를 위의 수식의 해석으로 본다면 k 에서 j 로 transient 이 일어난 빈도로 확률을 해석 할 수 있었다. 모든 k 에 대해서 다 더하면 j 에 있을 확률 $\pi_{j}$ 이 된다. <br/>
+<br/>
+@<br/>
+$V_{jk}(n)$ 의 해석 : initial state j 에서 출발하여 시간 n 이 될 때까지 k 를 방문한 횟수<br/>
+$q_{jk}(n)$ 의 해석 : j 에서 k 로 transient 이 발생한 횟수<br/>
+<br/>
+@<br/>
+$V_{jk}(n)$ 에서 n 이 무한대로 가면 $\pi_{j}$ 로 convergence 한다. 라는 것은 약속이라기 보다 위에서 언급된 condition 이 성립하면 성립하는 명제이다. <br/>
+<br/>
+@<br/>
+p6<br/>
+위의 내용은 markov chain example 을 하나 생각해 보면 된다.<br/>
+i, 1, 2 라고 가정해보자. i에서 출발을 했다. 그러다가 본인으로 돌다가 1로 들어가면 i 로는 더 이상 방문이 안된다. 시간 n 이 무한대로 갔을때, 출발을 i 에서 하든 1에서 하든, 어떤 state 에 있을 확률은 출발점과 무관 할 것이다. i 에서 출발해서 돌다가 1로 들어가면 그 이전의 일들은 다 잊혀지는것, 혹은 마치 1이 새로운 출발점이 되는 것과 같다. <br/>
+p6 e<br/>
+<br/>
+@<br/>
+p7<br/>
+그런데 recurrent class 가 두개라면 얘기가 달라진다. 1 에서 출발하면 2, 3, 4 전부 0이 되어 의미가 없어진다. 1에서 출발하면 1,2 가 의미가 없어진다. 그래서 recurrent class 는 하나라고 가정을 해야 initial state 에 상관없이..<br/>
+p7 e<br/>
+<br/>
+@<br/>
+Birth-death process 에 대해 알아보자.<br/>
+state node 들이 다양하게 있고 state transient 도 다양하게 일어날 수 있는 것이 markov chain 인데 birth-death process 는 state 들이 linear 하고 transient 는 서로 이웃한 것들끼리만 일어날 수 있는 markov chain 이다. <br/>
+<br/>
+@<br/>
+Birth-death process 는 network 에서 queuing delay, 어떤 service system 에 들어갔을 때 얼만큼 기다려야 하냐 혹은 service 를 받고 나가는데 얼마나 시간이 걸리느냐 같은 것들, 를 분석할때 자주 사용되는 markov chain 이다. <br/>
+<br/>
+@<br/>
+p8<br/>
+transient 는 자기 자신과 이웃한 state node 끼리만 일어난다. <br/>
+사람이 태어나고 죽는 사례가 대표적 예시가 된다.<br/>
+태어나서 인구가 1명이 된다. 또한명이 태어나면 2명이 된다. 한명이 죽으면 1명이 된다.<br/>
+0명이었을 때 한명이 태어날 확률을 $b_{0}$, 1명이었을때 죽을 확률 $d_{1}$, 0에서 0으로 recurrent 는 아무일도 일어나지 않을 확률 $1-b_{0}-0$, 1명이었을때 1명이 더 태어날 확률 $b_{1}$, 2명이었을 때 1명이 죽을 확률 $d_{2}$, 1에서 1로 recurrent 할 확률 $1-b_{1}-d_{1}$, $1-b_{2}-d_{2}$, $b_{3}$, $d_{3}$, ..., $b_{n-1}$, $d_{n}$, recurrent on (n-1) : $1-b_{n-1}-d_{n-1}$, recurrent on m : $1-d_{n}$ <br/>
+<br/>
+markov chain 의 state 가 인구를 나타낸다면, 시간 n 이 무한대로 갔을때, 인구가 2명일 확률은? 3명인 확률은? n 명일 확률은? 이런걸 따져볼 수 있다. <br/>
+<br/>
+@<br/>
+계산 편의를 위해 birth, death 확률이 모든 state 에서 같다고 가정한다. <br/>
+위에서 j 에서 k 로 transient 이 일어나는 빈도는 시간 n 이 무한대로 갈때 $\pi_{j} P_{jk}$ 로 convergence 된다고 위에서 얘기했다. <br/>
+state 1 에서 2 가는 빈도는 $\pi_{1} b$, state 2 에서 1로 가는 빈도는 $\pi_{2} d$ 이다.<br/>
+두 값은 똑같아야 한다. <br/>
+59<br/>      
    </BODY>
 </HTML>
