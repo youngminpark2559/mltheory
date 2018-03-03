@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+10-07 Nonparametric density estimation <br/>
+
+@<br/>
+k-NNR 방식으로 probability density estimation 을 하는 방법을 이용해서 bayes classifier 를 쉽게 apply 할 수 있는 방법을 알게 되었다. bayes classifier 을 일반적으로 사용한다면, 주어진 sample 이 있을 때, 그 중 에서 sample $x_{u}$ 가 class i 에 속할 posterior probability 을 구할때, $x_{u}$ 가 발생할 확률 normalization constant 분의 $\omega_{i}$ 가 나올 prior probability 곱하기 $\omega_{i}$ 에서 $x_{u}$ 가 나올 likelihood 이다.<br/>
+$P(\omega_{i}|x_{u}) = \frac{P(x|\omega_{i}) P(\omega_{i})}{P(x)}$<br/>
+<br/>
+@<br/>
+그런데 likelihood 는 probability density function 이기 때문에 이 probability density function 을 k-NNR 방식으로 estimation 하게 되면, i class 에 해당하는 sample 의 총 갯수 $N_{i}$ 와 영역안에 있는 i class 샘플 갯수 $k_{i}$ 를 이용해 간편하게 계산할 수 있다. <br/>
+<br/>
+각각의 요소는 다음과 같다.<br/>
+likelihood function 을 k-NNR 을 사용하여 다음과 같이 근사할 수 있다.<br/>
+$P(x_{u}|\omega_{i}) = \frac{k_{i}}{N_{i} V}$<br/>
+<br/>
+prior probability 는 k-NNR 을 사용하여 $P(\omega_{i}) = \frac{N_{i}}{N}$ 으로 근사된다.<br/>
+<br/>
+비조건적인 밀도는 $P(x) = \frac{k}{NV}$ 로 근사된다.<br/>
+<br/>
+@<br/>
+따라서, 정리하면 그 영역, 체적 안에 포함된 총 sample 갯수 k 분의 i class 에 해당하는 sample 의 갯수 $k_{i}$ 가 posterior probability $P(\omega_{i}|x)$ 이 된다.<br/>
+<br/>
+@<br/>
+상대도수만으로도 어느 class 에 속하는지 estimation 할 수 있는 간단한 bayes classifier 가 된다. <br/>
+<br/>
+@<br/>
+비모수추정법의 장점 : <br/>
+density analysis 가 용이하다. <br/>
+algorithm implementation 이 simple 하다.<br/>
+sample 의 갯수가 $\infty$ 정도로 클 때는 optimal methodology 이다.<br/>
+주어진 샘플 $x_{u}$ 의 주변을 살펴보고 국지적인 정보를 사용하므로 어떠한 상황에 대해서라도 adaptive 한 결과를 낳는다.<br/>
+task process 할 때 속도를 빠르게 하기위해 병렬로 task 를 처리하게 하는 algorithm 이 있는데, 이러한 병렬처리에 용이하다.<br/>
+<br/>
+@<br/>
+비모수밀도추정을 이용한 패턴 인식의 단점.<br/>
+training data set 을 memory 공간에 넣어야되서 저장공간이 많이 필요하다.<br/>
+많은 계산 시간이 소요된다.<br/>
+차원이 커지면 커질수록 텅빈공간이 많이 생기게 되어 probability density estimation 이 불확실해지는 현상을 가르키는 차원의 저주 에 영향을 크게 받는다. <br/>
+<br/>
+@<br/>
+k-NNR 에서 k 가 1일때와 1보다 큰경우 차이가 발생한다.<br/>
+KDE 방법의 경우, 특히, Parzen window 방식으로 했을 경우, non smooth 하고 discontinuity 가 존재했었다. <br/>
+k를 크게하면 smooth 한 결정영역, probability density function 을 만들수있다. <br/>
+또한, 확률적인 정보를 제공해준다. k-NNR 방식으로 계산할 때 결과 자체가 probability density 로 보기는 힘들지만 k 가 커질수록 정확도가 높아져서 probability value 로 활용할수 있는 가능성이 점점 커진다. <br/>
+각 class 에 대한 sample 의 비율은 결정 시 의 불확실 정도의 정보를 알려준다는 의미이다. 이말은 곧, bayes classifier 을 간단하게 사용할 수 있는 수식이 유도될 수 있을 정도로의 probability information 을 준다고 보면 된다는 것이다. <br/>
+<br/>
+@<br/>
+k 를 크게했을 때 단점은 너무 많은 sample 이 사용되기 때문에 estimation 을 할 때 국지적인 상황을 반영하는 장점이 제거된다. 즉, 체적 안에 들어와야할 k 가 너무 크면 체적이 너무 커진다. 그러면 local 성격이 배제되고 전체적인 probability density 성격이 나온다. <br/>
+또한 요구되는 계산량이 증가한다. <br/>
+
+   </BODY>
+</HTML>
