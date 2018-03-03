@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+11-01 Clustring<br/><br/>
+
+@<br/>
+data mining 과 관련이 깊은 방법이다. 온라인, 사물인터넷, 등 big data 에서 정보를 extract 할때 data mining 이라는 field 로서 많이 연구 되고 있다. <br/>
+<br/>
+@<br/>
+data mining : big data 속에 숨어있는 data 들 간의 패턴, 규칙, 관계 등의 정보를 자동으로 탐색하고 분류하는 인공지능, 통계 분야이다.<br/>
+<br/>
+@<br/>
+같은 패턴 끼리 data 를 모아주는 알고리즘이 clustring 이다. <br/>
+<br/>
+@<br/>
+clustring algorithm 중에서 K-Means algorithm 을 공부해보자.<br/>
+<br/>
+@<br/>
+supervised learning : <br/>
+관측된 자료의 구성이 특징벡터 x 와 관측 값이 속해 있는 $\omega$ class 로 이루어진 변수쌍 {$x,\omega$} 으로 구성될 때 supervised learning 이라고 한다.<br/>
+남학생의 키 100개, 여학생의 키 100개를 준다. 이 sample 에서 probability density 를 estimation 한다. 샘플 $x_{n}$ 이 주어진다면 여기에 해당하는 probability 를 추정한다. <br/>
+<br/>
+@<br/>
+supervised learning 의 두가지 methodology 는 gaussian distribution 일것이라고 assumption 하고 estimation 을 하는 parametric 방법, KDE, K-NNR 과 같은 non-parametric 방법이다. <br/>
+<br/>
+probability density estimation 을 하고 이 probability density 를 근거로 unknown data $x_{u}$ 을 분류하는 methodology 를 supervised learning 이라고 한다.<br/>
+<br/>
+@<br/>
+관측된 자료의 구성에서 class label $\omega$ 가 주어지지 않는다. feature vector $x_{1}$, ..., $x_{N}$ 로 이루어진 데이터 집합 $x = \{x_{1}, ..., x_{N}\}$ 로만 구성된다.<br/>
+parametric estimation, non-parametric estimation 이 있다. <br/>
+<br/>
+@<br/>
+class label 이 없는 data 가 있을 수 있다. data mining 이란게 online 에 많은 data 가 있는데 이러한 data 는 label 이 없고 여기에서 정보를 extract 하고 싶다. 이럴때 unsupervised learning 을 쓰면 된다.<br/>
+<br/>
+2nd, 많은 data set 들이 있을때, 이것들이 다 다른 feature 를 갖고 있는게 아니라, 비슷한 것들끼리 작은 prototype set 들로 압축될 수 있는 경우에 unsupervised learning, 특히, clustring 을 쓴다. <br/>
+<br/>
+3rd, sample 의 수가 너무 많아서 labeling 하는 작업이 힘들때, data 들이 가지고 있는 feature 들로 grouping 이 필요할때, unsupervised learning 을 쓴다.<br/>
+<br/>
+@<br/>
+unsupervised learning 에서 parametric method : mixture model 구축을 통한 방법이다. <br/>
+여러개의 parametric probability density function (parametric probability density function 은 gaussian distribution 이라고 생각해도 무리가 없다. gaussian 은 parameter 로 표현할 수 있는 가장 적절한 probability density function 의 모양이기 때문이다.) 들을 mixture 해서 구하고자하는 probability density function 으로 modeling 하는 방법으로 아래와 같이 modeling 될 수 있다.<br/>
+<br/>
+결국, probability density function 을 estimation 한다고 보면 된다. <br/>
+<br/>
+세개의 data set 이 있다고 생각해보자. 각각은 특별한 모수를 갖기때문에 특별한 gaussian function 모양을 갖는다. 이 세개를 더할 수 있다. 이 더한 probability density function 에서 앞의 세가지 probability density 가 각각 얼만큼의 크기로 나타나는지에 대한 예측을 해보는것이 unsupervised learning 에서 parametric method 이다. 수식으로 표현 하면 다음 과 같다. $P(x|\theta) = \sum\limits_{i=1}^{C} P(x_{i}|\omega_{i}, \theta_{i}) P(\omega_{i})$<br/>
+<br/>
+@<br/>
+unsupervised learning 에서 non parametric 방법 : probability density estimation 이라기 보다는 주어진 data 에 대해서 gaussian distribution 같은 assumption 을 하지 않고 정해주는 cluster 갯수로 data 들을 나누는 행위이다. 수학적으로 표현하자면 MLE(maximum likelihood estimation : 가장 그럴듯한 경우를 추정하는 방법) 방법을 쓴다. <br/>
+<br/>
+data 들이 비슷 한 probability 또는 group 에 속하는 것들끼리 묶어주는 것이다. <br/>
+<br/>
+@<br/>
+좌측에 data set 은 label이 없는  $\begin{bmatrix} x_{1}\\x_{2} \end{bmatrix}$ 와 같은 모양을 가지는 많은 2 dimensinal feature vector 들로 이루어져있다. 이 data set 을 group 들 혹은 cluster 들로 나누고 각 cluster 의 중심의 대표벡터로 할당하려고 한다. cluster 의 갯수도 자동적으로 결정하는 고급 algorithm 이 있긴 하지만 이러한 대표 벡터 들의 갯수 K 는 미리 정하는것이 일반적인 경우이다. <br/>
+<br/>
+오른쪽의 그림이 clustring 하고난 뒤 output 이다. <br/>
+2 dimensinal euclidian space 에서 K=8 의 영역으로 space 를 분할했다. <br/>
+<br/>
+@<br/>
+euclidian space : cluster 를 나눌때 data 와 data 간의 유사도나 차이점을 수치화시켜야한다. 가장 간단한 방법은 distance 이다. specific vector 를 기준으로 distance 가 먼지, 가까운지 에 따라서 유사한지, 다른지 를 알수 있다. <br/>
+<br/>
+distance 를 measure 하는 방법도 여러가지이다. 여기에서는 euclidian space 에서 distance 를 측정했다. <br/>
+다른 measurement method 는 mahalanobis 같은 것이다. 이때는 mahalanobis space 상의 data 이다 라고 표현할 수 있다. <br/>
+<br/>
+@<br/>
+vector quantization : 동일한 clustring algorithm 이다. 다만, 통신분야에서 data 들을 error 없이 transfer 할때, group 을 만들어 transfer 할때 쓰이는 방법이다. <br/>
+
+   </BODY>
+</HTML>
