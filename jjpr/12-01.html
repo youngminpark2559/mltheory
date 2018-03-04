@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+12-01 Dimentionality reduction by PCA(principle component analysis)<br/><br/>
+
+@<br/>
+PCA : feature vector 의 dimension 을 reduction 하는 한 방법이다<br/>
+<br/>
+@<br/>
+curse of dimensionality :<br/>
+차원이 커질수록 일이 복잡해 진다.<br/>
+다변량 자료 분석 시 자료의 차원이 증가함에 따라 발생하는 문제들을 통칭하는 표현이다<br/>
+<br/>
+@<br/>
+3 class 로 구분하는 patter recognition 문제를 가정해보자. 가장 간단한 접근법을 생각해보자.<br/>
+1. 특징공간을 일정한 구역으로 나눈다<br/>
+2. 각 구역에 속한 각 클래스 표본들의 비율을 구한다<br/>
+3. 새로운 unknown 표본의 경우, 해당하는 구역을 찾아 그 구역에서 우세한 클래스로 선택한다<br/>
+<br/>
+$\frac{k_{i}}{k}$ 를 구해서 나오는 가장 큰 i class 로 할당해 주는 방법이다<br/>
+k-NNR 방법을 사용하는 bayes classifier 를 얘기하는 것이다<br/>
+<br/>
+@<br/>
+단일 특징을 사용할 경우 1차원 축을 세 부분으로 나누게 될 때 너무 많은 부분에서 class 들이 겹체게 됨을 확인할 수 있다<br/>
+<br/>
+1구역:빨강2, 초록1<br/>
+2구역:초록2, 파랑1<br/>
+3구역:파랑2, 초록1<br/>
+일때 unknown 이 2구역에 떨어졌다면 초록색이 우세한 구역이므로 초록색 class 로 classification 을 한다.<br/>
+<br/>
+@<br/>
+두개의 특징을 사용하게 되면 특징벡터의 공간은 2차원 공간이며 구분영역의 갯수는 9개로 증가한다<br/>
+그리고 각각의 영역에서 sample 갯수를 일정 혹은 비슷하게 할건지(constant density) 아니면 원래 전체 표본을 유지해서 쓸지(constant number of example) 결정해야한다<br/>
+<br/>
+constant density 방법으로 하면 3*9=27 개의 sample 이 필요하게 된다<br/>
+9개 sample 갯수만 유지한다면 어떤 영역에는 sample 이 없거나 하나밖에 존재하지 않는 sparse 한 분산 플롯이 만들어지고 확률론적 방법으로 sample 을 활용할 방법이 없어진다는 뜻이다<br/>
+<br/>
+@<br/>
+특징을 3개를 가지고 작업을 하는 상황을 생각해보자<br/>
+bin의 갯수는 $3^{3}=27$ 개가 된다<br/>
+constant density 를 쓰면 3*27=81 개의 sample 이 필요하다<br/>
+constant number of example 을 쓰면 sparse 한 bin 이 많이 생기는 큰 문제가 발생한다<br/>
+<br/>
+@<br/>
+vector 의 dimension 이 높아짐에따라 생기는 문제<br/>
+1. 잡음 특징 까지 포함되므로 분류에 방해가 된다<br/>
+1. 학습과 인식 속도가 느려진다<br/>
+1. 모델링에 필요한 training data set 의 크기가 커진다<br/>
+<br/>
+@<br/>
+feature vector 의 dimensionality 가 높아짐에따라 performance 가 좋아지다가 어느 순간부터 performance 가 오히려 하락한다<br/>
+<br/>
+@<br/>
+curse of the dimensionality 를 극복하는 방법<br/>
+1. prior information 을 활용한다<br/>
+1. target function 의 smoothness 를 증가시킨다<br/>
+1. dimension 을 reduction 한다<br/>
+<br/>
+@<br/>
+dimension 을 reduction 하는 방법=vector 의 length 를 줄이는 두가지 방법<br/>
+1. feature selection:전체 특징들로부터 부분집합을 선택한다<br/>
+어떤건 포함시키고 어떤건 제외한다<br/>
+N dimension 에서 M dimension 으로 reduction 한다<br/>
+이 방법은 의미있는 시사점은 없다<br/>
+$\begin{bmatrix} X_{1}\\X_{2}\\...\\X_{N} \end{bmatrix}$<br/>
+$\rightarrow$<br/>
+$\begin{bmatrix} X_{i_{1}}\\X_{i_{2}}\\...\\X_{i_{M}} \end{bmatrix}$<br/>
+<br/>
+1. feature extraction:기존의 특징벡터를 함수에 넣어서 기존의 특징들의 조합으로 구성된 새로운 특징들의 부분집합을 생성한다<br/>
+위에서는 많은 갯수의 x 가 적은 갯수의 x 로 바뀌었다<br/>
+이방법은 x가 y 로 바뀐다<br/>
+함수에 넣어서 dimension 의 갯수를 줄이는 것이다<br/>
+<br/>
+@<br/>
+일반적으로 가장 최적의 mapping function y=f(x) sms non linear function 일수 있다. 하지만 현재까지 이러한 non linear function 을 찾는 수학적 방법은 알려져 있지 않다<br/>
+패턴인식에서 쓰는 모든 방법들은 linear function 내에서만 이 함수를 찾는다<br/>
+<br/>
+@<br/>
+선형변환: y, x가 vector 일때, x를 선형변환시키는 유일한 방법은 matrix W 를 곱해주는 것이다<br/>
+이 행렬을 구하는것이 목적이다. 가장 좋은 방법론 중 하나가 PCA 방법론이다. <br/>
+
+   </BODY>
+</HTML>
