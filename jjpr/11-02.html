@@ -48,80 +48,79 @@ MathJax.Hub.Config({
    <BODY>
 11-02 Clustring<br/><br/>
 
-clustring = non-parametric clustring 에는 3가지 단계가 필요하다. <br/>
-1. sample 들 간의 유사도(차이도) 정도를 측정하는 측정방법을 정의해야한다. <br/>
-1. clustring 을 위한 결정함수를 정의해야한다. 어떠한 $x_{u}$ 을 어떠한 함수를 통해서 어떠한 cluster 에 넣을지 결정할수 있어야한다. <br/>
-1. 결정함수를 통해 결정한 결과가 최적의 결과인지 확인하기 위해 최대화(or 최소화) 시키는 algorithm 이 정의되어야한다. <br/>
+clustring = non-parametric clustring 에는 3가지 단계가 필요하다. \\<br/>
+1. sample 들 간의 유사도(차이도) 정도를 측정하는 측정방법을 정의해야한다. \\<br/>
+1. clustring 을 위한 결정함수를 정의해야한다. 어떠한 $x_{u}$ 을 어떠한 함수를 통해서 어떠한 cluster 에 넣을지 결정할수 있어야한다. \\<br/>
+1. 결정함수를 통해 결정한 결과가 최적의 결과인지 확인하기 위해 최대화(or 최소화) 시키는 algorithm 이 정의되어야한다. \\<br/>
 <br/>
 @<br/>
-feature vector 로 이루어진 집합 x 가 새로운 vector set y 로 clustring 되는 과정은 feature vector 들 간에 정의된 거리척도(distance mesure) or 측량(metric) 과 깊은 관련이 있다. <br/>
+feature vector 로 이루어진 집합 x 가 새로운 vector set y 로 clustring 되는 과정은 feature vector 들 간에 정의된 거리척도(distance mesure) or 측량(metric) 과 깊은 관련이 있다. \\<br/>
 <br/>
 @<br/>
-distance measure 하는데에는 euclidian distance 를 사용하는 것이 일반적이다. <br/>
-two given vector x and y 의 distance 를 나타내는 d(x,y) 는 vector x minus vector y 의 absolute value and subscript 2, $||x-y||_{2}$ 이다. 제곱을 square root 를 씌워서 표현하기 때문에 subscript 2 가 euclidian distance 라는걸 설명한다. <br/>
-혹은 vector x minus vector y 한 것을 traspose 하고, $(x-y)^{T}$ 그 자신과 곱셈을 하고, $(x-y)^{T}(x-y)$  square root 를 씌운것, $\sqrt{(x-y)^{T}(x-y)}$ 으로 볼수 있다.<br/>
-이 식은 또한, vector 의 element 로 나타내면 x 의 첫번째 element, $x_{1}$, 거기에 minus y 를 하고 제곱, $(x_{1}-y_{1})^{2}$, 등등 해서, D 차원까지 빼고 제곱하고 다 더해준값 $\sqrt((x_{1}-y_{1})^{2}+(x_{2}-y_{2})^{2}+...+ (x_{D}-y_{D})^{2})$ 이 두개의 vector 사이의 거리이다.<br/>
+distance measure 하는데에는 euclidian distance 를 사용하는 것이 일반적이다. \\<br/>
+two given vector x and y 의 distance 를 나타내는 d(x,y) 는 vector x minus vector y 의 absolute value and subscript 2, $||x-y||_{2}$ 이다. 제곱을 square root 를 씌워서 표현하기 때문에 subscript 2 가 euclidian distance 라는걸 설명한다. \\<br/>
+혹은 vector x minus vector y 한 것을 traspose 하고, $(x-y)^{T}$ 그 자신과 곱셈을 하고, $(x-y)^{T}(x-y)$  square root 를 씌운것, $\sqrt{(x-y)^{T}(x-y)}$ 으로 볼수 있다.\\<br/>
+이 식은 또한, vector 의 element 로 나타내면 x 의 첫번째 element, $x_{1}$, 거기에 minus y 를 하고 제곱, $(x_{1}-y_{1})^{2}$, 등등 해서, D 차원까지 빼고 제곱하고 다 더해준값 $\sqrt{(x_{1}-y_{1})^{2}+(x_{2}-y_{2})^{2}+...+ (x_{D}-y_{D})^{2}}$ 이 두개의 vector 사이의 거리이다.\\<br/>
 <br/>
 <br/>
 @<br/>
-clustring 에서 고려해야될 사항은 중심평균이다. <br/>
-여러개의 서로 다른 data 들이 모여있으면 그것들의 대표값, 대표위치가 필요하다. 이것을 구할때 중심평균을 사용한다. 기호로는 c(x) 라 표시한다. x 는 x vector 의 값들 전체를 의미한다. N 은 sample 의 갯수이다. <br/>
-$c(x) = \frac{1}{N} \sum\limits_{n=1}^{N}x_{n}$ where $x=\{x_{n}|n=1,...,N\}$ <br/>
-
-@
-N개의 vector 에서 전체 왜곡이 얼마인지 계산해봐야한다. 왜곡이 느는지, 주는지 에 따라서 algorithm 이 적절하게 작동하고 있는지 판단할수 있기 때문이다. \\
-왜곡은 euclidian distance 개념을 사용한다. vector $x_{n} \in X_{k}$ 와 i 번째 그룹의 중심값 $y_i(n)$ 의 euclidian distance 를 구하고 다 더한다. 이것이 전체 왜곡이다. \\
-$D = \sum\limits_{n=1}^{N} d(x_{n}, y_{i(n)}) = d(x_{1}, y_{i(n)}) + ... + d(x_{N}, y_{i(N)})$<br/>
+clustring 에서 고려해야될 사항은 중심평균이다. \\<br/>
+여러개의 서로 다른 data 들이 모여있으면 그것들의 대표값, 대표위치가 필요하다. 이것을 구할때 중심평균을 사용한다. 기호로는 c(x) 라 표시한다. x 는 x vector 의 값들 전체를 의미한다. N 은 sample 의 갯수이다. \\<br/>
+$c(x) = \frac{1}{N} \sum\limits_{n=1}^{N}x_{n}$ where $x=\{x_{n}|n=1,...,N\}$ \\<br/>
 <br/>
 @<br/>
-euclidian distance, 중심평균, 전체왜곡 같은 mathematical tool 이 있으면 implementing clustring algorithm 이 가능하다. <br/>
-<br/>
-@<br/>
-k-Means algorithm : 평균값 k 개를 사용한 algorithm <br/>
-비균일 이진 분할(non-uniform binary split) algorithm : 반씩 잘라감.<br/>
-LGB algorithm : k-Means + non uniform binary split. <br/>
-<br/>
-@<br/>
-k-Means algorithm : <br/>
-다음과 같이 주어지는 평균자승오차(mean squared error) 규준함수 $J_{MSE}$ 를 반복적인 과정을 통해 최소화시키는 가장 단순한 clustring 과정이다. <br/>
-<br/>
-최소화 시키고자 하는 목적이 되는 함수 $J_{MSE}$ 를 생각해보자.<br/>
-여러 class 에 퐇마된 x 값들이 있을것이다. i class 의 x 값들의 평균을 $\mu_{i}$ 라고 하자. 이 둘의 차이를 error 라고 하자. 1부터 K 까지 모든 class 에서 대해서 이 작업을 수행한다. <br/>
-$J_{MSE} = \sum\limits_{i=1}^{K} \sum\limits_{x=\omega_{i}} |x-\mu_{i}|^{2}$ where, $\mu_{i} = \frac{1}{N} \sum\limits_{x_{\omega_{i}}} x$ <br/>
-<br/>
-@<br/>
-오차 개념을 담고 있는 $J_{MSE}$ function 을 최소화 시켜줄수 있도록 x 들이 속하는 그룹을 만들어 주는 게 k-mean algorithm 이다.<br/>
-<br/>
-@<br/>
-k-mean algorithm 과정은 다음과 같다.<br/>
-1. cluster 의 갯수 k 를 결정한다.<br/>
-1. 각각의 cluster 의 중심벡터를 random 하게 설정해서 cluster 들을 초기화한다.<br/>
-1. 각각의 cluster 의 표본 평균을 새로 구한다. 각각의 data 들이 어느 group 에 속해있다. 그리고 group 들의 중심평균이 결정이 되어있는 상태이다. 사실 random 하게 설정했기때문에 실제 data 의 중심과 일치하지않는다. 그래서 새로 표본 평균을 구하면 중심값이 변화하게 된다. <br/>
-1. 새로운 중심값으로 다시 설정한다. <br/>
-<br/>
-그리고 3번을 다시 하고 4번을 한다. 이것을 $J_{MSE}$ 가 최소가 될때까지 반복한다. <br/>
-<br/>
-결과는 k 개의 평균값, 중심벡터가 나온다. <br/>
-<br/>
-@<br/>
-k-mean algorithm 의 계산절차<br/>
-<br/>
-1. 중심초기화가 되어야한다. N 개의 feature vector 로 구성된 데이터 집합 $x={x_{1}, ..., x_{N}}$ 에서 임의의 K 개의 벡터를 선택하여 초기 중심 집합 ${y_{1}, ..., y_{K}}$ 를 만든다.<br/>
-<br/>
-1. clustring 단계 : 만약 data $x_{n}$ 과 $y_{1}$ 부터 $y_{K}$ 까지 distance 를 측정한다. 그 결과 $x_{n}$ 이 $y_{i}$ 에 가장 가깝다면, label 역할을 하는 cluster $X_{i}$ 에 속하도록 $x_{n}$ 를 labeling 한다. 결국 데이터의 전체 집합이 K 개의 cluster 들 ${X_{1}, ..., X_{K}}$ 로 나누어 진다. <br/>
-<br/>
-cluster $X_{i}$ 는 $x_{n}$ 들로 구성된 집합이다. 거리가 $x_{n}, y_{j}$ 거리보다 작거나 같다. <br/>
-$X_{i} = {x_{n} | d(x_{n}, y_{i}) \leq d(x_{n}, y_{j}), j=1,...,K}$<br/>
-<br/>
-1. 중심갱신단계 : clustring step 에서 구한 각각의 cluster 들에서 각각의 중심을 새로 설정해야한다. <br/>
-평균을 구하는 공식으로 구한다. <br/>
-i cluster 의 새로운 중심 $y_{i} = c(X_{i}) = \frac{1}{M} \sum\limits_{m=1}^{M} {X_{i}}$ where, i=1,...,K<br/>
-1. 왜곡 검증 단계 : data 와 가장 가까운, 즉, 자기가 속한 cluster의 중심과의 거리의 합으로 entire distortion 을 구한다. <br/>
-$D = \sum\limits_{n=1}^{N} d(x_{n}, y_{i(n)}), where i(n)=k, if x_{n} \in X_{K}$<br/>
-<br/>
-1. entire distortion 이 하나두개만 변하거나 설정된 반복횟수에 도달할 때까지 단계2-4를 반복한다. <br/>
-왜곡검증의 예. $\Delta D = \frac{D_{previous} - D_{current}}{D_{previous}} < 10^{-4}$<br/>
-
+N개의 vector 에서 전체 왜곡이 얼마인지 계산해봐야한다. 왜곡이 느는지, 주는지 에 따라서 algorithm 이 적절하게 작동하고 있는지 판단할수 있기 때문이다. \\<br/>
+왜곡은 euclidian distance 개념을 사용한다. vector $x_{n} \in X_{k}$ 와 i 번째 그룹의 중심값 $y_i(n)$ 의 euclidian distance 를 구하고 다 더한다. 이것이 전체 왜곡이다. \\<br/>
+$D = \sum\limits_{n=1}^{N} d(x_{n}, y_{i(n)}) = d(x_{1}, y_{i(n)}) + ... + d(x_{N}, y_{i(N)})$\\<br/>
+\\<br/>
+@\\<br/>
+euclidian distance, 중심평균, 전체왜곡 같은 mathematical tool 이 있으면 implementing clustring algorithm 이 가능하다. \\<br/>
+\\<br/>
+@\\<br/>
+k-Means algorithm : 평균값 k 개를 사용한 algorithm \\<br/>
+비균일 이진 분할(non-uniform binary split) algorithm : 반씩 잘라감.\\<br/>
+LGB algorithm : k-Means + non uniform binary split. \\<br/>
+\\<br/>
+@\\<br/>
+k-Means algorithm : \\<br/>
+다음과 같이 주어지는 평균자승오차(mean squared error) 규준함수 $J_{MSE}$ 를 반복적인 과정을 통해 최소화시키는 가장 단순한 clustring 과정이다. \\<br/>
+\\<br/>
+최소화 시키고자 하는 목적이 되는 함수 $J_{MSE}$ 를 생각해보자.\\<br/>
+여러 class 에 퐇마된 x 값들이 있을것이다. i class 의 x 값들의 평균을 $\mu_{i}$ 라고 하자. 이 둘의 차이를 error 라고 하자. 1부터 K 까지 모든 class 에서 대해서 이 작업을 수행한다. \\<br/>
+$J_{MSE} = \sum\limits_{i=1}^{K} \sum\limits_{x=\omega_{i}} |x-\mu_{i}|^{2}$ where, $\mu_{i} = \frac{1}{N} \sum\limits_{x_{\omega_{i}}} x$ \\<br/>
+\\<br/>
+@\\<br/>
+오차 개념을 담고 있는 $J_{MSE}$ function 을 최소화 시켜줄수 있도록 x 들이 속하는 그룹을 만들어 주는 게 k-mean algorithm 이다.\\<br/>
+\\<br/>
+@\\<br/>
+k-mean algorithm 과정은 다음과 같다.\\<br/>
+1. cluster 의 갯수 k 를 결정한다.\\<br/>
+1. 각각의 cluster 의 중심벡터를 random 하게 설정해서 cluster 들을 초기화한다.\\<br/>
+1. 각각의 cluster 의 표본 평균을 새로 구한다. 각각의 data 들이 어느 group 에 속해있다. 그리고 group 들의 중심평균이 결정이 되어있는 상태이다. 사실 random 하게 설정했기때문에 실제 data 의 중심과 일치하지않는다. 그래서 새로 표본 평균을 구하면 중심값이 변화하게 된다. \\<br/>
+1. 새로운 중심값으로 다시 설정한다. \\<br/>
+\\<br/>
+그리고 3번을 다시 하고 4번을 한다. 이것을 $J_{MSE}$ 가 최소가 될때까지 반복한다. \\<br/>
+\\<br/>
+결과는 k 개의 평균값, 중심벡터가 나온다. \\<br/>
+\\<br/>
+@\\<br/>
+k-mean algorithm 의 계산절차\\<br/>
+\\<br/>
+1. 중심초기화가 되어야한다. N 개의 feature vector 로 구성된 데이터 집합 $x={x_{1}, ..., x_{N}}$ 에서 임의의 K 개의 벡터를 선택하여 초기 중심 집합 ${y_{1}, ..., y_{K}}$ 를 만든다.\\<br/>
+\\<br/>
+1. clustring 단계 : 만약 data $x_{n}$ 과 $y_{1}$ 부터 $y_{K}$ 까지 distance 를 측정한다. 그 결과 $x_{n}$ 이 $y_{i}$ 에 가장 가깝다면, label 역할을 하는 cluster $X_{i}$ 에 속하도록 $x_{n}$ 를 labeling 한다. 결국 데이터의 전체 집합이 K 개의 cluster 들 ${X_{1}, ..., X_{K}}$ 로 나누어 진다. \\<br/>
+\\<br/>
+cluster $X_{i}$ 는 $x_{n}$ 들로 구성된 집합이다. 거리가 $x_{n}, y_{j}$ 거리보다 작거나 같다. \\<br/>
+$X_{i} = {x_{n} | d(x_{n}, y_{i}) \leq d(x_{n}, y_{j}), j=1,...,K}$\\<br/>
+\\<br/>
+1. 중심갱신단계 : clustring step 에서 구한 각각의 cluster 들에서 각각의 중심을 새로 설정해야한다. \\<br/>
+평균을 구하는 공식으로 구한다. \\<br/>
+i cluster 의 새로운 중심 $y_{i} = c(X_{i}) = \frac{1}{M} \sum\limits_{m=1}^{M} {X_{i}}$ where, i=1,...,K\\<br/>
+1. 왜곡 검증 단계 : data 와 가장 가까운, 즉, 자기가 속한 cluster의 중심과의 거리의 합으로 entire distortion 을 구한다. \\<br/>
+$D = \sum\limits_{n=1}^{N} d(x_{n}, y_{i(n)}), where i(n)=k, if x_{n} \in X_{K}$\\<br/>
+\\<br/>
+1. entire distortion 이 하나두개만 변하거나 설정된 반복횟수에 도달할 때까지 단계2-4를 반복한다. \\<br/>
+왜곡검증의 예. $\Delta D = \frac{D_{previous} - D_{current}}{D_{previous}} < 10^{-4}$\\<br/>
 
    </BODY>
 </HTML>
