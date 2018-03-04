@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+11-04 Clustring<br/><br/><br/>
+
+@<br/>
+ISODATA(iterative self-organizing data analysis technique algorithm)<br/>
+자기 발견적 학습법을 통해서 자동적으로 cluster 의 갯수를 선택하는 k-means algorithm 의 확장된 방법이다<br/>
+<br/>
+@<br/>
+이 방법에 필요한 parameter 는 다음과 같다<br/>
+$N_{min_ex}$:cluster 당 최소 표본의 갯수<br/>
+$N_{D}$:대략적으로 요구되는 cluster 의 갯수, 일종의 k인데 변화가 가능하다<br/>
+$\sigma_{s}^{2}$:분리가 요구되는 최대 분산 parameter, 분산이 일정한 크기를 가지면 cluster 를 반드시 나눠야 한다<br/>
+$D_{merge}$:결합이 요구되는 최대 분리거리, cluster 의 중심값끼리 거리를 쟨다. 아주 가까우면 하나의 cluster 로 보는 것이 좋다<br/>
+$N_{merge}$:결합될 수 있는 최대 cluster 수, 결합을 너무 많이 하면 전체가 하나의 cluster 가 될 위험이 있다 <br/>
+<br/>
+@<br/>
+작동과정<br/>
+1. k-means clustering 을 수행한다<br/>
+2. 충분히 다른 표본들로 구성된 cluster 를 분리한다<br/>
+3. 충분히 근접한 두개의 cluster 를 결합한다<br/>
+4. 1 과정으로 돌아간다<br/>
+   </BODY>
+</HTML>
