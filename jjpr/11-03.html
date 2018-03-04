@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+11-03 Clustring<br/><br/>
+
+@<br/>
+비균일 이진 분할 알고리즘. <br/>
+<br/>
+1. data 들이 들어오면 일단 하나의 cluster $X_{1}$ 으로 보고 관련된 중심은 모든 data 의 평균이므로 $y_{1}=c(X_{1})$ 이다. cluster 카운트는 일단 k=1 로 둔다.<br/>
+<br/>
+2. k 개의 중심을 얻기 위해서 3-6 단계를 k-1 번 반복한다.<br/>
+<br/>
+3. 초기에는 cluster 가 하나뿐이므로 해당이 안되지만, 나중에, 여러 cluster 중에서 cluster 내의 점들과 중심의 평균 거리로 측정된 가장 큰 왜곡을 가진 cluster $X_{i}$ 를 선택한다.(왜곡이 가장 큰 cluster 를 먼저 처리하기 때문에 비균일 알고리즘 이라고 한다.)  균일 알고리즘의 경우는 모든 cluster 를 차례대로 선택한다. <br/>
+$D_{i} = \frac{1}{N_{i}} \sum\limits_{n=1}^{N_{i}} d(x_{n}^{(i)}, y_{i})$, where, cluster i $X_{i}={x_{n}^{(i)}|n=1,...,N_{i}}$, $D_{i} \geq D_{j}$, where j=1,...,K<br/>
+$D_{i}$:cluster i 의 왜곡<br/>
+$N_{i}$:cluster i 에 속한 sample 의 갯수 <br/>
+$x_{n}^{(i)}$ : class i 에서 모든 sample 들<br/>
+$y_{i}$ : class i 에서 중심값<br/>
+<br/>
+4. 선택된 cluster X_{i} 를 k=2 로 두고 k-means 방법을 수행해본다. cluster 가 이렇게 작으면 굉장히 빨리 나뉘어진다. 이 때 cluster 를 X_{a}, X_{b} 로 labeling 을 한다. <br/>
+<br/>
+5. 새로운 cluster 를 만들었으므로 새로운 중심을 다음과 같이 설정한다<br/>
+y_{i}=c(X_{a})<br/>
+y_{k+1}=c(X_{b})<br/>
+<br/>
+@<br/>
+LBG(Linde, Buzo, Gray) algorithm:k-means 의 초기값을 random 하게 설정하지않고 binary split 의 결과에 포함되어있는 중심을 k-mean algorithm 에서 초기값으로 사용하는 방식이다<br/>
+
+
+
+   </BODY>
+</HTML>
