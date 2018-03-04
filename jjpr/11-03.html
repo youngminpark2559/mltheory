@@ -62,11 +62,11 @@ $N_{i}$:cluster i 에 속한 sample 의 갯수 <br/>
 $x_{n}^{(i)}$ : class i 에서 모든 sample 들<br/>
 $y_{i}$ : class i 에서 중심값<br/>
 <br/>
-4. 선택된 cluster X_{i} 를 k=2 로 두고 k-means 방법을 수행해본다. cluster 가 이렇게 작으면 굉장히 빨리 나뉘어진다. 이 때 cluster 를 X_{a}, X_{b} 로 labeling 을 한다. <br/>
+4. 선택된 cluster $X_{i}$ 를 k=2 로 두고 k-means 방법을 수행해본다. cluster 가 이렇게 작으면 굉장히 빨리 나뉘어진다. 이 때 cluster 를 $X_{a}, X_{b}$ 로 labeling 을 한다. <br/>
 <br/>
 5. 새로운 cluster 를 만들었으므로 새로운 중심을 다음과 같이 설정한다<br/>
-y_{i}=c(X_{a})<br/>
-y_{k+1}=c(X_{b})<br/>
+$y_{i}=c(X_{a})$<br/>
+$y_{k+1}=c(X_{b})$<br/>
 <br/>
 @<br/>
 LBG(Linde, Buzo, Gray) algorithm:k-means 의 초기값을 random 하게 설정하지않고 binary split 의 결과에 포함되어있는 중심을 k-mean algorithm 에서 초기값으로 사용하는 방식이다<br/>
