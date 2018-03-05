@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+12-02 Dimentionality reduction by PCA(principle component analysis)<br/><br/>
+
+@<br/>
+$\begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix} \underrightarrow{linear features extraction} \begin{bmatrix} y_{1}\\y_{2}\\...\\y_{M} \end{bmatrix}=<br/>
+\begin{bmatrix} w_{11}&w_{11}&...&w_{1N}\\w_{21}&w_{22}&...&w_{2N}\\...\\w_{M1}&w_{M2}&...&w_{MN} \end{bmatrix}\begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix}$<br/>
+<br/>
+M*N $\cdot$ N*1 $\Rightarrow$ M*1, where N$>$M<br/>
+<br/>
+@<br/>
+feature extraction 을 할때 mapping function y=f(x) 의 선택은 우리가 optimization 시키고자 하는 목적에 의해서 결정된다. 크게 두가지 방법이있다<br/>
+1. 신호표현 signal representation<br/>
+feature extraction 의 목적이 extraction 에 의해서 dimensionality 가 낮아지더라도 낮은 dimensinal space 에서 원래 data 의 정보들이 손실되지 않고 정확하게 표현하고자할때, 선형변환의 방법으로 PCA 를 사용한다. PCA 를 사용하면 낮은 차원에서도 feature vector 의 feature 가 정확히 표현된다<br/>
+1. classification<br/>
+feature extraction 을 할 때, extraction 의 목적이 낮은 차원에서 classification 을 더 잘 하길 원할때, 선형판별분석법 LDA linear discriminant analysis 를 사용한다<br/>
+
+
+   </BODY>
+</HTML>
