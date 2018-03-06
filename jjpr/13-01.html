@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+13-01 LDA(linear discriminant analysis)<br/><br/>
+
+PCA, LDA, both are algorithms for a dimensionality reduction.<br/>
+<br/>
+@<br/>
+PCA : data 가 가지고 있는 특징을 그대로 유지하면서 dimensionality reduction 한다.<br/>
+multi class 가 아닌 경우 주로 해당된다.<br/>
+정확히는 each class 마다 data 를 축소한다.<br/>
+LDA : data 의 형태나 특징의 유지에 촛점을 맞추기 보다 data 가 여러 class 로 구성되어 있을 경우 이러한 class 들의 분류가 적절, 용이 하도록 하는 목적을 갖고 dimensionality reduction 한다.<br/>
+<br/>
+@<br/>
+D 차원 표본 데이터 집합 $X = \{x^{(1)}, ..., x^{(N)}\}$ .<br/>
+$\omega_{1}$ class 에 속하는 것이 $N_{1}$ 개 이다.<br/>
+$\omega_{2}$ class 에 속하는 것이 $N_{2}$ 개 이다.<br/>
+<br/>
+이 때, x 를 임의의 선을 따라서 projecion 해서 scalar y 를 얻고자 할 때, 다음과 같은 수식을 적용한다.<br/>
+projecion 방향에 해당하는 vector 를 성분으로 갖는 W 를 곱해주면 된다.<br/>
+$y = W^{T}x$.<br/>
+<br/>
+@<br/>
+projecion 시키고 싶은 방향에 해당하는 선들이 다양하게 있을 수 있다.<br/>
+가능한 모든 선들 중에서 이러한 scalar 값들의 분리를 최대화하는 방향 혹은 가능한 선을 찾는것이 LDA 라고 할수 있다.<br/>
+<br/>
+@<br/>
+2차원 데이터가 입력데이터라고 생각하자.<br/>
+빨간색 데이터들이 $w_{1}$ class 의 데이터이다.<br/>
+파란색 데이터들이 $w_{2}$ class 의 데이터이다.<br/>
+<br/>
+이러한 데이터를 1차원으로 dimensionality reduction 할 때, 1차원 선은 무수히 많다. 그 중 하나의 선에 projection 시킬 수 있다 .<br/>
+<br/>
+projection 된 결과의 분포가 1차원 선에 따라 다르게 나타날 수 있다.<br/>
+어떤 선은 분류를 더 명확하게 한다.<br/>
+이러한 선의 방향을 찾는 방법론이 LDA 이다.<br/>
+<br/>
+@<br/>
+formal 하게 표현하자면, LDA 에서는 class 간의 variance (variance between classes) 과 class 내의 variance (variance within class) 의 ratio 를 maximization 하는 방식으로 데이터에 대한 feature vector 의 dimensionality reduction 을 한다.<br/>
+<br/>
+variance within class 가 작으면 밀집되어있다는 뜻이다.<br/>
+variance between class 가 크면 class 간 중심값의 거리가 크다는 뜻이며 class 간 구분이 확실하다는 뜻이다.<br/>
+<br/>
+mathematically, $\frac{variance\;between\;classes}{variance\;within\;class}$.<br/>
+이 값이 크면 class 안에서 데이터가 밀집 and class 간 구분이 확연 하다.<br/>
+따라서, good separation 은 위 값이 클 때를 의미하며 LDA 의 목표이다.<br/>
+      
+   </BODY>
+</HTML>
