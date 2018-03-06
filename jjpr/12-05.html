@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+12-05 Dimentionality reduction by PCA(principle component analysis)<br/><br/>
+
+@<br/>
+PCA 의 목적은 high dimensionality 에서 흩어짐의 정도인 variance 을 가능하면 많이 유지하면서 차원을 줄이는 방법을 linear algebra 로 유도하다 개발된 방법 이다.<br/>
+<br/>
+@<br/>
+principal component analysis 를 알아보자.<br/>
+2 dimensinal feature vector 들을 variance plot 통해 어떻게 분포하는지 생각해보자.<br/>
+평균은 데이터 퍼진 모양의 기하학적 중심이라는 것을 안다.<br/>
+주어진 data 의 퍼진 정도를 compact 하게 표현할수 있는 방법이 covarince matrix $\Sigma$ 이다 .<br/>
+$\Sigma=\begin{bmatrix} \sigma_{1}^{2}& c_{12}\\c_{12}&\sigma_{1}^{2} \end{bmatrix}$.<br/>
+$c_{12}$ : covariance of 1 and 1.<br/>
+covariance matrix 를 기하학적으로 생각해본다면 데이터가 퍼진 양상을 나타내는 가장 적절한 ellipse 이다.<br/>
+<br/>
+@<br/>
+covariance matrix 는 항상 squre matrix 이다.<br/>
+all squre matrix has eigenvalue, eigenvector in respect to oneself.<br/>
+covariance matrix 의 eigenvector u 를 구할 수 있다.<br/>
+그리고 eigenvalue 를 diagonal element 로 갖는 eigenvalue matrix $\Lambda$ 도 구할수 있다.<br/>
+결론적으로, covariance matrix $\Sigma = \begin{bmatrix} u_{1} & u_{2} \end{bmatrix} \begin{bmatrix} \lambda_{1} & 0 \\ 0 &\lambda_{2} \end{bmatrix} \begin{bmatrix} u_{1} \\ u_{2} \end{bmatrix}$ 으로 표현할 수 있다.<br/>
+이때 covariance matrix $\Sigma$ 를 분해하면서 얻어지는 eigenvalue, eigenvector 가 데이터의 기하학적 분포에서 어떤 의미를 갖는지 살펴보자.<br/>
+<br/>
+@<br/>
+eigenvalue 는 여러개 있을 수 있는데 $\lambda_{1} > \lambda_{2}$ 라 가정하면 .<br/>
+데이터 분포 ellipse 에서 길이가 긴 장축의 방향이 eigenvector $u_{1}$ 이고 길이가 eigenvalue $\lambda_{1}$ 이다.<br/>
+단축은 크기와 방향이 $\lambda_{2}, u_{2}$ 이다.<br/>
+<br/>
+즉, data 로 부터 covariance matrix 를 구해서 data 의 퍼진 양상을 알수 있고 그 ellipse 모양의 방향과 길이를 eigenvalue, eigenvector 를 통해서 정확히 알수있다 .<br/>
+<br/>
+@<br/>
+아래 그림에서 PCA 를 사용해서 data 분포의 축을 줄이는 방식을 설명하고있다.<br/>
+<br/>
+@<br/>
+장축의 방향은 eigenvalue 의 크기고 결정한다.<br/>
+여기에서는 $\lambda_{1}>\lambda_{2}$ 이다 .<br/>
+<br/>
+@<br/>
+데이터들이 $u_{1}, u_{2}$ 값을 갖을때, $u_{2} =0$ 으로 놓으면 $u_{1}$ 한성분만 남게된다.<br/>
+$u_{1}$ 축으로 projection 된 값만 남게된다.<br/>
+<br/>
+@<br/>
+이런식으로 dimensionality reduction 을 하고 $x_{1}, x_{2}$ plane 에 나타내보자.<br/>
+<br/>
+@<br/>
+data 의 퍼진 정도가 유지되어야한다.<br/>
+$u_{1}$ 방향으로 dimensionality reduction 을 하면 퍼진 양상이 유지된다.<br/>
+$u_{2}$ 방향으로 dimensionality reduction 을 하면 퍼진 양상에 변화가 생긴다.<br/>
+따라서, PCA 의 목적인 feature vector 들의 양상을 유지하고자 할때는 장축방향으로 dimensionality reduction 을 해야한다.<br/>
+분산의 정보가 유지되는 주성분 방향을 찾을때는 data 의 covariance matrix를 구한 뒤 이를 통하여 eigenvalue, eigenvector 를 찾는다. 가장 큰 eigenvalue 를 찾는다. 이것이 principal component 의 direction 이 되므로 이쪽 방향으로 projecion 시킨다..<br/>
+<br/>
+@<br/>
+PCA 는 다차원 feature vector 로 이루어진 data 에 대하여 고차원의 정보를 유지하면서 저차원으로 차원을 축소하는 다변량 데이터 처리 방법 중 하나이다.<br/>
+<br/>
+feature vector 는 feature vector 안의 축의 갯수(차원)만큼 데이터가 들어있다는 것이다..<br/>
+따라서 3차원 데이터는 3개의 기준 축으로 표현할수 있는 것이다.<br/>
+차원을 축소한다는것은 축을 줄이는 것이다.<br/>
+<br/>
+@<br/>
+다변량 데이터의 주성분에 해당하는 장축을 통계적 방법으로 구해야한다.<br/>
+이렇게 얻은 feature vector x를 장축방향으로 projection 시킴으로써 차원을 축소하게 되는 것이다.<br/>
+<br/>
+@<br/>
+projection 은 수학적, 기하학적으로 행렬의 내적이다.<br/>
+feature vector와 projection 시키고 싶은 direction 이 있으면 둘을 inner product 하면 된다.<br/>
+<br/>
+@<br/>
+data analysis 할때 coefficient 를 구했었다. 이 coefficient 가 높은 방향의 축이 존재한다. .<br/>
+PCA 는 이러한 coefficient 가 높은 correlated 한 변량들의 변동 variance 를 줄이는 관점에서 correlated 가 없는 변량들로 이루어진 집합으로 기준 축을 변환한다. 그리고 이쪽 방향으로 feature vector 를 재배치한다..<br/>
+<br/>
+@<br/>
+PCA dimensionality reduction 을 정리해보자 .<br/>
+element 는 R 이고 N 차원인 임의의 벡터 $x \in R^{N}$ 를 생각하자.<br/>
+$M<N$ 을 만족하는 상황에서, 서로 독립인 M 개의 벡터의 선형결합으로 근사시킬 최적의 방법은 다음과 같다.<br/>
+1. covariance matrix of x $\Sigma_{x}$ 를 구한다.<br/>
+1. 이 covariance matrix 의 eigenvalue, eigenvector 를구한다.<br/>
+1. 가장 큰 eigenvalue $\lambda_{i}$ 를 찾는다.<br/>
+1. $\lambda_{i}$ 에 해당하는 eigenvector $\Phi_{i}$ 를 찾는다. 이값은 base vector 로 사용된다.<br/>
+1. 무작위 vector 를 $\Phi_{i}$ 에 projection 시킨다.<br/>
+<br/>
+M 차원 벡터를 N 차원 벡터로 차원 축소하되 원래의 정보가 손실되지 않도록 바꾸는 방법이다.<br/>
+<br/>
+@<br/>
+PCA 를 통해서 변환 행렬을 구성하는 단계를 수학적으로 살펴보자.<br/>
+PCA : eigenvalue, eigenvector 를 구하는 단계.<br/>
+변환행렬을 구성 : 원하는 형태를 만들기 위해서 eigenvalue, eigenvector 를 활용하는 방법.<br/>
+<br/>
+1. 샘플이 N 개 있다고 하자. 이 샘플들이 차원이 D 차원이다. 이런 데이터를 $x_{n}$ 이라고 부르자.<br/>
+D 차원 matrix 의 covariance matrix 를 구하면 $D\times D$ matrix 이다.<br/>
+covariance matrix 를 구하려면 $\mu$ 을 먼저 알아야한다 .<br/>
+$\mu = \frac{1}{N} \sum\limits_{n=1}^{N} x_{n}$.<br/>
+$\Sigma = \frac{1}{N-1} \sum\limits_{n=1}^{N} (x_{n}-\mu)(x_{n}-\mu)^{T}$ .<br/>
+N is number of sample.<br/>
+unbiased version of covariance matrix 를 구하기 위해 N-1 를 썼다.<br/>
+<br/>
+1. covariance matrix 로 부터 eigenvalue, eigenvector 를 찾는다.<br/>
+큰 데이터라 컴퓨터를 이용해 계산한다.<br/>
+예를들어 matlab 에서 eig(covariance-matrix) 한다..<br/>
+그러면 eigenvalue 들로 이루어진 행렬 $\Lambda$ 와 eigenvector 들로 이루어진 행렬 U 가 얻어진다.<br/>
+$\Sigma = U\Lambda U^{T} = \begin{bmatrix} u_{1}&...&u_{D} \end{bmatrix} \begin{bmatrix} \lambda_{1}&0&0\\0&...&0\\0&0&\lambda_{D} \end{bmatrix} \begin{bmatrix} u_{1}\\...\\u_{D} \end{bmatrix}$.<br/>
+<br/>
+1. covariance matrix 가 $D\times D$ 라면 eigenvalue 도 D 개가 얻어진다.<br/>
+우리가 M 차원으로 축소하고자 할때 큰 순서대로 eigenvalue $\lambda_{1}, ..., \lambda_{M}$  를 선택한다.<br/>
+<br/>
+1. 선택한 eigenvalue 와 관련한 eigenvector $u_{1}, ..., u_{M}$ 를 구한다. 연결해서 변환행렬 $W=\begin{bmatrix} u_{1}&...&u_{M} \end{bmatrix}$ 를 만든다.<br/>
+<br/>
+어떤 feature vector 를 주어진 방향으로 projection 시키고 싶으면 W 를 곱해주면 된다.<br/>
+$y=W^{T}x$, where, $y\in R^{M}, x\in R^{D}$.<br/>
+
+   </BODY>
+</HTML>
