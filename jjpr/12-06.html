@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+12-06 Dimentionality reduction by PCA(principle component analysis)<br/><br/>
+
+
+@<br/>
+그림은 3차원 자료 3D 펭귄모양을 2차원으로 projecion 한 것이다.<br/>
+처음의 projecion 에서는 모양이 잘 드러나지 않지만 rotation 을 적절히 하면 구조가 잘 드러나는 시점이 있다.<br/>
+이런 rotation angle, direction 을 찾을 때 PCA 를 쓰면 좋다.<br/>
+<br/>
+@<br/>
+PCA 를 직접 계산해보자.<br/>
+다음 2차원 자료 X 의 principal component 를 계산해라.<br/>
+$X = [x_{1}, x_{2}] = \{(1,2), (3,3), (3,5), (5,4), (5,6), (6,5), (8,7), (9,8) \}$<br/>
+<br/>
+1. $\mu = \begin{bmatrix} 5\\5 \end{bmatrix}$<br/>
+1. $\Sigma_{X} = \frac{1}{N} \sum (x - \begin{bmatrix} 5\\5 \end{bmatrix})(x - \begin{bmatrix} 5\\5 \\\end{bmatrix})^{T}$<br/>
+$\Sigma_{X} = \begin{bmatrix} 6.25&4.25\\4.25&3.5 \end{bmatrix}$<br/>
+<br/>
+1. Find eigenvalue and eigenvector.<br/>
+in matlab, $eig(\Sigma)$, and we get $\Lambda, \vec{U}$<br/>
+$2\times 2$ matrix 에서는 계산이 어렵지 않으므로 해보자.<br/>
+eigenvalue, eigenvector 은 다음과 같은 특성방정식을 만족하는 값이다.<br/>
+$\Sigma_{X}v = \lambda v$<br/>
+$\Sigma_{X}v - \lambda v = 0$<br/>
+$v(\Sigma_{x} - \lambda I) = 0$<br/>
+Therefore, $(\Sigma_{x} - \lambda I) = 0$<br/>
+determinant 으로 풀면,.<br/>
+$|\Sigma_{x} - \lambda I| = 0$<br/>
+$\begin{bmatrix} 6.25-\lambda&4.25\\4.25&3.5-\lambda \end{bmatrix}=0$<br/>
+따라서, $\lambda_{1}=9.34, \lambda_{2}=0.41$<br/>
+따라서 the eigenvalue of principal component is $\lambda_{1}$<br/>
+이쪽 방향의 eigenvector 를 구하자.<br/>
+9.34를 원래의 definition formula의 $\lambda$ 에 넣는다.<br/>
+eigenvector $v_{1}$ corresponding to $\lambda_{1}$ is $\begin{bmatrix} v_{11}\\v_{12} \end{bmatrix}$<br/>
+$\Sigma_{X} v = \lambda v$<br/>
+$\begin{bmatrix} 6.25&4.25\\4.25&3.5 \end{bmatrix} \begin{bmatrix} v_{11}\\v_{12} \end{bmatrix} = \\\begin{bmatrix} \lambda_{1}v_{11}\\ \lambda_{1}v_{12} \end{bmatrix}$<br/>
+$\begin{bmatrix} \lambda_{1}v_{11}\\ \lambda_{1}v_{12} \end{bmatrix} = \begin{bmatrix} 0.81\\0.59 \end\\{bmatrix}$<br/>
+<br/>
+eigenvector $v_{2}$ corresponding to $\lambda_{2}$ is $\begin{bmatrix} v_{21}\\v_{22} \end{bmatrix}$<br/>
+$\Sigma_{X} v = \lambda v$<br/>
+$\begin{bmatrix} 6.25&4.25\\4.25&3.5 \end{bmatrix} \begin{bmatrix} v_{21}\\v_{22} \end{bmatrix} \begin\\{bmatrix} \lambda_{2}v_{21}\\ \lambda_{2}v_{22} \end{bmatrix}$<br/>
+$\begin{bmatrix} \lambda_{2}v_{11}\\ \lambda_{2}v_{22} \end{bmatrix} = \begin{bmatrix} -0.59\\0.81\end\\{bmatrix}$<br/>
+<br/>
+$v_{1}$ vector 를 그려보자. 크기와 방향을 알수있다.<br/>
+여기서의 방향이 이 data 가 가장 넓게 퍼져있는 방향 대표 방향을 의미하는 것이다.<br/>
+<br/>
+줄이고 싶은 차원의 갯수만큼 큰 순서대로 eigenvector v 를 뽑아서 vector W 를 만든다.<br/>
+$W = \begin{bmatrix} v_{1}&v_{2} \end{bmatrix}$<br/>
+<br/>
+그 방향으로 투영된 차원이 축소된 data y 를 얻으려면 $W^{T}$ dot product 한다.<br/>
+$y = W^{T}x$<br/>
+
+   </BODY>
+</HTML>
