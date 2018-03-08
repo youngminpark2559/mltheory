@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+13-04 LDA(linear discriminant analysis)<br/><br/>
+
+@<br/>
+fisher's LDA 는 C class 문제로 일반화될 수 있다.<br/>
+y 로의 단일 사영 대신에, (C-1) 개의 projecion vector $w_{i}$ 위로 (C-1) 개의 projecion data $\{y_{1}, ..., y_{C-1}\}$ 을 구하게 된다.<br/>
+이때의 projection vector 들은 사영행렬 $W = \begin{bmatrix} w_{1} \\ ... \\ w_{C-1} \end{bmatrix}$ 로 정렬된다.<br/>
+<br/>
+$y_{i} = w_{i}^{T} x$<br/>
+C class 문제를 풀게되면 w 가 하나의 vector 만 되는 것이 아니라 row 가 각각 $w_{1}, ..., w_{C-1}$ 으로 구성된 vector 이다.<br/>
+$y = W^{T} x$<br/>
+이렇게 해서 projecion data $\{y_{1}, ..., y_{C-1}\}$ 을 구하게 된다.<br/>
+따라서, 위의 수식에서 변환행렬 $W^{T}$ 가 얻어져야 $\{y_{1}, ..., y_{C-1}\}$ 를 구할 수 있는 것이다.<br/>
+<br/>
+@<br/>
+또한, 클래스 내 분산과 클래스 간 분산의 일반화를 시켜놓아야한다.<br/>
+<br/>
+@<br/>
+within-class scatter 의 일반화.<br/>
+분산을 나타내므로 제곱으로 표시하면 C class 의 $S_{WCS}$ 는 모든 class scatter 의 합이다.<br/>
+$S_{WCS} = \sum\limits_{i=1}^{C} S_{i}^{2}$<br/>
+$S_{i}^{2} = \sum\limits_{x\in \omega_{i}} (x-\mu_{i})(x-\mu_{i})^{T}$, where, $\mu_{i} = \frac{1}{N} \sum\limits_{x\in \omega_{i}} x$<br/>
+<br/>
+@<br/>
+위처럼, within-class scatter 는 이해된다.<br/>
+between-class scatter 는 생각해볼 부분이 있다.<br/>
+이전의 between-class scatter 는 class 가 2 인 case 였다.<br/>
+이때는 각각의 class 의 평균값들의 차이로 class 간의 variance 를 정의했었다.<br/>
+<br/>
+class 가 3개 이상일 때는 추가로 고려할 사항이 있다.<br/>
+모든 class 마다 평균값이 있다.<br/>
+이것으로 부터 총평균(전체평균) $\mu$ 에 대한 나머지 class 의 평균들에 대한 variance 를 계산하는 것이 between-class scatter 공식이다.<br/>
+따라서, C class 인 경우 between-class scatter 의 정의는 각각의 평균값 $\mu_{i}$ - 전체평균 $\mu$ 하고 tranpose 해서 한번도 곱하고 해당 class 마다 sample 의 갯수가 다를 수 있으므로 갯수 $N_{i}$ 를 곱해주고 모든 클래스에 대해서 다 더해준 결과가 between-class scatter $S_{n}$ 이다.<br/>
+<br/>
+@<br/>
+projecion 된 이후의 i class 표본들의 평균 벡터 $\tilde{\mu}_{i}$, scatter matrix $\tilde{S}_{BCS}$, $\tilde{S}_{WCS}$ 가 주어졌다.<br/>
+<br/>
+각각 구하는 공식을 다시 한번 정리해보자.<br/>
+$\tilde{\mu}_{i} = \frac{1}{N_{i}} \sum\limits_{y\in \omega_{i}} y$<br/>
+total mean $\mu_{i} = \frac{1}{N} \sum\limits_{\forall y} y$<br/>
+<br/>
+각각 class 가 가지고 있는 covariance matrix (variance 이므로 제곱으로 표시) $S_{1}^{2}, ... ,S_{i}^{2}$ 를 다 더해준 것이 within-class scatter $S_{WCS}$ 이다.<br/>
+data 를 projecion 시킨 다음에 $\tilde{S_{WCS}}$ 를 구한다.<br/>
+$\tilde{S_{WCS}} = \sum\limits_{i=1}^{C} \sum\limits_{y\in \omega_{i}} (y-\tilde{\mu}_{i}) (y-\tilde{\mu}_{i})^{T}$<br/>
+변환행렬 W 을 $S_{W}$ 에 곱하여 얻을 수도 있다.<br/>
+$\tilde{S_{WCS}} = W^{T}S_{W}W$<br/>
+<br/>
+between-class scatter.<br/>
+$\tilde{S}_{BCS} = \sum\limits_{i=1}^{C} N_{i} (\tilde{\mu}_{i} - \tilde{\mu})(\tilde{\mu}_{i} - \tilde{\mu})^{T}$<br/>
+$\tilde{S}_{BCS} = W^{T}S_{BCS}W$<br/>
+<br/>
+@<br/>
+위 두 시식을 대입하면 다음이 target function J(W) 를 얻을 수 있다.<br/>
+$J(W) = \frac{|\tilde{S}_{BCS}|}{|\tilde{S}_{WCS}|}$<br/>
+$J(W) = \frac{|W^{T}{S}_{BCS}W|}{|W^{T}{S}_{WCS}W|}$<br/>
+J(W) 를 최대화하는 최적의 사영행렬을 구해야한다.<br/>
+<br/>
+$W^{*} = \begin{bmatrix} w_{1}^{*} \\ ... \\ w_{C-1}^{*} \end{bmatrix}$<br/>
+$W^{*} = argmax\frac{W^{T}S_{BCS}W}{W^{T}S_{WCS}W} \Rightarrow$<br/>
+$(S_{BCS} - \lambda_{i}S_{WCS})w_{i}^{*} = 0$<br/>
+<br/>
+@<br/>
+LDA 를 적용할때 변환을 줄수 있다.<br/>
+클래스-종속 변환 공식, 클래스-독립 변환 공식 을 선택할 수 있다.<br/>
+<br/>
+@<br/>
+두개의 class $\omega_{1}, \omega_{2}$ 가 있다고 하자.<br/>
+그리고 데이터들을 1차원 데이터로 projection 시켰다.<br/>
+클래스-종속 변환을 하면 projecion 된 line 이 같은 선상이 아니다.<br/>
+앞에서 본 건 클래스-독립 변환을 사용한 LDA 였다.<br/>
+<br/>
+@<br/>
+클래스-종속 변환 : 클래스내의 분산과 각각의 클래스내의 분산의 비율을 최대화 하는 방법이다.<br/>
+(LDA 방법의 출발은 $\frac{S_{BCS}}{S_{WCS}}$ 을 최대화 시키는 것이다. 클래스 내의 분산 $S_{WCS} = \sum S_{1}+S_{2}$ 처럼 두개의 분산의 합으로 정의했다).<br/>
+클래스-종속 변환은 $S_{WCS}$ 를 따로따로 해서 최대화 시키는 것이다.<br/>
+$\frac{S_{BCS}}{S_{WCS_{i}}}$<br/>
+이 변환 방식의 주된 목적은 적절한 클래스 분류 능력을 가질 수 있도록 하는 것이고 이를 위해 between-class scatter 와 within-class scatter 의 비율을 최대화하는 변환법이다.<br/>
+해당 클래스의 변환 행렬을 클래스마다 지정하여야 하므로 2클래스 분류에서는 두 개의 최적화된 변환 행렬을 사용하게 된다.<br/>
+즉, $S_{WCS_{i}}^{-1}S_{BCS}$ 의 고유값 문제를 푼다.<br/>
+<br/>
+@<br/>
+클래스-독립 변환 : between-class scatter 와 전체의 within-class scatter 의 비율을 최대화 하는 방법이다.<br/>
+이 방법은 데이터 집합을 변환하기 위해서 하나의 최적화된 변환 행렬 w을 사용한다.<br/>
+모든 자료는 그들의 해당하는 클래스와 상관없이 같은 변환을 사용한다.<br/>
+이러한 종류의 LDA 에서는 각각의 클래스는 모든 다른 클래스에 대하여 분리된 클래스로 간주된다.<br/>
+즉, $S_{WCS}^{-1}S_{BCS}$ 의 고유값 문제를 푼다.<br/>
+<br/>
+@<br/>
+LDA 의 한계.<br/>
+데이터가 gaussian distribution and 하나의 군집 unimodal 일 경우만 가능하다.<br/>
+파란색 한덩이, 빨간색 한덩이, 데이터 퍼진 건 gaussian 이면 dimensionality reduction 하면서 분류를 잘 할수 있는 변환행렬을 찾을 수 있다.<br/>
+<br/>
+non linear distribution 을 보이는 자료에 대해서는 적절하지 않다.<br/>
+<br/>
+빨간색두덩이가 대각선, 파란색 두덩이가 대각선을 이루는 case 같은 multi modal 은 LDA 를 적용하기 어렵다.<br/>
+      
+   </BODY>
+</HTML>
