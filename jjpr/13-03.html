@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+13-03 LDA(linear discriminant analysis)<br/><br/>
+
+@<br/>
+다음과 같은 식이 성립한다.<br/>
+$(\tilde{\mu_{1}} - \tilde{\mu_{2}})^{2} = (w^{T}\tilde{\mu_{1}}-w^{T}\tilde{\mu_{2}})^{2}$<br/>
+$\tilde{\mu_{1}}$ : projection 이후의 평균.<br/>
+$w^{T}$ : tranpose of transforming matrix.<br/>
+정리해서 다음과 같이 쓸수 있다.<br/>
+$(\tilde{\mu_{1}} - \tilde{\mu_{2}})^{2} = w^{T}(\tilde{\mu_{1}}-\tilde{\mu_{2}})(\tilde{\mu_{1}}-\tilde{\mu_{2}})^{T}w$<br/>
+$(\tilde{\mu_{1}} - \tilde{\mu_{2}})^{2} = w^{T}S_{B}w$<br/>
+<br/>
+$(\tilde{\mu_{1}}-\tilde{\mu_{2}})(\tilde{\mu_{1}}-\tilde{\mu_{2}})^{T}$ 이 부분은 $S_{B}$ 으로서 projection 되기 이전의 클래스간 scatter(between-class scatter) matrix 이다.<br/>
+<br/>
+따라서, 구하고자 하는 target function J(w) 가 projection 이후의 값들로 표현 됐던 수식을 projection 되기 이전의 between-class scatter 와 projection 되기 이전의 within-class scatter $S_{w}$ 에 변환행렬 w 를 곱해서 만들수 있다.<br/>
+<br/>
+$J(w) = \frac{|\tilde{\mu}_{1}-\tilde{\mu}_{2}|^{2}}{\tilde{S}_{1}^{2}-\tilde{S}_{2}^{2}} \Leftrightarrow J(w) = \frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w}$<br/>
+<br/>
+w에 관한 함수 J(w) 가 maximazation 되도록 w 만 곱해주면 optimization 목적을 달성할 수 있다.<br/>
+<br/>
+fisher's linear discriminant.<br/>
+$J(w) = \frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w}$ 이 수식으로 내용들을 전개해 나간다.<br/>
+$S_{BCS}$ 와 $S_{WCS}$ 로 표현된 fisher 의 기준은 위의 target function J(w) 를 maximum 으로 만들어주는 변환행렬 w 를 찾는 것이다.<br/>
+J(w) 의 모양이 볼록함수인걸 수학적으로 증명할 수 있다.<br/>
+따라서, 기울기(미분) 이 0인 w 지점에서 J(w) 가 maximum 이라고 볼수 있다.<br/>
+<br/>
+J(w) 를 maximum 으로 만들어주는 w 의 값이 무엇인지 알아낸다.<br/>
+이 과정에서 특이한 성질을 알아낼수 있는데 이 성질을 이용하는 것이 LDA 이다.<br/>
+<br/>
+$\frac{d}{dw} |J(w)| = \frac{d}{dw} |\frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w} = 0$<br/>
+위 식을 만족하는 w 를 구한다.<br/>
+<br/>
+$(\frac{f}{g})' = \frac{f'g-g'f}{g^{2}}$ 임을 이용하여.<br/>
+$\frac{d[w^{T}S_{BCS}w]}{dw} [w^{T}S_{WCS}w] - [w^{T}S_{BCS}w] \frac{d[w^{T}S_{WCS}w]}{dw} = 0$<br/>
+정리하면,.<br/>
+$2S_{BCS}w[w^{T}S_{WCS}w] - [w^{T}S_{BCS}w] 2S_{WCS}w = 0$<br/>
+<br/>
+양변을 $w^{T}S_{WCS}w$ 로 나누고 2를 없앤다.<br/>
+$S_{BCS}w [\frac{w^{T}S_{WCS}w}{w^{T}S_{WCS}w}] - [\frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w}] S_{w}w = 0$<br/>
+<br/>
+$J(w) = \frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w}$ 을 대입해 정리하면,.<br/>
+$S_{BCS}w-J(w)S_{WCS}w = 0$<br/>
+$S_{WCS}^{-1}S_{BCS}w = 0$<br/>
+<br/>
+$S_{WCS}^{-1}S_{BCS}w = J(w)w$<br/>
+$Au = \lambda u$ 형태이므로 eigenvalue, eigenvector 를 구하는 문제가 된다 (PCA 랑 비슷한 결과가 얻어진다).<br/>
+$A = S_{WCS}^{-1}S_{BFBCS}$<br/>
+eigenvector $u = w$<br/>
+eigenvalue $\lambda = J(w)$ 라 볼 수 있다.<br/>
+<br/>
+PCA 에서는 covariance matrix 를 먼저 구해서 $u\Lambda u^{T}$ 를 구했다.<br/>
+LDA 에서는 $S_{WCS}^{-1}S_{BFBCS}$ 를 구해서 $u\Lambda u^{T}$ 를 구한다.<br/>
+<br/>
+@<br/>
+고유값 분석을 하지 않는 또다른 LDA 해법이 존재한다.<br/>
+일반화된 고유값 문제 $S_{WCS}^{-1}S_{BFBCS}w = J(w)w$ 의 다른 해법은 다음과 같다.<br/>
+<br/>
+$J(w) = \frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w}$ 이므로 대입하면.<br/>
+$S_{WCS}^{-1}S_{BFBCS}w = [\frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}w}]w$<br/>
+정리하면, .<br/>
+$[w^{T}S_{BCS}w] S_{WCS}w = w^{T}S_{WCS}w S_{BCS}w$<br/>
+$[w^{T}S_{BCS}w] S_{WCS}w = w^{T}S_{WCS}w \alpha_{1}(\mu_{1}-\mu_{2}) $, where, $S_{B}w = (\mu_{1}-\mu_{2})(\mu_{1}-\mu_{2})^{T}w$ 는 $(\mu_{1}-\mu_{2})$ 와 같은 방향의 벡터이므로.<br/>
+$S_{WCS}w = \frac{w^{T}S_{WCS}w}{w^{T}S_{BCS}w} \alpha_{1} (\mu_{1}-\mu_{2})$<br/>
+$S_{WCS}w = \alpha_{2}\alpha_{1}(\mu_{1}-\mu_{2})$<br/>
+$w = \alpha_{2}\alpha_{1} S_{WCS}^{-1} (\mu_{1}-\mu_{2})$<br/>
+<br/>
+벡터 W 의 크기는 중요하지 않으므로 이를 무시한다.<br/>
+$w^{*} = arg_{w}max\{\frac{w^{T}S_{BCS}w}{w^{T}S_{WCS}}\} = S_{WCS}^{-1} (\mu_{1}-\mu_{2})$<br/>
+<br/>
+@<br/>
+2차원 공간상에서 데이터가 주어졌다.<br/>
+이 데이터를 변환행렬 w 위로 projecion 시켜서 dimensionality reduction 을한다.<br/>
+projection 이후 data 들이 class 가 최적으로 분류되도록 하는 변환행렬 w를 찾는다.<br/>
+<br/>
+다음의 2차원 데이터에 대한 선형판별사영을 구하라.<br/>
+$\omega_{1} class : X_{1} = (x_{1}, x_{2}) = \{(4,1), (2,4), (2,3), (3,6), (4,4)\}$<br/>
+$\omega_{2} class : X_{2} = (x_{1}, x_{2}) = \{(9,10), (6,8), (9,5), (8,7), (10,8)\}$<br/>
+<br/>
+먼저 각 class 내부에서 데이터들의 분산과 평균을 구한다.<br/>
+$\mu_{1} = [3.00 3.60]$<br/>
+$\mu_{2} = [8.40 7.60]$<br/>
+<br/>
+$S_{1} = \begin{bmatrix} 0.80&-0.04 \\ -0.04&2.60 \end{bmatrix}$<br/>
+$S_{2} = \begin{bmatrix} 1.84&-0.04 \\ -0.04&2.64 \end{bmatrix}$<br/>
+$S_{1}$ : covariance matrix (scatter) of data of $\omega_{1}$ class .<br/>
+<br/>
+클래스간의 분산 between-class scatter(variance).<br/>
+$S_{BCS} = (\mu_{1} - \mu_{2})(\mu_{1} - \mu_{2})^{T} = \begin{bmatrix} 29.16&21.60 \\ 21.60&16.00 \end{bmatrix}$<br/>
+<br/>
+클래스내의 분산 within-class scatter(variance).<br/>
+$S_{WCS} = S_{1} + S_{2} = \begin{bmatrix} 2.64&-0.44 \\ -0.44&5.28 \end{bmatrix}$<br/>
+<br/>
+필요한 행렬을 다 구했으므로, 이제 고유값 분석만 하면 된다.<br/>
+$S_{WCS}$ 의 경우는 프로그램 등을 이용해 inverse matrix 를 구해서 쓴다.<br/>
+<br/>
+일반화된 고유값 문제의 해로서 LDA projecion 을 구하면.<br/>
+$S_{WCS}^{-1}S_{BCS} v = \lambda v \Rightarrow$<br/>
+$|S_{WCS}^{-1}S_{BCS} - \lambda I | = 0 \Rightarrow$<br/>
+$\begin{vmatrix} 11.89-\lambda&8.81 \\ 5.08&3.76-\lambda \end{vmatrix} = 0 \Rightarrow$<br/>
+for eigenvalue $\lambda = 15.65$<br/>
+<br/>
+15.65 를 대입하면,.<br/>
+$\begin{bmatrix} 11.89&8.81 \\ 5.08&3.76 \end{bmatrix} \begin{bmatrix} v_{1}\\v_{2} \end{bmatrix} = 15.65 \begin{bmatrix} v_{1}\\v_{2} \end{bmatrix} \Rightarrow$ .<br/>
+for eigenvector $\begin{bmatrix} v_{1}\\v_{2} \end{bmatrix} = \begin{bmatrix} 0.91\\0.39 \end{bmatrix}$<br/>
+<br/>
+이 vector 를 그려보자. 이것은 우리가 구하고자 한 벡터이다.<br/>
+
+      
+   </BODY>
+</HTML>
