@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+01-02 Probability axioms and random variables<br/><br/>
+
+@<br/>
+discrete probability law.<br/>
+sample space $\Omega = \{\omega_{1}, ..., \omega_{n}\}$<br/>
+event $A = \{\omega_{i_{1}}, ..., \omega_{i_{k}}\} \subseteq \Omega $<br/>
+$P(A) = P({\omega_{i_{1}}} \cup ... \cup \omega_{i_{k}})$<br/>
+$\omega_{i_{1}}, ..., \omega_{i_{k}}$ 처럼 각각이 discrete 하므로.<br/>
+$P(A) = P(\omega_{i_{1}}) + ... + P(\omega_{i_{k}})$<br/>
+<br/>
+@<br/>
+uniform law.<br/>
+$P(\omega_{i}) = \frac{1}{n}, \forall i = 1,...,n$<br/>
+<br/>
+위의 상황에서.<br/>
+$P(A) = \frac{k}{n}$<br/>
+$P(A) = \frac{|A|}{|\Omega|}$<br/>
+$|A|, |\Omega|$ : cardinality.<br/>
+<br/>
+즉, 각각의 outcome 이 equally likelihood 한 discrete sample space 인 경우에 어떤 event 의 probability 는 size of event over size of sample space (size is the number of outcome in the set).<br/>
+<br/>
+@<br/>
+continuous model.<br/>
+0에서 1 사이에서 숫자 하나 선택한다.<br/>
+각각 숫자가 뽑힐 확률은 같다.<br/>
+sample space $\Omega = \{0,1\}$<br/>
+각각의 outcome $\omega$ 에 어떤 확률 $\epsilon$ 을 할당한다고 해보자.<br/>
+$P(\omega) = \epsilon>0, \forall \omega \in \Omega$ 이면.<br/>
+$P(\Omega) \geq P(Q)$ 이다.<br/>
+Q 는 [0,1] 의 유리수의 집합.<br/>
+$\Omega$ 는 [0,1] 에서 유리수, 무리수 다 포함한 집합.<br/>
+유리수는 countable 하므로 $\omega \in Q$ 일때,<br/>
+$P(\Omega) \geq \sum\limits_{\omega \in Q} P(\omega)$ 이다.<br/>
+$P(\omega) = \epsilon$ 이므로.<br/>
+$P(\Omega) \geq \epsilon \times \infty $<br/>
+그러면 sample space 에 대한 $P(\Omega)$ 가 항상 1보다 크게되어 probability axiom 을 만족하지 않는다.<br/>
+이러한 점을 수정하는 유일한 방법은 $P(\omega) = 0$ 으로 만드는 것이다.<br/>
+$P(\omega) = 0$ 의 의미:<br/>
+in discrete sample space, 절대로 일어 나지 않는다.<br/>
+in continuous sample space, 거의 일어 나지 않는다.<br/>
+확률 = 1 은 항상 일어난다고 알려져 있지만 continuous model 에서는 그것도 아니다.<br/>
+almost sure event vs. sure event.<br/>
+$\Omega = [0,1]$<br/>
+event $\Omega$ 를 생각해보자.<br/>
+이 이벤트는 반드시 일어나는 이벤트이다.<br/>
+$P(\Omega) = 1$ 이다.<br/>
+전체 sample space 에서 A 처럼 $\frac{1}{2}$ 하나만 빠졌다면?.<br/>
+$A = [0,\frac{1}{2})\cup(\frac{1}{2},1]$<br/>
+probability 를 길이로 정의했기때문에 P(A)=1 이다.<br/>
+하지만 반드시 일어나는 이벤트는 아니다.<br/>
+event A occurs almost surely, which is sentence pointing to event with probability 1.<br/>
+<br/>
+in continuous, $P(\{\frac{1}{2}\})$ 와 같은 경우처럼 확률이 0 이라고 반드시 안일어나는 것도 아니다.<br/>
+<br/>
+with a dice in a discrete sample space, 7 은 나오지 않는다 라고 할 수 있지만, continuous 에서는 이런 말을 할수없다.<br/>
+<br/>
+@<br/>
+하지만 이것만 가지고는 부족하다.<br/>
+A 가 0.1 에서 0.2 사이에서 뽑히는 숫자 이벤트라고해보자.<br/>
+P(A) = 0 이 나온다.<br/>
+왜냐하면 continuous 에서 각각의 숫자가 뽑힐 확률은 0 이기 때문이다.<br/>
+따라서, 이러한 상황에서 probability axiom 을 만족하지 않는다.<br/>
+<br/>
+@<br/>
+[0,1] 을 길이로 probability 를 다루면 probability axiom 를 만족하게 할 수 있다.<br/>
+모든 subset 에 의미 있는 길이를 할당할수 있는 것은 아니다.<br/>
+유리수와 무리수의 조건을 이용하면 그러한 이상한 길이, subset 의 길이가 superset 의 길이보다 큰 것과 같은, 를 만들어낼 수 있다.<br/>
+<br/>
+위와 같은 문제를 피하기 위해 특정 subset 만을 끄집어 내서 이것들에만 길이를 할당하는 방법론인 $\sigma$ field 같은것은 이 course 에서 다루지 않는다.<br/>
+이상한 길이를 만들어내는 경우는 수학자들이 다루며 application level 에서는 일어나지 않는다.<br/>
+<br/>
+@<br/>
+$S \subseteq \Omega$ 일때.<br/>
+probability law 는 다음과 같다.<br/>
+$P(S) = \int_{x\in S} 1 dx$<br/>
+S 안의 모든 길이 x 를 더한다.<br/>
+<br/>
+@<br/>
+properties of probability law.<br/>
+1. $A \subset B \Rightarrow P(A) \leq P(B)$<br/>
+1. $P(A\cup B) = P(A) + P(B) - P(A\cap B)$<br/>
+1. $P(\cup_{i=1}^{n} A_{i}) \leq \sum\limits_{i=1}^{n} P(A_{i})$<br/>
+<br/>
+@<br/>
+conditional probability.<br/>
+<br/>
+general setup.<br/>
+1. sample sapce $\Omega$, probability law P.<br/>
+1. I did an experiment, the outcome of an experiment was included in event B.<br/>
+in other words, event B occurred.<br/>
+1. given that event B has occurred, what is the probability of event A?.<br/>
+$P(A|B)$<br/>
+<br/>
+@<br/>
+rolling a fair dice .<br/>
+$P(i) = \frac{1}{6}, where, i=1,...,6$<br/>
+event B is the event of occurring even number.<br/>
+$P(i|B)$ = 0 if i is odd.<br/>
+$P(i|B)$ = $\frac{1}{3}$ if i is even.<br/>
+<br/>
+@<br/>
+definition of $P(A|B)$<br/>
+$P(A|B) = \frac{P(A\cap B)}{P(B)}$, for event B only with $P(B)>0$ because it doesn't make sense with the case of $P(B)=0$, dealing with $P(A|B)$<br/>
+<br/>
+event B 가 일어났다는 가정하에 event A 가 일어나는 확률 $P(A|B)$ 은 B 가 new sample space 역할을 해서 B의 일부분의 확률인 $P(A\cap B)$ 를 P(B) 로 나눠서 구한다.<br/>
+<br/>
+@<br/>
+1. $P(A|B) \geq 0$<br/>
+1. $A\cap C = \phi$ 일때, .<br/>
+$P(A\cup C|B) = \frac{P((A\cup C)\cap B)}{P(B)}$<br/>
+$P(A\cup C|B) = \frac{P(A\cap B) + P(C\cap B)}{P(B)}$<br/>
+1. $P(\Omega|B) = \frac{P(\Omega \cap B)}{P(B)}$<br/>
+$P(\Omega|B) = \frac{P(B)}{P(B)}$<br/>
+$P(\Omega|B) = 1$<br/>
+<br/>
+@<br/>
+$P(\cap_{i=1}^{n}A_{i})$<br/>
+$A_{i}$ 들이 서로 discrete 하지 않다고 가정한다.<br/>
+하나의 fair 라도 discrete 하면 이 확률은 0 이 된다.<br/>
+multiplication rule.<br/>
+$P(\cap_{i=1}^{n}A_{i}) = P(A_{1}) P(A_{2}|A_{1}) P(A_{3}|A_{1}, A_{2}) ... P(A_{n}|A_{1},..., A_{n-1})$<br/>
+<br/>
+위 식은 다음의 유용한 공식으로부터 출발한다.<br/>
+$P(A|B) = \frac{P(A\cap B)}{P(B)}$<br/>
+정리하면,<br/>
+$P(A\cap B) = P(A|B)P(B)$ 이 수식을 n 개로 확장시킨것이 .<br/>
+$P(\cap_{i=1}^{n}A_{i}) = P(A_{1}) P(A_{2}|A_{1}) P(A_{3}|A_{1}, A_{2}) ... P(A_{n}|A_{1},..., A_{n-1})$ 이다.<br/>
+   </BODY>
+</HTML>
