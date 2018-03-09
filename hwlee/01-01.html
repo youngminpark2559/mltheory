@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+01-01 HMM<br/><br/>
+
+@<br/>
+random = stochastic.<br/>
+random process.<br/>
+stochastic process 용어를 더 많이 쓴다.<br/>
+<br/>
+random 은 random variable 을 지칭할 때 많이 쓰인다.<br/>
+<br/>
+@<br/>
+random process 란 .<br/>
+$X_{1}, X_{1}$, ... 이런게 있고 하나하나가 전부 random variable 이해.<br/>
+random variable 의 index 가 time 이라고 하면 time 에 따라서 나열한 모습이다.<br/>
+<br/>
+@<br/>
+1차원 time 축이 있을때, customer 를 표시한다면 나타나는 양상이 불규칙하다.<br/>
+이런것도 stochastic process 로 볼수있다.<br/>
+<br/>
+@<br/>
+probability and statistics 에서는 random variable 하나를 놓고 평균 E[X], 분산 Var[X] 등을 다룬다.<br/>
+X 의 pdf, pmf 등을 다룬다.<br/>
+<br/>
+@<br/>
+stochastic process 는 이러한 random variable 을 time 에 따라 나열한 것이다.<br/>
+100번째 customer 가 도착할 시간은? 오전에 올 확률을?.<br/>
+<br/>
+@<br/>
+partition of S : $P_{1}, ..., P_{n}$<br/>
+when, .<br/>
+$P_{i} \cap P_{j} = \phi, \forall i\neq j$<br/>
+$\cup_{i=1}^{n}P_{i} = S$<br/>
+<br/>
+$\mathbb{R}^{n}$ : n 차원 실수 벡터를 모두 모아놓은 집합.<br/>
+a set of all n dimensional real vectors.<br/>
+<br/>
+$\mathbb{R}$ : 모든 실수의 집합.<br/>
+<br/>
+@<br/>
+$S\cup T = T\cup S$ : cummutative, 순서.<br/>
+$(S\cup T)\cup V = S\cup (T\cup V)$ : associative, 묶다.<br/>
+$S\cap(T\cup V) = (S\cap T)\cup(S\cap V)$ : distributive, 분배.<br/>
+<br/>
+@<br/>
+probabilistic models : 어떤 현상에 대해서 확률을 정의하려면 몇가지 요소가 필요하다.<br/>
+1. 표본공간 sample space $\Omega$  : 어떤 실험을 했을 때 나올 수 있는 모든 결과를 모아놓은 집합.<br/>
+event : 사건.<br/>
+1. probability law P.<br/>
+$P : A \rightarrow [0,1], \forall A \leq \Omega $<br/>
+probability law P 는 all event 를 0과 1 사이 값으로 mapping 시키는 function 이다.<br/>      
+
+   </BODY>
+</HTML>
