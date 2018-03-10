@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+02-01. Function of random variables, Definitions of convergence, Convergence in probability, Convergence with probability 1, Convergence in distribution<br/><br/>
+
+@<br/>
+전 확률 정리 total probability theorem.<br/>
+$A_{1}, ..., A_{n}$ 을 sample space 의 partition 이라고 하자.<br/>
+(partition : 어떤 집합을 discrete 하게 나누는것).<br/>
+이때, $P(B) = P(A)P(B|A_{1}) + ... + P(A_{n})P(B|A_{n})$ 으로 표현할 수 있는 것이 total probability theorem 이다.<br/>
+증명).<br/>
+$P(B) = P((B\cap A_{1}) \cup (B\cap A_{2}) \cup ... \cup (B\cap A_{n}))$<br/>
+$P(B) = P(\cup_{i=1}^{n} (B\cap A_{i}))$<br/>
+모든 A가 discrete 하므로 $A_{i} \cap B$ 도 discrete 하다.<br/>
+따라서, 각각의 합으로 쓸수 있다.<br/>
+$P(B) = P(B\cap A_{1}) + ... + P(B\cap A_{n})$<br/>
+조건부 확률의 정의로 .<br/>
+$P(B) = P(A)P(B|A_{1}) + ... + P(A_{n})P(B|A_{n})$ 로 쓸수있다.<br/>
+<br/>
+@<br/>
+example. chess tournament.<br/>
+$\frac{1}{4}$ type 3.<br/>
+$\frac{1}{4}$ type 2.<br/>
+$\frac{1}{2}$ type 1.<br/>
+<br/>
+게임에 들어가서 type1 을 상대로 이길 확률 0.3 .<br/>
+게임에 들어가서 type2 을 상대로 이길 확률 0.4.<br/>
+게임에 들어가서 type3 을 상대로 이길 확률 0.5.<br/>
+이라고 가정하자.<br/>
+<br/>
+랜덤하게 type 을 뽑았을때 이길 확률을 구해보자.<br/>
+<br/>
+B 를 이기는 event 로 가정한다.<br/>
+P(B) 를 구하고싶다.<br/>
+$A_{i}$ 를 i type 이 선택되는 event 라고 가정하자.<br/>
+<br/>
+$A_{1}, A_{2}, A_{3}$ 가 partion 이라면 total probability theorem 에 의해서 .<br/>
+$P(B) = P(A_{1})P(B|A_{1}) + P(A_{2})P(B|A_{2}) + P(A_{3})P(B|A_{3})$ 로 표현할 수 있다.<br/>
+value 를 대입해보자.<br/>
+$P(B) = \frac{1}{2} \cdot 0.3 + \frac{1}{4} \cdot 0.4 + \frac{1}{4} \cdot 0.5$<br/>
+$P(B) = \frac{3}{8}$<br/>
+<br/>
+@<br/>
+bayes' rule.<br/>
+<br/>
+$A_{1}, ..., A_{n}$ 을 partition of $\Omega$, $P(A)>0$, $\forall i$ 라고 가정하자.<br/>
+<br/>
+그리고 conditional probability 먼저 생각해보자.<br/>
+$P(A_{i}|B) = \frac{P(A_{i}\cap B)}{P(B)}$<br/>
+$A_{i}\cap B$ 를 conditional probability definition 에 의해서 P(B) 를 total probability theorem 에 의해서 다시 쓸수 있다.<br/>
+<br/>
+$P(A_{i}|B) = \frac{P(A_{i})P(B|A_{i})}{P(A)P(B|A_{1})+...+P(A)P(B|A_{n})}$<br/>
+<br/>
+상황을 가정하자.<br/>
+$A_{i}$ 는 질병이다.<br/>
+B 는 테스트 결과이다.<br/>
+<br/>
+테스트에서 특정 결과가 나왔을 때 그 사람이 질병 $A_{i}$ 를 갖고 있을 확률은 .<br/>
+분모부터 생각해보면.<br/>
+각각의 질병 $A_{i}$ 를 갖고있을때 테스트결과 B 가 나올 conditional probability 곱하기 $A_{i}$ 를 갖고 있을 확률 을 모두 더한다.<br/>
+분모는 특정한 i 에 대해서만 적용한다.<br/>
+<br/>
+간단해보이지만 스팸필터링, 질병예측, 등 많은 곳에 쓰인다.<br/>
+<br/>
+@<br/>
+내가 이겼을 때 type1 이 었을 확률 $P(A_{1}|B) = \frac{P(A_{1}) P(B|A_{1})}{P(B)}$<br/>
+$P(A_{1}|B) = \frac{\frac{1}{2} 0.3}{\frac{3}{8}}$<br/>
+$P(A_{1}|B) = 0.4$<br/>
+<br/>
+@<br/>
+example : radar detection to the flying aircraft around (the case which is not much fit to out intuition).<br/>
+<br/>
+event $A = \{aircraft present\}$<br/>
+event $B = \{ringing alarm\}$<br/>
+Suppose we have following given probability.<br/>
+$P(A) = 0.05$<br/>
+$P(B|A) = 0.99$<br/>
+$P(B|A^{C}) = 0.1$<br/>
+<br/>
+What we want to know is what is the probability of event A(aircraft) when ringing alarm, in other words, we want to find P(A|B).<br/>
+<br/>
+when we see $P(B|A) = 0.99$, we think this radar detector is precise.<br/>
+<br/>
+$P(A|B) = \frac{P(A) P(BA)}{P(A) P(B|A) + P(A^{C}) P(B|A^{C})}$<br/>
+$P(A|B) = \frac{0.05 \times 0.99}{0.05 0.99 + 0.95 \times 0.1} \approx 0.3426$<br/>
+when ringing the alarm(B occurred), the probability of A(aircraft was there) is pretty low.<br/>
+<br/>
+@<br/>
+independence.<br/>
+만약, $P(A\cap B)=P(A)P(B)$ 이면, 두 event A, B 가 independence 이다.<br/>
+독립일때, $P(A\cap B)=P(A)P(B)$ 이므로.<br/>
+$P(A|B) = \frac{P(A\cap B)}{P(B)}$<br/>
+$P(A|B) = P(A)$<br/>
+<br/>
+@<br/>
+배반사건 disjointness 와 independence 는 다른 개념이다.<br/>
+A, B 가 discrete 하다는 동시에 일어날 수없다는 의미이다.<br/>
+A, B 가 disjoint 하다 $A\cap B = \phi$ 그리고 $P(A), P(B) > 0$ 이라고 가정하자.<br/>
+그러면, A, B 는 independent 하지 않다.<br/>
+<br/>
+@<br/>
+example.<br/>
+4개의 면을 가지는 주사위를 2번 연속던진다.<br/>
+$A_{i}$ = 첫번째 던진게 i 인 event 를 의미한다.<br/>
+$B_{j}$ = 2번째 던진게 j 이벤트.<br/>
+라고 가정하자.<br/>
+<br/>
+sample space $\Omega = \{1,2,3,4\}^{2}$ 으로써 16개의 outcome.<br/>
+$\{1,2,3,4\}^{2} = \{1,2,3,4\} \times \{1,2,3,4\}$ 첫번째 실험, 두번째실험 조합한 것.<br/>
+<br/>
+$A_{i}, B_{j}$ 가 independent 한가?.<br/>
+첫번째 던져서 i 가 나올 확률은 $\frac{4}{16}=\frac{1}{4}$<br/>
+두번째 던져서 j 가 나올 확률도 $\frac{1}{4}$<br/>
+첫번째 던져서 i, 두번째 던져서 j 가 나올 확률 $P(A_{i}\cap B_{j}) = \frac{1}{16}$<br/>
+따라서, 위의 정의로 부터 A, B 는 independent 하다고 얘기할 수 있다.<br/>
+<br/>
+@<br/>
+이벤트 A = 첫번째 던진게 1.<br/>
+이번트 B = 두번 던진 합이 5.<br/>
+<br/>
+$P(A) = \frac{1}{4}$<br/>
+$P(B) = \frac{1}{4}$<br/>
+$P(A\cap B) = \frac{1}{16}$<br/>
+<br/>
+@<br/>
+베르누이 시행.<br/>
+동전던지기와같이 각각의 시행이 두종류의 outcome 만 가지는 시행이다.<br/>
+<br/>
+@<br/>
+n 개의 nernoulii trials.<br/>
+H 가 나올 확률 p .<br/>
+T 가 나올 확률 1-p.<br/>
+<br/>
+k개의 H 를 얻을 확률 P(kHs) 는 다음과 같이 구한다.<br/>
+<br/>
+하나의 outcome 을 생각해보자.<br/>
+HTH...TT.<br/>
+여기에 k 개의 H, n-1 개의 T 가 있는 것이다.<br/>
+그리고 각각의 던지기는 independent 하다.<br/>
+따라서 $p^{k}(1-p)^{n-k}$<br/>
+이러한 outcome 의 총 갯수 $\begin{pmatrix} n\\k \end{pmatrix} p^{k} (1-p)^{n-k} = _{n}C_{r} = \frac{n!}{(n-k)!k!}$ (n choose k) 를 앞에다 곱해주면 된다.<br/>
+<br/>
+$\begin{pmatrix} n\\k \end{pmatrix} p^{k} (1-p)^{n-k}$ 를 binomial probability 라 부른다.<br/>
+$_{n}C_{r} = \frac{n!}{(n-k)!k!}$ 을 binomial coefficient 라고 부르고 이것이 나오는 과정은 다음과 같다.<br/>
+HTH...TT 를 $R_{1}, R_{2}, R_{3} ..., R_{n}$ 이라고 하면 이것을 나열하는 경우의 수는 n! 이다.<br/>
+이경우, $R_{1}, R_{3}$ 가 바뀐다고 해도 똑같은 outcome 이므로 없애줘야한다.<br/>
+이런경우가 k 개 있다.<br/>
+T 역시 같은 경우이므로 $(n-k)!$ 을 나눠줘야한다.<br/>
+<br/>
+그럼, $\sum\limits_{k=0}^{n} P(kHs)$ 이 확률은 어떻게 될까?.<br/>
+1 이 된다.<br/>
+$\sum\limits_{k=0}^{n} P(kHs) = \sum\limits_{k=0}^{n} \begin{pmatrix} n\\k \end{pmatrix} p^{k} (1-p)^{n-k} = 1 $<br/>
+     
+
+   </BODY>
+</HTML>
