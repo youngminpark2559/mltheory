@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+02-02. Function of random variables, Definitions of convergence, Convergence in probability, Convergence with probability 1, Convergence in distribution<br/><br/>
+
+@<br/>
+random variable X 는 실험결과로 부터 도출된 어떤 input 을 받아서 그것을 실수로 mapping 시키는 function 이다.<br/>
+random variable X 는 sample space 의 각각의 outcome 을 실수 R 로 대응시키는 function 이다.<br/>
+$X : \Omega \rightarrow R$<br/>
+<br/>
+@<br/>
+random variable X 의 range 가 finite 하거나 countably infinite 할때 discrete random variable 이라고 한다.<br/>
+<br/>
+range 는 random variable X 가 가질 수 있는 모든 값을 모아놓은 집합이다.<br/>
+$range r(x) = \{x|x\Omega such \; that \; X(\omega)=x \}$<br/>
+<br/>
+@<br/>
+example.<br/>
+동전을 두번 던진다.<br/>
+random variable X = H 가 나오는 횟수라 가정하자.<br/>
+$\Omega = \{HH, HT, TH, TT\}$<br/>
+X(HH)=2.<br/>
+X(TT)=0.<br/>
+$r(x)=\{0,1,2\}$<br/>
+<br/>
+@<br/>
+example.<br/>
+-1, 1 사이에서 숫자 $\omega$ 를 뽑는다.<br/>
+$X(\omega) = 1$ if $\omega>0$<br/>
+$X(\omega) = 0$ if $\omega=0$<br/>
+$X(\omega) = -1$ if $\omega<0$<br/>
+$X(\omega)$ 가 가질수 있는 범위는 1,0,-1 이므로 X 는 discrete 이다.<br/>
+<br/>
+@<br/>
+가장 큰 관심사는 이벤트가 어느 확률로 일어나는가 이다.<br/>
+<br/>
+random variable 도 어떤 값을 가질 확률이 얼마이냐 라는 질문을 해볼 수 있다.<br/>
+이런 질문을 다루는 것이 pmf probability mass function 이다.<br/>
+$p_{X}(x)$<br/>
+X : random variable.<br/>
+x : X 가 가질 수 있는 값.<br/>
+<br/>
+@<br/>
+discrete random variable X 의 pmf $p_{X}(x)$ 는 다음과 같이 정의된다.<br/>
+$p_{X}(x) = P(X=x) = P(\{\omega\in \Omega| X(\omega)=x\})$<br/>
+random variable X 가 x 값을 취하도록 하는 sample 들의 집합 의 확률이다.<br/>
+<br/>
+@<br/>
+동전 두번 던지기 실험을 다시 생각해본다.<br/>
+$P_{X}(x) = \frac{1}{4}$ if x= 0 when TT.<br/>
+$P_{X}(x) = \frac{1}{2}$ if x= 1 when HT, TH.<br/>
+$P_{X}(x) = \frac{1}{4}$ if x= 2 when HH.<br/>
+<br/>
+@<br/>
+숫자 하나만 가지로 random variable 의 특성을 얘기하고 싶다.<br/>
+expectation, variance, 등이다.<br/>
+<br/>
+@<br/>
+mean(expectation) of random variable X.<br/>
+$E[X] = \sum\limits_{x} x P_{X}(x)$<br/>
+x : X가 취하는 x.<br/>
+$P_{X}(x)$ : x 가 될 확률.<br/>
+<br/>
+@<br/>
+$E[X] = 0\times \frac{1}{4} + 1\times \frac{1}{2} + 3\times \frac{1}{4}$ .<br/>
+$E[X] = 1$ .<br/>
+앞면이 평균 한번 나온다.<br/>
+<br/>
+@<br/>
+variance 는 $E[(X-E[X])^{2}]$ 이다.<br/>
+안을 보면 random variable 이 들어있는 함수이다.<br/>
+이것의 평균을 구한 것이다.<br/>
+평균에서 얼마나 떨어져 있느냐를 나타내는 것이 variance 이다.<br/>
+$E[(X-E[X])^{2}] Var[X] = \sum\limits_{x} (x-E[X])^{2} P_{X}(x)$<br/>
+$stdv[x] = \sqrt{Var[X]}$<br/>
+<br/>
+@<br/>
+pmf 를 보고 분산이 어느게 큰지 얘기 해 보자.<br/>
+두번째것이 분산이 더 크다.<br/>
+<br/>
+@<br/>
+properties.<br/>
+1. $E[aX+b] = aE[X]+b$<br/>
+1. $Var[aX+b] = a^{2}Var[X]$<br/>
+<br/>
+@<br/>
+이벤트에 대한 conditioning random variable.<br/>
+<br/>
+$P(A) > 0$ 인 이벤트 A 가 있다.<br/>
+discrete random variable X 의 conditional pmf $P_{X|A}$ 는 다음과 같이 정의된다.<br/>
+A가 일어났다는 가정하에 random variable X 가 x 를 취할 확률.<br/>
+$P_{X|A}(x) = P(X=x|A) \frac{P({X=x}\cap A)}{P(A)}$<br/>
+<br/>
+@<br/>
+conditional expectation.<br/>
+$E[X|A] = \sum\limits_{x} x P_{X|A}(x)$<br/>
+<br/>
+@<br/>
+두개의 discrete random variable 의 joint pmf 를 정의해보자.<br/>
+X, Y : discrete random variable 이라고 가정하자.<br/>
+$P_{X,Y}(x,y) = P(X=x,Y=y)$<br/>
+(x 로 인해) 전체합이 5면서, (y 로 인해) 짝수일 확률 같은 상황.<br/>
+<br/>
+<br/>
+@<br/>
+하나의 random variable 을 다른 random variable 의 condition 을 취할 수 있다.<br/>
+이때, conditional pmf 는 Y가 y 를 취했을 때, X가 x 를 취할 확률 이다.<br/>
+$P_{X|Y}(x|y) = P(X=x|Y=y)$<br/>
+$P_{X|Y}(x|y) = \frac{P(X=x, Y=y)}{P(Y=y)}$<br/>
+$(P(X=x, Y=y) = P(\{X=x\}\cap\{Y=y\})) = P(\{\omega\in \Omega| X(\omega)=x \& Y(\omega)=y \})$<br/>
+$P_{X|Y}(x|y) = \frac{P(X=x, Y=y)}{P(Y=y)}$<br/>
+위의 수식을 이용한다.<br/>
+$P_{X|Y}(x|y) = \frac{P_{X,Y}(x,y)}{P_{Y}(y)}$<br/>
+<br/>
+@<br/>
+independence.<br/>
+모든 x, y 에 대해서 joint pmf $P_{X,Y}(x,y)$ 가 각각의 pmf 의 곱 $P_{X}(x)P_{Y}(y)$ 과 같을때, 두 discrete random variable 이 independent 하다 라고 한다.<br/>
+<br/>
+확률로는 다음과 같다.<br/>
+동시에 일어날 확률이 각각 이벤트가 발생할 확률의 곱과 같다.<br/>
+$P(X=x, Y=y) = P(X=x)P(Y=y)$<br/>
+<br/>
+@<br/>
+continuous random variable(CRV).<br/>
+random variable X 를 다음과 같을때 continuous 하다고 한다.<br/>
+0보다 큰 function $f_{X}(\cdot)$ 이 존재해야한다.<br/>
+$P(x\in B) = \int_{B} f_{X}(x)dx, \forall B\subset R$ 를 만족해야한다.<br/>
+<br/>
+예를들어, B 가 [a,b] interval 이라면 $P(x\in B)$ 는 다음과 같이 표현된다.<br/>
+$P(a\leq X \leq b) = \int_{a}^{b} f_{X}(x)dx$<br/>
+<br/>
+@<br/>
+R axis 를 가정하고 그 위에 function 을 가정한다.<br/>
+random variable X 가 이 사이에 들어갈 probability 이 function 을 이 구간에서 적분해서 구할수 있으면 continuous 라고 한다.<br/>
+이때, $f_{X}(\cdot)$ 을 pdf(probability density function) of X 이라고 한다.<br/>
+<br/>
+@<br/>
+$P_{X}(x) = P(X=x)$ : discrete 에서의 pmf.<br/>
+$f_{X}(x) = P(X=x)=0$ : continuous 에서의 pdf.<br/>
+<br/>
+@<br/>
+0,1 사이 숫자로 mapping 시키는 uniform random variable X 가 있다고 가정한다.<br/>
+0에서 1 사이 숫자를 뽑는 실험에서 각각의 숫자가 equally likelihood 하게 나온다고 가정한다.<br/>
+그리고 그 숫자는 X 에 의해 같은 숫자로 mapping 된다고 가정한다.<br/>
+$X(\omega)=\omega$, $\forall \omega \in [0,1]$<br/>
+<br/>
+$f_{X}(x) = 1 if x\in [0,1]$<br/>
+$f_{X}(x) = 0 if x\notin [0,1]$<br/>
+<br/>
+@<br/>
+x 의 pdf 에 대하여 $\int_{-\infty}^{\infty}f_{X}(x)dx=1$ 이어야 한다.<br/>
+pmf 도 마찬가지이다 $\sum\limits_{x}P_{X}(x)=1$<br/>
+<br/>
+@<br/>
+summary<br/>
+<pre><br/>
+discrete random variable                     continuous random variable<br/>
+PMF $P_{X}(x)=P(X=x)$                        PDF $f_{X}(x), P(X\in B)=\int_{B}f_{X}(x)dx$<br/>
+CDF                                          CDF(in CRV, it's non-decreasing but can't be over 1)<br/>
+$F_{X}(k)=P(X\leq k)$                        $F_{X}(x)=P(X\leq x)=\int_{-infty}^{x}f_{X}(t)dt$<br/>
+$F_{X}(k)=\sum\limits_{x\in k} P_{X}(x)$          <br/>
+Mean<br/>
+$E[X]=\sum\limits_{x}P_{X}(x)$               $E[X]=\int_{-\infty}^{\infty}xf(x)dx$<br/>
+$Var[X]=\sum(x-E[X])^{2}P_{X}(x)$            $Var[X]=\int_{-\infty}^{\infty}(x-E[X])^{2}dx$<br/>
+independence                                 independence<br/>
+$P_{X,Y}(x,y)=P_{X}(x)P_{Y}(y)$              $f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)$<br/>
+conditional pmf                              conditional pdf  <br/>
+$P_{X|Y}(x|y)=$                              $f_{X|Y}(x|y)=$<br/>
+$\frac{P_{X,Y}(x,y)}{P_{Y}(y)}$              $\frac{f_{X,Y}(x,y)}{f_{Y}(y)}$<br/>
+</pre><br/>
+<br/>
+@<br/>
+total expectation theorem.<br/>
+$A_{1}, ..., A_{n}$ 이 sample space $\Omega$ 의 partion 이며 $P(A_{i})>0$ 이라고 가정하자.<br/>
+$E[X]=\sum\limits_{i=1}^{n}P(A_{i})E[X|A_{i}]$<br/>
+$E[X|A]=\sum\limits_{x}P_{X|A}(x)$ 을 사용한다.<br/>
+$E[X]=\sum\limits_{i=1}^{n}P(A_{i}) \sum\limits_{x} x P(X=x|A_{i})$<br/>
+$E[X]=\sum\limits_{x}x\sum\limits_{i=1}^{n}P(A_{i}) P(X=x|A_{i})$<br/>
+$E[X]=\sum\limits_{x}x \sum\limits_{i=1}^{n}P(A_{i}) P(X=x|A_{i})$<br/>
+total probability theorem 에 의해서 $\sum\limits_{i=1}^{n}P(A_{i}) P(X=x|A_{i}) = P(X=x)$<br/>
+     
+
+   </BODY>
+</HTML>
