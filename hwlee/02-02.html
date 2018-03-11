@@ -197,23 +197,53 @@ x 의 pdf 에 대하여 $\int_{-\infty}^{\infty}f_{X}(x)dx=1$ 이어야 한다.<
 pmf 도 마찬가지이다 $\sum\limits_{x}P_{X}(x)=1$<br/>
 <br/>
 @<br/>
-summary<br/>
-<pre><br/>
-discrete random variable                     continuous random variable<br/>
-PMF $P_{X}(x)=P(X=x)$                        PDF $f_{X}(x), P(X\in B)=\int_{B}f_{X}(x)dx$<br/>
-CDF                                          CDF(in CRV, it's non-decreasing but can't be over 1)<br/>
-$F_{X}(k)=P(X\leq k)$                        $F_{X}(x)=P(X\leq x)=\int_{-infty}^{x}f_{X}(t)dt$<br/>
-$F_{X}(k)=\sum\limits_{x\in k} P_{X}(x)$          <br/>
-Mean<br/>
-$E[X]=\sum\limits_{x}P_{X}(x)$               $E[X]=\int_{-\infty}^{\infty}xf(x)dx$<br/>
-$Var[X]=\sum(x-E[X])^{2}P_{X}(x)$            $Var[X]=\int_{-\infty}^{\infty}(x-E[X])^{2}dx$<br/>
-independence                                 independence<br/>
-$P_{X,Y}(x,y)=P_{X}(x)P_{Y}(y)$              $f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)$<br/>
-conditional pmf                              conditional pdf  <br/>
-$P_{X|Y}(x|y)=$                              $f_{X|Y}(x|y)=$<br/>
-$\frac{P_{X,Y}(x,y)}{P_{Y}(y)}$              $\frac{f_{X,Y}(x,y)}{f_{Y}(y)}$<br/>
-</pre><br/>
-<br/>
+<table border="1">
+      <caption>summary by table</caption>
+      <thead>
+        <tr>
+          <th>discrete random variablen</th>
+          <th>continuous random variable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PMF $P_{X}(x)=P(X=x)$</td>
+          <td>PDF $f_{X}(x), P(X\in B)=\int_{B}f_{X}(x)dx$</td>
+        </tr>
+        <tr>
+          <td>CDF<br/>
+          $F_{X}(k)=P(X\leq k)$<br/>
+          $F_{X}(k)=\sum\limits_{x\in k} P_{X}(x)$<br/>
+          </td>
+          <td>CDF(in CRV, it's non-decreasing but can't be over 1)<br/>
+          $F_{X}(x)=P(X\leq x)=\int_{-infty}^{x}f_{X}(t)dt$<br/>
+          </td>
+        </tr>
+        <tr>
+          <td>Mean<br/>
+          $E[X]=\sum\limits_{x}P_{X}(x)$<br/>
+          $Var[X]=\sum(x-E[X])^{2}P_{X}(x)$<br/>
+          </td>
+          <td>$E[X]=\int_{-\infty}^{\infty}xf(x)dx$<br/>
+          $Var[X]=\int_{-\infty}^{\infty}(x-E[X])^{2}dx$<br/>
+          </td>
+        </tr>
+        <tr>
+          <td>independence<br/>
+          $P_{X,Y}(x,y)=P_{X}(x)P_{Y}(y)$<br/>
+          </td>
+          <td>$f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)$</td>
+        </tr>
+        <tr>
+          <td>conditional pmf<br/>
+          $P_{X|Y}(x|y)=\frac{P_{X,Y}(x,y)}{P_{Y}(y)}$<br/>
+          </td>
+          <td>conditional pdf<br/>
+          $f_{X|Y}(x|y)=\frac{f_{X,Y}(x,y)}{f_{Y}(y)}$<br/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 @<br/>
 total expectation theorem.<br/>
 $A_{1}, ..., A_{n}$ 이 sample space $\Omega$ 의 partion 이며 $P(A_{i})>0$ 이라고 가정하자.<br/>
