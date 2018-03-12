@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+03-01. Useful inequalities and law of large numbers. Central limit theorem. Markov inequality. Chebyshev inequality. Chernoff bound.<br/><br/>
+
+@<br/>
+markov inequality.<br/>
+X 는 0 보다 크거나 같은 값만 취하는 random variable 이라고 가정한다.<br/>
+이런 random variable 에 대해 다음이 성립한다고 가정한다.<br/>
+$P(X\geq a) \leq \frac{E[X]}{a}, \forall a\geq 0$<br/>
+<br/>
+위의 수식의 증명.<br/>
+$I_\{X\geq a\}=1$ if $X\geq a$<br/>
+$I_\{X\geq a\}=0$ if $X< a$<br/>
+이라는 random variable I(indicator function) 를 가정한다.<br/>
+<br/>
+특성에 의하여 다음이 성립한다.<br/>
+$aI_\{X\geq a\} \leq X$<br/>
+따라서, 다음도 성립한다.<br/>
+$E[aI_\{X\geq a\}] \leq E[X]$<br/>
+특성으로 다음을 유도한다.<br/>
+$a\cdot P(X\geq a) + 0\cdot P(X<a)$<br/>
+$a\cdot P(X\geq a)$<br/>
+<br/>
+@<br/>
+example.<br/>
+random variable X 가 0에서 10 사이의 uniform distribution 을 갖는다고 가정하자.<br/>
+그러면, pdf 는 다음과 같다.<br/>
+$f_{X}(x)=\frac{1}{10}$, if $0\leq x \leq 10$<br/>
+$f_{X}(x)=0$, if out of range.<br/>
+<br/>
+E[X] = 5.<br/>
+a=5 로 가정하고 markov inequality 를 적용해본다.<br/>
+$P(X\geq 5) \leq \frac{5}{5} = 1$<br/>
+<br/>
+어떤 확률이 1보다 작거나 같다.<br/>
+우리가 아는 정보이고 새로운 정보를 주지 않는다.<br/>
+사실 $P(X\geq 5)$ 의 정확한 값은 $\frac{1}{2}$ 이다.<br/>
+<br/>
+참고: pdf 에서 continuous variable 은 확률이 아니다.<br/>
+<br/>
+$P(X\geq 6) \leq \frac{5}{6}$<br/>
+$P(X\geq 6) = \frac{2}{5}$<br/>
+<br/>
+@<br/>
+위의 사례를 보면 markov inequality $P(X\geq a) \leq \frac{E[X]}{a}, \forall a\geq 0$ 가 주는 정보인 upper bound 가 pretty loose 하다.<br/>
+그렇지만 probability theory 에서 그리고 다른것을 증명할 때에도 많이 쓰이는 inequality 이다.<br/>
+<br/>
+@<br/>
+chebyshev inequality.<br/>
+<br/>
+markov inequality 는 mean E[X] 만을 사용했다.<br/>
+chebyshev inequality 는 variance 를 사용한다.<br/>
+variance 사용하면 specific 한 값에서 random variable 이 벗어나는것을 더 잘, more tight 하게 묘사할 수 있다.<br/>
+variance 자체가 그런 의미를 포함하기 있기 때문이다.<br/>
+단 data 의 distribution 이 $P(X- 5 \geq 1)$ 처럼 variance 가 크면 tight 한 bound 를 주지 않기도 한다.<br/>
+<br/>
+@<br/>
+random variable X.<br/>
+its mean is $\mu$<br/>
+its variance is $\sigma^{2}$<br/>
+다음의 inequality 가 성립한다.<br/>
+$P(X-\mu\geq a) \leq P(|X-\mu|\geq a) \leq \frac{\sigma^{2}}{a^{2}}$, $\forall >0$<br/>
+<br/>
+@<br/>
+많이 쓰이는 chebyshev inequality 는 markov inequality 를 이용해 induce 할 수 있다.<br/>
+$P(|X-\mu|\geq a) = P((X-\mu)^{2}\geq a^{2})$<br/>
+markov inequality 를 적용한다.<br/>
+$P(|X-\mu|\geq a) \leq \frac{E[(X-\mu)^{2}]}{a^{2}}$<br/>
+variance 를 볼수있다.<br/>
+$P(|X-\mu|\geq a) \leq \frac{\sigma^{2}]}{a^{2}}$<br/>
+<br/>
+@<br/>
+applying chebyshev inequality to the example.<br/>
+$P(X-\mu \geq a) \leq P(|X-\mu|\geq a) = P(X-\mu \geq a \; or \; X-\mu \leq -a)$<br/>
+<br/>
+X 가 a,b 사이의 범위로 uniform distribution 을 따르면.<br/>
+$E[X] = \frac{a+b}{2}$<br/>
+$Var[X] = \frac{(b-a)^{2}}{12}$<br/>
+$P(X-5 \geq 1) \leq \frac{100}{12}$<br/>
+이 시점에서는 variance 가 너무 크기때문에 markov inequality 보다 더 loose 하다.<br/>
+<br/>
+@<br/>
+example.<br/>
+X 가 $\lambda>0$ 이면서 $exp(\lambda)$,  distribution 을 따른다고 하자.<br/>
+pdf 는 다음과 같다.<br/>
+$f_{X}(x) = \lambda e^{-\lambda x}$, if $x \geq 0$<br/>
+$f_{X}(x) = 0$, if otherwise.<br/>
+<br/>
+$E[X]=\frac{1}{\lambda}$<br/>
+$Var(X)=\frac{1}{\lambda^{2}}$<br/>
+위에 대해서 chebyshev inequality 를 적용한다.<br/>
+$P(|X-\mu|\geq a) \leq \frac{\frac{1}{\lambda^{2}}}{a^{2}}$<br/>
+$P(|X-\mu|\geq a) \leq \frac{1}{a^{2}\lambda^{2}}$<br/>
+$P(|X-\mu|\geq a) \leq \frac{1}{a^{2}}$<br/>
+<br/>
+$\lambda=1$ 이라면.<br/>
+$P(X \geq a+1) = \int_{a+1}^{\infty} f_{X}(x)dx = e^{-(a+1)}$<br/>
+a 가 커짐에 따라서 e 가 빠르게 줄어든다.<br/>
+여전히 bound 가 tight 하지는 않지만 chebyshev inequality 는 많이 쓰인다.<br/>
+<br/>
+@<br/>
+chernoff bound.<br/>
+n 개의 random variable $X_{1}, ..., X_{n}$ 이 있다고 가정하자.<br/>
+이것들이 서로에 대해 i.i.d. (independent and identically distributed) 를 만족한다.<br/>
+각각의 random variable 은 다음과 같은 베르누이 distribution 이다.<br/>
+$X_{i} = 1$ with probability p.<br/>
+$X_{i} = 0$ with probability 1-p.<br/>
+<br/>
+$E[X_{i}] = P$<br/>
+<br/>
+$S_{n} = \sum\limits_{i=1}^{n}X_{i}$<br/>
+$\mu = E[S_{n}]$ 이라 가정하자.<br/>
+그러면,.<br/>
+$\mu = E[S_{n}] = E[\sum\limits_{i} X_{i}] = \sum\limits_{i} E[X_{i}] = nP$<br/>
+그러면, 다음의 chernoff bound 를 얻는다.<br/>
+$P(S_{n} -\mu \geq \epsilon\mu = P(S_{n} \geq (1+\epsilon)\mu) \leq (\frac{e^{-\epsilon}}{1+\epsilon})^{1+\epsilon}$, $\forall\epsilon>0$<br/>
+$P(S_{n} -\mu \leq -\epsilon\mu = P(S_{n} \leq (1-\epsilon)\mu) \leq (\frac{e^{-\epsilon}}{1-\epsilon})^{1+\epsilon}$, $\forall\epsilon>0$<br/>
+<br/>
+@<br/>
+proof.<br/>
+0보다 큰 어떤 수를 곱한다.<br/>
+여전히 logic 은 어긋나지 않는다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(tS_{n} \geq (1+\epsilon)\mu t)$<br/>
+exponential 을 취해도 마찬가지이다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t})$<br/>
+markov inequality 를 적용한다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}}$<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} E[\prod\limits_{i=1}^{n}e^{tX_{i}}]$<br/>
+$X_{1}, X_{2}$ 가 independent 하면 $f(X_{1}), f(X_{2})$ 도 independent 하다.<br/>
+따라서, properties of independence 를 적용한다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} \prod\limits_{i=1}^{n} E[e^{tX_{i}}]$<br/>
+$E[e^{tX_{i}}]$ 를 다시 쓰면.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} \prod\limits_{i=1}^{n} (Pe^{t}+(1-p))$<br/>
+$(Pe^{t}+(1-p))$ 를 조금 정리한다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} \prod\limits_{i=1}^{n} (1+(e^{t}-1)p)$<br/>
+$1+x\leq e^{x}$ 은 우리가 알고 있는 관계식이다. 그래프를 그려보면 알수있다. 이 관계를 $(1+(e^{t}-1)p)$ 에 적용해본다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} \prod\limits_{i=1}^{n} (e^{e^{t}-1}p)$<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} \prod\limits_{i=1}^{n} (e^{e^{t}-1}p)$<br/>
+$\prod\limits_{i=1}^{n}=np=\mu$ 을 사용한다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t} e^{(e^{t}-1)\mu}$<br/>
+지수법칙으로 정리한다.<br/>
+$P(S_{n}\geq (1+\epsilon)\mu) = P(e^{tS_{n}} \geq e^{(1+\epsilon)\mu t}) \leq \frac{E[e^{tS_{n}}]}{e^{(1+\epsilon)\mu t}} = e^{-(1+\epsilon)\mu t + e^{t}\mu - \mu}$<br/>
+$e^{-(1+\epsilon)\mu t + e^{t}\mu - \mu}$ 에서 $-(1+\epsilon)\mu t + e^{t}\mu - \mu$ 를 최소화하는 t 를 찾아야한다.<br/>
+최소화할수록 upper bound 가 작아진다는 것이기 때문이다.<br/>
+t 에 대해 미분해서 0 인 지점을 찾는다.<br/>
+<br/>
+@<br/>
+conclusion of chernoff bound.<br/>
+$P(S_{n} \geq (1+\epsilon)\mu) \leq (\frac{e^{\epsilon}}{(1+\epsilon)^{1+\epsilon}})^{\mu} \leq e^{-\frac{\epsilon^{2}\mu}{3}}$<br/>
+$P(S_{n} \geq (1-\epsilon)\mu) \leq (\frac{e^{-\epsilon}}{(1-\epsilon)^{1-\epsilon}})^{\mu} \leq e^{-\frac{\epsilon^{2}\mu}{2}}$<br/>
+<br/>
+$(1-\epsilon)^{1-\epsilon} > e^{-\epsilon + \frac{1}{2} \epsilon^{2}}$<br/>
+임을 보이면 된다.<br/>
+그러기 위해서 log 를 취한다.<br/>
+$(1-\epsilon)\log{(1-\epsilon)} > -\epsilon + \frac{1}{2} \epsilon^{2}$<br/>
+<br/>
+by taylor's theorem.<br/>
+$\log{(1+x)} = x-\frac{1}{2}\frac{1}{(1+y)^{2}}x^{2}$ 인 y 가 존재한다.<br/>
+$x=-\epsilon$ 을 대입하면.<br/>
+$\log{(1-\epsilon)} = -\epsilon-\frac{1}{2}\frac{1}{(1+y)^{2}}\epsilon^{2}$<br/>
+$y \in [-\epsilon,0]$<br/>
+y=0 일때 최소가 된다.<br/>
+따라서 그때, 다음이 성립한다.<br/>
+$\log{(1-\epsilon)} = -\epsilon-\frac{1}{2}\epsilon^{2}$<br/>
+<br/>
+위의 내용을 이용해 다음을 이어서 전개한다.<br/>
+$(1-\epsilon)\log{(1-\epsilon)} > -\epsilon + \frac{1}{2} \epsilon^{2}$<br/>
+$(1-\epsilon)\log{(1-\epsilon)} > (1-\epsilon)(-\epsilon-\frac{1}{2}\epsilon^{2})$<br/>
+$(1-\epsilon)\log{(1-\epsilon)} > -\epsilon + \frac{1}{2}\epsilon^{2} + \frac{1}{2}\epsilon^{3})$<br/>
+$(1-\epsilon)\log{(1-\epsilon)} > -\epsilon + \frac{1}{2}\epsilon^{2}$<br/>
+
+     
+
+   </BODY>
+</HTML>
