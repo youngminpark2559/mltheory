@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+032. Week 06. Training, Testing, Regularization - 01. Overfitting, Underfitting<br/><br/>
+@<br/>
+To understand training and testing, we need to understand bias and variance<br/>
+<br/>
+@<br/>
+We need to understand relationship between bias and variance in terms of trade-off<br/>
+<br/>
+@<br/>
+When we already have predicting model, how we to enhance performance of model<br/>
+<br/>
+@<br/>
+What does it mean by better machine learning?<br/>
+It can mean accurate prediction result<br/>
+In classification, accurate dicision<br/>
+In regression, accurate prediction value<br/>
+<br/>
+@<br/>
+Suppose there is predicting model but always outputing "false"<br/>
+And about data composed of 99 false and 1 true, predicting model can be said it can predict with 99\% accurately<br/>
+<br/>
+So, we need good evalution and validation methodology for predicting model, output result, and even data set, etc<br/>
+<br/>
+@<br/>
+Training data is used to "parameter inference procedure"<br/>
+We can also bring information from "prior knowledge" and "past experience"<br/>
+<br/>
+@<br/>
+The weak point of machine learning is that machine learning predicting model is only effective only under assumption that distribution of given data is not changed<br/>
+<br/>
+If distribution of given data changed, we should make predicting model to learn newly<br/>
+<br/>
+@<br/>
+The reasons or conditions machine learning can't be effective in industry can be following<br/>
+When domain changes<br/>
+When current domain doesn't show enough variance, we can't guarantee future effectiveness of predicting model<br/>
+<br/>
+@<br/>
+Suppose this scenario<br/>
+1. You are given N points to train predicting model with those N points data<br/>
+1. You are going to train simple polynomial regression function Y=F(x)<br/>
+1. Y=F(x) can be linear or unlinear according to its undetermine degree<br/>
+<br/>
+Now, consider following 3 F functions<br/>
+Which one looks better?<br/>
+<br/>
+@<br/>
+1st one is one degree linear funtion (underfitting)<br/>
+I didn't train some pattern<br/>
+There are more area to train<br/>
+The train is insufficient<br/>
+<br/>
+2nd one is curved funtion (good one)<br/>
+<br/>
+3rd one is high dgree function to fit every data point (overfitting)<br/>
+This one will make least error in respect to train data set<br/>
+But this one can make higher error in respect to unknow data than simply curven function<br/>
+<br/>
+@<br/>
+How to avoid "underfitting" and "overfitting" with some techniques?<br/>
+<br/>
+As degree of hypothesis function increases, predicting model(hypothesis fuction) becomes complex<br/>
+But complex model with high degree doesn't mean better predicting model<br/>
+<br/>
+Then, question arises<br/>
+Where should we stop increasing degree of hypothesis function?<br/>
+<br/>
+Is there measurement to calculate complexity and generality of hypothesis function?<br/>
+<br/>
+@<br/>
+There is trade-off between complexity of model and generality of dataset<br/>
+It means high generality of dataset brings low complexity of predicting model<br/>
+It means low generality of dataset brings high complexity of predicting model<br/>
+
+   </BODY>
+</HTML>
