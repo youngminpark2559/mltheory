@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+061. Week 10. Sampling Based Inference - 01. Forward Sampling<br/>
+<br/>
+@<br/>
+단, topological order 에 따라서 sample 을 generate 해보자<br/>
+주사위나 동전을 던져서 probability 를 generate 해본다<br/>
+P(B) : 1000번중 999번은 buglary 가 안들어오고 1번 들어왔다<br/>
+즉, buglary random variable 에 값을 generate 해서 t or f 같은 것을 대입해보자<br/>
+<br/>
+동전을 던져서 확률을 부여한뒤 buglary F, earthquake F 로 Sampling 해보자<br/>
+alarm 을 주어진 condition 에 기반해서 동전을 던지면 topological order 를 따르기 때문에 그 이전에 있었던 모든 random variable 에 대해서 값이 획득된 상황이라고 볼 수 있다<br/>
+   </BODY>
+</HTML>
