@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+003. Week 01. Motivations and Basics - 03. MAP(maximum posteriori estimation)<br/>
+<br/>
+@<br/>
+MLE 가 전부는 아니에요 라고 말하면서 베이즈가 뛰어들어왔다. <br/>
+압정을 던졌을때 정말로 60\%에 맞춰서 결과가 나올거라고 생각하세요? 50대 50이라고 생각안하세요?<br/>
+나도 처음에 50대 50이라고 생각했었어. 그런데 실제 50번 던져보니까 앞면이 30번나오잖아. 그럼 뭐 믿어야지. <br/>
+베이즈가 말하길 회장님 생각하는 50대 50이 맞지 않을까? 하는 사전 정보를 파라미터를 추정하는과정에 넣을 수 있습니다. 거기다가 추가 정보를 넣어가지고 회장님이 생각하는 그 사전 정보를 가미한 $\theta$ 를 알아보록하죠.<br/>
+<br/>
+@<br/>
+제가 예전에 이런 공식을 하나 만들었습니다. 데이터를 관측할 확률 P(D)분의 $\theta$ 에 대한 사전정보 $P(\theta)$ 곱하기 $\theta$ 가 주어졌을때, Data를 관측할 likelihood $P(D|\theta)$ 를 하면, 데이타가 주어졌을때 $\theta$ 의 확률 $P(\theta|D)$ 을 만들어 낼수 있습니다. <br/>
+<br/>
+$P(\theta|D)$ : posterior = likelihood*prior , 즉, 데이타가 주어졌을때, 어떤 $\theta$ 가 사실일 확률을 이렇게 표현할 수 있다는 것이다.  <br/>
+$P(D|\theta)$ : likelihood, $\theta$ 를 가정했을때 data가 관측될 확률. <br/>
+$P(\theta)$ : prior knowledge, latent 한 drive하는 force, 왜 사람들이 이렇게 행동할까. 압정이라고 하는것은 어떻게 앞과 뒤가 나올까. 하는 $\theta$ 에 대한 사전 정보이다. <br/>
+P(D) : normalize 한 constant, 이건 크게 중요하지 않다. 왜냐하면 많은 경우에 우리의 관심은 데이터가 아니라 파라미터 $\theta$ 이기 때문이다. 요즘세상에 널려있는 데이터를 활용해서 P(D) latent 한 테이터 속에 들어있는 force, factor 를 알아보고 싶은거다. 그것을 나타내는게 $\theta$ 라고 하는 숫자가 되는 것이다. <br/>
+<br/>
+@<br/>
+즉, 베이즈라는 사람은 $\theta$ 를 알아내는 중요한 공식을 만들어 낸 것이다. <br/>
+$P(\theta|D)=\frac{P(D|\theta)P(\theta)}{P(D)}$<br/>
+<br/>
+우리는 이미 베르누이 시행과 binomial distribution 으로 $P(D|\theta)$ 는 잘 정의를 했었다. <br/>
+$P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$<br/>
+<br/>
+$P(\theta)$ 는 압정을 던졌을때 50대 50이지 않을까 하는 회장님의 사전 생각이 prior knowledge $P(\theta)$ 로 적용될 수 있는 것이다.<br/>
+<br/>
+$P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$ 는 잘 해놨으니까 $P(\theta)$ 만 가미하면 될 것같다. 그러니까 우리 posterior 를 한번 계산해 보록 합시다. 라고 베이즈가 제안을 했다. <br/>
+<br/>
+그럼 우리 데이터와 prior knowledge 를 함께 적용을 해서 영향을 받은 $P(\theta|D)$ 를 알아볼까요? 라고 제안을 했다. <br/>
+<br/>
+@<br/>
+$P(\theta|D) = \frac{P(D|\theta)P(\theta)}{P(D)}$ 에서 $P(D|\theta)$ 를 봤을 때, P(D) 는 이미 일어난 것, 주어진 사실이고, 우리는 이것에 대해 어떻게 할 수 없다. 이미 발생한 확률은 정해져 있다. 그래서 이것은 normalized constant 로 취급하는 것이다. 즉, $\theta$ 가 바뀌는 거에 영향을 받지 않는 factor 인 것이다. 그래서 P(D)를 빼고 볼려고 하면 더이상 equal 을 쓸수는 없고 비례한다는 의미로 표현할 수 있다. <br/>
+$P(\theta|D) \propto P(D|\theta)P(\theta)$<br/>
+<br/>
+@<br/>
+$P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$<br/>
+그럼 $P(\theta)$ 는 어떻게 표현하면 좋을까? 50대 50이라고 표현할 수 있을까? 쉽게 그렇게 되지는 않을 것이다. $P(D|\theta)$ 는 어디서 나온거지? binomial distribution 에서 나왔다. $P(\theta)$ 도 제대로 계산 하려면 어떤 distribution 에 의존을 해서 표현을 해야할 것이다. <br/>
+<br/>
+@<br/>
+그래서 여러가지 방법들이 있을 수 있지만 그중에서 회장님께 권해드리고싶은것은 뭐냐면 beta distribution 이라고 하는 것이다. <br/>
+<br/>
+beta distribution 은 특정 범위내에서 0에서 1로 confine 되어있는 cumulitive distribution function(cdf) 을 가지고 있다. 그래서 nice 하게 probability 의 성격을 잘 표현하고있다. \\ <br/>
+<br/>
+beta distribution은 다음과 같이 표현 할 수 있다.<br/>
+$P(\theta)$ 라고 하는 것의 확률 함수 pdf는 $P(\theta)=\frac{\theta^{\alpha-1}(1-\beta)^{\beta-1}}{B(\alpha, \beta)}$, B파트는 $B=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$, $\Gamma$ 파트는 $\Gamma(\alpha)=(\alpha-1)!$ <br/>
+순서는 역순이다. $\Gamma$ function 으로 표현되고, $\Gamma$ function을 이용해서 $\alpha, \beta$ 가 표현되고, 그 다음에 $\alpha, \beta$ 가 정해지면 마지막으로 $P(\theta)$ 를 만들어 낼 수 있을 것이다. <br/>
+<br/>
+즉, beta distribution 에 필요한 파라미터는 $\alpha, \beta$ 인 것이다. <br/>
+<br/>
+사실 binomial distribution 에서도 필요한 파라미터가 있었다. H와 T가 나온 횟수 $a_{H}, a_{T}$ 그리고 그런것들을 활용해서 $\theta$ 라는 파라미터를 만들수있었다. <br/>
+<br/>
+$P(\theta)$ 에 대해서도 수식이 있으니까 이제 계산 해보자.<br/>
+<br/>
+$P(\theta|D){\propto}P(D|\theta)P(\theta)$ 에다가 아래 수식을 대입할 것이다.<br/>
+<br/>
+$P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$<br/>
+$P(\theta)=\frac{\theta^{\alpha-1}(1-\beta)^{\beta-1}}{B(\alpha, \beta)}$<br/>
+<br/>
+대입하면,<br/>
+$P(\theta|D){\propto}\theta^{a_{H}}(1-\theta)^{a_{T}}P(\theta) \theta^{\alpha-1}(1-\beta)^{\beta-1}$<br/>
+<br/>
+$P(\theta)=\frac{\theta^{\alpha-1}(1-\beta)^{\beta-1}}{B(\alpha, \beta)}$ 에서 $B(\alpha, \beta)$ 이 부분은 어떻게 된거죠?<br/>
+이부분은 $\alpha, \beta$ 가 결정이 되어있는 상황에서는 constant 이다. $\theta$ 에 의존하는 term 이 아니라는 의미이다. 그래서 $\theta$ 에 의존하는 $\theta^{\alpha-1}(1-\beta)^{\beta-1}$ 이부분만 대입하고 proportion 으로 처리하면 된다. <br/>
+<br/>
+$P(\theta|D){\propto}\theta^{a_{H}}(1-\theta)^{a_{T}}P(\theta) \theta^{\alpha-1}(1-\beta)^{\beta-1}$ 에서 $\theta^{a_{H}}$ 와 $\theta^{\alpha-1}$ 이라고 하는 이 파트가 있다. 그리고 $(1-\theta)^{a_{H}}$ 와 $(1-\theta)^{\beta-1}$ 이라는 파트가 있다. 이파트는 우리가 자승에 대해서 덧셈을 할 수 있다.<br/>
+<br/>
+$P(\theta|D){\propto}\theta^{a_{H}}(1-\theta)^{a_{T}}P(\theta) \theta^{\alpha-1}(1-\beta)^{\beta-1}$<br/>
+$P(\theta|D){\propto}\theta^{a_{H}+\alpha-1}(1-\theta)^{a_{T}+\beta-1}$<br/>
+<br/>
+그런데 여기서 희안하게 재밌는 현상을 하나 볼 수 있다. $a_{H}+\alpha-1$ 과 $a_{T}+\beta-1$ . 왠지 봤던 꼴이 또 나오지 않았나? 앞 두 꼴이 $\theta^{a_{H}}(1-\theta)^{a_{T}}$ 꼴과 유사하지 않은가? <br/>
+<br/>
+회장이 말하길, 수식 더 전개 하지 말고 일단 얘기좀 해보자.<br/>
+나는 가장 probably 하면서 approximate 한 $\theta$ 를 찾고 싶은거야. 그런 과정에서 사전 정보를 더 넣겠다고 했는데 지금 어떻게 가고 있는거야? 거의 다했어요. MLE 라고 하는 것은 아까 계산 해봤지만 MAP 라고 하는 것을 이제 계산 해보려고 하는거에요. 라고 베이즈와 함께 얘기를 했다. <br/>
+<br/>
+MLE 같은 경우에서는 $\hat{\theta}=arg\;\underset{\theta}{max}P(D|\theta)$ 를 찾았었다. <br/>
+그래서, 미분과 극점을 활용해서 최대가 되는 값을 구해서<br/>
+$P(D|\theta) = \theta^{a_{H}}(1-\theta)^{a_{T}}$<br/>
+$\hat{\theta}=\frac{a_{H}}{a_{H}+a_{T}}$<br/>
+이런 결과 수식을 도출해 낼 수 있었다. <br/>
+<br/>
+@<br/>
+MAP 라고 하는 것은 다른게 아니라 $\hat{\theta}=arg\;\underset{\theta}{max}P(\theta|D)$ 의 $P(\theta|D)$ 에서 $\theta$ 와 D 를 바꾼 것이다. 즉, likelihood 에 대한것이 아니라 posterior 에 대해서 maximize 하는것이 되겠다. <br/>
+<br/>
+일단 $P(\theta|D)$ 는 $P(\theta|D) \propto \theta^{a_{H}+\alpha-1}(1-\theta)^{a_{T}+\beta-1}$ 이렇게 정의했었다. 그런데 이 비슷한걸 최적화 하는것은 위에서 처럼 우리가 이미 한번 봤다. 최적화를 하기 위한 계산의 패턴은 자승끼리 덧셈을 한다. 그 뒤 특정하게 추정하려고 하는 자승부분을 분자에 쓴다. <br/>
+$\hat{\theta}=\frac{a_{H}+\alpha-1}{a_{H}+\alpha-1 + (a_{T}+\beta-1)}$<br/>
+$\hat{\theta}=\frac{a_{H}+\alpha-1}{a_{H}+\alpha + a_{T}+\beta-2}$<br/>
+위의 수식을 구하기 까지 과정인 미분을 통해 극점을 찾아 최적화를 하는 과정은 이전에 했던 방법과 동일하다. <br/>
+방법은 동일한데 관점이 다르다. $P(D|\theta)$ 에서 지금 우리의 관심은 $P(\theta|D)$ 이다. 그래서 공식이 조금 달라졌다. <br/>
+<br/>
+여기서 만약 회장이 $\alpha$ 와 $\beta$ 를 prior knowledge 를 이용해 조절 해 보면서 $\hat{\theta}$ 을 MLE 와는 조금 다른 값을 만들어 낼 수 있는 것이다. MLE 에서는 사전정보를 넣을만한 방법이 없었다. 그런데 MAP 를 이용한다면 왠지 50대 50일 것 같아 라는 사전 정보를 넣을 수 있는 방법이 생긴것이다. <br/>
+<br/>
+@<br/>
+그런데, 잠깐 만 가만있어봐,<br/>
+MLE 가 $\hat{\theta} = \frac{a_{H}}{a_{H}+a_{T}}$ 이렇게 표현되고,<br/>
+MAP 가 $\hat{\theta} = \frac{a_{H}+\alpha-1}{a_{H}+\alpha+a_{T}+\beta-2}$ 이렇게 표현된다면,<br/>
+$\alpha, \beta$ 의 정의에 의해가지고 값이 달라질수도 있을것 같아. 라고 얘기 할 수 있다.<br/>
+<br/>
+베이즈가 그래서 얘기한다. 사실 그렇지는 않아요. 아주 여러번 실험을 해보면 $\alpha, \beta$ 에 대한 사전 정보 값이 점점 사라지고 $a_{H}$ 와 $a_{H}+a_{T}$ 의 term 이 점점더 dominant 해 질것이다. $\alpha, \beta$ 가 무한대의 값은 아니다. 결론적으로, 시행을 엄청 많이 했을때, MLE와 MAP 의 값은 사실 같아진다. 시행이 작은 상황이라면 사전정보는 중요한 역할을 하게 되겠다.<br/>
+<br/>
+$\alpha, \beta$ 는 중요한거 같은데, 어떻게 계산, 정할까? 라고 회장이 물어봄.<br/>
+prior 정보를 주는건 아주 중요한 과정이다. 하지만 많은 경우에 크게 신경을 쓰지 않고 있는 부분도 있는것도 사실이다. 중요한것은 관측값이 많지 않을때는 MLE와 MAP 는 다른 결과값을 낼수 있다는 것이다. MAP 는 사전정보로 우리가 가정한 부분인 $\alpha, \beta$ 가 있어가지고 우리가 유용하게 쓸수도 있고 잘못된 사전정보를 선택한 경우, 우리가 좋지 않은 결과를 얻을 수도 있다.<br/>
+<br/>
+@<br/>
+어쨋든, 동전던지기하자, 압정던지기 하자. 50대 50이지 않을까? 던진 총 횟수 분의 앞면이 나온 횟수로 나누면 되지 않을까? 라고 쉽게 쉽게 얘기했던 확률이라는 것이 사실 이렇게 MLE 라는 관점, MAP 라는 관점에서 다른 숫자가 나올 수도 있다. 라고 하는 점을 배워보았다. <br/>
+<br/>
+@<br/>
+MLE, MAP 컨셉은 기계학습과 인공지능에서 중요한 컨셉이다. <br/>
+
+   </BODY>
+</HTML>
