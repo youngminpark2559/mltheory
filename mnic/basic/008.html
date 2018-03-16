@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+008. Week 02. Fundamentals of Machine Learning - 04. Entropy and Info. Gain<br/>
+<br/>
+@<br/>
+Entropy : 어떤 attribute 를 더 잘 체크할 수 있을 것인지 알려주는 하나의 지표. uncertainty 를 줄여주는게 좋은 것이다. <br/>
+불확실성을 측정하는게 필요하다. 어떻게 쟬수있을까? 그 measurement 중 하나가 Entropy 이다. <br/>
+random variable 이 얼만큼 불확실성이 높으냐 낮으냐 이런걸 판정하는게 Entropy 이다. <br/>
+<br/>
+@<br/>
+항상 위만 나오는 압정이 있다고 해보자. <br/>
+불확실성이 없다. <br/>
+어떤 압정이 50대 50으로 위아래가 나온다면 불확실성이 더이상 높을수 없을만큼 높다. <br/>
+<br/>
+압정이 토스한 결과에 대한 확률분포가 존재하고, 이 확률 분포에 대해서 얼마만큼 확실한지 확실하지 않은지를 알수 있다는 것이다. 모든 케이스 들에서 비슷비슷한 확률분포라고 하면 불확실성이 높은것이다. 어떤 하나의 케이스가 dominant 하고 확실하게 항상 그게 나온다. 이런식으로 된다하면 불확실성이 낮거나 없어진다. <br/>
+<br/>
+엔트로피 H(x)는 확률밀도함수 P(X=x) 를 활용한다. 확률밀도함수에 정의된 모든 x에 대해서 그냥있는것과 로그가 있는것을 곱하고 더한것을 결과물 H(x) 로 가져오고 있다.<br/>
+$H(x) = -{\sum\limits_{x}}P(X=x)\log_{b}P(X=x)$ <br/>
+<br/>
+@conditional Entropy : 특정 feature 에 대한 정보가 있을 경우에 Entropy 를 판단해보자. <br/>
+공식은 다음과 같다.<br/>
+P(X=x) 라고 하는게 있고 conditional Entropy H(Y|X=x) 는 마치 conditional probability 처럼 정의되어있다. <br/>
+$H(Y|X=x)$ 는 $-{\sum\limits_{Y}}P(Y=y|X=x)\log_{b}P(Y=y|X=x)$ 이런식으로 term 이 풀어진다.<br/>
+P(X=x) 마치 사전정보가 들어간것과 같은 것이 밑에 내려가서 합을한다. 하나는 X도메인에서 루프가 돌고있다. 하나는 Y도메인에서 루프가 돌고있다. <br/>
+X가 주어진 상황일경우 Y의 불확실성을 잡아라. Y에 대한 Entropy 를 쟤는 것으로 되어있는데 X가 조건이므로 X에 대한 feature 를 반영해야한다. 그부분이 곱해지는 형태이다. <br/>
+$H(Y|X) = \sum\limits_{X}P(X=x)H(Y|X=x)$ <br/>
+$H(Y|X) = \sum\limits_{X}P(X=x)(-\sum\limits_{Y}P(Y=y|X=x)\log_{b}P(Y=y|X=x))$ <br/>
+<br/>
+@<br/>
+information gain 이라고 하는 또다른 measurement 를 정의해보자. <br/>
+
+   </BODY>
+</HTML>
