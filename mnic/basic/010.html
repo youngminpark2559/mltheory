@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+010. Week 03. Naive Bayes Classifier - 01. Optimal Classification<br/><br/>
+@<br/>
+가장 쉬우면서 통계적인 머신러닝의 기초라고 할수 있는 모델들에 대해 배우겠다. <br/>
+<br/>
+@<br/>
+Naive Bayes Classifier 에 대해 배우겠다. 쉬운모델이다. 앞에서 배운 MLE, MAP 개념, Bayes 정리의 수식적 성질 들만 제대로 알았다면 유도조차 필요없는 쉬운 모델이며 성능도, 미분하기도 좋은 모델이다. <br/>
+<br/>
+@<br/>
+Naive Bayes Classifier 를 배우기 전에 선수과정으로 배워야할 Classifier 를 배운다. 이전에 DT, RL, 등의 Classifier 를 배웠었다. Classifier 를 어떻게 최적화해서 잘 만드는가 에 대해 생각해 봐야한다. <br/>
+<br/>
+@<br/>
+Classification 에 대하여 알아보자. X에다 어떤 값을 받아들여서 Y에서 true or false 인가 그런것들을 알아보는 과정이다. <br/>
+<br/>
+X라는 정보가 주어졌을때 Y가 어떤 값일까, 초록색값일까 빨간색값일까 를 알아보는 것이다. 실제 데이터가 $X=x_{1}$ 에서 Y가 초록색 값이면, $X=x_{1}$ 일 경우에 Y=y_{green} 이 될 확률 $P(Y=y_{green}|X)$ 은 매우 높을 것이다. $X=x_{1}$ 일때 $Y=y_{red}$ 인 확률 $P(Y=y_{red}|X)$ 이 낮다. 이럴때, 우리는 $x_{1}$ 인 상황에서는 초록색 y가 더 낫겠다 라고 하는 말, 판별, Classification 을 할 수 있다.  $x_{2}$ 에서 상황이 반대가 될 수 있다. <br/>
+<br/>
+어떤 것, 예를들어 X라는 조건이 given 인 상황에서 target class Y 에 대한 확률값을 우리는 계산해야한다. <br/>
+<br/>
+두개의 클래스에 대한 PDF 를 정의할 수 있다면 좋겠다. <br/>
+<br/>
+Bayes Classifier 라는 걸 정의할 텐데, $P(f(X))\neq Y$ 이런 수식이 하나 있다. X를 넣어가지고 f(X) 는 Y 를 $\hat{y}$ 로 예측할 텐데, $\hat{y}$ 와 Y 가 같지 않을 확률 $P(f(X))\neq Y$ 을 arg\;min 최소화하는 f를 찾아내어 그것을 f star 라고 부르겠다. 즉, optimized 된 function 이라는 의미이다. <br/>
+$f^{*}=arg\;\underset{f}{min} (P(f(X))\neq Y)$<br/>
+<br/>
+@<br/>
+ML 이라고 하는것은 Probably Appromately Correct 한 function 을 만드는 것이다. 아마도 유사하게끔 맞게끔 동작하는 function 을 approximation 하는 것이다. 여기서는 어떻게 function approximation 하라고 했나? X가 주어진 function f 에 들어갔을 경우에 f(X), 나오는 $\hat{y}$ 이 Y 와 같지 않을 확률을 줄여주는 function 을 만들어내라 라는 것이 되겠다. <br/>
+<br/>
+@<br/>
+function approximation 을 하는데 에러를 minimize 하기 위해서 function approximation 을 하는 것이다. <br/>
+<br/>
+@<br/>
+두개의 클래스만 가정해 놓고 보면 빨간 Y와 초록 Y가 되겠다. 두개의 클래스만 놓고 보면 이렇게 될것이다.<br/>
+argmax라 되서 헷갈릴수도 있긴한데, X가 x로 주어졌을 때, Y가 y가 될 확률을 최대화 시켜주는, 그러면 두개의 클래스니까 1 - 이 확률이 될텐데 그럼 1-이 확률은 자동적으로 최소화가 되는것이기 때문에 argmin 과 똑같은 의미이다. 두개의 클래스에 대해서는 이 관계가 성립할 것이다. <br/>
+<br/>
+다시말하면, X=x 가 주어진 상황에서 Y=y 가 되는 것과 동일하게끔 되도록 확률 밀도 함수를 쫙 올려주는 그런함수가 function approximation 으로 optimized 된 $f^{*}(x) arg\;max{Y=y}{max} P(Y=y|X=x)$ 이다. 즉, $x_{1}$ 이 주어졌을때 초록색 y가 나오게끔, 확률밀도함수를 조정 해주고 그것을 $f^{*}$ 로 만들어보자. 하는 것이 이 내용이 된다. <br/>
+<br/>
+@<br/>
+Detour : MLE and MAP in thumbtack example <br/>
+<br/>
+In MLE, we found $\theta$ from $\hat{\theta} = arg\;\underset{\theta}{max} P(D|\theta)$ <br/>
+$P(D|\theta)=\theta^{a_{H}} (1-\theta)^{a_{T}}$ <br/>
+MLE에서는 관측된 값만 활용해서 H가 나온경우 + T가 나온경우 분의 H가 나온경우 를해서 $\hat{\theta}$ 를 만들어 주었다. <br/>
+$\hat{\theta}=\frac{a_{H}}{a_{H}+a_{T}}$<br/>
+<br/>
+Now, in MAP, we find $\theta$ from $\hat{\theta}=arg\;\underset{\theta}{max} P(\theta|D)$<br/>
+$P(\theta|D) \propto \theta^{a_{H}+\alpha-1} (1-\theta)^{a_{T}+\beta-1}$<br/>
+MAP에서는 $\alpha$, $\beta$ 라고 하는 추가적 사전정보를 줄수 있는 파라미터를 통하여 나오는 추정된 값을 조정 해 보았다.  <br/>
+$\hat{\theta}=\frac{a_{H}+\alpha-1}{a_{H}+\alpha+a_{T}-2}$<br/>
+<br/>
+@<br/>
+이렇게 P를 D given $\theta$ 로 만들어 주는 과정, MLE, MAP 를 어떻게 Naive Bayes Classifier 에 적용할 수 있을까 를 알아보는 과정이 이번주차 내용이 되겠다. <br/>
+<br/>
+@<br/>
+Classification 문제로 다시 돌아오자. MLE, MAP 를 활용해서 어떻게 하면 더 좋은 Classifier 만들수 있을까 가 내용이다.<br/>
+<br/>
+실선과 점선으로 이루어진 두개의 쌍, 4개의 PDF 함수가 있다. 점선끼리 한쌍, 실선끼리 한쌍이다. 점선끼리 덧셈을 하면 여기를 $x_{1}$ 이라고 봤을 때, 점선끼리의 값 $p_{1}$ , $p_{2}$ 을 더하면 1이되어야한다. 왜냐면 $x_{1}$ 이라는 특정 인풋이 들어왔을 경우에 빨간색이든 초록색이든 어떻게든 하나의 만들어 주긴 줘야해서이다. 그러니까 이 두 경우를 합치면 확률값이 1이 나와야한다. 실선에서도 마찬가지, 두 확률값 더하면 1이 되야한다. 만나는 점에 대해서는 특이하다. $x_{m}$ 이라고 보면, 이때 확률값은 0.5로서 어느 쪽이 더 높은지 판별이 안된다. <br/>
+<br/>
+문제는 뭐냐면 이렇게 실선으로도 점선으로도 PDF를 만들수 있다. 하지만 어느쪽이 좀더 나은 쪽일까? 점선보다 실선이 조금 더 낫다. 예컨대, $x_{m}$ 보다 조금 앞에 있는 $x_{n}$ 을 생각해보자. 실선같은경우는 이렇게 확률값이 나눠지고 있다. 점선같은경우는 네모로 확률값이 나눠지고 있다. 점선같이 선형으로 되어있는 모형은 확률값의 차이가 크지 않다. 이 의미는 $x_{n}$ 이 주어졌을때, 점선모델이서는, 빨간색일지, 초록색일지 명확하게 높은 확률차이로 구분을 못해준다는 뜻이다. 반대로 실선모델에서는 점선보다 확률값의 차이가 크다. 의미는 높은 확률로 빨간색, 초록색을 구분해줄수 있다는 것이다. $x_{m}$ 에서 수직선을 decision boundary 라고 부른다. DB 를 기준으로 급격히 확률값이 변하면 좀더 높은 확률차이로 두개의 클래스를 분리해줄 수 있다. <br/>
+<br/>
+점선모델로 클래스를 구분해본다고 하면, 이 DB 를 기준으로 왼쪽의 점선 모델을 이용한 Classifier 에서는 다 초록색으로 판별을 할 것이다. 즉, 빨간색 부분 분명히 존재하는 확률이긴 하지만 에러가 된다는 것이다. <br/>
+<br/>
+실선을 가지고 Classification 한다고 해보면, 초록선이 높으니까 초록으로 판별이 되긴 될텐데, 에러의 영역도 작다는 것이다. 그 차이만큼이 실선모델과 점선모델의 성능 차이이다. <br/>
+<br/>
+@<br/>
+그러면 optimal Classifier 를 만들것인데, 이것은 뭐냐면, Bayes risk 라 불리는 밑에 있는 영역을 줄이는 형태로 만드는 것이 최적화된 Classifier 가 될 것이다. <br/>
+<br/>
+x라는 것이 들어왔을 경우에 X=x , Y를 판별하는 것이다 Y=y. 이함수 P(Y=y|X=x) 를 어떻게 만들수 있을까가 핵심적인 사항이 될 것이다. 이함수는 Bayes risk 를 줄이는 방향으로 만들어 줘야 되겠다. 라는 내용이 된다. <br/>
+<br/>
+@<br/>
+줄이기 위해서 여러 treatment 를 할수 있다. 많은 행동들 중 하나가 logistic function 을 써서 s 커브를 만들어 내는 것이다. <br/>
+<br/>
+@<br/>
+앞에서 risk 를 줄이는 learning 부분에 대해서 배웠다. risk 를 주여서 Classifier 를 만들어 줘야되는데 선상, 곡선형태 등으로 만들수 있다. 일단 커브, 선 등의 pdf 를 만들어보자.<br/>
+<br/>
+@<br/>
+그래서 optimal Classifier 는 데이터로 주어진 y와 우리가 판별해서 나오는 y 가 같은 값이 되는 그런 확률을 만들어 주는 그런 function approximation 된 값 $f^{*}(x)$ 이다. <br/>
+   </BODY>
+</HTML>
