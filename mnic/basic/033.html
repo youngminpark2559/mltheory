@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+033. Week 06. Training, Testing, Regularization - 02. Bias and Variance<br/><br/>
+
+
+
+@<br/>
+After deployment of machine learning application, you rarely have a chance to touch that application<br/>
+<br/>
+Actually, it's best not to touch after deployment<br/>
+<br/>
+@<br/>
+There are 2 sources of error in machine learning<br/>
+<br/>
+First one $E_{in}$ is what we couldn't explain about data set even if we tried to explain it with best efforts<br/>
+It's called error by "inevitable" approximation<br/>
+<br/>
+Second one $\Omega$ is error came from generalization<br/>
+It's inevitable to have error between various variance of unknown coming data and generalization of model<br/>
+<br/>
+@<br/>
+Entire error $E_{out}$ is calculated by adding those two<br/>
+$E_{out} = E_{in} + \Omega$<br/>
+<br/>
+@<br/>
+Suppose following elements<br/>
+f is true target function which we want to learn<br/>
+g is predicting model which we're processing step of learning<br/>
+We genuinely can't have entire data<br/>
+Even if we suppose we can have entire data, since data will be created continuously, we can't have entire data<br/>
+$g^{(D)}$ is predicting model which is configured with inferenced parameters<br/>
+D is available dataset drawn from real world<br/>
+Now, suppose there is absolute entire data in the world, and data is generated continuously<br/>
+And suppose we bring that entire data by bring data with infinite number of trying to take<br/>
+And every time we try to bring each group of data D, we can make corresponding $g^{(D)}$<br/>
+Now, we suppose we make infinite number of $g^{(D)}$<br/>
+We can calculate infinite number of $g^{(D)}$ to make average hypothesis function<br/>
+So $\bar{g}$ means average hypothesis induced from infinite number of $g^{(D)}$ via above process<br/>
+We can express above logic by $g(x) = E_{D}[g^{(D)}(x)]$<br/>
+<br/>
+@<br/>
+We got this formular<br/>
+$E_{out} \leq E_{in} + \Omega$<br/>
+<br/>
+Let's think error of single instance of dataset D<br/>
+$E_{out}(g^{(D)}(x)) = E_{X}[(g^{(D)}(x) - f(x))^{2}]$<br/>
+<br/>
+Then, let's think of expected error of infinite number of dataset D<br/>
+$E_{D}[E_{out}(g^{(D)}(x))] = E_{D}[E_{X}[(g^{(D)}(x) - f(x))^{2}]]$<br/>
+We can switch $E_{X}$ with $E_{D}$ because it's process of calculating average(sum operation)<br/>
+$E_{D}[E_{out}(g^{(D)}(x))] = E_{X}[E_{D}[(g^{(D)}(x) - f(x))^{2}]]$<br/>
+We will simplify $E_{D}[(g^{(D)}(x) - f(x))^{2}]$<br/>
+<br/>
+We can't go further only with $E_{D}[(g^{(D)}(x) - f(x))^{2}]$<br/>
+So, we use trick of $-\bar{g}(x)+\bar{g}(x)$<br/>
+$E_{D}[(g^{(D)}(x) - f(x))^{2}] = E_{D}[(g^{(D)}(x) -\bar{g}(x) + \bar{g}(x) - f(x))^{2}]$<br/>
+We think as two groups<br/>
+$E_{D}[(g^{(D)}(x) - f(x))^{2}] = E_{D}[((g^{(D)}(x) -\bar{g}(x)) + (\bar{g}(x) - f(x))^{2})]$<br/>
+We use $(a+b)^{2} = a^{2}+2ab+b^{2}$<br/>
+$E_{D}[(g^{(D)}(x) - f(x))^{2}] = E_{D}[(g^{(D)}(x) -\bar{g}(x))^{2} + (\bar{g}(x) - f(x))^{2} +2(g^{(D)}(x) -\bar{g}(x))(\bar{g}(x) - f(x))]$<br/>
+We can extract terms not related to $E_{D}$ out of inside of entire term<br/>
+$(g^{(D)}(x) -\bar{g}(x))^{2}$ is related to $E_{D}$<br/>
+$(\bar{g}(x) - f(x))^{2}$ can be out of entire term<br/>
+Anyway, we can get following terms<br/>
+$E_{D}[(g^{(D)}(x) - f(x))^{2}] = E_{D}[(g^{(D)}(x) -\bar{g}(x))^{2}] + (\bar{g}(x) - f(x))^{2} + E_{D}[2(g^{(D)}(x) -\bar{g}(x))(\bar{g}(x) - f(x))]$<br/>
+We know $E_{D}[2(g^{(D)}(x) -\bar{g}(x))(\bar{g}(x) - f(x))]$ becomes 0<br/>
+because process of calculating expectation value from infinite number of sampling for D $E_{D}$ is actually same average hypothesis $\bar{g}(x)$<br/>
+<br/>
+Then, we plug in simplified $E_{D}[(g^{(D)}(x) - f(x))^{2}]$ into $E_{X}$<br/>
+$E_{D}[(g^{(D)}(x) - f(x))^{2}] = E_{D}[(g^{(D)}(x) -\bar{g}(x))^{2} + (\bar{g}(x) - f(x))^{2} +2(g^{(D)}(x) -\bar{g}(x))(\bar{g}(x) - f(x))]$<br/>
+$E_{D}[(g^{(D)}(x) - f(x))^{2}] = E_{D}[(g^{(D)}(x) -\bar{g}(x))^{2} + (\bar{g}(x) - f(x))^{2}]$<br/>
+$E_{D}[E_{out}(g^{(D)}(x))] = E_{X}[E_{D}[(g^{(D)}(x) - f(x))^{2}]]$<br/>
+$E_{D}[E_{out}(g^{(D)}(x))] = E_{X}[E_{D}[(g^{(D)}(x) -\bar{g}(x))^{2} + (\bar{g}(x) - f(x))^{2}]]$<br/>
+<br/>
+We will call $E_{D}[(g^{(D)}(x) -\bar{g}(x))^{2}$ as Variance(x)<br/>
+This means error $\Omega$ from generalization<br/>
+<br/>
+We will call $(\bar{g}(x) - f(x))^{2}$ as $Bias^{2}(X)$<br/>
+This means error $E_{in}$ from approximation, which come from limitation of our predicting model<br/>
+$\bar{g}(x)$ is average hypothesis from infite data<br/>
+We don't have any issue on data set, but issue comes from limitation of approximation<br/>
+<br/>
+If we think of $\bar{g}(x)$ as linear function to make it identical to true target function f(x), $\bar{g}(x)$ contains huge bias(strong assumption of liearity)<br/>
+As we increase degree with making model more complex with being nearer to f(x), bias reduces<br/>
+However, in this case, we can have issue in terms of variance<br/>
+The more we make complex model, we will get far distance with average hypothesis $\bar{g}(x)$ which is created from infinite various dataset<br/>
+<br/>
+In conclusion, there is trad-off relationship between variance and bias<br/>
+<br/>
+@<br/>
+We can't train Variance with average hypothesis $\bar{g}(x)$ because of limitation of dataset<br/>
+<br/>
+@<br/>
+We can't make average hypothesis $\bar{g}(x)$ to match real world function f(x) only by bias because we're confined and limited by machine learning model which we're using<br/>
+<br/>
+@<br/>
+So, how can we reduce variance and bias?<br/>
+<br/>
+The way of reducing variance is collecting more dataset to make model as average hypothesis $\bar{g}(x)$ <br/>
+<br/>
+The way of reducing bias is making model more complex<br/>
+<br/>
+@<br/>
+We can reduce both variance and bias<br/>
+But as I said before, those two has trade-off relationship to each other<br/>
+If we reduce bias with making model complex, chance of overfitting rises, resulting in high variance<br/>
+
+   </BODY>
+</HTML>
