@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+004. Week 01. Motivations and Basics - 04. Probability and Distribution<br/>
+<br/>
+@<br/>
+MLE, MAP 부분은 농담도 하면서 재밌게 얘기했던 파트고 오늘 할 부분인 Probability, Distribution, some rules 들은 모든 확률이나 통계가 들어가는 교과목에서 다루어야하지만 또 사람들이 재미없어 하는 그런 부분이다. 혹시 아시는 분들은 건너뛰셔도 무방하지 않을까 생각도 한다. <br/>
+<br/>
+@<br/>
+MLE 는 사전지식없이 데이타를 중심으로 가지고 $\theta$ 라고 하는 압정에 대한 파라미터를 알아봤던 내용이다. <br/>
+MAP 는 사전지식을 좀더 가미해서 압정을 던졌을 경우에 위가 나올것인지 아래가 나올것인지를 알아보는 과정이었다.<br/>
+<br/>
+MLE, MAP 둘다 확률을 추정해보는, 파라미터를 알아보는 그런 과정이다. 이런 과정이 확률에 대한 내용이기 때문에, 확률 자체에 대한 정의도 필요하다고 하겠다. <br/>
+<br/>
+@<br/>
+확률이라고 하는것은 피컨티스트, 베이지안, 이런 다양한 논증들이 있고, 또 다양한 철학적인 내용도 포함되기 때문에 정확히 확률이 뭐다 라고 정의한다는것은 쉬운일이 아니다. 그런데 우리가 이 과목에서 쓸수 있을 정도로만 한번 정의를 해보자. <br/>
+<br/>
+$\Omega$ 라는 세상에서 일어날 수 있는 모든 사건인 전체 집합 안에서 $E_{1}$ 과 $E_{2}$ 라는 각각의 사건이 발생한다고 해보자. <br/>
+<br/>
+$E_{1}$ 과 $E_{2}$ 가 발생할 수 있는 확률이 무엇일까? 를 정의 해 보는 것이다. <br/>
+<br/>
+사건 E 가 발생할 확률 P(E) 는 연속하는 범위인 실수에 속한다. $P(E){\in}R$ 고등학교 수학을 배웠다면 이게 함수모양을 하고 있다는 것을 알수있다. 함수 P에 인자 이벤트 E를 넣은것이다. <br/>
+사건 E 가 발생할 확률 P(E) 는 0보다 크거나 같다. $P(E) \geq 0$ <br/>
+전체 집합 $\Omega$ 가 발생할 확률 $P(\Omega)$ 는 1이다. $P(\Omega) = 1$  \\ <br/>
+<br/>
+$P(\Omega) = 1$ 에 대하여 이렇게 볼수 있다.<br/>
+무한대의 이벤트가 있다. $E_{1}, E_{2}, ...$ 이것의 합집합을 인자로 함수 P에 넣으면,<br/>
+$P(E_{1} \cup $E_{2}$ \cup ...) = P(E_{1}) + P(E_{2}) + ... = 1$ <br/>
+$P(E_{1} \cup $E_{2}$ \cup ...) = {\sum\limits_{i=1}^{\infty}}P(E_{i}) = 1$ <br/>
+<br/>
+P라고 하는 확률을 나타내는 특정 함수를 정의해보았다. <br/>
+여기에 대해서 적분이나 기타 복잡한 수식을 넣을 수도 있는데, 사실 함수의 기본은 이벤트 E와 실수값 R을 연결, 맵핑시켜주는 것이기 때문에 위와같이 정의해도 충분히 훌륭하게 정의했다고 나는 생각한다. <br/>
+<br/>
+@<br/>
+위와같이 확률을 정의하고 난 다음에는 몇가지 특성을 알아볼수 있다. <br/>
+A와 B가 특수한 관계에 있는 사건이라고 가정해 보자. $A{\subseteq}B$ B사건이 조금더 광범위한 사건이다. <br/>
+<br/>
+자녀를 한명 낳았다 라는 것을 B라고 한다면, 딸을 한명 낳았다고 하는것을 A로 본다면 A는 B보다 조금 작은 범위의 사건으로 볼 수 있다. A가 아닌 다른 영역의 B라고 하면, 아들을 낳은 케이스가 될 것이다. <br/>
+따라서 자녀가 있을 확률 P(B) 는 딸이 있을 확률 P(A) 보다 크거나 같다. $P(A){\leq}P(B)$ 만약 같지않고 차이가 있다면 그 차이는 아들이 있을 확률만큼의 차이이다.<br/>
+<br/>
+특별한 이벤트를 정의할수있는데 발생할 확률이 0 인 null 이벤트 $\phi$ 이다. $P(\phi)=0$ <br/>
+<br/>
+$0{\leq}P(E){\leq}1$<br/>
+<br/>
+뿐만 아니라 확률은 집합이론과도 연관이 되어있다. <br/>
+<br/>
+@<br/>
+조건부확률을 알아보자.<br/>
+옛날에는 $\Omega$ 를 발생할 수 있는 모든 이벤트들을 네모 박스처럼 정의했었는데 이제는 condition(scope, 범위, 제한) 를 주는 것이다. 이 범위에서 $E_{1}, E_{2}$ 가 발생할 확률을 볼 것이다. 조건 범위에서 절반만 걸쳐있는 $E_{2}$ 가 발생할 확률은 겹치는 부분으로 제한이 될 것이다. $E_{1}$ 은 조건 스코프 안에 다 들어가고 $E_{2}$ 는 일부만 들어간다. <br/>
+<br/>
+일반적으로 우리는 $\Omega$ 라는 모든 상황을 다루지는 않는다. 뭔가 조건을 걸어서 다루게된다. 이런이런경우에 이 확률은 무엇이냐? <br/>
+<br/>
+B라는 조건이 참인 내부에서 A가 발생할 확률이 무엇인지 다뤄보아라. A와 B가 교집합이 되는 부분만이 될 것이다. 따라서 $P(A{\cup}B)$ 를 스코프로 나눠준 값이 조건부확률이 된다.<br/>
+$P(A|B)=\frac{P(A{\cup}B)}{P(B)}$<br/>
+<br/>
+@<br/>
+조건부확률을 정의했으면 몇가지 재밌는 공식을 유도해 볼수 있다.<br/>
+그중에 특히 재밌는 공식은 $P(B|A)=\frac{P(A|B)P(B)}{P(A)}$ 이다. 아주 많이 활용할 공식이다. 옆에있는 이 공식도 마찬가지로 많이 쓸거다. $P(A)={\sum\limits_{n}}P(A|B_{n})P(B_{n})$<br/>
+<br/>
+@<br/>
+여기까지 하면 P 라는 함수의 여러 특성을 정리한것이다. 그러면 P라는 함수, 매핑 자체에 대해서 더 자세히 정의를 해볼 필요가 있다. 여러가지 정의가 있다. 여러가지 정의, 정리가 있는데 그런것들을 우리가 볼수있도록 정의한것이 대표적으로 확률분포(Probability Distribution) 이다. <br/>
+<br/>
+PD 란 함수로서 어떤 이벤트가 발생한다는 것을 확률(특정한 값)으로 assign, mapping 하는 것이다. <br/>
+<br/>
+@<br/>
+$f(x)=\frac{e^{-\frac{1}{2}x^{2}}}{\sqrt{2\pi}}$ 에서 f 가 Probability Distribution function 이다. x 가 이벤트의 한종류(예를들어, $E_{1}$ ) 가 될 것이다. x는 3이다, x는 5다, ... 와 같이 이벤트는 다양한 경우가 있을 수 있다. <br/>
+<br/>
+@<br/>
+Probability density function 에서 x 값을 찾고 그에 해당하는 y값을 보면 그게 x가 발생할 확률이다. 즉, x 축이 이벤트 y축이 확률인 좌표에서 그래프가 Probability density function 이다. <br/>
+Probability cumulative function 에서 맨 위 값은 1이다. 모든 이벤트에 대한 발생확률을 다 더하면 1이기 때문이다. 위에꺼는 0보다 크고 1보다 작다.<br/>
+<br/>
+@<br/>
+이렇게 PDF, PCA function 들을 정의 할수 있는데 함수의 모양은 다양한 종류가 있을 수 있다. <br/>
+<br/>
+@<br/>
+함수의 모양을 다양하게 만드는 방법에는 두가지가 있다. 첫번째는 함수의 공식을 정해서 그대로 유지한채 파라미터만 바꾸면서 모양을 조정할수있다. 다른 하나는 공식 자체를 바꾸는것이다. <br/>
+<br/>
+PDF 의 특정한 공식들에 이름을 부여한다. 예를들어, normal Distribution, 포아송 Distribution. 그리고 거기에 들어가는 파라미터들을 우리가 정하는 것이다. <br/>
+<br/>
+@<br/>
+가장 많이쓰이는 함수 종류가 normal Distribution 이다. <br/>
+normal Distribution function 의 공식은 $f(x;\mu,\sigma)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}$ 이런 식으로 되어있다. <br/>
+그리고 이 공식안에 <br/>
+mean : $\mu$ , <br/>
+variance : $\sigma^{2}$ 이라는 파라미터가 들어가있다. <br/>
+아까 말했지만 mean, variance 파라미터를 조정해 함수의 모양을 조정할수도 있고, 우리의 데이터나 분석목적에 normal Distribution 에 맞지 않는다면 다른 종류의 function 을 쓰면 된다.<br/>
+<br/>
+@<br/>
+Probability Distribution function 의 또다른 종류로는 beta Distribution 이 있다.<br/>
+beta Distribution 이랑 normal Distribution 이랑 비슷한 부분이 있는데 다른부분도 있다. normal Distribution 은 long tale 이라는 것이 있다. 양끝이 0에 점근하면서 길이는 무한대까지 길게 쭉간다는 것이다. beta Distribution 은 long tale 이 없고 정해진 범위가 있다. 0에서 1사이 점근 tale 이 없이 딱 정해짐. <br/>
+<br/>
+@<br/>
+어떤 경우에 beta Distribution 이 많이 쓰일까? 범위가 딱정해져있는 경우들. 확률은 0에서 1사이라고 하는 범위가 딱 떨어진다. 확률을 모델링 할때는 beta distribution 을 nice 하게 쓸수 있다. <br/>
+<br/>
+@<br/>
+beta distribution 을 처음 보는 것은 아니다. 베이즈라는 사람이, 우리 prior 를 써보자. 그런데 prior 는 어떤 distribution 을 쓰면 좋을까? beta distribution 을 써보자 이렇게 제안했었다. <br/>
+<br/>
+@<br/>
+beta distribution function 의 공식은 다음과 같다.<br/>
+$f(\theta;\alpha,\beta)=\frac{\theta^{\alpha-1}(1-\theta)^{\beta-1}}{B(\alpha, \beta)}$<br/>
+$B(\alpha,\beta)=\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}$<br/>
+$\Gamma(\alpha)=(\alpha-1)!$<br/>
+$\alpha{\in}N^{+}$<br/>
+<br/>
+함수 그래프의 특성을 잘 표현하기 위해 많은 수학자, 통계학자들이 위의 공식을 만든것이다. 우리는 이 공식을 쓰는 것이다.<br/>
+beta distribution 의 notation : $Beta(\alpha,\beta)$ <br/>
+beta distribution 의 파라미터 $\alpha, \beta$ 는 mean 과 variance 에 포함되어있다.<br/>
+mean : $\frac{\alpha}{\alpha + \beta}$ <br/>
+variance : $\frac{\alpha\beta}{(\alpha+\beta)^{2}(\alpha+\beta+1)}$ <br/>
+<br/>
+@<br/>
+Probability density function 의 또 다른 종류인 binomial distribution 을 살펴보자.<br/>
+descrete 값을 위한 가장 간단한 distribution 이다.<br/>
+example : bernoulli trial, yes or no, 0 or 1, selection, switch<br/>
+<br/>
+@<br/>
+binomial distribution 를 나타내는 function :<br/>
+$f(\theta;n,p) = \begin{bmatrix} n\\k \end{bmatrix} p^{k}(1-p)^{n-k}$ <br/>
+$\begin{bmatrix} n\\k \end{bmatrix} = \frac{n!}{k!(n-k)!}$ <br/>
+<br/>
+binomial distribution 의 notation : B(n,p)<br/>
+binomial distribution 의 파라미터 : n, p 즉, n, p 모양에 따라 distribution 의 모양이 달라진다. <br/>
+mean : np <br/>
+variance : np(1-p) <br/>
+<br/>
+@<br/>
+normal distribution, beta distribution, binomial distribution 을 봤을 때 binomial distribution 은 조금 다른 점이 있다. 앞 두개는 부드러운 선이다. 점이 뚝뚝 떨어져있다. discrete 한 event 에 대해서 확률을 정의할 때 쓰는 함수가 되겠다. 압정을 한번, 두번, 세번,... 던져서 결과를 알아낼수 있다시피 1.5번 같은 횟수로 던져 알아낼수 없다는 뜻이다. <br/>
+<br/>
+@<br/>
+binomial 들었을때 ring a bell 처럼 multinomial 생각이 나야한다. <br/>
+앞과 뒤 두가지 케이스에서 나오는게 binomial distribution 이라면, 앞뒤옆 이런식으로 3개 이상 선택지가 있을때 multinomial distribution 이 필요하다. 내가 단어 만개 알때, 아 다음에 뭐가올까? 특정한 어떤거다. 중간거 없다. 즉, 텍스트 마이닝 할때 많이 쓰는게 multinomial distribution 이다. <br/>
+<br/>
+multinomial distribution is the generalization of the binomial distribution.<br/>
+It's beyond yes or no(binomial distribution)<br/>
+It's like a choice from A, B, C, ..., Z<br/>
+Other examples are word selection, cluster selection, etc.<br/>
+<br/>
+multinomial distribution 은 다음과 같이 수식으로 정의할수있고, binomial distribution 의 특수한 경우이다.<br/>
+$f(x_{1}, ..., x_{k};n,p_{1}, ..., p_{k}) = \frac{n!}{x_{1}!...x_{k}!}p_{1}^{x_{1}}...p_{k}^{x_{k}}$<br/>
+multinomial distribution 의 notation 은 다음과 같다 : $Mult(P), P=<p_{1}, ..., p_{k}>$ <br/>
+mean : $E(x_{i}) = np_{i}$ <br/>
+variance : $Var(x_{i})=np_{i}(1-p_{i})$ <br/>
+<br/>
+@<br/>
+여기까지 확률을 간단히 알아보았다. 더 많은 확률분포들이 있다. 포아송 distribution 은 다루지도 않았다. 이번 강의 를 진행해나가면서 다양한 내용과 distribution 을 소개할 거지만 오늘 배웠던 normal, beta, binomial, multinomial distribution 만 제대로 알고 있어도 많은 머신러닝 알고리즘을 이해하는데 큰도움이 되고 이걸로 많이 커버를 할수 있다. <br/>
+
+   </BODY>
+</HTML>
