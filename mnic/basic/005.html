@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+005. Week 02. Fundamentals of Machine Learning - 01. Probability and Distribution<br/>
+<br/>
+@<br/>
+가장 기초적인 머신러닝 방법에 대해서 개관을 해보자. 그런데 빠른속도로 하자. 왜그러냐면, 오늘 다룰 내용이 decision tree, linear regression, rule based learning 이런것들인데 이런 방법들은 아직도 많이 쓰이고 있고 중요하다고 보고 있기도 하다. linear regression 은 특히 언제나 중요할 것 같다. decision tree 도 마찬가지고. 하지만 광범위하게, 정교하게, 높은 성능으로 인공지능이나 머신러닝 문제를 풀기위해서는 앞에것들은 약간 부족하지 않나 생각이 드는 모델인게 사실이다. 그래서 빠른시간에 이걸 보고 statistics 방법을 좀더 활용한 머신러닝 방법을 배우도록 하자. <br/>
+<br/>
+@<br/>
+rule based learning 이라는 옛날 방법을 살펴보자. 이론적으로. 왜냐면 사실 이걸 쓸려고 하는건 아니고 어떤 한계가 있는지 볼려고 하는 목적이기 때문이다. <br/>
+<br/>
+그 다음 decision tree 알아보자. forest decision tree 같은 변형도 나왔다.<br/>
+<br/>
+마지막으로 linear regression 을 알아보자. 많은 variation 들이 나오면서 다양한 방법들이 연구가 되고 있다. <br/>
+<br/>
+@<br/>
+머신러닝 프로그램은<br/>
+경험 E 에 의해서 배운다.<br/>
+배워서 특정 Task 를 한다.<br/>
+점점 performance 가 올라간다.<br/>
+   </BODY>
+</HTML>
