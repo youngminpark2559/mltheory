@@ -101,7 +101,7 @@ def kmeans_df(c0, c1):
                                 model.labels_[:, np.newaxis]]),
                     columns=["x0", "x1", "d0", "d1", "c"])
     return df
-​
+
 kmeans_df(c0, c1)
 % x0	x1	d0	d1	c
 % 0	7.0	5.0	6.708204	1.978277	0.0
@@ -186,7 +186,7 @@ kmeans_df(c0, c1)
 </xmp><img src="https://raw.githubusercontent.com/youngmtool/machinelearning/master/dohkim/pic/045-001-004.png"><xmp>
 
 @
-K-Means++ is algorithm to configure initial centroid알고리즘이다.
+K-Means++ is algorithm to configure initial centroid
 
 1. You prepare set M to store centroid in it
 2. First of all, you choose one random centroid $\mu_{0}$ and store it into M
@@ -203,16 +203,16 @@ Let's deal with Iris data with k-means and k-means++
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn.cluster import KMeans
 from sklearn import datasets
-​
+
 np.random.seed(5)
 centers = [[1, 1], [-1, -1], [1, -1]]
 iris = datasets.load_iris()
 X = iris.data
 y = iris.target
-​
+
 estimators = {'k_means_iris_3': KMeans(n_clusters=3),
               'k_means_iris_8': KMeans(n_clusters=8)}
-​
+
 fignum = 1
 for name, est in estimators.items():
     fig = plt.figure(fignum)
@@ -244,10 +244,10 @@ Let's deal with Digit Image with k-means and k-means++
 
 from sklearn.datasets import load_digits
 from sklearn.preprocessing import scale
-​
+
 digits = load_digits()
 data = scale(digits.data)
-​
+
 def print_digits(images, labels):
     f = plt.figure(figsize=(10,2))
     plt.subplots_adjust(top=1, bottom=0, hspace=0, wspace=0.05)
@@ -262,7 +262,7 @@ def print_digits(images, labels):
         ax.yaxis.set_ticks([])
         plt.tight_layout()
         i += 1
-​
+
 print_digits(digits.images, range(10))
 #img 1195e5a1-8724-472e-990b-338c6a8daa6b
 </xmp><img src="https://raw.githubusercontent.com/youngmtool/machinelearning/master/dohkim/pic/1195e5a1-8724-472e-990b-338c6a8daa6b.png"><xmp>
