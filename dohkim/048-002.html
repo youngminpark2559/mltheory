@@ -52,24 +52,24 @@ MathJax.Hub.Config({
 Naive Bayes classification model is one of famous "generating models"
 
 Target variable y has each class </xmp>$\{C_{1}, ...,C_{K}\}$<xmp>There is independent variable x
-We can find </xmp>$P(x|y=C_{K})$<xmp>We can estimate </xmp>$P(y=C_{K}|x)$<xmp>We can choose maximal </xmp>$P(y=C_{K}|x)$ from mulple estimated </xmp>$P(y=C_{K}|x)$<xmp>We finally choose class K from maximal </xmp>$P(y=C_{K}|x)$<xmp>
+We can find </xmp>$P(x|y=C_{K})$<xmp>We can estimate </xmp>$P(y=C_{K}|x)$<xmp>We can choose maximal </xmp>$P(y=C_{K}|x)$<xmp> from mulple estimated </xmp>$P(y=C_{K}|x)$<xmp>We finally choose class K from maximal </xmp>$P(y=C_{K}|x)$<xmp>
 Above way is called "naive bayes classification model"
 
 @
-We can calculate </xmp>$p(y=C_{K}|x)$ by using bayes rule
+We can calculate </xmp>$p(y=C_{K}|x)$<xmp> by using bayes rule
 </xmp>$P(y=C_{K}|x) = \frac{P(y=C_{K}|x) P(y=C_{K})}{P(x)}$<xmp> 
 We don't need to use marginal probability P(X) because we're only interested in probability in respect to each class K, and P(X) is regardless of K
 
 So, we can write like this without P(X)
 </xmp>$P(y=C_{K}|x) \propto P(x|y=C_{k}) P(y=C_{k})$<xmp>
-We can easily find prior probability </xmp>$P(y=C_{k})$ as follow
+We can easily find prior probability </xmp>$P(y=C_{k})$<xmp> as follow
 </xmp>$P(y=C_{k}) \approx \frac{number-of-samples-with-y=C_{k}}{number-of-all-samples}$<xmp>
-We can find likelihood </xmp>$P(x|y=C_{k})$ as follwing steps on assumption of specific model like gaussian normal distribution or bernoulli distribution
-1. We suppose </xmp>$P(x|y=C_{k})$ follows specific probability distribution model
-1. We find parameter of this model by using training data </xmp>$\{x_{1}, ...,x_{N}\}$<xmp>1. Since we know parameter of this model, we can find </xmp>$P(x|y=C_{k})$ as to any new value of x
+We can find likelihood </xmp>$P(x|y=C_{k})$<xmp> as follwing steps on assumption of specific model like gaussian normal distribution or bernoulli distribution
+1. We suppose </xmp>$P(x|y=C_{k})$<xmp> follows specific probability distribution model
+1. We find parameter of this model by using training data </xmp>$\{x_{1}, ...,x_{N}\}$<xmp>1. Since we know parameter of this model, we can find </xmp>$P(x|y=C_{k})$<xmp> as to any new value of x
 
 @
-If independent variable x is multi-dimensional </xmp>$x=(x_{1}, ...,x_{n})$<xmp>, above likelihood </xmp>$P(x|y=C_{k})$ should use joint probability </xmp>$P(x_{1}, ..., x_{n}|y=C_{k})$ in respect to all </xmp>$x_{i}$<xmp>But since we hardly get this joint probability </xmp>$P(x_{1}, ..., x_{n}|y=C_{k})$<xmp>, we use assumption that </xmp>$x_{1}, ...,x_{n}$ are all independent
+If independent variable x is multi-dimensional </xmp>$x=(x_{1}, ...,x_{n})$<xmp>, above likelihood </xmp>$P(x|y=C_{k})$<xmp> should use joint probability </xmp>$P(x_{1}, ..., x_{n}|y=C_{k})$<xmp> in respect to all </xmp>$x_{i}$<xmp>But since we hardly get this joint probability </xmp>$P(x_{1}, ..., x_{n}|y=C_{k})$<xmp>, we use assumption that </xmp>$x_{1}, ...,x_{n}$<xmp> are all independent
 We call this assumption naive assumption
 
 Under naive assumption, joint probability is represented multiplication by each probability
@@ -86,7 +86,7 @@ The probability of x being 1 is fixed
 Example: model which finds which coin was thrown, based on result of coin toss
 </xmp>$P(x_{i}|y=C_{k}) = \theta^{x}_{k}(1-\theta_{K})^{(1-x_{i})}$<xmp> 
 1. multinomial distribution
-</xmp>$(x_{1}, ...,x_{n})$ has 0 or positive integer
+</xmp>$(x_{1}, ...,x_{n})$<xmp> has 0 or positive integer
 Example: model which find which dice was thrown, based on result of throwing dice
 </xmp>$P(x_{1}, ...,x_{n}|y=C_{k}) = \prod\limits_{i} \theta_{k}^{x_{i}}$<xmp> 
 1. gaussian normal distribution
@@ -104,23 +104,23 @@ GaussianNB class is gaussian normal distribution naive bayes classification mode
 </xmp>$P(y=C_{K}|x) = \frac{P(y=C_{K}|x) P(y=C_{K})}{P(x)}$<xmp>Above classes have following attribute and method
 
 @
-Attributes which are related to "prior probability" </xmp>$P(y=C_{K})$ 
+Attributes which are related to "prior probability" </xmp>$P(y=C_{K})$<xmp> 
 classes_ is label of y
 
-class_count_ is the number of sameple data in respect to specific y
+class_count_ is the number of sample data in respect to specific y
 
 class_prior_ is unconditional probability distribution P(Y) in respect to y (this attribute is only for gaussian normal distribution)
-class_log_prior_ is log($\log{P(Y)}$) of unconditional probability distribution in respect to y (this attribute is only for bernoulli distribution or multinomial distribution)
+class_log_prior_ is log(</xmp>$\log{P(Y)}$<xmp>) of unconditional probability distribution in respect to y (this attribute is only for bernoulli distribution or multinomial distribution)
 
 @
-Attributes which estimate likelihood </xmp>$P(y=C_{K}|x)$<xmp>theta_, sigma_ calculate </xmp>$\mu$ and </xmp>$\sigma^{2}$ for gaussian normal distribution
+Attributes which estimate likelihood </xmp>$P(y=C_{K}|x)$<xmp>theta_, sigma_ calculate </xmp>$\mu$<xmp> and </xmp>$\sigma^{2}$<xmp> for gaussian normal distribution
 feature_count_ calculates the number of showing frequency in respect to each independent variable x for bernoulli distribution or multinomial distribution
 feature_log_prob_ calculates log of parameter vector of bernoulli distribution or multinomial distribution
 </xmp>$\log{\theta} = (\log{\theta_{1}}, ...,\log{\theta_{n}}) = (\log{\frac{N_{1}}{N}}, ...,\log{\frac{N_{K}}{N}})$<xmp>
 Above text,
 K means the number of classes which x can have
 N means the number of entire tries
-</xmp>$N_{i}$ means the number of occurring 1 on ith try
+</xmp>$N_{i}$<xmp> means the number of occurring 1 on ith try
 
 @
 If you have small sample, you can use "smoothing"
@@ -421,7 +421,7 @@ for i, clf in enumerate([model1, model2, model3, model4]):
 
 
 Practice 4
-How will you resolve question if x is composed of </xmp>$x_{1}$ has real numbers, </xmp>$x_{2}$ has 0 or 1, etc 
+How will you resolve question if x is composed of </xmp>$x_{1}$<xmp> has real numbers, </xmp>$x_{2}$<xmp> has 0 or 1, etc 
    
       </xmp>
    </BODY>
