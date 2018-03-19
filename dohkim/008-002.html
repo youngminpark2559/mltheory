@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+008-002. ID data, load csv, create csv, export csv<br/>
+<xmp>
+@
+# Pandas can make dataframe by loading data file in various formats
+
+CSV
+Excel
+HTML
+JSON
+HDF5
+SAS
+STATA
+SQL
+
+@
+# You can create text file to make csv file by doing following magic command
+
+%%writefile sample1.csv
+c1, c2, c3
+1, 1.11, one
+2, 2.22, two
+3, 3.33, three
+# Writing sample1.csv
+
+@
+# You can create dataframe object by loading csv file
+pd.read_csv('sample1.csv')
+# c1	c2	c3
+# 0	1	1.11	one
+# 1	2	2.22	two
+# 2	3	3.33	three
+
+# We designated colomns index
+# But we didn't for row index, so that, integer row index is automatically inserted
+
+
+@
+# I create csv file without both row index and colomn index
+%%writefile sample2.csv
+1, 1.11, one
+2, 2.22, two
+3, 3.33, three
+# Writing sample2.csv
+
+# If you want to add colomn index, you can add it 
+pd.read_csv('sample2.csv', names=['c1', 'c2', 'c3'])
+# c1	c2	c3
+# 0	1	1.11	one
+# 1	2	2.22	two
+# 2	3	3.33	three
+
+@
+# If you want to use specific colomn index as row index,
+pd.read_csv('sample1.csv', index_col='c1')
+# c2	c3
+# c1		
+# 1	1.11	one
+# 2	2.22	two
+# 3	3.33	three
+
+@
+%%writefile sample3.txt
+c1        c2        c3        c4 
+0.179181 -1.538472  1.347553  0.43381
+1.024209  0.087307 -1.281997  0.49265
+0.417899 -2.002308  0.255245 -1.10515
+# Writing sample3.txt
+
+# If you run into none-csv file without comma delimeter, you can designate comma delimeter by sep argument
+# If delimiter is unfixed length whitespace, you can use regular expression patter \s+
+pd.read_table('sample3.txt', sep='\s+')
+# c1	c2	c3	c4
+# 0	0.179181	-1.538472	1.347553	0.43381
+# 1	1.024209	0.087307	-1.281997	0.49265
+# 2	0.417899	-2.002308	0.255245	-1.10515
+
+
+@
+%%writefile sample4.txt
+c1, c2, c3
+1, 1.11, one
+2, 2.22, two
+3, 3.33, three
+# Writing sample4.txt
+
+# If you want to skip some rows in data file,
+pd.read_csv('sample4.txt', skiprows=[0, 1])
+# c1	c2	c3
+# 2	3	3.33	three
+
+
+@
+%%writefile sample5.csv
+c1, c2, c3
+1, 1.11, one
+2,, two
+empty, 3.33, three
+
+# If you want to treat specific value as NaN, 
+# you put specific value you want to treat as NaN into na_values argument
+df = pd.read_csv('sample5.csv', na_values=['empty'])
+df
+# c1	c2	c3
+# 0	1.0	1.11	one
+# 1	2.0	NaN	two
+# 2	NaN	3.33	three
+
+
+@
+%%writefile sample6.txt
+c1,c2,c3
+0,1.0,1.11,one
+1,2.0,two
+2,3.33,three
+
+# If you want to export dataframe in form of csv file,
+# you can use to_csv()
+df.to_csv('sample6.csv')
+
+
+# You can check contents of that csv file by using cat shell command
+# In windows, you can use type command
+# Exclamation mark(!) is magic command to use shell comman in IPython
+!cat sample6.csv  # In windows, you can use !type command
+# ,c1, c2, c3
+# 0,1.0,1.11, one
+# 1,2.0,, two
+# 2,,3.33, three
+
+@
+# When you export file, you can use sep argument to change delimeter
+df.to_csv('sample7.txt', sep='|')
+# !cat sample7.txt
+# |c1| c2| c3
+# 0|1.0|1.11| one
+# 1|2.0|| two
+# 2||3.33| three
+
+@
+# You can change NaN denotation by using na_rep argument
+df.to_csv('sample8.csv', na_rep='empty')
+# !cat sample8.csv
+# ,c1, c2, c3
+# 0,1.0,1.11, one
+# 1,2.0,누락, two
+# 2,누락,3.33, three
+
+@
+# You can designate colomn or row to show data table
+df.index = ["a", "b", "c"]
+# or
+df.index = ["c1", "c2", "c3"]
+df
+# c1	c2	c3
+# a	1.0	1.11	one
+# b	2.0	NaN	two
+# c	NaN	3.33	three
+
+# You can designate wheter printing colomn or row to show
+df.to_csv('sample9.csv', index=False, header=False)
+# !cat sample9.csv
+# 1.0,1.11, one
+# 2.0,, two
+# ,3.33, three
+
+
+@
+# You can find various data file in form of csv
+# When you use read_csv(), you can use url instead of path of csv file
+df = pd.read_csv('https://raw.githubusercontent.com/datascienceschool/docker_rpython/master/data/titanic.csv')
+df
+
+# If data is too massive, dataframe shows partial table
+# survived	pclass	sex	age	sibsp	parch	fare	embarked	class	who	adult_male	deck	embark_town	alive	alone
+# 0	0	3	male	22.0	1	0	7.2500	S	Third	man	True	NaN	Southampton	no	False
+# 1	1	1	female	38.0	1	0	71.2833	C	First	woman	False	C	Cherbourg	yes	False
+# 2	1	3	female	26.0	0	0	7.9250	S	Third	woman	False	NaN	Southampton	yes	True
+# 3	1	1	female	35.0	1	0	53.1000	S	First	woman	False	C	Southampton	yes	False
+# 4	0	3	male	35.0	0	0	8.0500	S	Third	man	True	NaN	Southampton	no	True
+# 5	0	3	male	NaN	0	0	8.4583	Q	Third	man	True	NaN	Queenstown	no	True
+# 6	0	1	male	54.0	0	0	51.8625	S	First	man	True	E	Southampton	no	True
+# 7	0	3	male	2.0	3	1	21.0750	S	Third	child	False	NaN	Southampton	no	False
+# 8	1	3	female	27.0	0	2	11.1333	S	Third	woman	False	NaN	Southampton	yes	False
+# 9	1	2	female	14.0	1	0	30.0708	C	Second	child	False	NaN	Cherbourg	yes	False
+# 10	1	3	female	4.0	1	1	16.7000	S	Third	child	False	G	Southampton	yes	False
+# 11	1	1	female	58.0	0	0	26.5500	S	First	woman	False	C	Southampton	yes	True
+# 12	0	3	male	20.0	0	0	8.0500	S	Third	man	True	NaN	Southampton	no	True
+# 13	0	3	male	39.0	1	5	31.2750	S	Third	man	True	NaN	Southampton	no	False
+# 14	0	3	female	14.0	0	0	7.8542	S	Third	child	False	NaN	Southampton	no	True
+# 15	1	2	female	55.0	0	0	16.0000	S	Second	woman	False	NaN	Southampton	yes	True
+# 16	0	3	male	2.0	4	1	29.1250	Q	Third	child	False	NaN	Queenstown	no	False
+# 17	1	2	male	NaN	0	0	13.0000	S	Second	man	True	NaN	Southampton	yes	True
+# 18	0	3	female	31.0	1	0	18.0000	S	Third	woman	False	NaN	Southampton	no	False
+# 19	1	3	female	NaN	0	0	7.2250	C	Third	woman	False	NaN	Cherbourg	yes	True
+# 20	0	2	male	35.0	0	0	26.0000	S	Second	man	True	NaN	Southampton	no	True
+# 21	1	2	male	34.0	0	0	13.0000	S	Second	man	True	D	Southampton	yes	True
+# 22	1	3	female	15.0	0	0	8.0292	Q	Third	child	False	NaN	Queenstown	yes	True
+# 23	1	1	male	28.0	0	0	35.5000	S	First	man	True	A	Southampton	yes	True
+# 24	0	3	female	8.0	3	1	21.0750	S	Third	child	False	NaN	Southampton	no	False
+# 25	1	3	female	38.0	1	5	31.3875	S	Third	woman	False	NaN	Southampton	yes	False
+# 26	0	3	male	NaN	0	0	7.2250	C	Third	man	True	NaN	Cherbourg	no	True
+# 27	0	1	male	19.0	3	2	263.0000	S	First	man	True	C	Southampton	no	False
+# 28	1	3	female	NaN	0	0	7.8792	Q	Third	woman	False	NaN	Queenstown	yes	True
+# 29	0	3	male	NaN	0	0	7.8958	S	Third	man	True	NaN	Southampton	no	True
+# ...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+# 861	0	2	male	21.0	1	0	11.5000	S	Second	man	True	NaN	Southampton	no	False
+# 862	1	1	female	48.0	0	0	25.9292	S	First	woman	False	D	Southampton	yes	True
+# 863	0	3	female	NaN	8	2	69.5500	S	Third	woman	False	NaN	Southampton	no	False
+# 864	0	2	male	24.0	0	0	13.0000	S	Second	man	True	NaN	Southampton	no	True
+# 865	1	2	female	42.0	0	0	13.0000	S	Second	woman	False	NaN	Southampton	yes	True
+# 866	1	2	female	27.0	1	0	13.8583	C	Second	woman	False	NaN	Cherbourg	yes	False
+# 867	0	1	male	31.0	0	0	50.4958	S	First	man	True	A	Southampton	no	True
+# 868	0	3	male	NaN	0	0	9.5000	S	Third	man	True	NaN	Southampton	no	True
+# 869	1	3	male	4.0	1	1	11.1333	S	Third	child	False	NaN	Southampton	yes	False
+# 870	0	3	male	26.0	0	0	7.8958	S	Third	man	True	NaN	Southampton	no	True
+# 871	1	1	female	47.0	1	1	52.5542	S	First	woman	False	D	Southampton	yes	False
+# 872	0	1	male	33.0	0	0	5.0000	S	First	man	True	B	Southampton	no	True
+# 873	0	3	male	47.0	0	0	9.0000	S	Third	man	True	NaN	Southampton	no	True
+# 874	1	2	female	28.0	1	0	24.0000	C	Second	woman	False	NaN	Cherbourg	yes	False
+# 875	1	3	female	15.0	0	0	7.2250	C	Third	child	False	NaN	Cherbourg	yes	True
+# 876	0	3	male	20.0	0	0	9.8458	S	Third	man	True	NaN	Southampton	no	True
+# 877	0	3	male	19.0	0	0	7.8958	S	Third	man	True	NaN	Southampton	no	True
+# 878	0	3	male	NaN	0	0	7.8958	S	Third	man	True	NaN	Southampton	no	True
+# 879	1	1	female	56.0	0	1	83.1583	C	First	woman	False	C	Cherbourg	yes	False
+# 880	1	2	female	25.0	0	1	26.0000	S	Second	woman	False	NaN	Southampton	yes	False
+# 881	0	3	male	33.0	0	0	7.8958	S	Third	man	True	NaN	Southampton	no	True
+# 882	0	3	female	22.0	0	0	10.5167	S	Third	woman	False	NaN	Southampton	no	True
+# 883	0	2	male	28.0	0	0	10.5000	S	Second	man	True	NaN	Southampton	no	True
+# 884	0	3	male	25.0	0	0	7.0500	S	Third	man	True	NaN	Southampton	no	True
+# 885	0	3	female	39.0	0	5	29.1250	Q	Third	woman	False	NaN	Queenstown	no	False
+# 886	0	2	male	27.0	0	0	13.0000	S	Second	man	True	NaN	Southampton	no	True
+# 887	1	1	female	19.0	0	0	30.0000	S	First	woman	False	B	Southampton	yes	True
+# 888	0	3	female	NaN	1	2	23.4500	S	Third	woman	False	NaN	Southampton	no	False
+# 889	1	1	male	26.0	0	0	30.0000	C	First	man	True	C	Cherbourg	yes	True
+# 890	0	3	male	32.0	0	0	7.7500	Q	Third	man	True	NaN	Queenstown	no	True
+# 891 rows × 15 columns
+
+
+@
+# If you want to see specific number of data from front or back area, you use head() or tail()
+# You can designate the number of row or colomn to show as argument
+df.head()
+# survived	pclass	sex	age	sibsp	parch	fare	embarked	class	who	adult_male	deck	embark_town	alive	alone
+# 0	0	3	male	22.0	1	0	7.2500	S	Third	man	True	NaN	Southampton	no	False
+# 1	1	1	female	38.0	1	0	71.2833	C	First	woman	False	C	Cherbourg	yes	False
+# 2	1	3	female	26.0	0	0	7.9250	S	Third	woman	False	NaN	Southampton	yes	True
+# 3	1	1	female	35.0	1	0	53.1000	S	First	woman	False	C	Southampton	yes	False
+# 4	0	3	male	35.0	0	0	8.0500	S	Third	man	True	NaN	Southampton	no	True
+
+df.tail(2)
+# survived	pclass	sex	age	sibsp	parch	fare	embarked	class	who	adult_male	deck	embark_town	alive	alone
+# 889	1	1	male	26.0	0	0	30.00	C	First	man	True	C	Cherbourg	yes	True
+# 890	0	3	male	32.0	0	0	7.75	Q	Third	man	True	NaN	Queenstown	no	True
+
+
+@
+# If you use DataReader of pandas_datareader package, you can directly and automatically load data of some internet site
+# To use pandas_datareader package, you should install separately regardless of pandas
+# Following is site examples of pandas_datareader provding
+# Some site can require register and payment
+# FRED
+# Fama/French
+# World Bank
+# OECD
+# Eurostat
+# EDGAR Index
+# TSP Fund Data
+# Oanda currency historical rate
+# Nasdaq Trader Symbol Definitions
+
+# For more detail, you can see following site
+# https://pandas-datareader.readthedocs.io/en/latest/index.html
+
+@
+from pandas_datareader.data import DataReader
+
+# You can designate datetime by using datetime package or in form of string
+# If you use string for datetime, internally it uses dateutil package
+import datetime
+dt_start = datetime.datetime(2015, 1, 1)
+dt_end = "2016, 6, 30"
+
+# You designate web site name as argument to load data
+# You should find code of data you want to explore in following sites
+# https://fred.stlouisfed.org/series/GDP
+# https://fred.stlouisfed.org/series/CPIAUCSL
+# https://fred.stlouisfed.org/series/CPILFESL
+
+# Following is example of loading GDP of USA
+gdp = DataReader("GDP", "fred", dt_start, dt_end)
+gdp.tail()
+# GDP
+# DATE	
+# 2015-04-01	18093.224
+# 2015-07-01	18227.689
+# 2015-10-01	18287.226
+# 2016-01-01	18325.187
+# 2016-04-01	18538.039
+
+# If you put list for code, you can bring multiple data at the same time
+# CPIAUCSL is consumer price index
+# CPILFESL is consumer price index excluded food and energy
+inflation = DataReader(["CPIAUCSL", "CPILFESL"], "fred", dt_start, dt_end)
+inflation.tail()
+# CPIAUCSL	CPILFESL
+# DATE		
+# 2016-02-01	237.808	245.845
+# 2016-03-01	238.078	246.062
+# 2016-04-01	238.908	246.517
+# 2016-05-01	239.362	247.026
+# 2016-06-01	239.842	247.389
+      </xmp>
+   </BODY>
+</HTML>
