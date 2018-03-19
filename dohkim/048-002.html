@@ -161,7 +161,9 @@ sns.distplot(X1, rug=True, kde=False, norm_hist=True, label="class 1")
 plt.legend()
 plt.xlim(-6,6)
 plt.show()
-#i1
+#img 048-002-001
+<img src="https://raw.githubusercontent.com/youngmtool/machinelearning/master/dohkim/pic/048-002-001.png"> <br/><br/>
+
 
 from sklearn.naive_bayes import GaussianNB
 clf_norm = GaussianNB().fit(X, y)
@@ -189,8 +191,9 @@ plt.plot(xx, p0, c="r", label="class 0 est. pdf")
 plt.plot(xx, p1, c="b", label="class 1 est. pdf")
 plt.legend()
 plt.show()
-#i2
-
+#img 048-002-002
+<img src="https://raw.githubusercontent.com/youngmtool/machinelearning/master/dohkim/pic/048-002-002.png"> <br/><br/>
+   
 x_new = -1
 clf_norm.predict_proba([[x_new]])
 % array([[0.98327446, 0.01672554]])
@@ -353,7 +356,6 @@ Practice 3
 
 @
 Let's try to apply naive bayes classification model to "20 News Group" data
-다음은 20 News Group 데이터에 대해 나이브 베이즈 분류 모형을 적용한 결과이다.
 
 import numpy as np
 import scipy as sp
