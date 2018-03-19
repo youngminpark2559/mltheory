@@ -1,0 +1,624 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+008-001. introduction to pandas<br/>
+<xmp>
+@
+Pandas package is most much used package when you analyze data
+Most of data can be represented in form of "series" format or "table" format
+Pandas provides Series class and DataFrame class which are used to deal with "table" format data
+
+@
+Seires class is similar to 1 dimensional array of numpy
+But Series class allows us to append index data for each data which is called value
+So, we can say Series = value(data) + label(index)
+
+@
+How to generate Serise object
+
+data = [9904312, 3448737, 2890451, 2466052]
+each data is value
+index=["서울", "부산", "인천", "대구"]
+each index is label which also can be datetime, time, integer, string
+
+s = pd.Series([9904312, 3448737, 2890451, 2466052], index=["서울", "부산", "인천", "대구"])
+s
+# 서울    9904312
+# 부산    3448737
+# 인천    2890451
+# 대구    2466052
+# dtype: int64
+
+@
+If you don't designate index, index will be integer which starts with 0
+
+Data = [10,11,12,13]
+pd.Series(range(10, 14))
+# 0    10
+# 1    11
+# 2    12
+# 3    13
+# dtype: int64
+
+@
+You can access to index data by using Series.index
+You can access to data by using Series.values
+s.index
+# Index(['서울', '부산', '인천', '대구'], dtype='object')
+s.values
+# array([9904312, 3448737, 2890451, 2466052])
+
+
+@
+You can give name to entire series data by using Series.name
+You can give name to entire series index data by using Series.index.name
+
+s.name = "인구"
+s.index.name = "도시"
+s
+# 도시
+# 서울    9904312
+# 부산    3448737
+# 인천    2890451
+# 대구    2466052
+# Name: 인구, dtype: int64
+
+@
+시리즈 연산¶
+Like numpy array, you can do vectorized operation with series
+But vectorized operation is only applied to value data
+index value doesn't change
+
+s / 1000000
+# 도시
+# 서울    9.904312
+# 부산    3.448737
+# 인천    2.890451
+# 대구    2.466052
+# Name: 인구, dtype: float64
+
+@
+indexing series
+You can use "indexing which is used in numpy array", "indexing using index label", "slicing using array indexing and index label"
+
+s[1], s["부산"]
+# (3448737, 3448737)
+s[3], s["대구"]
+# (2466052, 2466052)
+
+If you do "array indexing", you can change order of data or choose specific data
+
+0 서울    9904312
+1 부산    3448737
+2 인천    2890451
+3 대구    2466052
+s[[0, 3, 1]]
+# 도시
+# 서울    9904312
+# 대구    2466052
+# 부산    3448737
+# Name: 인구, dtype: int64
+
+s[["서울", "대구", "부산"]]
+# 도시
+# 서울    9904312
+# 대구    2466052
+# 부산    3448737
+# Name: 인구, dtype: int64
+
+s[(250e4 < s) & (s < 500e4)]
+# 도시
+# 부산    3448737
+# 인천    2890451
+# Name: 인구, dtype: int64
+
+@
+
+s[1:3]
+# 도시
+# 부산    3448737
+# 인천    2890451
+# Name: 인구, dtype: int64
+
+# When you use slicing with "label string data", index string after ":" is included in result, on which you should be careful
+s["부산":"대구"]
+# 도시
+# 부산    3448737
+# 인천    2890451
+# 대구    2466052
+# Name: 인구, dtype: int64
+
+# If label data is alphabet string, you can access to index data by using . like you do with attribute
+s0 = pd.Series(range(3), index=["a", "b", "c"])
+s0
+# a    0
+# b    1
+# c    2
+# dtype: int64
+s0.a
+# 0
+s0.b
+# 1
+
+@
+# Serise and dictionary data type
+# Since serise object can be indexed by label vale, series is actually identical to dictionary data type which has label value as key
+# Therefore,
+# you can use "in" operation which is provided by dictionary data type
+# you can access to each element's key and value via for loop by using items()
+
+
+"서울" in s
+# True
+"대전" in s
+# False
+for k, v in s.items():
+    print("%s = %d" % (k, v))
+# 서울 = 9904312
+# 부산 = 3448737
+# 인천 = 2890451
+# 대구 = 2466052
+
+@
+# And you can also make series from dictionary object
+
+s2 = pd.Series({"서울":9631482, "부산":3393191, "인천":2632035, "대전":1490158})
+s2
+# 대전    1490158
+# 부산    3393191
+# 서울    9631482
+# 인천    2632035
+# dtype: int64
+
+# Since element of dictionary data type doesn't have order, element of series doesn't have fixed order
+# If you want to make fixed order, you should designate order of index as list
+s2 = pd.Series({"서울" : 9631482, "부산" : 3393191, "인천" : 2632035, "대전" : 1490158}, index=["부산", "서울", "인천", "대전"])
+s2
+# 부산    3393191
+# 서울    9631482
+# 인천    2632035
+# 대전    1490158
+# dtype: int64
+
+@
+# Operation based on index
+# If you operate 2 series, operation is performed on data with same index
+
+ds = s - s2
+ds
+# 대구         NaN
+# 대전         NaN
+# 부산     55546.0
+# 서울    272830.0
+# 인천    258416.0
+# dtype: float64
+
+s.values - s2.values
+# array([ 6511121, -6182745,   258416,   975894])
+
+# In case of 대구 and 대전, operation is impossible because data doesn't exist on 2010 and 2015
+# So, NaN is returned
+# Since NaN can be represented in float, all other result is represented in float
+
+# If you want to find value not NaN, you can use notnull()
+
+ds.notnull()
+# 대구    False
+# 대전    False
+# 부산     True
+# 서울     True
+# 인천     True
+# dtype: bool
+
+ds[ds.notnull()]
+# 부산     55546.0
+# 서울    272830.0
+# 인천    258416.0
+# dtype: float64
+
+@
+# You can calculate increasing rate(%) of population
+rs = ((s - s2) / s2) * 100
+rs = rs[rs.notnull()]
+rs
+# 부산    1.636984
+# 서울    2.832690
+# 인천    9.818107
+# dtype: float64
+
+@
+
+# You can update, add, remove data by using indexing as if you do with dictionary
+rs["부산"] = 1.63
+rs
+# 부산    1.630000
+# 서울    2.832690
+# 인천    9.818107
+# dtype: float64
+
+rs["대구"] = 1.41
+rs
+# 부산    1.630000
+# 서울    2.832690
+# 인천    9.818107
+# 대구    1.410000
+# dtype: float64
+
+@
+# When you delete data, you can use del() as if dictionary
+del(rs["서울"])
+rs
+# 부산    1.630000
+# 인천    9.818107
+# 대구    1.410000
+# dtype: float64
+
+
+@
+# Practice 1
+# 1. Randomly create 2 series objects
+# They should have string index value
+# There should be uncommon index label between two
+
+# 1. Perform arithmetics with 2 series objects
+
+@
+You can say series has row index on 1 dimensional vector data
+You can say dataframe has column index on 2 dimensional matrix data
+Of course, you can use both row index and column index because it's 2 dimensional matrix
+
+@
+# You prepare data in form of list or 1 dimensional array, which will be one column
+# You create dictionary, with creating index label as key and column as value
+# You put this data, row index data, column index data into dataframe class constructor
+
+
+
+data = \
+{
+    "2015" : [9904312, 3448737, 2890451, 2466052],
+    "2010" : [9631482, 3393191, 2632035, 2431774],
+    "2005" : [9762546, 3512547, 2517680, 2456016],
+    "2000" : [9853972, 3655437, 2466338, 2473990],
+    "지역" : ["수도권", "경상권", "수도권", "경상권"],
+    "2010-2015 증가율" : [0.0283, 0.0163, 0.0982, 0.0141]
+}
+columns = ["지역", "2015", "2010", "2005", "2000", "2010-2015 증가율"]
+index = ["서울", "부산", "인천", "대구"]
+df = pd.DataFrame(data, index=index, columns=columns)
+df
+# 지역	2015	2010	2005	2000	2010-2015 증가율
+# 서울	수도권	9904312	9631482	9762546	9853972	0.0283
+# 부산	경상권	3448737	3393191	3512547	3655437	0.0163
+# 인천	수도권	2890451	2632035	2517680	2466338	0.0982
+# 대구	경상권	2466052	2431774	2456016	2473990	0.0141
+
+@
+# We said dataframe is created based on 2 dimensional array
+# But it's actually not true
+# It's more true to consider dataframe as dictionary which is combined with colomns series which have common index
+# 2 dimensional array should have same data type for all elements
+# Dataframe can have different data type for each colomn
+data = \
+{
+    "2015" : [9904312, 3448737, 2890451, 2466052],
+    "2010" : [9631482, 3393191, 2632035, 2431774],
+    "2005" : [9762546, 3512547, 2517680, 2456016],
+    "2000" : [9853972, 3655437, 2466338, 2473990],
+    "지역" : ["수도권", "경상권", "수도권", "경상권"],
+    "2010-2015 증가율" : [0.0283, 0.0163, 0.0982, 0.0141]
+}
+columns = ["지역", "2015", "2010", "2005", "2000", "2010-2015 증가율"]
+
+@
+# You can use dataframe.values attribute to access to data as if series
+df.values
+# array([['수도권', 9904312, 9631482, 9762546, 9853972, 0.0283],
+#        ['경상권', 3448737, 3393191, 3512547, 3655437, 0.0163],
+#        ['수도권', 2890451, 2632035, 2517680, 2466338, 0.0982],
+#        ['경상권', 2466052, 2431774, 2456016, 2473990, 0.0141]], dtype=object)
+
+# You can use dataframe.colomns attribute to access to colomn index
+df.columns
+# Index(['지역', '2015', '2010', '2005', '2000', '2010-2015 증가율'], dtype='object')
+
+# You can use dataframe.index attribute to access to row index
+df.index
+# Index(['서울', '부산', '인천', '대구'], dtype='object')
+
+@
+# You can give name to colomns index and row index
+df.index.name = "도시"
+df.columns.name = "특성"
+df
+# 특성	지역	2015	2010	2005	2000	2010-2015 증가율
+# 도시						
+# 서울	수도권	9904312	9631482	9762546	9853972	0.0283
+# 부산	경상권	3448737	3393191	3512547	3655437	0.0163
+# 인천	수도권	2890451	2632035	2517680	2466338	0.0982
+# 대구	경상권	2466052	2431774	2456016	2473990	0.0141
+
+@
+# Practice 2
+# Create dataframe which satisfies following condition
+# 1. The number of row and colomn should be over 5
+# 1. Colomns should contain each data type at least over 1 time from integer, string, float
+
+@
+# Dataframe provides almost all attributes and methods, including transpose which 2 dimensional numpy array has
+# I use transpose attribute
+df.T
+# 도시	서울	부산	인천	대구
+# 특성				
+# 지역	수도권	경상권	수도권	경상권
+# 2015	9904312	3448737	2890451	2466052
+# 2010	9631482	3393191	2632035	2431774
+# 2005	9762546	3512547	2517680	2456016
+# 2000	9853972	3655437	2466338	2473990
+# 2010-2015 증가율	0.0283	0.0163	0.0982	0.0141
+
+
+@
+# When you index dataframe, you can index with considering "colomns label" as key
+
+# If you put one value of label as index, you get series object
+df["지역"]
+# 도시
+# 서울    수도권
+# 부산    경상권
+# 인천    수도권
+# 대구    경상권
+# Name: 지역, dtype: object
+
+# If you put array or list of label as index, you get partial dataframe object
+df[["2010", "2015"]]
+# 특성	2010	2015
+# 도시		
+# 서울	9631482	9904312
+# 부산	3393191	3448737
+# 인천	2632035	2890451
+# 대구	2431774	2466052
+
+@
+# If you want to bring one colomn with wanting dataframe's data type unified,
+# you can index with list containing one element
+df[["2010"]]
+# 특성	2010
+# 도시	
+# 서울	9631482
+# 부산	3393191
+# 인천	2632035
+# 대구	2431774
+
+type(df[["2010"]])
+# pandas.core.frame.DataFrame
+
+
+df["2010"]
+# 도시
+# 서울    9631482
+# 부산    3393191
+# 인천    2632035
+# 대구    2431774
+# Name: 2010, dtype: int64
+
+type(df["2010"])
+# pandas.core.series.Series
+
+@
+# If colomns index has string label, you can't use integer indexing for that colomn indexing
+
+# You can't use integer indexing (which can be used for row indexing) for colomn indexing
+# You get error if you use integer indexing for colomn indexing
+df[0]
+# ---------------------------------------------------------------------------
+# KeyError                                  Traceback (most recent call last)
+# ~/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
+#    2441             try:
+# -> 2442                 return self._engine.get_loc(key)
+#    2443             except KeyError:
+
+# pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+# pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+# pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+# pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+# KeyError: 0
+
+# During handling of the above exception, another exception occurred:
+
+# KeyError                                  Traceback (most recent call last)
+#  in ()
+# ----> 1 df[0]
+
+# ~/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py in __getitem__(self, key)
+#    1962             return self._getitem_multilevel(key)
+#    1963         else:
+# -> 1964             return self._getitem_column(key)
+#    1965 
+#    1966     def _getitem_column(self, key):
+
+# ~/anaconda3/lib/python3.6/site-packages/pandas/core/frame.py in _getitem_column(self, key)
+#    1969         # get column
+#    1970         if self.columns.is_unique:
+# -> 1971             return self._get_item_cache(key)
+#    1972 
+#    1973         # duplicate columns & possible reduce dimensionality
+
+# ~/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py in _get_item_cache(self, item)
+#    1643         res = cache.get(item)
+#    1644         if res is None:
+# -> 1645             values = self._data.get(item)
+#    1646             res = self._box_item_values(item, values)
+#    1647             cache[item] = res
+
+# ~/anaconda3/lib/python3.6/site-packages/pandas/core/internals.py in get(self, item, fastpath)
+#    3588 
+#    3589             if not isnull(item):
+# -> 3590                 loc = self.items.get_loc(item)
+#    3591             else:
+#    3592                 indexer = np.arange(len(self.items))[isnull(self.items)]
+
+# ~/anaconda3/lib/python3.6/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)
+#    2442                 return self._engine.get_loc(key)
+#    2443             except KeyError:
+# -> 2444                 return self._engine.get_loc(self._maybe_cast_indexer(key))
+#    2445 
+#    2446         indexer = self.get_indexer([key], method=method, tolerance=tolerance)
+
+# pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+# pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()
+
+# pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+# pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+# KeyError: 0
+
+
+@
+# But in case of when you didn't provide colomn label, so interger colomn index was automatically generated, you can use integer indexing
+df2 = pd.DataFrame(np.arange(12).reshape(3, 4))
+df2
+# 0	1	2	3
+# 0	0	1	2	3
+# 1	4	5	6	7
+# 2	8	9	10	11
+
+df2[2]
+# 0     2
+# 1     6
+# 2    10
+# Name: 2, dtype: int64
+
+@
+# Since dataframe can be considered as colomn series of dictionary,
+# you can updata, add, remove data per colomn
+df["2010-2015 증가율"] = df["2010-2015 증가율"] * 100
+df
+# 특성	지역	2015	2010	2005	2000	2010-2015 증가율
+# 도시						
+# 서울	수도권	9904312	9631482	9762546	9853972	2.83
+# 부산	경상권	3448737	3393191	3512547	3655437	1.63
+# 인천	수도권	2890451	2632035	2517680	2466338	9.82
+# 대구	경상권	2466052	2431774	2456016	2473990	1.41
+
+df["2005-2010 증가율"] = ((df["2010"] - df["2005"]) / df["2005"] * 100).round(2)
+df
+# 특성	지역	2015	2010	2005	2000	2010-2015 증가율	2005-2010 증가율
+# 도시							
+# 서울	수도권	9904312	9631482	9762546	9853972	2.83	-1.34
+# 부산	경상권	3448737	3393191	3512547	3655437	1.63	-3.40
+# 인천	수도권	2890451	2632035	2517680	2466338	9.82	4.54
+# 대구	경상권	2466052	2431774	2456016	2473990	1.41	-0.99
+
+del df["2010-2015 증가율"]
+df
+# 특성	지역	2015	2010	2005	2000	2005-2010 증가율
+# 도시						
+# 서울	수도권	9904312	9631482	9762546	9853972	-1.34
+# 부산	경상권	3448737	3393191	3512547	3655437	-3.40
+# 인천	수도권	2890451	2632035	2517680	2466338	4.54
+# 대구	경상권	2466052	2431774	2456016	2473990	-0.99
+
+@
+# You can index by colomn label, and then, you can index by row label each data
+df["2015"]["서울"]
+# 9904312
+
+@
+# If you want to index data per row, you use slicing
+# You can use label slicing as if series
+
+df[:1]
+# 특성	지역	2015	2010	2005	2000	2005-2010 증가율
+# 도시						
+# 서울	수도권	9904312	9631482	9762546	9853972	-1.34
+
+df[1:2]
+# 특성	지역	2015	2010	2005	2000	2005-2010 증가율
+# 도시						
+# 부산	경상권	3448737	3393191	3512547	3655437	-3.4
+
+df[1:3]
+# 특성	지역	2015	2010	2005	2000	2005-2010 증가율
+# 도시						
+# 부산	경상권	3448737	3393191	3512547	3655437	-3.40
+# 인천	수도권	2890451	2632035	2517680	2466338	4.54
+
+df["서울":"부산"]
+# 특성	지역	2015	2010	2005	2000	2005-2010 증가율
+# 도시						
+# 서울	수도권	9904312	9631482	9762546	9853972	-1.34
+# 부산	경상권	3448737	3393191	3512547	3655437	-3.40
+
+@
+Practice 3
+# Extract or process data from following dataframe
+data = {
+    "국어": [80, 90, 70, 30],
+    "영어": [90, 70, 60, 40],
+    "수학": [90, 60, 80, 70],
+}
+columns = ["국어", "영어", "수학"]
+index = ["춘향", "몽룡", "향단", "방자"]
+df = pd.DataFrame(data, index=index, columns=columns)
+
+# 1. Print all student's math score in form of serise
+# 1. Print all student's math score and english score in form of dataframe
+# 1. Add all studnet's average score for each subject as new colomn
+# 1. Update bangja's english score to 80, and then, update his average score
+# 1. Print chunhyang's score in form of dataframe
+# 1. Print hyangdan's score in form of series
+      </xmp>
+   </BODY>
+</HTML>
