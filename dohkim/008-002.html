@@ -78,19 +78,19 @@ pd.read_csv('sample1.csv')
 # 1	2	2.22	two
 # 2	3	3.33	three
 
-# We designated colomns index
+# We designated columns index
 # But we didn't for row index, so that, integer row index is automatically inserted
 
 
 @
-# I create csv file without both row index and colomn index
+# I create csv file without both row index and column index
 %%writefile sample2.csv
 1, 1.11, one
 2, 2.22, two
 3, 3.33, three
 # Writing sample2.csv
 
-# If you want to add colomn index, you can add it 
+# If you want to add column index, you can add it 
 pd.read_csv('sample2.csv', names=['c1', 'c2', 'c3'])
 # c1	c2	c3
 # 0	1	1.11	one
@@ -98,7 +98,7 @@ pd.read_csv('sample2.csv', names=['c1', 'c2', 'c3'])
 # 2	3	3.33	three
 
 @
-# If you want to use specific colomn index as row index,
+# If you want to use specific column index as row index,
 pd.read_csv('sample1.csv', index_col='c1')
 # c2	c3
 # c1		
@@ -194,7 +194,7 @@ df.to_csv('sample8.csv', na_rep='empty')
 # 2,empty,3.33, three
 
 @
-# You can designate colomn or row to show data table
+# You can designate column or row to show data table
 df.index = ["a", "b", "c"]
 # or
 df.index = ["c1", "c2", "c3"]
@@ -204,7 +204,7 @@ df
 # b	2.0	NaN	two
 # c	NaN	3.33	three
 
-# You can designate wheter printing colomn or row to show
+# You can designate wheter printing column or row to show
 df.to_csv('sample9.csv', index=False, header=False)
 # !cat sample9.csv
 # 1.0,1.11, one
@@ -286,7 +286,7 @@ df
 
 @
 # If you want to see specific number of data from front or back area, you use head() or tail()
-# You can designate the number of row or colomn to show as argument
+# You can designate the number of row or column to show as argument
 df.head()
 # survived	pclass	sex	age	sibsp	parch	fare	embarked	class	who	adult_male	deck	embark_town	alive	alone
 # 0	0	3	male	22.0	1	0	7.2500	S	Third	man	True	NaN	Southampton	no	False
