@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+010-001. nltk package for natural language processing
+<xmp>
+@
+% NLTK(Natural Language Toolkit) is a python package which was developed for educational purpose to process natural language and to analyze document.
+% NLTK has various examples and NLTK is much used in industry and research
+
+@
+% Major functionalities which nltk provides are following ones
+% Corpus data
+% Tokenizing
+% Analyzing morpheme
+% Tagging Part Of Speech
+
+@
+% Corpus means a collection of sample documents to analyze natural language
+% It includes documents like novel, newspaper
+% It also includes structurely arranged documents added by addtional information like POS, morpheme, etc for easier analysis
+
+@
+% Subpackage corpus of nltk provides various corpus for research
+% They're partial ones from entire one
+% You should manually download corpus data
+
+import nltk
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download("gutenberg")
+nltk.download('punkt')
+nltk.download('reuters')
+nltk.download("stopwords")
+nltk.download("webtext")
+nltk.download("wordnet")
+% [nltk_data] Downloading package averaged_perceptron_tagger to
+% [nltk_data]     /home/dockeruser/nltk_data...
+% [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
+% [nltk_data] Downloading package gutenberg to
+% [nltk_data]     /home/dockeruser/nltk_data...
+% [nltk_data]   Unzipping corpora/gutenberg.zip.
+% [nltk_data] Downloading package punkt to /home/dockeruser/nltk_data...
+% [nltk_data]   Unzipping tokenizers/punkt.zip.
+% [nltk_data] Downloading package reuters to
+% [nltk_data]     /home/dockeruser/nltk_data...
+% [nltk_data] Downloading package stopwords to
+% [nltk_data]     /home/dockeruser/nltk_data...
+% [nltk_data]   Unzipping corpora/stopwords.zip.
+% [nltk_data] Downloading package webtext to
+% [nltk_data]     /home/dockeruser/nltk_data...
+% [nltk_data]   Unzipping corpora/webtext.zip.
+% [nltk_data] Downloading package wordnet to
+% [nltk_data]     /home/dockeruser/nltk_data...
+% [nltk_data]   Unzipping corpora/wordnet.zip.
+% True
+
+
+% gutenberg corpus includes following nevels
+nltk.corpus.gutenberg.fileids()
+% ['austen-emma.txt',
+%  'austen-persuasion.txt',
+%  'austen-sense.txt',
+%  'bible-kjv.txt',
+%  'blake-poems.txt',
+%  'bryant-stories.txt',
+%  'burgess-busterbrown.txt',
+%  'carroll-alice.txt',
+%  'chesterton-ball.txt',
+%  'chesterton-brown.txt',
+%  'chesterton-thursday.txt',
+%  'edgeworth-parents.txt',
+%  'melville-moby_dick.txt',
+%  'milton-paradise.txt',
+%  'shakespeare-caesar.txt',
+%  'shakespeare-hamlet.txt',
+%  'shakespeare-macbeth.txt',
+%  'whitman-leaves.txt']
+
+@
+% Let's see one of them
+emma_raw = nltk.corpus.gutenberg.raw("austen-emma.txt")
+print(emma_raw[:1302])
+% [Emma by Jane Austen 1816]
+
+% VOLUME I
+
+% CHAPTER I
+
+
+% Emma Woodhouse, handsome, clever, and rich, with a comfortable home
+% and happy disposition, seemed to unite some of the best blessings
+% of existence; and had lived nearly twenty-one years in the world
+% with very little to distress or vex her.
+
+% She was the youngest of the two daughters of a most affectionate,
+% indulgent father; and had, in consequence of her sister's marriage,
+% been mistress of his house from a very early period.  Her mother
+% had died too long ago for her to have more than an indistinct
+% remembrance of her caresses; and her place had been supplied
+% by an excellent woman as governess, who had fallen little short
+% of a mother in affection.
+
+% Sixteen years had Miss Taylor been in Mr. Woodhouse's family,
+% less as a governess than a friend, very fond of both daughters,
+% but particularly of Emma.  Between _them_ it was more the intimacy
+% of sisters.  Even before Miss Taylor had ceased to hold the nominal
+% office of governess, the mildness of her temper had hardly allowed
+% her to impose any restraint; and the shadow of authority being
+% now long passed away, they had been living together as friend and
+% friend very mutually attached, and Emma doing just what she liked;
+% highly esteeming Miss Taylor's judgment, but directed chiefly by
+% her own.
+
+
+@
+% To analyze natural language document, you first need to devide long sentence into short unit
+% This devided short unit is called token
+% The process of generating token is called tokenizing
+% In case of english, you can use word or sentence as token and you can use regular expression on english
+
+from nltk.tokenize import sent_tokenize
+% Sentence tokenizing emma_raw[:1000]
+% Print sentence tokenized emma_raw[:1000] from [0] to [3]
+print(sent_tokenize(emma_raw[:1000])[3])
+% Sixteen years had Miss Taylor been in Mr. Woodhouse's family,
+% less as a governess than a friend, very fond of both daughters,
+% but particularly of Emma.
+
+from nltk.tokenize import word_tokenize
+print(emma_raw[50:100])
+% 'Emma Woodhouse, handsome, clever, and rich, with a'
+% Word tokenizing emma_raw[50:100]
+% Print entire word tokenized emma_raw[50:1000]
+word_tokenize(emma_raw[50:100])
+% ['Emma',
+%  'Woodhouse',
+%  ',',
+%  'handsome',
+%  ',',
+%  'clever',
+%  ',',
+%  'and',
+%  'rich',
+%  ',',
+%  'with',
+%  'a']
+
+@
+from nltk.tokenize import RegexpTokenizer
+% Find [a-zA-Z0-9_] over 1 times
+t = RegexpTokenizer("[\w]+")
+t.tokenize(emma_raw[50:100])
+% ['Emma', 'Woodhouse', 'handsome', 'clever', 'and', 'rich', 'with', 'a']
+
+
+@
+Morpheme means linguistically smallest unit of word having meaning
+Generally, in natural language processing, we use morpheme as token
+
+You first grasp various properties of language like root of word, prefix, suffix, part of speech from word.
+And then, you find morpheme of that word by using information you found above
+This process is called morphological analysis
+
+Examples of morphological analysis are shown following
+1. Stemming
+1. Lemmatizing
+1. Tagging Part-Of-Speech
+
+@
+% Stemming means following processes
+% You first remove prefix or suffix which were added with various reasons from word
+% Then you get various forms of morpheme which have same meaning
+% And you make those various forms of morpheme same shape
+
+% NLTK provides PorterStemmer, LancasterStemmer, etc
+
+% For more detail algorithm of stemming and extracting stem of word, you can see following site
+% http://snowball.tartarus.org/algorithms/porter/stemmer.html
+
+words = ['flies', 'dies', 'denied', 'plotted', 'meeting', 'itemization', 'sensational', 'traditional']
+from nltk.stem import PorterStemmer
+st = PorterStemmer()
+% words -> w -> [st.stem(w)]
+[st.stem(w) for w in words]
+% ['fli', 'die', 'deni', 'plot', 'meet', 'item', 'sensat', 'tradit']
+
+from nltk.stem import LancasterStemmer
+st = LancasterStemmer()
+[st.stem(w) for w in words]
+% ['fli', 'die', 'deny', 'plot', 'meet', 'item', 'sens', 'tradit']
+
+@
+% Stemming is actually one kind of lemmatizing
+% Lemmatizing is process of unifying various words having same meaning to most substantial form(word form in dictionary)
+
+from nltk.stem import WordNetLemmatizer
+lm = WordNetLemmatizer()
+[lm.lemmatize(w) for w in words]
+% ['fly',
+%  'dy',
+%  'denied',
+%  'plotted',
+%  'meeting',
+%  'itemization',
+%  'sensational',
+%  'traditional']
+
+% I do lemmatizing on "denied" as verb form
+lm.lemmatize("denied", pos="v")
+% 'deny'
+
+@
+Tagging POS
+We distinguish word based on grammar, form, meaning
+Distinguished name of group is called POS
+Distinguishing POS varies per language and researcher
+
+NLTK uses "Penn Treebank Tagset"
+Following ones are POSs used in "Penn Treebank Tagset"
+VB verb : play
+VBD verb : played
+VBG verb : playing
+VBN verb : had played
+VBP verb
+VBZ verb
+
+@
+% As tag sets in Korean language, there are various tag sets including "21세기 세종계획 품사 태그세트"
+% For more detail about "21세기 세종계획 품사 태그세트", you can see "어절 분석 표지 표준안" of "(21세기 세종계획)국어 기초자료 구축" report
+
+@
+from nltk.tag import pos_tag
+% I do word_tokenize on emma_raw[:100]
+% I do pos_tag on above result
+tagged_list = pos_tag(word_tokenize(emma_raw[:100]))
+tagged_list
+% [('[', 'NNS'),
+%  ('Emma', 'NNP'),
+%  ('by', 'IN'),
+%  ('Jane', 'NNP'),
+%  ('Austen', 'NNP'),
+%  ('1816', 'CD'),
+%  (']', 'NNP'),
+%  ('VOLUME', 'NNP'),
+%  ('I', 'PRP'),
+%  ('CHAPTER', 'VBP'),
+%  ('I', 'PRP'),
+%  ('Emma', 'NNP'),
+%  ('Woodhouse', 'NNP'),
+%  (',', ','),
+%  ('handsome', 'NN'),
+%  (',', ','),
+%  ('clever', 'NN'),
+%  (',', ','),
+%  ('and', 'CC'),
+%  ('rich', 'JJ'),
+%  (',', ','),
+%  ('with', 'IN'),
+%  ('a', 'DT')]
+
+from nltk.tag import untag
+% I untag tagged_list
+untag(tagged_list)
+% ['[',
+%  'Emma',
+%  'by',
+%  'Jane',
+%  'Austen',
+%  '1816',
+%  ']',
+%  'VOLUME',
+%  'I',
+%  'CHAPTER',
+%  'I',
+%  'Emma',
+%  'Woodhouse',
+%  ',',
+%  'handsome',
+%  ',',
+%  'clever',
+%  ',',
+%  'and',
+%  'rich',
+%  ',',
+%  'with',
+%  'a']       
+      </xmp>
+   </BODY>
+</HTML>
