@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+008-003. dataframe indexer, loc[], iloc[], at[], iat[]<br/>
+<xmp>
+@
+# Pandas provides indexer to provide 2 dimensional indexing for row index and column index
+
+# loc : 2 dimensional indexing based on label value
+# iloc : 2 dimensional indexing based on integer (which is used to represent order) label value
+# at: 2 dimensional indexing based on label value (but this only finds one scalar value)
+# iat : 2 dimensional indexing based on integer (which is used to represent order) label value (but this only finds one scalar value)
+
+@
+# When you use loc indexer, row index and column index should be one of following ones
+# 1. Label value which is not integer (but it allows integer index if it's orinially denoted by integer)
+# 1. List of label values, or slicing
+# 1. List of boolean, 1 dimensional arrya, series, (dataframe can't be in)
+# 1. Method which returns above data types by taking dataframe
+
+@
+# When you have following dataframe,
+# You make list of [10, 11, ..., 21]
+# You reshape [10, 11, ..., 21] as 3*4 matrix
+# [[10 11 12 13]
+#  [14 15 16 17]
+#  [18 19 20 21]]
+# You add index data and column data
+#    A	B	C	D
+# a	10	11	12	13
+# b	14	15	16	17
+# c	18	19	20	21
+df = pd.DataFrame(np.arange(10, 22).reshape(3, 4),
+                    index=["a", "b", "c"],
+                    columns=["A", "B", "C", "D"])
+df
+#   A	B	C	D
+# a	10	11	12	13
+# b	14	15	16	17
+# c	18	19	20	21
+
+@
+# To use loc indexer, you use dataframe.loc[row-index, column-index] format
+df.loc["a", "A"]
+# 10
+
+@
+# You can use slicing or list with label value
+df.loc["b":, "A"]
+# b    14
+# c    18
+# Name: A, dtype: int64
+
+df.loc["a", :]
+# A    10
+# B    11
+# C    12
+# D    13
+# Name: a, dtype: int64
+
+df.loc[["a", "b"], ["B", "D"]]
+#   B	D
+# a	11	13
+# b	15	17
+
+df.loc[df.A > 10, :]
+#   A	B	C	D
+# b	14	15	16	17
+# c	18	19	20	21
+
+@
+# You can extract row as series data type by using loc indexer
+df.loc["a", :]
+# A    10
+# B    11
+# C    12
+# D    13
+# Name: a, dtype: int64
+
+@
+# If you want to extract row without using loc indexer, you can use slicing
+# But this case returns row as dataframe data type
+df[:1]
+#     A	B	C	D
+# a	10	11	12	13
+
+@
+# You can use method returning indexed value instead of using indexer or indexing funtionality
+
+# Select row A
+# then, select all values over 12
+def select_rows(df):
+    return df.A>12
+select_rows(df)
+# a    False
+# b     True
+# c     True
+# Name: A, dtype: bool
+
+
+df.loc[select_rows(df), ["B"]]
+#   B
+# b	15
+# c	19
+
+# You can put only 1 dimensional array or list into loc indexer
+# You can't put dataframe like 2 dimensional array into loc indexer
+df.loc[]
+# df.loc[:, df[:1] <= 11]
+# You should do this way
+# You're putting df.loc["a", :] <= 11 into loc indexer
+df.loc[:, df.loc["a", :] <= 11]
+#     A	B
+# a	10	11
+# b	14	15
+# c	18	19
+
+@
+# When you use loc indexer, if you put one index into it, it chooses row
+df.loc["a"]
+# A    10
+# B    11
+# C    12
+# D    13
+# Name: a, dtype: int64
+
+# I add row e with data list of [90, 91, 92, 93]
+df.loc["e"] = [90, 91, 92, 93]
+df
+#    A	B	C	D
+# a	10	11	12	13
+# b	14	15	16	17
+# c	18	19	20	21
+# e	90	91	92	93
+
+@
+# You can use integer index with loc indexer only if index is automatically initialized
+
+# This dataframe has integer index because you're not desgnating index as string
+# [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+# [[10, 11, 12, 13],
+#  [14, 15, 16, 17],
+#  [18, 19, 20, 21],
+#  [22, 23, 24, 25]]
+#     1   3   5   7
+#  0  10  11  12  13
+#  1  14  15  16  17
+#  2  18  19  20  21
+#  3  22  23  24  25 
+df2 = pd.DataFrame(np.arange(10, 26).reshape(4, 4), columns=np.arange(1, 8, 2))
+df2
+#    1   3	 5	 7
+# 0	10	11	12	13
+# 1	14	15	16	17
+# 2	18	19	20	21
+# 3	22	23	24	25
+
+df2.loc[1, 1]
+# 14
+
+@
+# In this case, slicing follows "label slicing way"(which includes end value of slicing)
+df2.loc[1:2, :]
+#     1	3	5	7
+# 1	14	15	16	17
+# 2	18	19	20	21
+
+@
+# iloc indexer takes only integer index in opposed to loc indexer which takes string index except for case which automatically generates integer index
+# df.iloc[0, 1]
+11
+
+df.iloc[:2, 2]
+# a    12
+# b    16
+# Name: C, dtype: int64
+
+df.iloc[0, -2:]
+# C    12
+# D    13
+# Name: a, dtype: int64
+
+df.iloc[2:3, 1:3]
+# B	C
+# c	19	20
+
+@
+# If you put one index, it choose row
+df.iloc[-1]
+# A    90
+# B    91
+# C    92
+# D    93
+# Name: e, dtype: int64
+
+df.iloc[-1] = df.iloc[-1] * 2
+df
+#    A	B	C	D
+# a	10	11	12	13
+# b	14	15	16	17
+# c	18	19	20	21
+# e	180	182	184	186
+
+@Practice 1
+# 1. Make over 5*5 dataframe whose all rows and columns have label
+# like,
+#    A	B	C	D   E
+# a	10	11	12	13  22
+# b	14	15	16	17  33
+# c	18	19	20	21  21
+# e	180	182	184	186 97
+# f	10	82	43	61  47
+1. Select specific row or column by over 10 various ways
+
+@
+# You use at indexer and iat indexer which return one scalar value
+# They're used when you need fast indexing
+
+# Select row a and column A by df.loc[]
+%timeit df.loc["a", "A"]
+# 8.06 µs ± 1.84 µs per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+# Select row a and column A by df.at[]
+%timeit df.at["a", "A"]
+# 5.91 µs ± 1.2 µs per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+# Select row 0 and column 0 by df.iloc[]
+%timeit df.iloc[0, 0]
+# 8.91 µs ± 839 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+# Select row 0 and column 0 by df.iat[]
+%timeit df.iat[0, 0]
+# 5.27 µs ± 135 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)       
+      </xmp>
+   </BODY>
+</HTML>
