@@ -341,9 +341,9 @@ df
 @
 # We said dataframe is created based on 2 dimensional array
 # But it's actually not true
-# It's more true to consider dataframe as dictionary which is combined with colomns series which have common index
+# It's more true to consider dataframe as dictionary which is combined with columns series which have common index
 # 2 dimensional array should have same data type for all elements
-# Dataframe can have different data type for each colomn
+# Dataframe can have different data type for each column
 data = \
 {
     "2015" : [9904312, 3448737, 2890451, 2466052],
@@ -363,7 +363,7 @@ df.values
 #        ['수도권', 2890451, 2632035, 2517680, 2466338, 0.0982],
 #        ['경상권', 2466052, 2431774, 2456016, 2473990, 0.0141]], dtype=object)
 
-# You can use dataframe.colomns attribute to access to colomn index
+# You can use dataframe.columns attribute to access to column index
 df.columns
 # Index(['지역', '2015', '2010', '2005', '2000', '2010-2015 증가율'], dtype='object')
 
@@ -372,7 +372,7 @@ df.index
 # Index(['서울', '부산', '인천', '대구'], dtype='object')
 
 @
-# You can give name to colomns index and row index
+# You can give name to columns index and row index
 df.index.name = "도시"
 df.columns.name = "특성"
 df
@@ -386,8 +386,8 @@ df
 @
 # Practice 2
 # Create dataframe which satisfies following condition
-# 1. The number of row and colomn should be over 5
-# 1. Colomns should contain each data type at least over 1 time from integer, string, float
+# 1. The number of row and column should be over 5
+# 1. columns should contain each data type at least over 1 time from integer, string, float
 
 @
 # Dataframe provides almost all attributes and methods, including transpose which 2 dimensional numpy array has
@@ -404,7 +404,7 @@ df.T
 
 
 @
-# When you index dataframe, you can index with considering "colomns label" as key
+# When you index dataframe, you can index with considering "columns label" as key
 
 # If you put one value of label as index, you get series object
 df["지역"]
@@ -425,7 +425,7 @@ df[["2010", "2015"]]
 # 대구	2431774	2466052
 
 @
-# If you want to bring one colomn with wanting dataframe's data type unified,
+# If you want to bring one column with wanting dataframe's data type unified,
 # you can index with list containing one element
 df[["2010"]]
 # 특성	2010
@@ -451,10 +451,10 @@ type(df["2010"])
 # pandas.core.series.Series
 
 @
-# If colomns index has string label, you can't use integer indexing for that colomn indexing
+# If columns index has string label, you can't use integer indexing for that column indexing
 
-# You can't use integer indexing (which can be used for row indexing) for colomn indexing
-# You get error if you use integer indexing for colomn indexing
+# You can't use integer indexing (which can be used for row indexing) for column indexing
+# You get error if you use integer indexing for column indexing
 df[0]
 # ---------------------------------------------------------------------------
 # KeyError                                  Traceback (most recent call last)
@@ -526,7 +526,7 @@ df[0]
 
 
 @
-# But in case of when you didn't provide colomn label, so interger colomn index was automatically generated, you can use integer indexing
+# But in case of when you didn't provide column label, so interger column index was automatically generated, you can use integer indexing
 df2 = pd.DataFrame(np.arange(12).reshape(3, 4))
 df2
 # 0	1	2	3
@@ -541,8 +541,8 @@ df2[2]
 # Name: 2, dtype: int64
 
 @
-# Since dataframe can be considered as colomn series of dictionary,
-# you can updata, add, remove data per colomn
+# Since dataframe can be considered as column series of dictionary,
+# you can updata, add, remove data per column
 df["2010-2015 증가율"] = df["2010-2015 증가율"] * 100
 df
 # 특성	지역	2015	2010	2005	2000	2010-2015 증가율
@@ -571,7 +571,7 @@ df
 # 대구	경상권	2466052	2431774	2456016	2473990	-0.99
 
 @
-# You can index by colomn label, and then, you can index by row label each data
+# You can index by column label, and then, you can index by row label each data
 df["2015"]["서울"]
 # 9904312
 
@@ -615,7 +615,7 @@ df = pd.DataFrame(data, index=index, columns=columns)
 
 # 1. Print all student's math score in form of serise
 # 1. Print all student's math score and english score in form of dataframe
-# 1. Add all studnet's average score for each subject as new colomn
+# 1. Add all studnet's average score for each subject as new column
 # 1. Update bangja's english score to 80, and then, update his average score
 # 1. Print chunhyang's score in form of dataframe
 # 1. Print hyangdan's score in form of series
