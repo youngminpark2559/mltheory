@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+031-001. meaning of test and parameter estimation
+<xmp>
+@
+% First assumption of data analysis is "data what you want to analyze is sample which was realized from certain random variable"
+
+% This means that what we're interested in is not "data" which we have as nothing but realization but "random variable" which generates data
+% Data is nothing but reference materials for finding random variable
+
+% Random variable has "distribution model" and "parameter"
+
+% Therefore, finding random variable is to answer about following example questions
+% 1. Corresponding data is generated from specific distribution model like gaussian normal distribution?
+% 1. If so, that gaussian normal distribution has expection $\mu$ and variance $\sigma^{2}$?
+% For example, $\mu=0$ or not?
+% 1. If $\mu \neq 0$, what value does $\mu$ have?
+
+@
+% Answering these questions is called "test" or "parameter estimation"
+% "parameter estimation" can be simply "estimation"
+
+@
+% 1. Corresponding data is generated from specific distribution model like gaussian normal distribution?
+% This question tests if hypothesis about distribution of random variable is right or wrong
+% This question is called "distribution test of random variable"
+% This question uses hypothesis that random variable follows gaussian normal distribution
+% Testing this kind of hypothesis is called "normality test" which is one of most used test in data analysis
+
+@
+% 1. If so, that gaussian normal distribution has expection $\mu$ and variance $\sigma^{2}$?
+% In this question, the fact that random variable follows which distribution model is fixed
+% On this state, we test if coefficient of pdf has specific value
+% We test if coefficient of pdf is greater or smaller than specific value
+% For example, if you want to test if expection parameter \mu equals to 0 or not, you want to prove hypothesis that expection parameter of gaussian normal distribution equals to 0
+
+% Testing this kind of hypothesis is called "parameter test"
+
+@
+% 1. If $\mu \neq 0$, what value does $\mu$ have?
+% This question is task of finding highest probability when parameter has certain value
+% This step is called "parameter estimation" or "estimation"
+
+% There are various ways of "parameter estimation"
+
+% MSE(Maximum Squred Error) and MLE(Maximum Likelihood Estimation) find one value with highest probability
+
+% Bayesian Estimation finds all potential value
+% And it also finds all probabilities of those values becoming actual parameter
+% and then, it display distribution of those probabilities 
+      </xmp>
+   </BODY>
+</HTML>
