@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 25px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:1.6em
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+031-002. testing and p-value
+<xmp>
+@
+We can prove authenticity quantitatively of hypothesis about distribution of "random variable" and "parameter" which are hidden behind data
+We call this task of proving "testing"
+
+For example, we can access to following question in testring methodology
+
+question 1
+You tossed coin 15 times
+You got 12 heads
+Is this fair coin?
+
+question 2
+An earning rate of one trader during one week is following
+-2.5%, -5%, 4.3%, -3.7% -5.6% 
+Will this trader continuously lose this money?
+
+@
+Testing methodology
+Basic logic of proving hypothesis(testing) is as follow
+
+1. We suppose data is sample from random variable which follows fixed probability distribution
+For example,
+result of coin-toss is sample from random variable which follows bernoulli distribution,
+result of earning rate is sample from random variable which follows gaussian normal distribution
+
+1. We suppose parameters of this probability distribution have specific values
+At this time, values (which parameters have) should be related to fact which we want to test
+We call this assumption "null hypothesis"
+
+For example,
+claiming coin is fair equals to assumption that parameter $\theta$ of bernoulli distribution is 0.5
+claiming trader won't lose his money equals to assumption that parameter $\mu$ of gaussian normal distribution is 0
+
+1. Suppose data is sample which follows given null hypothesis
+If you calculate sample data by specific formular, you will get specific values
+And these specific values will follows specific probability distribution
+We call specific values "test statistics"
+We call distribution of "test statistics" "test statistics distribution"
+
+The kind of "test statistics distribution" and values of parameters are decided by hypothesis and formular which you use initially
+
+
+@
+In case that given null hypothesis turns out right, you can calculate probabilities of occurring same value to "test statistics", and probabilities of occurring extreme value than "test statistics", and probabilities of occurring rare value than "test statistics"
+
+This kind of probability is callled p-value
+
+@
+We can think of specific size of p-value, which is called significance level which is generally ranged from 1% to 5%
+
+Let's suppose significance level is 1%
+If p-value is less than significance level 1%, it means probability of occuring "test statistics" is very low from corresponding "test statistics distribution"
+In conclusion, the very substantial hypothesis(null hypothesis) is wrong
+In case of this, we reject null hypothesis
+
+If p-value is greater than significance level 1%, it means probability of occuring "test statistics" is possible from corresponding "test statistics distribution"
+Therefore, we can't reject null hypothesis
+In case of this, we accept null hypothesis
+
+@
+We can make certain claim about probability distribution
+This certain claim is called hypothesis, denoted by H
+
+We can prove this hypothesis
+Action of this is called "statistical hypothesis testing" or simply "testing"
+
+Suppose there is claim that parameter of probability distribution has specific value
+Proving this claim is called "parameter testing"
+
+In "parameter testing", one of most used claims is that parameter has specific real number value, generally 0
+Hypothesis : parameter $\theta$ has 0
+$H:\theta=\theta_{0}$
+
+This hypothesis is frequently used for "regression"
+ If regression coefficient is 0, it means dependent variable(target y) isn't affected by independent variable(feature x)
+
+
+@
+For proceeding "testing", first, you should suppose that probability distribution which data follows is fixed by specific parameter values
+This hypothesis is called null hypothesis which is denoted by $H_{0}$
+Null hypothesis should be denoted by equality because it should fix probability distribution as specific state
+
+You can think of "alternative hypothesis" along with "null hypothesis", which is denoted by $H_{a}$
+"alternative hypothesis" generally expresses case that parameter value is greater or less than specific value
+If probability of "alternative hypothesis" true becomes high, we reject "null hypothesis"
+      </xmp>
+   </BODY>
+</HTML>
