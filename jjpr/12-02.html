@@ -5,7 +5,7 @@
       <TITLE>My first HTML document</TITLE>
       <style rel="stylesheet" type="text/css">
 body {
- font-size: 25px;
+ font-size: 23px;
  
  margin-top: 50px;
     margin-bottom: 50px;
@@ -17,7 +17,10 @@ body {
     padding-right: 80px;
     padding-left: 80px;
     
-    line-height:1.6em
+    line-height:35px;
+},
+img {
+ width=900px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -37,8 +40,8 @@ MathJax.Hub.Config({
                equationNumbers: { autoNumber: "AMS" } },
         extensions: ["tex2jax.js"],
         jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
                    processEscapes: true },
         "HTML-CSS": { availableFonts: ["TeX"],
                       linebreaks: { automatic: true } }
@@ -46,21 +49,70 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
-12-02 Dimentionality reduction by PCA(principle component analysis)<br/><br/>
+12-02 Dimentionality reduction by PCA(principle component analysis)
+<xmp>
+=======================================================
+feature extraction
+=======================================================
+N>M
+N dimensional vector X
+<linear feature extraction>
+M dimensional vector Y
 
-@<br/>
-$\begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix} \underrightarrow{\text{linear features extraction}} \begin{bmatrix} y_{1}\\y_{2}\\...\\y_{M} \end{bmatrix}=<br/>
-\begin{bmatrix} w_{11}&w_{11}&...&w_{1N}\\w_{21}&w_{22}&...&w_{2N}\\...\\w_{M1}&w_{M2}&...&w_{MN} \end{bmatrix}\begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix}$<br/>
-<br/>
-M*N $\cdot$ N*1 $\Rightarrow$ M*1, where N$>$M<br/>
-<br/>
-@<br/>
-feature extraction 을 할때 mapping function y=f(x) 의 선택은 우리가 optimization 시키고자 하는 목적에 의해서 결정된다. 크게 두가지 방법이있다<br/>
-1. 신호표현 signal representation<br/>
-feature extraction 의 목적이 extraction 에 의해서 dimensionality 가 낮아지더라도 낮은 dimensinal space 에서 원래 data 의 정보들이 손실되지 않고 정확하게 표현하고자할때, 선형변환의 방법으로 PCA 를 사용한다. PCA 를 사용하면 낮은 차원에서도 feature vector 의 feature 가 정확히 표현된다<br/>
-1. classification<br/>
-feature extraction 을 할 때, extraction 의 목적이 낮은 차원에서 classification 을 더 잘 하길 원할때, 선형판별분석법 LDA linear discriminant analysis 를 사용한다<br/>
+To perform linear feature extraction, you can multiply matrix by vector X, which is linear transformation method
+2018-06-04 10-08-45.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-04 10-08-45.png"><xmp>
 
+$$$X = f(X) = Y = W^{M\times N}X$$$
 
+$$$M*N \cdot N*1 \Rightarrow M*1$$$, where N>M
+
+W can be very various
+You want to find matrix W which keeps structure and information of vector X when finding Y, from very various W
+
+=======================================================
+according to selection of mapping function f
+-> PCA, LDA
+=======================================================
+
+When you perform "feature extraction", selection of mapping function f will be determined by purpose of optimization
+
+1. You sometimes perform "linear transformation" with purpose of "signal representation" 
+Goal of extraction of feature :
+In low dimension, precise express characteristics of original data 
+Famous method for "linear transformation" with purpose of "signal representation" is PCA (principle component analysis) when finding matrix W
+
+1. You sometimes perform "linear transformation" with purpose of "classification"
+Goal of extraction of feature :
+Better classification in low dimension
+Famous method for "linear transformation" with purpose of "classification" is LDA (linear discriminant analysis) when finding matrix W
+
+=======================================================
+Picture representing feature extraction-performed data 
+with purposes of "signal representation" and "classification"
+=======================================================
+2018-06-04 10-37-49.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-04 10-37-49.png"><xmp>
+
+1 : data which are involved in class 1
+2 : data which are involved in class 2
+Feature space : 2 dimensional plane
+Number of feature : 2 (feature 1, feature 2)
+
+Each individual data is 2 dimensional vector like data = $$$\begin{bmatrix} x_{1}^{(1} \\ x_{2}^{(3} \end{bmatrix}$$$
+
+Since you have 2 dimensional vector (2 features), you want to reduce it to 1 dimensional vector
+
+You can say data is projected based on -45 degree direction axis with purpose of signal representation, by using PCA 
+You can say data is projected based on +45 degree direction axis with purpose of classification, by using LDA
+
+One of important characteristic of data is distribution (variance)
+You can see PCA keep variance of each data in 1 dimensional space
+
+You can see LDA can help you when perform classify 2 data
+
+METHODS to find direction of axis are PCA and LDA
+      
+</xmp>
    </BODY>
 </HTML>
