@@ -64,17 +64,17 @@ keeps information of discriminant of data
 is applied on entire data
 
 ===========================================================
-D dimension sample data set $X = \{x^{(1)}, ..., x^{(N)}\}$
-Number of sample involved in $\omega_{1}$ class is $N_{1}$
-Number of sample involved in $\omega_{2}$ class is $N_{2}$
+D dimension sample data set $$$X = \{x^{(1)}, ..., x^{(N)}\}$$$
+Number of sample involved in $$$\omega_{1}$$$ class is $$$N_{1}$$$
+Number of sample involved in $$$\omega_{2}$$$ class is $$$N_{2}$$$
 
 That is, data X is sample mixed with 2 classes data
 
 =========================================================
 When you want to obtain scalar y by performing projection of x along specific line (axis),
 you can use following inner product formular, resulting in projected vector :
-$y = W^{T}x$
-$W^{T}$ is matrix which has column vectors which have projection direction you want to use when performing projecion
+$$$y = W^{T}x$$$
+$$$W^{T}$$$ is matrix which has column vectors which have projection direction you want to use when performing projecion
 
 
 @
@@ -84,8 +84,8 @@ purpose of LDA is to find lines (axises) which make classification of scalar val
 
 =========================================================
 Suppose you have 2 dimension input data
-Red dots are $w_{1}$ class data
-Blue dots are $w_{2}$ class data
+Red dots are $$$w_{1}$$$ class data
+Blue dots are $$$w_{2}$$$ class data
 
 You can project 2 dimension data onto one line (axis, vector)
 Following picture shows PCA
@@ -123,24 +123,23 @@ bad example for class separation
 </xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-32-37.png"><xmp>
 
 =========================================================
-Mathematically, $\frac{\text{between-class\;Scatter}}{\text{within-class\;Scatter}}$
+Mathematically, $$$\frac{\text{between-class\;Scatter}}{\text{within-class\;Scatter}}$$$
 
-large $value = \frac{large}{small}$
+large $$$value = \frac{large}{small}$$$
 good example for class separation
 high density within class
 far distance between centroids of classes
 
-small $value = \frac{small}{large}$
+small $$$value = \frac{small}{large}$$$
 bad example for class separation
 low density within class
 short distance between centroids of classes
 
-Finding large $value = \frac{large}{small}$ is goal of LDA
+Finding large $$$value = \frac{large}{small}$$$ is goal of LDA
 
 =========================================================
 2018-06-07 09-38-39.png
 </xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-38-39.png"><xmp>
-
 </xmp>
    </BODY>
 </HTML>
