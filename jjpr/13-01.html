@@ -5,7 +5,7 @@
       <TITLE>My first HTML document</TITLE>
       <style rel="stylesheet" type="text/css">
 body {
- font-size: 25px;
+ font-size: 23px;
  
  margin-top: 50px;
     margin-bottom: 50px;
@@ -17,7 +17,10 @@ body {
     padding-right: 80px;
     padding-left: 80px;
     
-    line-height:1.6em
+    line-height:35px;
+}
+img {
+ width:500px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -37,8 +40,8 @@ MathJax.Hub.Config({
                equationNumbers: { autoNumber: "AMS" } },
         extensions: ["tex2jax.js"],
         jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
                    processEscapes: true },
         "HTML-CSS": { availableFonts: ["TeX"],
                       linebreaks: { automatic: true } }
@@ -46,49 +49,98 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
-13-01 LDA(linear discriminant analysis)<br/><br/>
+13-01 LDA(linear discriminant analysis)
+<xmp>
+===========================================================
+PCA, LDA, both are algorithms for dimensionality reduction.
 
-PCA, LDA, both are algorithms for a dimensionality reduction.<br/>
-<br/>
-@<br/>
-PCA : data 가 가지고 있는 특징을 그대로 유지하면서 dimensionality reduction 한다.<br/>
-multi class 가 아닌 경우 주로 해당된다.<br/>
-정확히는 each class 마다 data 를 축소한다.<br/>
-LDA : data 의 형태나 특징의 유지에 촛점을 맞추기 보다 data 가 여러 class 로 구성되어 있을 경우 이러한 class 들의 분류가 적절, 용이 하도록 하는 목적을 갖고 dimensionality reduction 한다.<br/>
-<br/>
-@<br/>
-D 차원 표본 데이터 집합 $X = \{x^{(1)}, ..., x^{(N)}\}$ .<br/>
-$\omega_{1}$ class 에 속하는 것이 $N_{1}$ 개 이다.<br/>
-$\omega_{2}$ class 에 속하는 것이 $N_{2}$ 개 이다.<br/>
-<br/>
-이 때, x 를 임의의 선을 따라서 projecion 해서 scalar y 를 얻고자 할 때, 다음과 같은 수식을 적용한다.<br/>
-projecion 방향에 해당하는 vector 를 성분으로 갖는 W 를 곱해주면 된다.<br/>
-$y = W^{T}x$.<br/>
-<br/>
-@<br/>
-projecion 시키고 싶은 방향에 해당하는 선들이 다양하게 있을 수 있다.<br/>
-가능한 모든 선들 중에서 이러한 scalar 값들의 분리를 최대화하는 방향 혹은 가능한 선을 찾는것이 LDA 라고 할수 있다.<br/>
-<br/>
-@<br/>
-2차원 데이터가 입력데이터라고 생각하자.<br/>
-빨간색 데이터들이 $w_{1}$ class 의 데이터이다.<br/>
-파란색 데이터들이 $w_{2}$ class 의 데이터이다.<br/>
-<br/>
-이러한 데이터를 1차원으로 dimensionality reduction 할 때, 1차원 선은 무수히 많다. 그 중 하나의 선에 projection 시킬 수 있다 .<br/>
-<br/>
-projection 된 결과의 분포가 1차원 선에 따라 다르게 나타날 수 있다.<br/>
-어떤 선은 분류를 더 명확하게 한다.<br/>
-이러한 선의 방향을 찾는 방법론이 LDA 이다.<br/>
-<br/>
-@<br/>
-formal 하게 표현하자면, LDA 에서는 class 간의 variance (variance between classes) 과 class 내의 variance (variance within class) 의 ratio 를 maximization 하는 방식으로 데이터에 대한 feature vector 의 dimensionality reduction 을 한다.<br/>
-<br/>
-variance within class 가 작으면 밀집되어있다는 뜻이다.<br/>
-variance between class 가 크면 class 간 중심값의 거리가 크다는 뜻이며 class 간 구분이 확실하다는 뜻이다.<br/>
-<br/>
-mathematically, $\frac{variance\;between\;classes}{variance\;within\;class}$.<br/>
-이 값이 크면 class 안에서 데이터가 밀집 and class 간 구분이 확연 하다.<br/>
-따라서, good separation 은 위 값이 클 때를 의미하며 LDA 의 목표이다.<br/>
-      
+@
+PCA : reduces dimensionality with keeping characteristics of data in high dimension
+is much used in case that you don't use multi class
+more precisely, you reduce dimensionality on each class (each data)
+
+LDA : reduces dimensionality with purpose of optimal classification in low (reduced) dimension
+keeps information of discriminant of data
+is applied on entire data
+
+===========================================================
+D dimension sample data set $X = \{x^{(1)}, ..., x^{(N)}\}$
+Number of sample involved in $\omega_{1}$ class is $N_{1}$
+Number of sample involved in $\omega_{2}$ class is $N_{2}$
+
+That is, data X is sample mixed with 2 classes data
+
+=========================================================
+When you want to obtain scalar y by performing projection of x along specific line (axis),
+you can use following inner product formular, resulting in projected vector :
+$y = W^{T}x$
+$W^{T}$ is matrix which has column vectors which have projection direction you want to use when performing projecion
+
+
+@
+There can be numorous lines (axises) which have direction you want to project vector data
+Out of all possible lines (axises), 
+purpose of LDA is to find lines (axises) which make classification of scalar values (projected data) most easy
+
+=========================================================
+Suppose you have 2 dimension input data
+Red dots are $w_{1}$ class data
+Blue dots are $w_{2}$ class data
+
+You can project 2 dimension data onto one line (axis, vector)
+Following picture shows PCA
+2018-06-07 09-18-03.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-18-03.png"><xmp>
+
+=========================================================
+Result distribution after projection can show differ according to kind of 1 dimension line (axis, vector)
+Some lines make classification of projected data easier
+Methodology to find direction of these lines (which make classification of projected data easier) is LDA
+2018-06-07 09-22-53.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-22-53.png"><xmp>
+
+=========================================================
+LDA reduces dimensionality of high dimensional feature vector data 
+by maximizing ratio between "variance between classes" and "variance within class"
+
+Small variance within class (==within-class scatter) : 
+high density data in each class
+
+Large variance between class (==between-class scatter) : 
+far between each class centroid
+clear classification between classes
+
+small variance within class
+large variance between class
+good example for class separation
+2018-06-07 09-32-23.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-32-23.png"><xmp>
+
+large variance within class
+small variance between class
+bad example for class separation
+2018-06-07 09-32-37.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-32-37.png"><xmp>
+
+=========================================================
+Mathematically, $\frac{\text{between-class\;Scatter}}{\text{within-class\;Scatter}}$
+
+large $value = \frac{large}{small}$
+good example for class separation
+high density within class
+far distance between centroids of classes
+
+small $value = \frac{small}{large}$
+bad example for class separation
+low density within class
+short distance between centroids of classes
+
+Finding large $value = \frac{large}{small}$ is goal of LDA
+
+=========================================================
+2018-06-07 09-38-39.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 09-38-39.png"><xmp>
+
+</xmp>
    </BODY>
 </HTML>
