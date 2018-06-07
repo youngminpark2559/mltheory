@@ -5,7 +5,7 @@
       <TITLE>My first HTML document</TITLE>
       <style rel="stylesheet" type="text/css">
 body {
- font-size: 25px;
+ font-size: 23px;
  
  margin-top: 50px;
     margin-bottom: 50px;
@@ -17,7 +17,10 @@ body {
     padding-right: 80px;
     padding-left: 80px;
     
-    line-height:1.6em
+    line-height:35px;
+}
+img {
+ width:500px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -37,8 +40,8 @@ MathJax.Hub.Config({
                equationNumbers: { autoNumber: "AMS" } },
         extensions: ["tex2jax.js"],
         jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
                    processEscapes: true },
         "HTML-CSS": { availableFonts: ["TeX"],
                       linebreaks: { automatic: true } }
@@ -46,81 +49,161 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
-13-02 LDA(linear discriminant analysis)<br/><br/>
+13-02 LDA(linear discriminant analysis)
+<xmp>
+=========================================================
+Projection by linear transform:
+$$$y=W^{T}x$$$
+W is (D,1)
+Row vectors of W have direction for projection
 
-@<br/>
-다음과 같이 선형변환을 통한 projecion 을 했다.<br/>
-주어진 vector x 가 있을 때, vector y 로 projecion 시킬 때, projecion 시키는 특정한 방향에 해당하는 vector W 를 x 에 곱해준다.<br/>
-<br/>
-@<br/>
-빨간색 ellipse 로 $\omega_{1}$ class data distribution 을 그렸다.<br/>
-파란색 ellipse 로 $\omega_{2}$ class data distribution 을 그렸다.<br/>
-각각의 class 의 평균은 distribution 의 중앙위치이다.<br/>
-각각의 위치를 $\mu_{1}, \mu_{2}$ vector 로 표현한다.<br/>
-<br/>
-class i 의 평균 $\mu_{i}$ 은 $\omega_{i}$ 에 속하는 x 들을 모두 $\sum$ 해서 데이터 총갯수 N 으로 나눠준 값이다 .<br/>
-$\mu_{i} = \frac{1}{N} \sum\limits_{x\in \omega_{i}} x$<br/>
-<br/>
-projecion 시킨 이후에도 평균값을 구할 수 있다.<br/>
-linear algebra 로 $y = W^{T}x$ 임을 알고 있으므로 y 에 대입하고 $W^{T}$ 를 앞으로 끄집어내본다.<br/>
-그러면 $W^{T}\mu_{i}$ 가 얻어진다.<br/>
-$\tilde{\mu_{i}} = \frac{1}{N} \sum\limits_{y\in \omega_{i}} y = \frac{1}{N} \sum\limits_{x\in \omega_{i}} W^{T}x = W^{T}\mu_{i}$<br/>
-<br/>
-$x_{1}$ 방향으로 projecion 시켰을때 평균은 이전의 평균과 같다.<br/>
-평균값은 넓게 떨어져있지만 빨간색과 파란색 각각이 넓게 projecion 되고 상당부분이 겹친다. 클래스 간에 떨어진 정도가 좋다.<br/>
-$x_{2}$ 방향으로 projecion 시켰을때는 겹치는 부분이 적고 좀더 확연히 나뉜다. 클래스 분류에 좋다.<br/>
-우리는 두가지 다 원한다.<br/>
-<br/>
-사용된 데이터들의 중심(평균)간의 거리를 maximization 하고 싶은 target function 으로 선택한다.<br/>
-projecion 된 다음에 중심평균벡터사이의 거리 혹은.<br/>
-projecion 이전의 평균벡터사이의 거리 에 $W^{T}$ 를 곱한 것이다.<br/>
-$J(w) = |\tilde{\mu_{1}} - \tilde{\mu_{2}}| = |W^{T}\mu_{1}-W^{T}\mu_{2}| = |W^{T}(\mu_{1}-\mu_{2})|$<br/>
-<br/>
-@<br/>
-위 식에 의하면 projecion 뒤 평균벡터의 거리 가 $x_{1}$ 으로 projecion 했을 때 크다.<br/>
-하지만 뷴류가 더 명확히 되는 경우는 $x_{2}$ 에 projecion 했을 때 이다.<br/>
-평균만을 고려하면 class 안에서의 variance 가 고려되지 않기 때문에 좋은 척도는 아니라는 결론을 얻는 것이다.<br/>
-위의 수식이 좋은 지표이지만 하나만으로는 부족하다.<br/>
-<br/>
-@<br/>
-위의 방법은 평균들간의 차이 $|\mu_{1}-\mu_{2}|$ 를 target function J(w) 로 나타낸 것이다.<br/>
-위의 수식을 보완하는 방법을 fisher 가 제안했다.<br/>
-class 내 scatter(variance) 로 정규화한 평균들 간의 차이로 target function J(w) 를 만들어 이를 최대화 시키는 것이다.<br/>
-<br/>
-@<br/>
-각 class 들에 대하여 scatter(projecion 이후 y 에 관한 covariance matrix 가 within class scatter 라고 보면 된다, 아래 과정에서는 샘플갯수 N 으로 나눠주는 과정은 생략되어 있음) 는 다음과 같이 주어진다.<br/>
-$\tilde{S}_{i}^{2} = \sum\limits_{y\in \omega_{i}} (y-\tilde{\mu}_{i})^{2} = \sum\limits_{y\in \omega_{i}} (y-\tilde{\mu}_{i})(y-\tilde{\mu}_{i})^{T}$<br/>
-<br/>
-2개의 class 인 binary classification 의 경우, within-class scatter = 1번 class 의 covariance matrix + 2번 class 의 covariance matrix.<br/>
-<br/>
-@<br/>
-정규화시켜준 다는 것은 위의 값으로 나눠준다는 것이다.<br/>
-따라서, fisher 의 선형판별은 다음의 목적함수 J(w) 를 최대화하는 선형함수 $W^{T}x$ 를 찾는 것이다.<br/>
-$J(w) = \frac{|\tilde{\mu}_{1}-\tilde{\mu}_{2}|^{2}}{\tilde{S}_{1}^{2}+\tilde{S}_{2}^{2}}$<br/>
-<br/>
-@<br/>
-J(w) 를 최대화시키려면 분자(between-class scatter) 는 크고 분모(within-class scatter) 는 작아야한다.<br/>
-<br/>
-@<br/>
-fisher 선형판별식은 같은 class 의 표본들은 인접하게 projecion 되고, 동시에 class 간의 projecion 은 중심이 가능한 멀리 떨어지게 하는 변환행렬 w 를 찾아내는 것이 목적이다.<br/>
-<br/>
-@<br/>
-최적의 사영 w 를 구하기 위해서는 J(w) 를 w 에 대한 함수로 표현해야한다.<br/>
-다차원 특징 공간에서 i 번째 class 의 within-class scatter matrix 는 i class 속한 샘플들을 평균에서 빼고 제곱을 하여 다 더해준다.<br/>
-사영 상에서 분산과 동일한 형태이다.<br/>
-$S_{i}^{2} = \sum\limits_{x\in \omega_{i}} (x-\mu_{i})(x-\mu_{i})^{T}$<br/>
-variance 는 $\sigma^{2}$ 으로 쓴다.<br/>
-여기서도 마찬가지이다.<br/>
-클래스 내 scatter 행렬 $S_{w} = S_{1}^{2} + S_{2}^{2} = S_{w}$<br/>
-<br/>
-사영된 다음에 class 내의 scatter 행렬에는 다음과 같은 관계식이 존재한다.<br/>
-$\tilde{S_{1}^{2}} +  \tilde{S_{2}^{2}} = W^{T}S_{W}W = \tilde{S_{W}}$<br/>
-주어진 하나의 class 의 covariance matrix 를 projecion 된 다음에 구하면 x 데이터는 y 로 바뀐 상태이고 평균값도 projection 된것의 평균값인 tilde 로 바뀐상태이다.<br/>
-<br/>
-주어진 before project 일때 within-class scatter $S_{1}^{2}$ 과 after project 일때 within class scatter $\tilde{S_{1}^{2}}$ 의 관계 는 수식으로 다음과 같다.<br/>
-<br/>
-즉, $S_{w}$ 와 $\tilde{S_{1}^{2}}+\tilde{S_{2}^{2}}$ 의 관계는 변환행렬을 곱해주는 관계이다.<br/>
-$\tilde{S_{1}^{2}}+\tilde{S_{2}^{2}} = w^{T}S_{w}w$<br/>
-      
+x is (D,1)
+
+=========================================================
+2018-06-07 10-50-44.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 10-50-44.png"><xmp>
+
+One of parameters which each class has is average parameter
+
+Red ellipse : $$$\omega_{1}$$$ class data's distribution
+Blue ellipse : $$$\omega_{2}$$$ class data's distribution
+
+Average point of each class data's distribution is generally their centroids ($$$\mu_{1}, \mu_{1}$$$)
+
+Average of class i $$$\mu_{i}$$$ :
+$$$\mu_{i} = \frac{1}{N} \sum\limits_{x\in \omega_{i}} x$$$
+
+=========================================================
+How to find average after projection?
+
+Average of class i $$$\mu_{i}$$$ :
+$$$\mu_{i} = \frac{1}{N} \sum\limits_{x\in\omega_{i}}x$$$
+
+$$$\tilde{\mu}_{i}$$$ : average of class i after projection
+
+$$$\tilde{\mu}_{i} = \frac{1}{N}\sum\limits_{y\in \omega_{i}}y$$$
+$$$\tilde{\mu}_{i} = \frac{1}{N}\sum\limits_{y\in \omega_{i}}W^{T}x$$$
+$$$\tilde{\mu}_{i} = W^{T}\mu_{i}$$$
+
+[Projection of $$$\mu_{i}$$$] == [projection of $$$\omega_{1}$$$ class data -> from projected data, find its average $$$\tilde{\mu}_{1}$$$]
+2018-06-07 11-02-06.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 11-02-06.png"><xmp>
+
+=========================================================
+Case that you project data onto $$$x_{2}$$$ axis
+
+2018-06-07 11-03-06.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 11-03-06.png"><xmp>
+
+=========================================================
+Distribution after projection onto each axix $$$x_{1}$$$ and $$$x_{2}$$$
+
+2018-06-07 11-04-57.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 11-04-57.png"><xmp>
+
+Case you project data onto $$$x_{1}$$$ :
+Wide distance between averages $$$\mu_{1}$$$ and $$$\mu_{2}$$$
+Red and blue are projected in wide range and they're overapped in some parts
+This is good case of far distance between red class and blue class
+
+Case you project data onto $$$x_{2}$$$ :
+You get less overapped region
+You get more clear separation of 2 classes
+This is good case of class separation
+
+But you should want both of them (wide range between averages and good separation)
+
+=========================================================
+First formular
+
+You can choose distance between average points (centroids) of each used data 
+as target function J(W) which you should maximize :
+$$$J(W) = |\tilde{\mu_{1}} - \tilde{\mu_{2}}|$$$
+$$$J(W) = |W^{T}\mu_{1}-W^{T}\mu_{2}|$$$
+$$$J(W) = |W^{T}(\mu_{1}-\mu_{2})|$$$
+
+J(W) : target function in respect to transform matrix W
+
+2018-06-07 11-14-47.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 11-14-47.png"><xmp>
+
+This target function J(W) finds most wide distance between 2 centroids
+But this target function is insufficient, which will be complemented by following Fisher's LDA method
+
+=========================================================
+This method is suggested by Fisher
+
+Target function J(W) which should be maximized :
+$$$J(W) = \frac{|\tilde{\mu}_{1}-\tilde{\mu}_{2}|^{2}}{\tilde{S}_{1}^{2}+\tilde{S}_{2}^{2}}$$$
+
+$$$\tilde{\mu}_{1}$$$ : average of class 1 data after projection
+$$$\tilde{\mu}_{2}$$$ : average of class 2 data after projection
+$$$|\tilde{\mu}_{1}-\tilde{\mu}_{2}|^{2}$$$ : square of $$$|\tilde{\mu}_{1}-\tilde{\mu}_{2}|$$$
+$$$\tilde{S}_{1}^{2}$$$ : covariance matrix of class 1 data after projection
+$$$\tilde{S}_{2}^{2}$$$ : covariance matrix of class 2 data after projection
+$$$\tilde{S}_{1}^{2}+\tilde{S}_{2}^{2}$$$ : indicator related to within-class scatter (variance within class)
+
+Fisher's LDA is linear fucntion $$$W^{T}x$$$ which maximizes above target function J(W)
+
+To maximize J(W),
+$$$|\tilde{\mu}_{1}-\tilde{\mu}_{2}|^{2}$$$ should be largest
+$$$\tilde{S}_{1}^{2}+\tilde{S}_{2}^{2}$$$ should be lowest
+
+=========================================================
+Scatter (variance) of each class after projection $$$\tilde{S_{i}}$$$
+
+$$$\tilde{S}_{i}^{2} = \sum\limits_{y\in\omega_{i}} (y-\tilde{\mu}_{i})^{2} $$$
+$$$\tilde{S}_{i}^{2} = \sum\limits_{y\in\omega_{i}} (y-\tilde{\mu}_{i})(y-\tilde{\mu}_{i})^{T}$$$
+
+=========================================================
+Fisher's method finds transform matrix W which projects data in same class onto near region, at the same time, which makes far distances between centroids of classes
+
+2018-06-07 13-08-09.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 13-08-09.png"><xmp>
+
+Left axis :
+short distance between centroids of projected class
+good separation
+
+below axis ($$$x_{1}$$$) :
+long distance between centroids of projected class
+bad separation (overapped)
+
+
+=========================================================
+How to find transform matrix W which maximizes target function J(W)?
+
+That method is already found by mathematicians
+
+Target function J(W) you've seen is this :
+$$$J(W) = \frac{|\tilde{\mu}_{1}-\tilde{\mu}_{2}|^{2}}{\tilde{S}_{1}^{2}+\tilde{S}_{2}^{2}}$$$
+
+To find optimal transform matrix W, you need to express target function J(W) in respect to W
+
+Assumption : 
+In multi-dimension feature space, scatter matrix S is identical form to covariance matrix only without scale factor $$$\frac{1}{N-1}$$$
+Scatter matrix of class i $$$S_{i} = \sum\limits_{x\in\omega_{i}} (x-\mu_{i}) (x-\mu_{i})^{T}$$$
+2018-06-07 13-19-48.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-07 13-19-48.png"><xmp>
+
+Note
+Covariance matrix $$$\Sigma= \frac{1}{N-1} \sum\limits_{x\in\omega_{i}} (x-\mu_{i}) (x-\mu_{i})^{T}$$$
+ 
+
+Scatter matrix within class S_{with-in-class} :
+$$$S_{with-in-class}^{2} = S_{1}^{2} + S_{2}^{2}$$$
+
+=========================================================
+After projection, scatter matrix within class \widetilde{S}_{with-in-class} has following relation
+$$$\widetilde{S}_{1}^{2} + \widetilde{S}_{2}^{2} = W^{T}S_{within-class}W = \widetilde{S}_{within-class}$$$
+$$$S_{within-class}$$$ : scatter matrix (covariance matrix) within class before projection
+W : tranform matrix
+
+Induce step :
+$$$\widetilde{S}_{i}^{2} = \sum\limits_{y\in\omega_{i}} (y-\widetile{\mu}) (y-\widetile{\mu})^{T}$$$
+$$$\widetilde{S}_{i}^{2} = \sum\limits_{y\in\omega_{i}} (W^{T}x-W^{T}\mu_{i}) (W^{T}x-W^{T}\mu_{i})^{T}$$$
+$$$\widetilde{S}_{i}^{2} = \sum\limits_{y\in\omega_{i}} W^{T} (x-\mu_{i}) (x-\mu_{i})^{T} W$$$
+$$$\widetilde{S}_{i}^{2} = W^{T}S_{i}^{2}W$$$
+</xmp>
    </BODY>
 </HTML>
