@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:500px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+=========================================================
+01_03.html
+feature, feature vector, feature space, pattern, scatter plot
+
+=========================================================
+feature
+distinguisible aspect, quality, characteristic which object has
+
+example of feature:
+color, symbol, height/width/weight, ...
+
+=========================================================
+How to mathematically express features
+
+To mathematically express features, you need :
+1. feature vector :
+standard : column vector
+2018-06-09 09-03-12.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-03-12.png"><xmp>
+
+3 features -> 3-D column vector
+3-D vector is one point in 3-D space
+2018-06-09 09-03-41.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-03-41.png"><xmp>
+1. feature space
+Space where feature vector is defined
+2018-06-09 09-04-27.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-04-27.png"><xmp>
+1. scatter plot
+You express objects in collected dots in feature space
+2-D scatter plot
+2018-06-09 09-07-38.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-07-38.png"><xmp>
+there are 2 features
+class has 3
+objects are many
+
+=========================================================
+What's pattern?
+
+set of features which each object has
+
+In task of classification, pattern is given in form of pair like $(x,\omega)$
+x : feature vector
+$\omega$ : label of x, information about x is involved in specific class
+
+=========================================================
+feature
+
+collection of features -> pattern
+
+You recognize object with pattern
+
+=========================================================
+good features
+2018-06-09 09-20-29.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-20-29.png"><xmp>
+bad features
+2018-06-09 09-20-40.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-20-40.png"><xmp>
+In other words,
+sample from same class should have same or similar feature values
+sample from different class should have different feature values
+
+=========================================================
+Type of patterm
+
+1. pattern which can be divided by linear separation
+2018-06-09 09-21-34.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-21-34.png"><xmp>
+
+1. pattern which can be divided by non-linear separation
+2018-06-09 09-21-54.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-21-54.png"><xmp>
+
+1. pattern which has strong correlation
+2018-06-09 09-22-20.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-22-20.png"><xmp>
+
+1. pattern which has multimodal feature
+2018-06-09 09-22-52.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-09 09-22-52.png"><xmp>
+
+
+</xmp>
+   </BODY>
+</HTML>
