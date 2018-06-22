@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:500px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+=========================================================
+vector : 
+physically, physical quantity which has size and direction
+2018-06-10 08-26-57.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 08-26-57.png"><xmp>
+
+mathematically, notation which express over one numbers
+generally, expressed by one point in n-D space
+
+=========================================================
+In linear algebra, vector symbol is notated by bold lower case
+Standard feature vector is column vector 
+Direction of column vector is direction of vertical downwards "one" arrow 
+
+=========================================================
+Size of vector is called norm in linear algebra
+Norm symbol is pair of double vertical bar
+$$$||x|| = \sqrt{x^{T}x} = \sqrt{x_{1}^{2}+x_{2}^{2}+...x_{N}^{2}}=\begin{bmatrix} \sum\limits_{k=1}^{N}x_{k}x_{k} \end{bmatrix} ^{\frac{1}{2}}$$$
+
+$$$x^{T}x = \begin{bmatrix} x_{1}&x_{2}&...&x_{N} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix}$$$
+$$$x^{T}x=x_{1}^{2}+x_{2}^{2}+...x_{N}^{2}$$$
+
+=========================================================
+unit vector : 
+same direction but length in 1
+$$$u = \frac{1}{||v||}v$$$
+
+Step of finding unit vector is called "normalization"
+
+</xmp>
+   </BODY>
+</HTML>
