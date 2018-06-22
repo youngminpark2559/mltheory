@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:500px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+=========================================================
+linear : multiplication, add with vector and matrix
+if linear is used for purpose of transform, it's linear transform
+
+=========================================================
+linear transform is mapping vector space (N-D space) $X^{N}$ to vector space (M-D space) $Y^{M}$
+linear transform is actually and simply "matrix multiplication"
+
+if there is one vector which is element of N-D space ($x\in X^{N}$) (x is one point of N-D space),
+you can map x onto Y^{M}, then, you can obtain corresponding mapped y
+
+task can be processed like this:
+(M,1) vector y = (some (M,N) matrix)*((N,1) vector x)
+
+You call some matrix as linear transform matrix
+
+
+If you want to 8-D vector onto 5-D vector, you can use (5,8) linear transform matrix
+
+=========================================================
+In pattern recognition, linear transform is much used for dimensionality reduction 
+
+=========================================================
+If linear transform matrix A is square matrix, and satisfies AA^{T}=A^{T}A=I, you can say A and $A^{T}$ are orthonormal
+If A and A^{T} are orthonormal, A^{T}=A^{-1}
+
+=========================================================
+If you perform orthonormal transform, you can preserve size of vector
+
+y=Ax
+y : n 
+A : nxn
+x : n
+but y and x are perfectly different
+
+If A is orthonormal, length of y and x becomes identical
+
+prove:
+$|y|=\sqrt{y^{T}y}$
+you know y=Ax
+$|y|=\sqrt{(Ax)^{T}(Ax)}$
+you know, $(ab)^{T}=b^{T}a^{T}$
+$|y|=\sqrt{x^{T}A^{T}Ax}$
+if A is orthonormal, $A^{T}A=I$
+$|y|=\sqrt{x^{T}x}$
+$|y|=|x|$
+
+=========================================================
+row vectors ($a_{1}, a_{2}, ...,a_{N}$) of orthonormal transform matrix forms set of basis vectors which are all orthonormal
+2018-06-12 10-31-02.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-12 10-31-02.png"><xmp>
+
+
+if $a_{1}, a_{2}, ...,a_{N}$ are orthonormal, 
+$a_{i}^{T}a_{j}=0$ if $i\neq j$
+$a_{i}^{T}a_{j}=1$ if $i = j$
+
+=========================================================
+suppose one matrix A which will be used as linear transform
+y=Ax
+
+eigenvector of A represents invariant direction in vector space
+
+=========================================================
+When you perform y=Ax,
+you can think of eigenvector v of A
+
+all points on direction of eigenvector v of A will be located in that same direction when you perform y=Ax
+
+length of that will be multiplication by corresponding eigenvalue $\lambda$
+2018-06-12 10-43-53.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-12 10-43-53.png"><xmp>
+
+
+That is, direction and location don't change from x to y
+only length changes as much as $\lambda$
+
+=========================================================
+suppose one matrix A = $\begin{bmatrix} \cos{\beta}&-\sin{\beta}&0 \\ \sin{\beta}&\cos{\beta}&0 \\ 0&0&1 \end{bmatrix}$
+
+A is actually rotate transform matrix
+1 column : x
+2 column : y
+3 column : z
+axis : z
+rotate angle : $\beta$
+x and y change
+z is fixed, z is direction of eigenvector
+eigenvalue is 1 because length is also fixed
+
+=========================================================
+
+</xmp>
+   </BODY>
+</HTML>
