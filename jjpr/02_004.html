@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:500px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+=========================================================
+linear combination
+
+suppose you have n number of vectors :
+$$$x = \{x_{1}, x_{2},...,x_{N}\}$$$
+
+suppose you have n number of scalars :
+$$$a = \{a_{1}, a_{2},...,a_{N}\}$$$
+
+you can consider this notation :
+$$$y = a_{1}x_{1}+a_{2}x_{2}+...+a_{N}x_{N}$$$
+
+y which is created in this way is also vector
+
+with this notation, you can say vector y is "linear combination" of vector x
+or vector y is created based on "linear combination" of vector x 
+
+=========================================================
+2 characteristics (linearly dependent, linearly independent) of vector created in linear combination
+
+=========================================================
+linearly dependent
+
+there is vector set $$$x=\{x_{1},x_{2},...,x_{N}\}$$$
+if you can find scalar coefficient set $$${a_{1},a_{2},...,a_{N}\}$$$ which satisfies following formular, 
+$$$a_{1}x_{1}+a_{2}x_{2}+...+a_{N}x_{N}=\sum\limits_{i=1}^{N}a_{i}x_{i}=0$$$
+you can say vector set $$$x=\{x_{1},x_{2},...,x_{N}\}$$$ is linearly dependent
+
+trivial solution is all scalar coefficients are 0
+but you're not thinking of that trivial solution
+you can see example like this:
+$$$\begin{bmatrix} 0\\0\\0 \end{bmatrix} = 1\times \begin{bmatrix} 2\\2\\4 \end{bmatrix} -2\times \begin{bmatrix} 2\\2\\3 \end{bmatrix} + 2\times \begin{bmatrix} 1\\1\\1 \end{bmatrix}$$$
+
+So, you can say above 3 vectors are linearly dependent
+
+Or, you can say definition of linearly dependent like this :
+$$$a_{1}x_{1}+a_{2}x_{2}+...+a_{N-1}x_{N-1}=-a_{N}x_{N}$$$
+Elements can make other elements, which means they're related to each other, so you can use term "linearly dependent"
+
+=========================================================
+linearly independent
+
+more simple concept than linearly dependent
+
+linearly independent indicates case that when solution satisfying following formular :
+$$$a_{1}x_{1}+a_{2}x_{2}+...+a_{N}x_{N}=\sum\limits_{i=1}^{N}a_{i}x_{i}=0$$$
+is only one where all scalar coefficients are 0, you can say vectors of vector set x are linearly independent
+
+Example :
+$$$\begin{bmatrix} 0\\0\\0 \end{bmatrix} = 0\times \begin{bmatrix} 1\\0\\0 \end{bmatrix} +0\times \begin{bmatrix} 0\\1\\0 \end{bmatrix} + 0\times \begin{bmatrix} 0\\0\\1 \end{bmatrix}$$$
+
+=========================================================
+3 vectors which are linearly independent can be plotted on space :
+2018-06-10 10-55-20.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 10-55-20.png"><xmp>
+
+Vectors located on each axis are linearly independent
+
+basis vectors are linearly independent
+</xmp>
+   </BODY>
+</HTML>
