@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:500px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+=========================================================
+trace of matrix
+2018-06-11 08-24-31.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-11 08-24-31.png"><xmp>
+
+above characteristics are importantly used when finding solution on eigenvalue question
+
+=========================================================
+determinant value of matrix
+
+matrix has many elements
+To inform matrix, you should inform all of elements of matrix, which is complex way
+
+So, what if you can inform one value which expresses unique characteristic of matrix?
+
+determinant value of matrix is one real number which expresses matrix
+
+determinant of matrix $$$A = |A| = \sum\limits_{k=1}^{d} a_{ik}|A_{ik}|(-1)^{k+i}$$$
+$$$A_{ik}$$$ : sub-matrix of A, which you remove ith row, kth column from matrix A
+
+
+=========================================================
+determinant is only defined in squre matrix
+$$$|A|=|A^{T}|$$$
+
+
+=========================================================
+determinant of 2x2 matrix A :
+$$$|A| = \begin{vmatrix} a_{11}&a_{12}\\a_{21}&a_{22} \end{vmatrix} = a_{11}&a_{22} - a_{12}&a_{21}$$$
+
+determinant of 3x3 matrix A :
+uses computer
+
+</xmp>
+   </BODY>
+</HTML>
