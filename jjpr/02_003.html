@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:500px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+=========================================================
+orthogonal projection
+2018-06-10 09-08-13.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 09-08-13.png"><xmp>
+
+When you project vector y onto vector x, projected vector y becomes vector in direction of vector x
+
+What will be projected vector y's length?
+
+projected vector y is $$$u_{x}$$$*(length of projected vector y)
+
+length of projected vector y = y^{T}u_{x}
+
+In conclusion,
+projected vector y = $$$\langle y^{T},u_{x} \rangle u_{x} = (||y||\cos{\theta})u_{x}$$$
+
+$$$||y||\cos{\theta}$$$ = (length of projected y) = (length of y)*($$$\cos{\theta}$$$)
+
+=========================================================
+Example
+
+vector $$$y=[2 4]^{T}$$$
+vector $$$x=[4 3]^{T}$$$
+
+projection y onto x?
+
+$$$u_{x}=\frac{1}{||x||}x=\frac{1}{\sqrt{16+9}} [4\;3] = \begin{bmatrix} \frac{4}{5} \; \frac{3}{5} \end{bmatrix} $$$
+
+$$$\begin{pmatrix} [2\;4]\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix} \end{pmatrix}  \begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
+$$$4*\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
+
+=========================================================
+If inner product is 0, 2 vectors are orthogonal
+If inner product is 0 AND $$$||x||=||y||=1$$$, 2 vectors are orthonoarmal
+
+</xmp>
+   </BODY>
+</HTML>
