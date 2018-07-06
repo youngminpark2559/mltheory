@@ -5,7 +5,7 @@
       <TITLE>My first HTML document</TITLE>
       <style rel="stylesheet" type="text/css">
 body {
- font-size: 25px;
+ font-size: 23px;
  
  margin-top: 50px;
     margin-bottom: 50px;
@@ -17,7 +17,10 @@ body {
     padding-right: 80px;
     padding-left: 80px;
     
-    line-height:1.6em
+    line-height:35px;
+},
+img {
+ width:900px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -37,8 +40,8 @@ MathJax.Hub.Config({
                equationNumbers: { autoNumber: "AMS" } },
         extensions: ["tex2jax.js"],
         jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
                    processEscapes: true },
         "HTML-CSS": { availableFonts: ["TeX"],
                       linebreaks: { automatic: true } }
@@ -46,109 +49,176 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
-002. Week 01. Motivations and Basics - 02. MLE(maximum likelihood estimation)<br/>
-<br/>
-@<br/>
-이산적인 사건의 종류가 두가지인 Binomial distribution 은 continuous 한게 아니라 true/false, H/T 와 같이 이산적인 사건에 대한 discrete probability distribution 이다.<br/>
-결과가 두개가 나오는 실험을 베르누이 실험이라고 한다. <br/>
-<br/>
-압정을 던지는 행위는 i.i.d(independent event, identically distributed according to binomial distribution) 라는것을 가정 하고 던지는 것이다. 두번 던질때, 이 두 행위가 연관되지 않은 독립된 사건이라는 것을 가정한다는 것이다. <br/>
-또 두번 던질때 압정이 손상이 없어서, H/T 이 나오는 동일한 확률분포를 가지고 시도를 해봤다. 독립적인 이벤트이다. <br/>
-<br/>
-H가 나올확률을 $\theta$ 라고 부르자. $P(\theta)$<br/>
-그러면 H가 안나올확률, 즉 T가 나올 확률은 $P(T)=1-\theta$<br/>
-<br/>
-i.i.d. condition 을 만족하는 상황에서 압정을 5번 던졌을때, HHTHT 이렇게 나왔다면, 연속이므로 확률을 곱해준다.<br/>
-$P(HHTHT)={\theta}{\theta}{(1-\theta)}{\theta}{(1-\theta)}$<br/>
-$P(HHTHT)={\theta^{3}}{(1-\theta)}^{2}$ 많이 작은 수 이다.<br/>
-<br/>
-여기서 조금더 자세히 얘기해보자.<br/>
-Data를 D라고 부르자. D=H,H,T,H,T <br/>
-시행횟수 n=5<br/>
-H가 나온 횟수 $k=a_{H}=3$<br/>
-압정의 특이한 모양에서 기인한 H가 나올 확률 $p=\theta$ <br/>
-<br/>
-$\theta$ 라는 압정의 특이한 모양에서 기인한 H가 나올 확률을 가정했을때, $\theta$ 가 기본이라고 생각했을때,<br/>
-D라는 Data 가 관측될 확률은 $\theta$ 에 앞면이 나온 횟수 승, 곱하기 $(1-\theta)$ 뒷면이 나온 횟수 승이다. $P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$<br/>
-<br/>
-그러면 위의 정보들을 활용해서 우리가 어떻게 $\frac{3}{5}, \frac{2}{5}$ 라는 확률을 구하는데 까지 갈 수 있을까?<br/>
-<br/>
-@<br/>
-Maximum Likelihood Estimation<br/>
-가정을 세워보자. 압정의 도박 결과는 $\theta$ 라는 binomial distribution를 따른다. <br/>
-그러면 여기서 어떻게 하면 우리의 가정사항이 강해질까? hypothesis가 강해져서 이게 참이다 라고 말을 할수 있게 될까?<br/>
-<br/>
-먼저 첫번째로, binomial distribution 이 아니었다. 더좋은 hypothesis 구조가 있다 면 그것을 가정으로 주장할 수 있겠다. <br/>
-<br/>
-두번째로, 결과가 binomial distribution $\theta$ 를 따른다고 했을때, $\theta$ 를 최적화해서 hypothesis 가 강해질수 있도록 만들 수 있을 것이다. 즉, best canditate $\theta$를 찾는 문제인 것이다. <br/>
-어떤 $\theta$를 선택했을때 이 데이터를 가장 잘 설명 해 줄수 있을까? 그것을 찾아내는게 확률의 요체라고 할 수 있다.<br/>
-<br/>
-@<br/>
-첫번째로 알아볼것이 MLE 라고 하는 확률의 추론이다. <br/>
-MLE 는 관측된 데이터들의 등장할 확률을 최대화 하는 $\theta$를 찾아내는 것이다. <br/>
-수식적으로 표현하면,<br/>
-$P(D|\theta)$ 를 최대화해주는 argument $\theta$ 를 찾아내서 그것을 $\hat{\theta}$ 이라고 부르겠다. 라는 의미이다.<br/>
-중요한 표현이나 잘 알아두자. $\theta$ 가 주어졌을때 Data를 관측할 확률 $P(D|\theta)$ 를 우리는 계산할 수 있다. 그런데 그 확률을 최대화해주는 $\theta$ 를 찾아내자. 그리고 그 $\theta$를 앞으로는 $\hat{\theta}$ 이라고 부르겠다. <br/>
-$arg\;\underset{\theta}{max}P(D|\theta)$<br/>
-<br/>
-@<br/>
-MLE를 적용해보자.<br/>
-우선 $\hat{\theta}$ 는 이렇게 정의할 수 있을 것이다.<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}P(D|\theta)$<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}\theta^{a_{H}}(1-\theta)^{a_{T}}$<br/>
-그런데 $\theta^{a_{H}}(1-\theta)^{a_{T}}$ 이 수식은 앞으로 진전하기에는 자승같이 처리하기 쉽지 않은 복잡한것들이 많다. <br/>
-그래서 통계학자, 기계학자들이 흔히 이용하는 테크닉이 log function 을 이용하는 것이다. log function 은 단조증가하기때문에 확률함수 $P(D|\theta)$ 를 log function 을 활용해서 맵핑시켜도 P가 최대가 되는점이 log 가 최대화 되는 점과 서로 동일하다. <br/>
-ln을 취하면,<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}\ln{P(D|\theta)}$<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}\ln{\theta^{a_{H}}(1-\theta)^{a_{T}}}$<br/>
-이렇게 하면 $\log{P}$와 P의 값은 달라지지만 P가 최대화되는 점은 $\log{P}$가 최대화 되는 점과 동일하다는 특성을 이용하는 것이다. <br/>
-로그의 특성을 활용해서.<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}\ln{\theta^{a_{H}}(1-\theta)^{a_{T}}}$<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}\{\ln{\theta}^{a_{H}}+\ln{(1-\theta)}^{a_{T}}\}$<br/>
-$\hat{\theta} = arg\;\underset{\theta}{max}\{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\}$<br/>
-이제부터 최대화 문제가 된다. <br/>
-$\{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\}$ 이 속에서 $\theta$ 를 optimize 해서 $\{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\}$ 이 수식을 최대화 시켜주는 $\theta$를 찾는 문제이다.<br/>
-<br/>
-어떤 방법을 쓰면 좋을까?<br/>
-고등학교때, 최대값, 최소값 찾을때 어떻게 했지? 미분해서 0 나오는거 기억나나? 극점을 이용한 방법이다. <br/>
-$\theta$ 에 대해 미분해 보도록 하자. 그리고 0이 되는 점을 찾아보자.<br/>
-$\frac{d}{d\theta}\{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\} = 0$<br/>
-$\frac{a_{H}}{\theta}-\frac{a_{T}}{1-\theta}=0$<br/>
-$\theta=\frac{a_{H}}{a_{T}+a_{H}}$ 즉 던져진 총 횟수 분의 H가 나오는 횟수가 되는 것이다.<br/>
-$\frac{3}{5} \frac{2}{5}$ 같이 시도한 총 횟수분의 선택하고자 했던 횟수로 나눠준다. 라는 간략한 확률이 이런 binomial distribution, MLE, 최적화 과정을 거쳐서 나온 수식이 바로 이 총횟수분의 사건횟수 수식이다.<br/>
-<br/>
-@<br/>
-이것이 MLE 관점에서 본 추정된, inference 된, 최적화된 파라미터값인 $\hat{\theta}$ 이다.<br/>
-<br/>
-@<br/>
-이런 MLE 라는 과정을 거쳐서 $\frac{3}{5} \frac{2}{5}$ 입니다. 이렇게 회장님한테 설명을 함.<br/>
-그래서 결론적으로 $\theta = 0.6$ 입니다 라고 주장을 함.<br/>
-<br/>
-@<br/>
-이번에는 압정을 50번을 던져봤지. 비율이 이전 시도와 똑같이 30번 앞, 20번 뒤가 나왔다. 그러면 5번던져서 3번나온거랑 50번 던져서 30번 나온거랑 다른건가? 똑같이 0.6이에요. 5번에 3번이나 50번에 30번이나 똑같고요. 헛수고 하신거에요. 이렇게 말해야할까? 그거랑은 좀 다를거같다.<br/>
-생각을 해보자.<br/>
-<br/>
-여러번 더 많이 하면, $\theta$ 가 실제 파라미터라기보다 추론된 $\hat{\theta}$ 이었는데 여기에 대한 에러가 줄어든다는 것이다.<br/>
-지금, 우리는 $\hat{\theta}=\frac{a_{H}}{a_{H}+a_{T}}$, 시행횟수 $N = a_{H}+a_{T}$ 을 갖고있다.<br/>
-진짜 파라미터인 $\theta^{*}$ 는 아무런 에러없이 던졌을 때 나오는 것이고, 그런데 trial error 는 언제나 있기 때문에, $\theta^{*}$ 과 $\hat{\theta}$ 가 동일할 수는 없다는 것이다. <br/>
-<br/>
-그럴때 수학과에서 배우는 수식중에 하나가 우리가 위의 과정을 거치면서 추론한 $\hat{\theta}$ 과 true 파라미터인 $\theta^{*}$ 의 차이가 허용할수 있는 특정 에러 바운드 $\epsilon$ 보다 클 확률은 $2e^{-2N\epsilon^{2}}$ 보다는 작다. 여기서 N값이 시행한 횟수 값이다. <br/>
-<br/>
-허용할수 있는 특정 에러 바운드 $\epsilon$ 가 커진다고 생각하면, $2e^{-2N\epsilon^{2}}$ 값은 작아진다. 즉, 에러바운드가 커지면 커질수록 에러가 발생할 확률 P는 작아지는 것이다. <br/>
-<br/>
-N 이 커지면 커질수록 $2e^{-2N\epsilon^{2}}$ 값은 작아진다. 에러가 발생할 확률 P가 작아지니까, N이 늘어나서 수정된 파라미터와 진짜파라미터 사이의 에러가 더 작을 거라고 회장님한테 보고를 할수 있을 것이다. <br/>
-<br/>
-우리는 추정 파라미터 $\hat{\theta}$ 를 $0.6=\frac{30}{50}$ 이라고 주장하고 있음. 트루 파라미터 $\theta^{*}$ 와 $\epsilon=0.1$ 차이가 나면서 동시에, $\epsilon=0.1$ 이 발생할 확률이 0.01\% 보다 작게끔 만들어 볼수 있을까? 라고 제의하면 대답할수 있어야한다.<br/>
-<br/>
-답은 N을 많이 늘려서 만들어진 $\hat{\theta}$ 은 이 조건을 만족시킬 겁니다. <br/>
-<br/>
-이게 사실은 Probably Approximate Correct(PAC)한 learning 이라는 것이 되겠습니다. <br/>
-Probably 는 아마도 $P(|\hat{\theta}-\theta^{*}|{\geq}\epsilon){\leq}2e^{-2N\epsilon^{2}}$ 이 확률 내에서는, 이 오차 범위 내에서는, correct 한 learning의 결과물이 $\hat{\theta}$ 이 아닌가 하는것이 PAC 러닝의 결과물이라고 보는것이다. <br/>
-<br/>
-@<br/>
-이렇게 MLE 를 활용한 $\hat{\theta}$ 을 추정하고 이 $\hat{\theta}$ 이 왜 PAC learning 의 결과물이 되는지를 알아보았다. <br/>
-<br/>
-@<br/>
-그런데 MLE 관점에서 $\theta$ 를 추정했다고 했는데 다른 관점에서 추정하는건 없을까? 있다. 다음시간에 설명한다.<br/>
+bikesharingdemand
+<xmp>
+a
+002. Week 01. Motivations and Basics - 02. MLE(maximum likelihood estimation)
+
+% ========================================================================
+Formular of finding probability, $$$probability=\frac{\text{occured case}}{\text{entire case}}$$$ is actually not simply induced
+To induce above formular, you need to understand following concepts, for example, binomial distribution
+
+% ========================================================================
+Binomial distribution is probability distribution about 2 discrete (like head or tail, unlike continuous) events
+
+Bernoulli experiment: experiment where result is 2 kinds
+
+% ========================================================================
+When you throw thumbtack, you already suppose iid (independent event, identically distributed according to binomial distribution)
+
+Independent event: first throw and second throw are independent, which meant both events are not related
+identically distributed according to binomial distribution: no damage on thumbtack, so trials with same probability distribution
+
+% ========================================================================
+Let's call probability of occuring H as $$$\theta$$$ like $$$P(H)=\theta$$$
+So, probability of occuring T is $$$P(T)=1-\theta$$$
+
+% ========================================================================
+Under iid condition, let's throw thumbtack 5 times
+And you observed HHTHT
+
+$$$P(HHTHT)={\theta}{\theta}{(1-\theta)}{\theta}{(1-\theta)}$$$
+$$$P(HHTHT)={\theta^{3}}{(1-\theta)}^{2}$$$
+which is very small number
+
+% ========================================================================
+Let's say above experiment in more detail
+
+Call Data as D
+D=H,H,T,H,T
+$$$n=5$$$, number of trial
+$$$k=a_{H}=3$$$, number of occuring head
+$$$p=\theta=P(H)$$$, probability of occuring head
+
+When $$$\theta$$$ is given, probability of occuring D is $$$P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$$$
+
+With above information, how can you reach to probability $$$\frac{3}{5}, \frac{2}{5}$$$
+
+% ========================================================================
+MLE (Maximum Likelihood Estimation)
+
+$$$P(D|\theta)=\theta^{a_{H}}(1-\theta)^{a_{T}}$$$
+Data: is what you have observed sequence data of D with $$$a_{H}$$$ and $$$a_{T}$$$
+
+Let's assume as hypothesis
+1. Gambling result with thumbtack follows binomial distribution of $$$\theta$$$
+
+From this, how can you make that hypothesis stronger to be true sentence?
+1. You can find better distribution explaining your observation
+This way can be done but you need more rational
+1. You admit result follows binomial distribution of $$$\theta$$$ 
+Then, you can optimize $$$\theta$$$ to make your hypothesis strongerer,
+which means with which $$$\theta$$$ you will explain data?
+
+Finding best candidate $$$\theta$$$ is core idea of probability
+
+% ========================================================================
+MLE: Probabilistic estimation
+
+MLE is about finding $$$\theta$$$ which makes probability of occuring observed data
+
+Mathematically, 
+You should find argument $$$\theta$$$ which makes $$$P(D|\theta)$$$ maximized
+And you call found $$$\theta$$$ as $$$\hat{\theta}$$$
+
+$$$\hat{\theta}=arg_{\theta}max P(D|\theta)$$$
+$$$P(D|\theta)$$$: When $$$\theta$$$ is give, conditional probability of occuring Data D
+$$$\hat{\theta}$$$: maximizes $$$P(D|\theta)$$$
+
+% ========================================================================
+Let's apply MLE to "throwing thumbtack gambling"
+
+You can define $$$\hat{\theta}$$$ as follow:
+$$$\hat{\theta} = arg_{\theta} max P(D|\theta)$$$
+$$$\hat{\theta} = arg_{\theta} max \theta^{a_{H}}(1-\theta)^{a_{T}}$$$
+
+Above notations are rather complicated to proceed further because it contains power notations
+
+% ========================================================================
+You can use log function whcih increases monotonically
+% /home/young/사진/IlChul_Moon-Basic_ML/2018_07_06_14:30:51.png
+
+Even if you map probability function $$$P(D|\theta)$$$ through log function, points where P becomes maximum are same
+
+You use ln:
+$$$\hat{\theta} = arg_{\theta}max \ln{P(D|\theta)}$$$
+$$$\hat{\theta} = arg_{\theta}max \ln{\theta^{a_{H}}(1-\theta)^{a_{T}}}$$$
+$$$\hat{\theta} = arg_{\theta}max \{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\}$$$
+
+% ========================================================================
+Now, it becomes maximazation question
+
+From $$$\{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\}$$$, you need to optimize $$$\theta$$$
+Then, you need to find $$$\theta$$$ which maximizes $$$\{a_{H}\ln{\theta}+a_{T}\ln{(1-\theta)}\}$$$
+
+Which ways will you use?
+You can use derivative which is set to zero
+
+You perform derivative in respect to $$$\theta$$$ then find points derivative is 0
+$$$\frac{d}{d\theta} \{ a_{H} \ln{\theta} + a_{T} \ln{(1-\theta)} \} = 0$$$
+
+$$$\frac{a_{H}}{\theta} - \frac{a_{T}}{1 - \theta} = 0$$$
+
+You arrange in respect to $$$\theta$$$
+$$$\theta=\frac{a_{H}}{a_{T}+a_{H}}$$$ 
+$$$a_{H}$$$: number of occuring head
+$$$a_{T}+a_{H}$$$: number of throwings
+
+Results from probability formular like $$$\frac{3}{5}$$$ and $$$\frac{2}{5}$$$ come from these steps with "binomial distribution", "MLE", "optimization process"
+
+% ========================================================================
+When $$$\theta=\frac{a_{H}}{a_{T}+a_{H}}$$$, $$$\theta$$$ becomes best candidate from MLE perspective
+So, you can write like this:
+$$$\hat{\theta}=\frac{a_{H}}{a_{T}+a_{H}}$$$
+
+Above $$$\theta$$$ is inferenced optimized parameter $$$\hat{\theta}$$$ in terms of MLE
+
+% ========================================================================
+So, you can explain how $$$\frac{3}{5} \frac{2}{5}$$$ come from
+So, you can say $$$\theta = 0.6$$$ is best $$$\theta$$$
+
+% ========================================================================
+Now, you can throw thumbtack 50 times
+And suppose 30 heads and 20 tails occurred
+Then, can you say 3H and 2T and 30H and 20T are different because probability is same as 0.6
+
+% ========================================================================
+No, it's actually different
+More you perform trials, error about inferenced parameter $$$\hat{\theta}$$$ as to actual parameter $$$\theta$$$ reduces 
+
+Now, you found $$$\hat{\theta}=\frac{a_{H}}{a_{H}+a_{T}}$$$ via MLE where $$$N=a_{H}+a_{T}$$$
+
+True parameter $$$\theta^{*}$$$ comes from without error, so it's ideal
+
+Since there are always trial erros, $$$\hat{\theat} \neq \theta^{*}$$$
+
+% ========================================================================
+$$$P(|\hat{\theta}-\theta^{*}|\geq \epsilon) \leq 2e^{-2N\epsilon^{2}}$$$
+
+$$$\hat{\theta}$$$: inferenced $$$\theta$$$
+$$$\theta^{*}$$$: true $$$\theta$$$ which thumbtack has
+$$$\epsilon$$$: specific error value
+$$$N$$$: number of trial
+
+If allowing error bound $$$\epsilon$$$ becomes larger, 
+$$$2e^{-2N\epsilon^{2}}$$$ becomes smaller
+That is, larger error bound becomes, probability of occuring error $$$P(|\hat{\theta}-\theta^{*}|\geq \epsilon)$$$ becomes smaller
+
+Larger N becomes, probability of occuring error $$$P(|\hat{\theta}-\theta^{*}|\geq \epsilon)$$$ becomes smaller
+
+So, with increased N, you can say $$$P(|\hat{\theta}-\theta^{*}|\geq \epsilon)$$$ becomes smaller
+
+% ========================================================================
+By increasing N, making $$$\hat{\theta}$$$ satisfying condition is PAC (Probably Approximate Correct) learning
+
+
+% ========================================================================
+You inferenced $$$\hat{\theta}$$$ by using MLE
+And you figured out why $$$\hat{\theta}$$$ becomes result of PAC learning
+
+% ========================================================================
+Next time, you will see other perspective inferencing $$$\theta$$$ instead of MLE
+
+</xmp>
    </BODY>
 </HTML>
