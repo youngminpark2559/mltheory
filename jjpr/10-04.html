@@ -5,7 +5,7 @@
       <TITLE>My first HTML document</TITLE>
       <style rel="stylesheet" type="text/css">
 body {
- font-size: 25px;
+ font-size: 23px;
  
  margin-top: 50px;
     margin-bottom: 50px;
@@ -17,7 +17,10 @@ body {
     padding-right: 80px;
     padding-left: 80px;
     
-    line-height:1.6em
+    line-height:35px;
+},
+img {
+ width:900px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -37,8 +40,8 @@ MathJax.Hub.Config({
                equationNumbers: { autoNumber: "AMS" } },
         extensions: ["tex2jax.js"],
         jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
                    processEscapes: true },
         "HTML-CSS": { availableFonts: ["TeX"],
                       linebreaks: { automatic: true } }
@@ -46,73 +49,112 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
-
-<br/>@
+bikesharingdemand
+<xmp>
+======================================================================
 10-04 Nonparametric density estimation
 
-<br/>@
-Parzen window 의 단점 :<br/>
-불연속적인 모양의 밀도추정을 낳는다. 앞에서 샘플 4개를 가지고 작업을 했다. 주어진 x 값에 따라서 확률밀도가 이렇게 연속적이지 않고 히스토그램처럼 딱딱끊어지는 확률밀도를 만들었다. 그런데 확률밀도함수는 스무드한 함수이지 딱딱 끊어지는 불연속적인 확률밀도라는건 없다. 따라서, 현실성이 떨어지는 확률밀도함수를 만들어낸다는 것이다. <br/>
+======================================================================
+Disadvantage of Parzen window:
+It creates density estimation which looks discontinuous shape.
 
-불연속성이 나타나는 이유는 Parzen window 의 한계 때문이다. 그 한계란 추정점으로부터의 거리에 관계없이 모든 점에 가중치를 같게 주는 특성을 말한다. <br/>
-모든 샘플점마다 이것의 주변에 가로긴직사각형모양의 똑같은 크기의 함수들을 만들어서 더해줬었다. 샘플이 영향을 주는 영향권안에 모든 영역에다가 동일한 값을 더해준다는 의미이다. <br/>
+You performed task with 4 samples in previous lecture.
 
-이러한 특성으로 블록 커널 밀도 추정법 이라고 불리기도 한다. <br/>
+Given x, it created discontinuous probability density like histogram.
 
-<br/>@
-그러나 커널 밀도 추정법은 히스토그램과는 다르다. <br/>
+But probability density function is smooth function.
+There is no discontinuous probability density.
 
-<br/>@
-위의 불연속적인 블록 모양을 만들어내므로 커널을 바꿔보자라고 생각을 했다. <br/>
-그렇게해서 나온게 스무스 커널을 이용한 커널 밀도 추정이다. <br/>
-다음과 같은 조건을 만족하는 부드러운 커널로 Parzen window 가 만드는 불연속적인 모양을 극복한다.<br/>
-조건: 커널함수 K(x) 를 주어진 영역 $R^{0}$ 전체에 대해서 적분했을때 1이 나와야한다. <br/>
-$\int_{R^{0}}K(x)dx=1$<br/>
+Therefore, disadvantage of Parzen window is to create unrealistic probability density function,
+which looks discontinuous. 
 
-위의 조건을 만족하는 함수가 가우시안 함수이다. 부드러운 형태도 갖고있다. <br/>
-부드러운 커널함수 K(x) 는 다음과 같이 단순화된 형태의 가우시안 밀도 함수로 사용된다.<br/>
-단순화된 형태란 일반적인 가우시안 함수에서 분산, 공분산 행렬의 값을 단위값을 갖는 분산과 단위행렬로 가정했을때의 형태이다. <br/>
-일반 가우시안 함수 : $\frac{1}{(2\pi)^{\frac{D}{2}} |\Sigma|^{\frac{1}{2}}} e^{-\frac{1}{2}[(X-\mu)^{T}\Sigma^{-1}(X-\mu)]}$<br/>
-$\Sigma=I$, 평균값 $\mu=0$ 인 경우, $|\Sigma|^{\frac{1}{2}}=1, \mu=0, \Sigma^{-1}=1$ 이므로 아래와 같이 된다.<br/>
-$K(x)=\frac{1}{(2\pi)^{\frac{D}{2}}} e^{-\frac{1}{2}x^{T}x}$<br/>
+Reason of showing discontinuity from Parzen window is due to its limitation.
 
-<br/>@
-8개의 샘플로 확률밀도함수를 추정한게 Density estimation 이다. <br/>
-그 과정은 각각의 샘플을 중심값으로 해서 가우시안 함수를 다 그려본다. 그리고 그 함수들을 다 더한다. 겹치는 곳은 피크가 된다. 그 주변은 스무드하다. <br/>
+Limitation is that Parzen window gives same weights to all points 
+regardless of distance beween estimated point and each point.
 
-<br/>@
-밀도추정식을 수식으로 표현해보자.<br/>
-커널밀도추정방법(KDE)는 스무드 커널을 사용하더라도 똑같이 $\frac{k}{NV}$ 를 사용한다. <br/>
-볼륨 V는 h 의 D 제곱이다. $V=h^{D}$ <br/>
-들어오는 샘플의 갯수를 카운트 하는 k는 Parzen window 를 썼을 경우에 커널 함수가 $\sum\limits_{i=1}^{N}K(\frac{x-x^{(i)}}{h})$ 와 같이 주어진다. 따라서, 이전에 사용했던 불연속적인 확률밀도함수를 만들어내는 커널밀도함수추정방법의 함수 $p_{KDE}(x)$ 는<br/>
-$p_{KDE}(x) = \frac{1}{Nh^{D}} \sum\limits_{i=1}^{N}K(\frac{x-x^{(i)}}{h})$ 이다.<br/>
+For example, 
 
-간단한 형태의 가우시안 확률밀도 함수로 k 를 대체해본다.<br/>
-$p_{KDEsoft}=\frac{1}{N} \sum\limits_{i=1}^{N} \frac{1}{(h\sqrt{2\pi})^{D}} e^{[-\frac{1}{2}(\frac{(x-x^{i})}{h})^{2}]}$<br/>
-모양을 보면 평균 $\mu$ 가 i 번째에 해당하는 샘플 $x^{(i)}$ , 표준편차 $\sigma$ 가 h 인 가우시안 함수로 볼 수 있다.<br/>
+모든 샘플점마다 이것의 주변에 가로긴직사각형모양의 똑같은 크기의 함수들을 만들어서 더해줬었다. 샘플이 영향을 주는 영향권안에 모든 영역에다가 동일한 값을 더해준다는 의미이다. 
 
-이 말은, 샘플하나가 있으면 샘플을 중심값, 즉, 평균으로 하고 폭이 h 인 가우시안 함수를 도입하는거다. 이렇게 샘플마다 만들어서 다 더한다. 그리고 $\frac{1}{N}$ 을 곱해서 스케일해준다. 이 결과가 커널 밀도 추정법을 사용하여 구한 확률 밀도 추정값이다. <br/>
+For this kind of characteristic, 
+Parzen window is also called "block kernel density estimation"
+
+======================================================================
+However, Kernel Density Estimation is different with histogram.
+
+======================================================================
+Since above block shape windown of Parzen window creates discontinuous shape,
+researchers consider to change shape of kernel.
+
+So, kernel density estimation using smooth kernel came.
+
+By using smooth kernel which satisfies following conditions,
+it can overcome discontinuous shape from Parzen window.
+
+Condition: when you integrate kernel function K(x) 
+with respect to given area $$$R^{0}$$$,
+you should get 1
+$$$\int_{R^{0}}K(x)dx=1$$$
+
+======================================================================
+Function which satifies above condition is Gaussian function.
+Gaussian function has smooth shape.
+
+Smooth kernel function K(x) can be used as Gaussian density function 
+in simplified form shown as following.
+
+Simplified form is the form 
+where variance and covariance matrix have unit variance and identity matrix 
+from general form of Gaussian function.
+
+General form of Gaussian function:
+$$$\frac{1}{(2\pi)^{\frac{D}{2}} |\Sigma|^{\frac{1}{2}}} e^{-\frac{1}{2}[(X-\mu)^{T}\Sigma^{-1}(X-\mu)]}$$$
+
+When $$$\Sigma=I$$$, $$$\mu=0$$$ 인 경우, 
+$$$|\Sigma|^{\frac{1}{2}}=1, \mu=0, \Sigma^{-1}=1$$$ 
+
+So that,
+$$$K(x)=\frac{1}{(2\pi)^{\frac{D}{2}}} e^{-\frac{1}{2}x^{T}x}$$$
+
+======================================================================
+8개의 샘플로 확률밀도함수를 추정한게 Density estimation 이다. 
+그 과정은 각각의 샘플을 중심값으로 해서 가우시안 함수를 다 그려본다. 그리고 그 함수들을 다 더한다. 겹치는 곳은 피크가 된다. 그 주변은 스무드하다. 
+
+======================================================================
+밀도추정식을 수식으로 표현해보자.
+커널밀도추정방법(KDE)는 스무드 커널을 사용하더라도 똑같이 $$$\frac{k}{NV}$$$ 를 사용한다. 
+볼륨 V는 h 의 D 제곱이다. $$$V=h^{D}$$$ 
+들어오는 샘플의 갯수를 카운트 하는 k는 Parzen window 를 썼을 경우에 커널 함수가 $$$\sum\limits_{i=1}^{N}K(\frac{x-x^{(i)}}{h})$$$ 와 같이 주어진다. 따라서, 이전에 사용했던 불연속적인 확률밀도함수를 만들어내는 커널밀도함수추정방법의 함수 $$$p_{KDE}(x)$$$ 는
+$$$p_{KDE}(x) = \frac{1}{Nh^{D}} \sum\limits_{i=1}^{N}K(\frac{x-x^{(i)}}{h})$$$ 이다.
+
+간단한 형태의 가우시안 확률밀도 함수로 k 를 대체해본다.
+$$$p_{KDEsoft}=\frac{1}{N} \sum\limits_{i=1}^{N} \frac{1}{(h\sqrt{2\pi})^{D}} e^{[-\frac{1}{2}(\frac{(x-x^{i})}{h})^{2}]}$$$
+모양을 보면 평균 $$$\mu$$$ 가 i 번째에 해당하는 샘플 $$$x^{(i)}$$$ , 표준편차 $$$\sigma$$$ 가 h 인 가우시안 함수로 볼 수 있다.
+
+이 말은, 샘플하나가 있으면 샘플을 중심값, 즉, 평균으로 하고 폭이 h 인 가우시안 함수를 도입하는거다. 이렇게 샘플마다 만들어서 다 더한다. 그리고 $$$\frac{1}{N}$$$ 을 곱해서 스케일해준다. 이 결과가 커널 밀도 추정법을 사용하여 구한 확률 밀도 추정값이다. 
 
 
-<br/>@
-커널 함수의 모양에 따라서 어떻게 달라질까 살펴보자. 스무드 커널도 가우시안 함수의 폭을 마음대로 조절할 수 있다. 폭을 조절함으로써 어떤 결과가 나올지 예측 할 수 있다. <br/>
+======================================================================
+커널 함수의 모양에 따라서 어떻게 달라질까 살펴보자. 스무드 커널도 가우시안 함수의 폭을 마음대로 조절할 수 있다. 폭을 조절함으로써 어떤 결과가 나올지 예측 할 수 있다. 
 
-Parzen window 의 추정은 관측점을 중심으로 박스들의 합으로 간주될 수 있었다. 스무드 커널의 경우 관측점을 중심으로 부드러운 범프 모양인 가우시안 함수를 도입하고 이러한 함수들을 더함으로서 확률 밀도를 추정할 수 있었다.  <br/>
+Parzen window 의 추정은 관측점을 중심으로 박스들의 합으로 간주될 수 있었다. 스무드 커널의 경우 관측점을 중심으로 부드러운 범프 모양인 가우시안 함수를 도입하고 이러한 함수들을 더함으로서 확률 밀도를 추정할 수 있었다.  
 
-사용하는 커널 함수는 데이터 점 위에 많이 튀어나왔는지, 조금 튀어나왔는지 튀어나온 모양을 결정짓는다. 커널 함수의 폭 h 는 스무딩 파라미터(진폭) 을 결정한다. h 가 크면 밀도가 과하게 스무드, 완만해져서 데이터 안의 구조를 덮어버린다. 즉, 데이터가 어디에서 밀집되어있는지 알수 없다. h 가 너무 작으면 밀도가 뾰족하게 되서, 밀도추정으로 해석하기 어렵게 된다. 결국, 진폭 h 의 결정이 밀도 추정의 중요한 문제이다. <br/>
+사용하는 커널 함수는 데이터 점 위에 많이 튀어나왔는지, 조금 튀어나왔는지 튀어나온 모양을 결정짓는다. 커널 함수의 폭 h 는 스무딩 파라미터(진폭) 을 결정한다. h 가 크면 밀도가 과하게 스무드, 완만해져서 데이터 안의 구조를 덮어버린다. 즉, 데이터가 어디에서 밀집되어있는지 알수 없다. h 가 너무 작으면 밀도가 뾰족하게 되서, 밀도추정으로 해석하기 어렵게 된다. 결국, 진폭 h 의 결정이 밀도 추정의 중요한 문제이다. 
 
-<br/>@
-예를들어서 데이터는 똑같은데 커널 함수를 어떤걸 쓰느냐에 따라서 최종 확률밀도함수가 달라질수 있다 라는걸 보여주고 있다. 1번부터 4번까지 점점 더 부드러운 커널 함수를 썼다. 부드럽다는 h 에 따라 결정된다. <br/>
+======================================================================
+예를들어서 데이터는 똑같은데 커널 함수를 어떤걸 쓰느냐에 따라서 최종 확률밀도함수가 달라질수 있다 라는걸 보여주고 있다. 1번부터 4번까지 점점 더 부드러운 커널 함수를 썼다. 부드럽다는 h 에 따라 결정된다. 
 
-<br/>@
-window 의 사이즈에 따라서 확률 밀도 함수가 변하는 양상을 보여주고 있다. n 은 샘플의 갯수이다. 하나의 샘플로 확률밀도를 추정하면 그 샘플의 커널함수 하나를 그리고 그걸 더한거니까 최종 확률 밀도 함수가 커널 함수의 모양이다. 그리고 폭을 1, 0.5, 0.1 로 줬을때 추정된 확률 밀도 함수의 양상을 나타낸다. <br/>
+======================================================================
+window 의 사이즈에 따라서 확률 밀도 함수가 변하는 양상을 보여주고 있다. n 은 샘플의 갯수이다. 하나의 샘플로 확률밀도를 추정하면 그 샘플의 커널함수 하나를 그리고 그걸 더한거니까 최종 확률 밀도 함수가 커널 함수의 모양이다. 그리고 폭을 1, 0.5, 0.1 로 줬을때 추정된 확률 밀도 함수의 양상을 나타낸다. 
 
-<br/>@
-Parzen window 는 이론적으로만 있고 실제 활용도는 떨어진다. smooth kernal 을 쓸 때, 폭 h 를 너무 작게하면 추정된 확률밀도함수 p(x) 가 너무 뾰족하게 under smooth 되서 나타난다. 반대는 over smooth 이다. <br/>
+======================================================================
+Parzen window 는 이론적으로만 있고 실제 활용도는 떨어진다. smooth kernal 을 쓸 때, 폭 h 를 너무 작게하면 추정된 확률밀도함수 p(x) 가 너무 뾰족하게 under smooth 되서 나타난다. 반대는 over smooth 이다. 
 
-<br/>@
-Parzen window 를 이용해 bi-modal distribution 을 추정하는 경우.<br/>
-bi-modal distribution : 데이터의 분포가 한곳에만 몰려있는게 아니라 두 개 영역에 몰려있는 경우.       
+======================================================================
+Parzen window 를 이용해 bi-modal distribution 을 추정하는 경우.
+bi-modal distribution : 데이터의 분포가 한곳에만 몰려있는게 아니라 두 개 영역에 몰려있는 경우.
       
+</xmp>
    </BODY>
 </HTML>
