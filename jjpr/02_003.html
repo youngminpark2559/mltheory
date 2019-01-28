@@ -51,17 +51,19 @@ MathJax.Hub.Config({
    <BODY>
 <xmp>
 =========================================================
-orthogonal projection
+Orthogonal projection
 2018-06-10 09-08-13.png
 </xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 09-08-13.png"><xmp>
 
-When you project vector y onto vector x, projected vector y becomes vector in direction of vector x
+When you project "vector y" onto "vector x", 
+"projected vector y" becomes vector which has same direction with "vector x"
 
-What will be projected vector y's length?
+What will be "projected vector y's length"?
 
-projected vector y is $$$u_{x}$$$*(length of projected vector y)
+"True projected vector y" is $$$u_{x} \times $$$ (length of projected vector y)
 
-length of projected vector y = y^{T}u_{x}
+So, length of projected vector y can be calculated by
+$$$y= y^{T}u_{x}$$$
 
 In conclusion,
 projected vector y = $$$\langle y^{T},u_{x} \rangle u_{x} = (||y||\cos{\theta})u_{x}$$$
@@ -71,10 +73,10 @@ $$$||y||\cos{\theta}$$$ = (length of projected y) = (length of y)*($$$\cos{\thet
 =========================================================
 Example
 
-vector $$$y=[2 4]^{T}$$$
-vector $$$x=[4 3]^{T}$$$
+vector $$$y=[2 \;\; 4]^{T}$$$
+vector $$$x=[4 \;\; 3]^{T}$$$
 
-projection y onto x?
+Calculate projection y onto x?
 
 $$$u_{x}=\frac{1}{||x||}x=\frac{1}{\sqrt{16+9}} [4\;3] = \begin{bmatrix} \frac{4}{5} \; \frac{3}{5} \end{bmatrix} $$$
 
@@ -82,8 +84,9 @@ $$$\begin{pmatrix} [2\;4]\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix
 $$$4*\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
 
 =========================================================
-If inner product is 0, 2 vectors are orthogonal
-If inner product is 0 AND $$$||x||=||y||=1$$$, 2 vectors are orthonoarmal
+If "inner product" is 0, 2 vectors are "orthogonal" relationship.
+If "inner product" is 0 AND $$$||x||=||y||=1$$$, 
+2 vectors are "orthonoarmal" relationship
 
 </xmp>
    </BODY>
