@@ -50,57 +50,75 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
-=========================================================
+===================================================================================
 You can think of all kind of (n,1) matrix
-You also think of vector set which can express all kind of (n,1) matrix
-In this situation, you can say above vector set is "basis vector set"
+You also think of "vector set" 
+which can express all kind of (n,1) matrix
 
-Arbitrary one vector can be expressed like it gets spanned into (n,1) vector space via basis vector set
+In this situation, 
+you can say "(n,1) above vector set" is "basis vector set"
 
-Suppose there are N number of basis vectors :
+"Arbitrary one vector" can be expressed 
+like it gets spanned into (n,1) vector space via basis vector set
+
+Suppose there are N number of basis vectors:
 $$$\{v_{i}\}_{1\leq i \leq N}$$$
 
-You can create arbitrary vector x by using following formular :
+You can create "arbitrary vector x" by using following formular :
 $$$x = \sum\limits_{i=1}^{N}c_{i}v_{i}$$$
 
-Vector x is located in n-D basis vector's space as one point
+"Vector x" is located in "n-D basis vector's space" as one point
 
-In other words, x is created via linear combination of basis vector set v
+In other words, vector x is created 
+via linear combination of basis vector set v
 
-
-basis vectors $$$v_{1}, v_{2}, v_{3}$$$ in 3-D space
+--------------------------------------------------
+Basis vectors $$$v_{1}, v_{2}, v_{3}$$$ in 3-D space
 $$$v_{1} = \begin{bmatrix} 1\\0\\0 \end{bmatrix}$$$
 $$$v_{2} = \begin{bmatrix} 0\\1\\0 \end{bmatrix}$$$
 $$$v_{3} = \begin{bmatrix} 0\\0\\1 \end{bmatrix}$$$
 
 $$$\begin{bmatrix} 3\\6\\9 \end{bmatrix} = 3\times \begin{bmatrix} 1\\0\\0 \end{bmatrix} 6\times \begin{bmatrix} 0\\1\\0 \end{bmatrix} 9\times \begin{bmatrix} 0\\0\\1 \end{bmatrix}$$$
 
-=========================================================
-If arbitrary one vector a can be expressed via linear combination of vector set $$$\{u_{i}\}$$$ like this :
+======================================================================
+If "arbitrary one vector a" can be expressed 
+via linear combination of vector set $$$\{u_{i}\}$$$ like this:
 $$$a = a_{1}u_{1}+a_{2}u_{2}+...+a_{N}u_{N}$$$
-vector set $$$\{u_{1},u_{2},...,u_{N}\}$$$ forms basis in respect to vector space and vector a
 
-You can say coefficient set $$$\{a_{1},a_{2},...,a_{N}\}$$$ is element of vector a according to basis vector set $$$\{u_{i}\}$$$
-That is, to form vector a, $$$u_{1}$$$ exists in size of $$$a_{1}$$$, $$$u_{2}$$$ exists in size of $$$a_{2}$$$, ...
+vector set $$$\{u_{1},u_{2},...,u_{N}\}$$$ forms "basis" 
+with respect to "vector space" and "vector a"
+
+You can say coefficient set $$$\{a_{1},a_{2},...,a_{N}\}$$$ is element of vector a 
+according to basis vector set $$$\{u_{i}\}$$$
+
+That is, to form vector a, $$$u_{1}$$$ exists in size of $$$a_{1}$$$, 
+$$$u_{2}$$$ exists in size of $$$a_{2}$$$, ...
+
 And, to form basis, linearly independent of $$$\{u_{i}\}$$$ is necessary and sufficient condition
 
-orthogonal :
+Orthogonal :
 $$$u_{i}^{T}u_{j} \neq 0$$$, i=j
 $$$u_{i}^{T}u_{j} = 0$$$, $$$i\neq j$$$
 
-orthonormal :
+Orthonormal :
 $$$u_{i}^{T}u_{j} = 1$$$, i=j
 $$$u_{i}^{T}u_{j} = 0$$$, $$$i\neq j$$$
 
-=========================================================
-summary
+======================================================================
+Summary
 
-arbitrary all vectors x can be expressed via linear combination of basis vectors which form space where all vectors x exist
+"Arbitrary all vectors x" can be expressed 
+via "linear combination" of "basis vectors" 
+which form space where all vectors x exist
 $$$x = \sum\limits_{i=1}^{N}c_{i}v_{i}$$$
 
-In that situation, basis vectors which you can use for above task (linear combination to create all vectors x) should be linearly independent to each other
+In that situation, basis vectors 
+which you can use for above task (linear combination to create all vectors x) should be linearly independent 
+to each other
+
 In other words, basis vectors should be orthonormal to each other
 In other words, basis vectors should have 90 degree to all others and have 1 length
+
 </xmp>
    </BODY>
 </HTML>
