@@ -51,6 +51,7 @@ MathJax.Hub.Config({
    <BODY>
 bikesharingdemand
 <xmp>
+
 ======================================================================
 10-04 Nonparametric density estimation
 
@@ -149,11 +150,22 @@ Parzen window 의 추정은 관측점을 중심으로 박스들의 합으로 간
 window 의 사이즈에 따라서 확률 밀도 함수가 변하는 양상을 보여주고 있다. n 은 샘플의 갯수이다. 하나의 샘플로 확률밀도를 추정하면 그 샘플의 커널함수 하나를 그리고 그걸 더한거니까 최종 확률 밀도 함수가 커널 함수의 모양이다. 그리고 폭을 1, 0.5, 0.1 로 줬을때 추정된 확률 밀도 함수의 양상을 나타낸다. 
 
 ======================================================================
-Parzen window 는 이론적으로만 있고 실제 활용도는 떨어진다. smooth kernal 을 쓸 때, 폭 h 를 너무 작게하면 추정된 확률밀도함수 p(x) 가 너무 뾰족하게 under smooth 되서 나타난다. 반대는 over smooth 이다. 
+Parzen window exists in theory
+It's not practical for use.
 
 ======================================================================
-Parzen window 를 이용해 bi-modal distribution 을 추정하는 경우.
-bi-modal distribution : 데이터의 분포가 한곳에만 몰려있는게 아니라 두 개 영역에 몰려있는 경우.
+When you use smooth kernel,
+if you reduce width h too far,
+estimated probability density function p(x) shows up as sharp peak shape 
+like under smooth shape.
+
+Opposite situation is over smooth.
+
+======================================================================
+When you estimate bi-modal distribution by using Parzen window,
+
+bi-modal distribution is case where data has high density in over 2 number of areas
+rather than 1 number of area.
       
 </xmp>
    </BODY>
