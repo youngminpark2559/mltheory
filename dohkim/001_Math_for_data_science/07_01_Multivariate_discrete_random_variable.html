@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+Suppose 2 random variables X and Y  
+X and Y can have values from 1 to 6  
+
+Probability mass functions of X and Y  
+$$$P_X(x)$$$  
+$$$P_Y(y)$$$  
+
+$$$P_X(x=1)$$$ means probability of occuring 1 from random variable X  
+
+==================================================
+Joint probability mass function of X and Y  
+$$$P_{XY}(x,y)$$$  
+
+$$$P_{XY}(x=2,y=3)$$$ means  
+probability of occuring 2 from random variable X and  
+occuring 3 from random variable Y  
+
+==================================================
+Marginal probability mass function  
+
+It means univariate probability mass function  
+before it becomes multivariate probability mass function  
+
+You can calculate marginal probability mass function  
+from joint probability mass function  
+by using the rule of entire probability  
+
+$$$P_X(A) \\
+= P_{XY}(A,A) + P_{XY}(A,B) + P_{XY}(A,C) + P_{XY}(A,D) + P_{XY}(A,E) + P_{XY}(A,F) \\ 
+= 0.02$$$
+
+==================================================
+Generalized notation  
+
+$$$P_X(x) = \sum\limits_{y_i} P_{XY}(x,y_i)$$$ 
+$$$P_Y(y) = \sum\limits_{x_i} P_{XY}(x_i,y)$$$ 
+
+==================================================
+Conditional probability mass function  
+
+When y is already occurred  
+$$$P_{X \mid Y}(x \mid y) = \dfrac{P_{XY}(x, y)}{P_{Y}(y)}$$$  
+
+When x is already occurred  
+$$$P_{Y \mid X}(y \mid x) = \dfrac{P_{XY}(x, y)}{P_{X}(x)}$$$  
+
+==================================================
+
+</xmp>
+   </BODY>
+</HTML>
+
