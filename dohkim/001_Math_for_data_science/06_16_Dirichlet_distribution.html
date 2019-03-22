@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+Probability distribution which follows K=3 Dirichlet distribution 
+can have following samples. 
+
+(1,0,0) 
+(0.5,0.5,0.5) 
+(0.2,0.3,0.5) 
+
+==================================================
+Limitation condition of values of Dirichlet distribution 
+$$$=x_1+x_2+...+x_K 
+=\sum\limits_{i=1}^K x_i 
+=1$$$ 
+
+==================================================
+Probability density function of Dirichlet distribution 
+$$$Dir(x_1,x_2,...,x_K;\alpha_1,\alpha_2,...,\alpha_K) 
+= \dfrac{1}{B(\alpha_1,\alpha_2,...,\alpha_K)} 
+(x_1^{\alpha_1-1} \times x_2^{\alpha_2-1} \times ... \times x_K^{\alpha_K-1})
+= \dfrac{1}{B(\alpha_1,\alpha_2,...,\alpha_K)} 
+\prod\limits_{i=1}^K x_i^{\alpha_i-1}$$$
+
+$$$Dir()$$$: PDF of Dirichlet distribution 
+$$$x_1,...,x_K$$$: values of Dirichlet distribution 
+$$$\alpha_1,\alpha_2,...,\alpha_K$$$: parameters of Dirichlet distribution 
+$$$B(\alpha_1,\alpha_2,...,\alpha_K)$$$: Beta function 
+
+$$$B(\alpha_1,\alpha_2,...,\alpha_K)
+= \dfrac{\Gamma(\alpha_1)\times \Gamma(\alpha_2) \times ... \times \Gamma(\alpha_K)}
+{\Gamma(\alpha_1+\alpha_2+...+\alpha_K)}$$$
+
+==================================================
+Relationship between Beta distribution and Dirichlet distribution 
+Beta distribution $$$\subset$$$ Dirichlet distribution 
+
+Beta distribution is Dirichlet distribution when K=2 
+
+Suppose following: 
+$$$x_1=x$$$ 
+$$$x_2=1-x$$$ 
+$$$\alpha_1=a$$$ 
+$$$\alpha_2=b$$$ 
+
+$$$Beta(x;a,b) 
+= \dfrac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} x^{a-1}(1-x)^{b-1} 
+\text{Insert above supposed values} 
+= \dfrac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_1)}
+x_1^{\alpha_1-1}x_2^{\alpha_2-1}
+\dfrac{\Gamma(\alpha_1+\alpha_2)}{\Gamma(\alpha_1)\Gamma(\alpha_1)} \text{ is inversed Beta function when } K=2
+= \dfrac{1}{B(\alpha_1,\alpha_2)} \prod\limits_{i=1}^2 x_i^{\alpha_i-1}$$$
+
+==================================================
+When $$$\alpha=\alpha_1+\alpha_2+...+\alpha_k=\sum\limits\alpha_k$$$ 
+Expectation of Dirichlet distribution 
+$$$E[x_k]
+=\dfrac{\alpha_k}{\alpha_1+\alpha_2+...+\alpha_k}
+=\dfrac{\alpha_k}{\alpha}$$$ 
+
+Mod of Dirichlet distribution 
+$$$\dfrac{\alpha_k-1}{\alpha_1+\alpha_2+...+\alpha_k-k}
+= \dfrac{\alpha_k-1}{\alpha-k} $$$ 
+
+Variance of Dirichlet distribution
+$$$Var[x_k]
+= \dfrac{\alpha_k(\alpha-\alpha_k)}
+{\alpha^2(\alpha+1)}$$$
+
+==================================================
+      
+</xmp>
+   </BODY>
+</HTML>
+
