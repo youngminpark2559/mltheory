@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+Suppose 3 random variables A,B,C  
+Each random variable can have values within $$$[0,2]$$$  
+
+Joint probability distribution of A,B,C 
+A	B	C	P(A,B,C)
+0	0	0	P(A=0,B=0,C=0)
+0	0	1	P(A=0,B=0,C=1)
+0	0	2	P(A=0,B=0,C=2)
+...
+2	2	1	P(A=2,B=2,C=1)
+2	2	2	P(A=2,B=2,C=2)
+
+Number of parameters of joint probability distribution of A,B,C is $$$3^3-1=26$$$ 
+which means you need 26 storages to store these parameters  
+
+==================================================
+In the real world,  
+the case where several sepecific random variables affect each other is more often 
+than the case where all random variables affect each other  
+
+Graphical probability model means you describe the relationships  
+between "only several random variables" out of "all random variables"  
+
+==================================================
+If cause-result relationship is clear from the graphical probability model, 
+you can use arrows to represent that cause-result relationship, 
+
+which is called "Bayesian network model"  
+
+==================================================
+% /home/young/Pictures/2019_03_22_13:46:39.png
+
+This is also called "directed graph" or "directed acyclic graph" 
+out of "Bayesian network model" 
+
+Circle (node) stands for random variable  
+Array (edge, link) stands for the relationship  
+
+==================================================
+A is cause and B is result.  
+It can be represented by $$$P(B|A)$$$  
+
+==================================================
+Relationship of entire random variables can be represented 
+by combining conditional probability distribution  
+
+$$$P(A,B,C) = P(A)P(B|A)P(C|B)$$$  
+
+==================================================
+If you add information of relationship on each variable  
+you can reduce number of parameters you should know  
+
+In the case of P(A): 
+you should know 3-1=2 number of parameters  
+
+In the case of P(B|A): 
+you should know $$$(3-1)\times 2=6$$$ number of parameters  
+
+In the case of P(C|B): 
+you should know $$$(3-1)\times 2=6$$$ number of parameters  
+
+==================================================
+Joint probability distribution of Bayesian network  
+
+1. You create Bayesian network 
+by drawing nodes (random variables) 
+and edges (relationships between variables) 
+
+2. Once the Bayesian network is created  
+joint probability distribution of these random variables can be written as: 
+$$$P(X_1,\cdots,X_N) \\ 
+= P(X_1|Pa(X_1)) \times P(X_2|Pa(X_2)) \times \cdots \times P(X_N|Pa(X_N)) \\ 
+= \prod\limits_{i=1}^N P(X_i|Pa(X_i))$$$
+
+$$$Pa(X_i)$$$ stands for random variable playing a cause, parent node  
+$$$X_i$$$ stands for random variable playing a result, child node  
+
+==================================================
+Example of Bayesian network  
+% /home/young/Pictures/2019_03_22_14:02:49.png
+
+Joint probability distribution  
+of random variables $$$(X_1,X_2,X_3,X_4,X_5,X_6)$$$  
+$$$P(X_1, X_2, X_3, X_4, X_5, X_6, X_7) \\ 
+= P(X_1) P(X_2) P(X_3 | X_2) P(X_4| X_2, X_3) P(X_5|X_4) P(X_6|X_4) P(X_7|X_2)$$$
+
+==================================================
+Important point when you create Bayesian network is  
+that conditional independence relationship between random variables  
+should show in the graph  
+
+==================================================
+If random variables A and B are "independent" to each other  
+$$$P(A,B)=P(A)P(B)$$$  
+
+If random variables A and B are "conditional independent" to each other  
+over condition C   
+$$$P(A,B|C)=P(A|C)P(B|C)$$$  
+
+==================================================
+Above means  
+Joint probability distribution of A and B over condition C  
+= conditional probability distribution of A over condition C $$$\times$$$  
+conditional probability distribution of B over condition C  
+
+==================================================
+Directed separation is the way to know  
+whether 2 nodes (random variables) are conditional independence or not  
+
+To use this, you should know following 3 things  
+1. Tail-tail binding  
+2. Head-tail binding  
+3. Head-head binding  
+
+==================================================
+Tail-tail biding  
+% /home/young/Pictures/2019_03_22_14:14:00.png
+
+In this case,  
+A and B is not independent  
+but they're conditional independent  
+$$$P(A,B|C)\\ 
+= \dfrac{P(A, B, C)}{P(C)}\\ 
+= \dfrac{P(A|C)P(B|C)P(C)}{P(C)}\\ 
+= P(A|C)P(B|C)$$$
+
+You call this status as "C" blocks between of A and B  
+
+==================================================
+Head-tail binding  
+
+% /home/young/Pictures/2019_03_22_14:15:44.png
+
+In this case,  
+A and B is not independent  
+but they're conditional independent  
+
+$$$P(A,B|C) \\ 
+= \dfrac{P(A, B, C)}{P(C)}\\ 
+= \dfrac{P(A)P(C|A)P(B|C)}{P(C)}\\ 
+= \dfrac{P(A,C)P(B|C)}{P(C)}\\ 
+= P(A|C)P(B|C)$$$
+
+You call this status as "C" blocks between of A and B  
+
+==================================================
+Head-head binding (or V structure) 
+% /home/young/Pictures/2019_03_22_14:18:55.png
+
+In this case,  
+A and B is independent  
+$$$P(A,B,C) = P(A)P(B)P(C|A,B)$$$  
+$$$P(A,B) = \sum_c P(A)P(B)P(C|A,B) = P(A)P(B)$$$  
+
+but they're NOT conditional independent  
+
+
+==================================================
+Head-head binding having descendent 
+
+% /home/young/Pictures/2019_03_22_14:20:55.png
+
+Same characteristics with head-head binding 
+
+==================================================
+There are cases you can represent the relationships between random variables 
+by using Bayesian network  
+because random variables form the cyclic relationship  
+
+In this case, you can use "Markov network" which is "undirected graph"  
+
+% /home/young/Pictures/2019_03_22_14:32:52.png
+
+==================================================
+Markov network is composed of cliques  
+
+Clique is composed of random variable  
+
+Distribution of random variable for clique is represented  
+by potential function or facotr  
+
+Factor is a function which is multiplied by positive constant  
+on joint probability distribution  
+
+There is no limitation  
+that sum of all probabilities should be 1 to Markov network 
+
+==================================================
+Joint probability distribution of Markov network is represented  
+by multiplication of all cliques which consist of Markov network  
+
+$$$P(X) \\ 
+= \dfrac{1}{Z(X)} \{\psi_1(X_1) \times \psi_2(X_2) \times \cdots \times \psi_C(X_C)\}  
+= \dfrac{1}{Z(X)} \prod\limits_{\{C\}}\psi_C(X_C)$$$
+
+$$$C$$$: clique  
+$$$X_C$$$: random variable in clique  
+$$$\psi_C$$$: factor of clique  
+$$$\{C\}$$$: set of all cliques  
+
+==================================================
+Suppose you have 3x3 image  
+3x3 image has 9 random variables  
+
+Joint probability distribution of above 9 random variables can be represented  
+by using Markov network  
+$$$P(X_{11}, \ldots, X_{33}) = 
+\dfrac{1}{Z}
+\psi(X_{11}, X_{12}) 
+\psi(X_{11}, X_{21}) 
+\psi(X_{12}, X_{13}) 
+\cdots
+\psi(X_{23}, X_{33}) 
+\psi(X_{32}, X_{33})$$$  
+
+==================================================
+Factor function is also represented as  
+$$$\psi(X) = \exp(-E(X))$$$  
+
+$$$E(X)$$$: energy function  
+
+Higher probability makes lower energy function  
+
+==================================================
+
+</xmp>
+   </BODY>
+</HTML>
+
