@@ -9,8 +9,8 @@
 Optimization problem is to find variable $x^*$ \\ 
 which makes value of f minimum or maximum \\ 
 
-$x^*=arg_x max f(x)$ \\ 
-$x^*=arg_x min f(x)$ \\ 
+$x^*=\arg_x \max f(x)$ \\ 
+$x^*=\arg_x \min f(x)$ \\ 
 
 $x^*$ is called solution to the optimization problem \\ 
 
@@ -68,7 +68,7 @@ SGD finds $x_{k+1}$ by using slope information at $x_k$ \\
 
 $x_{k+1} \\\\ 
 =x_k - \alpha \times \triangledown f(x_k) \\\\ 
-=x_k - \alpha g(x_k)$
+=x_k - \alpha \times g(x_k)$
 
 ==================================================\\
 Newton method using second order derivative \\ 
@@ -87,14 +87,14 @@ ${x}_{n+1} = {x}_n - [{H}f({x}_n)]^{-1} \times \nabla f({x}_n)$ \\
 Meaning: \\ 
 1. You don't need learning rate \\ 
 2. You need one order derivative for gradient vector \\ 
-2. You need second order derivative for Hessian matrix \\ 
+3. You need second order derivative for Hessian matrix \\ 
 
 ==================================================\\
 Quasi-Newton method \\ 
 
 ==================================================\\
 Global optimization problem \\ 
-If f(x) has multiple local minima, \\ 
+If $f(x)$ has multiple local minima, \\ 
 you can assure numerical optimization method reaches to global minimum \\
 
 Numerical optimization method depends on initial value, algorithm, parameter, etc \\ 
@@ -107,7 +107,7 @@ where second order derivative is greater or equal to 0 \\
 
 $\dfrac{\partial^2 f}{\partial x^2} \ge 0$ \\
 
-If f(x) is multivariate function \\ 
+If $f(x)$ is multivariate function \\ 
 Hessian matrix should always be "positive semidefinite" \\ 
 in given range \\ 
 
