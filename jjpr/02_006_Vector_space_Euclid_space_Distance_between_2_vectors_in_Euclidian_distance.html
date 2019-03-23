@@ -50,43 +50,18 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
+02_006_Vector_space_Euclid_space_Distance_between_2_vectors_in_Euclidian_distance.html
 =========================================================
-Orthogonal projection
-2018-06-10 09-08-13.png
-</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 09-08-13.png"><xmp>
+There are many kinds in vector space
 
-When you project "vector y" onto "vector x", 
-"projected vector y" becomes vector which has same direction with "vector x"
-
-What will be "projected vector y's length"?
-
-"True projected vector y" is $$$u_{x} \times $$$ (length of projected vector y)
-
-So, length of projected vector y can be calculated by
-$$$y= y^{T}u_{x}$$$
-
-In conclusion,
-projected vector y = $$$\langle y^{T},u_{x} \rangle u_{x} = (||y||\cos{\theta})u_{x}$$$
-
-$$$||y||\cos{\theta}$$$ = (length of projected y) = (length of y)*($$$\cos{\theta}$$$)
+You will deal with Euclid space
 
 =========================================================
-Example
+Distance between 2 vectors as Euclidian distance
 
-vector $$$y=[2 \;\; 4]^{T}$$$
-vector $$$x=[4 \;\; 3]^{T}$$$
-
-Calculate projection y onto x?
-
-$$$u_{x}=\frac{1}{||x||}x=\frac{1}{\sqrt{16+9}} [4\;3] = \begin{bmatrix} \frac{4}{5} \; \frac{3}{5} \end{bmatrix} $$$
-
-$$$\begin{pmatrix} [2\;4]\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix} \end{pmatrix}  \begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
-$$$4*\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
-
-=========================================================
-If "inner product" is 0, 2 vectors are "orthogonal" relationship.
-If "inner product" is 0 AND $$$||x||=||y||=1$$$, 
-2 vectors are "orthonoarmal" relationship
+$$$d_{E}(x,y) = |x-y|=||x-y||=\sqrt{\sum\limits_{k=1}^{d}(x_{k}-y_{k})^{2}}$$$
+2018-06-11 07-50-46.png
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-11 07-50-46.png"><xmp>
 
 </xmp>
    </BODY>

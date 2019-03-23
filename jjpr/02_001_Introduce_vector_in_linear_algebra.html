@@ -18,9 +18,9 @@ body {
     padding-left: 80px;
     
     line-height:35px;
-}
+},
 img {
- width:500px;
+ width:900px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -51,16 +51,34 @@ MathJax.Hub.Config({
    <BODY>
 <xmp>
 =========================================================
-There are many kinds in vector space
+Vector is physically "physical quantity" which has "size" and "direction".
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 08-26-57.png"><xmp>
 
-You will deal with Euclid space
+Vector is mathematically "notation" which express "over one number of numbers".
+Vector is generally expressed by one point in n dimensional space.
 
 =========================================================
-distance between 2 vectors as Euclidian distance
+In linear algebra, symbol for vector is used as bold lower case.
 
-$$$d_{E}(x,y) = |x-y|=||x-y||=\sqrt{\sum\limits_{k=1}^{d}(x_{k}-y_{k})^{2}}$$$
-2018-06-11 07-50-46.png
-</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-11 07-50-46.png"><xmp>
+Standard notation for feature vector is column vector.
+
+Direction of column vector is direction of "vertical downwards one arrow".
+
+=========================================================
+Size of vector is called "norm" in linear algebra.
+Symbol for norm is pair of double vertical bars.
+$$$||x|| = \sqrt{x^{T}x} = \sqrt{x_{1}^{2}+x_{2}^{2}+...x_{N}^{2}}=\begin{bmatrix} \sum\limits_{k=1}^{N}x_{k}x_{k} \end{bmatrix} ^{\frac{1}{2}}$$$
+
+$$$x^{T}x = \begin{bmatrix} x_{1}&x_{2}&...&x_{N} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix}$$$
+$$$x^{T}x=x_{1}^{2}+x_{2}^{2}+...x_{N}^{2}$$$
+
+=========================================================
+Unit vector has same direction with specific vector 
+but length of unit vector is 1.
+$$$u = \frac{1}{||v||}v$$$
+
+======================================================================
+Step of finding unit vector is called "normalization".
 
 </xmp>
    </BODY>

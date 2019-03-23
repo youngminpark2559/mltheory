@@ -50,43 +50,38 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
+03_002_Trace_of_matrix_Determinant_value_of_matrix.html
 =========================================================
-inverse number
-$$$3\times \frac{1}{3}=1$$$
-$$$\frac{1}{3}$$$ is inverse number of 3
+Trace of matrix
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-11 08-24-31.png"><xmp>
 
-inverse matrix
-$$$AA^{-1}=I$$$
-$$$A^{-1}$$$ is inverse matrix of A
+above characteristics are importantly used when finding solution on eigenvalue question
 
 =========================================================
-Characteristic of inverse matrix
+determinant value of matrix
 
-$$$AA^{-1}=I$$$
-$$$A^{-1}A=I$$$
-$$$(A^{-1})^{T}=(A^{T})^{-1}$$$
-$$$(AB)^{-1}=B^{-1}A^{-1}$$$
+matrix has many elements
+To inform matrix, you should inform all of elements of matrix, which is complex way
 
-=========================================================
-positive-definite is characteristic of matrix which has similar characteristic with positive real number
+So, what if you can inform one value which expresses unique characteristic of matrix?
 
-(number)$$$\times$$$ (positive number) $$$\rightarrow$$$ changes size but +- doesn't change
+determinant value of matrix is one real number which expresses matrix
 
-In matrix, there are matrices which have above characteristic, because matrix is also multiplied by some others
-Matrix can play role of positive number (positive-definite) or negative number (negative-definite)
+determinant of matrix $$$A = |A| = \sum\limits_{k=1}^{d} a_{ik}|A_{ik}|(-1)^{k+i}$$$
+$$$A_{ik}$$$ : sub-matrix of A, which you remove ith row, kth column from matrix A
+
 
 =========================================================
-Mathematically, if A satisfies $$$x^{T}Ax>0$$$, A is positive-definite matrix
-Simply, you can write A>0 to express A is positive-definite matrix
+determinant is only defined in squre matrix
+$$$|A|=|A^{T}|$$$
+
 
 =========================================================
-example of positive-definite matrix :
-$$$A=\begin{bmatrix} 3&0&0 \\ 0&1&0 \\ 0&0&2 \end{bmatrix}$$$
+determinant of 2x2 matrix A :
+$$$|A| = \begin{vmatrix} a_{11}&a_{12}\\a_{21}&a_{22} \end{vmatrix} = a_{11}&a_{22} - a_{12}&a_{21}$$$
 
-=========================================================
-If A satisfies $$$x^{T}Ax \geq 0$$$, A is positive-semidefinite matrix
-
-Famous example of positive-semidefinite matrix is covariance matrix
+determinant of 3x3 matrix A :
+uses computer
 
 </xmp>
    </BODY>

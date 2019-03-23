@@ -18,9 +18,9 @@ body {
     padding-left: 80px;
     
     line-height:35px;
-},
+}
 img {
- width:900px;
+ width:500px;
 }
 </style>
       <script type="text/x-mathjax-config">
@@ -51,35 +51,41 @@ MathJax.Hub.Config({
    <BODY>
 <xmp>
 =========================================================
-Vector is physically "physical quantity" which has "size" and "direction".
-2018-06-10 08-26-57.png
-</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 08-26-57.png"><xmp>
+Orthogonal projection
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-10 09-08-13.png"><xmp>
 
-Vector is mathematically "notation" which express "over one number of numbers".
-Vector is generally expressed by one point in n dimensional space.
+When you project "vector y" onto "vector x", 
+"projected vector y" becomes vector which has same direction with "vector x"
 
-=========================================================
-In linear algebra, symbol for vector is used as bold lower case.
+What will be "projected vector y's length"?
 
-Standard notation for feature vector is column vector.
+"True projected vector y" is $$$u_{x} \times $$$ (length of projected vector y)
 
-Direction of column vector is direction of "vertical downwards one arrow".
+So, length of projected vector y can be calculated by
+$$$y= y^{T}u_{x}$$$
 
-=========================================================
-Size of vector is called "norm" in linear algebra.
-Symbol for norm is pair of double vertical bars.
-$$$||x|| = \sqrt{x^{T}x} = \sqrt{x_{1}^{2}+x_{2}^{2}+...x_{N}^{2}}=\begin{bmatrix} \sum\limits_{k=1}^{N}x_{k}x_{k} \end{bmatrix} ^{\frac{1}{2}}$$$
+In conclusion,
+projected vector y = $$$\langle y^{T},u_{x} \rangle u_{x} = (||y||\cos{\theta})u_{x}$$$
 
-$$$x^{T}x = \begin{bmatrix} x_{1}&x_{2}&...&x_{N} \end{bmatrix} \begin{bmatrix} x_{1}\\x_{2}\\...\\x_{N} \end{bmatrix}$$$
-$$$x^{T}x=x_{1}^{2}+x_{2}^{2}+...x_{N}^{2}$$$
+$$$||y||\cos{\theta}$$$ = (length of projected y) = (length of y)*($$$\cos{\theta}$$$)
 
 =========================================================
-Unit vector has same direction with specific vector 
-but length of unit vector is 1.
-$$$u = \frac{1}{||v||}v$$$
+Example
 
-======================================================================
-Step of finding unit vector is called "normalization".
+vector $$$y=[2 \;\; 4]^{T}$$$
+vector $$$x=[4 \;\; 3]^{T}$$$
+
+Calculate projection y onto x?
+
+$$$u_{x}=\frac{1}{||x||}x=\frac{1}{\sqrt{16+9}} [4\;3] = \begin{bmatrix} \frac{4}{5} \; \frac{3}{5} \end{bmatrix} $$$
+
+$$$\begin{pmatrix} [2\;4]\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix} \end{pmatrix}  \begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
+$$$4*\begin{bmatrix} \frac{4}{5} \\ \frac{3}{5} \end{bmatrix}$$$
+
+=========================================================
+If "inner product" is 0, 2 vectors are "orthogonal" relationship.
+If "inner product" is 0 AND $$$||x||=||y||=1$$$, 
+2 vectors are "orthonoarmal" relationship
 
 </xmp>
    </BODY>

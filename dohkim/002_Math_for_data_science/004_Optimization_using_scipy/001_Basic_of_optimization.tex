@@ -1,0 +1,118 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{kotex}
+\usepackage{amssymb}
+\usepackage{bigints}
+\begin{document}
+
+==================================================\\
+Optimization problem is to find variable $x^*$ \\ 
+which makes value of f minimum or maximum \\ 
+
+$x^*=arg_x max f(x)$ \\ 
+$x^*=arg_x min f(x)$ \\ 
+
+$x^*$ is called solution to the optimization problem \\ 
+
+==================================================\\
+Since you can automatically solve max optimization problem,\\
+by adding $-$ like $-f(x)$,\\
+you generally should consider only min optimization problem.\\ 
+
+Function $f(x)$ which you want to minimize is called \\ 
+as objective function, cost function, loss function \\
+
+==================================================\\
+
+Grid search by values: \\ 
+1. you continuously assign various values to x \\ 
+2. you see whether $f(x)$ is mimimum \\
+
+Grid search by graph: \\ 
+1. you draw graph of function \\ 
+2. you find x value which minimizes $f(x)$ \\
+
+==================================================\\
+Numerical optimization: \\ 
+1. you perform trial and error \\ 
+(which means you move x value like gradient descent algorithm) \\ 
+2. you find $x^*$ which satisties necessary condition for optimization
+
+==================================================\\
+To do numerical optimization, \\ 
+you should need 2 algorithms \\ 
+
+1. algorithm to confirm whether current $x_k$ is optimal \\ 
+2. algorithm to find next position $x_{k+1}$ \\ 
+
+==================================================\\
+Algorithm to confirm whether current $x_k$ is optimal \\ 
+using slope information \\ 
+
+If $f(x)$ is N univariate function, \\ 
+$\dfrac{df(x)}{dx}=0$ \\ 
+
+If $f(x)$ is multivariate function, \\ 
+$\dfrac{\partial f(x)}{\partial x_1}=0$ \\ 
+$\dfrac{\partial f(x)}{\partial x_2}=0$ \\ 
+$\vdots$ \\ 
+$\dfrac{\partial f(x)}{\partial x_N}=0$ \\ 
+
+In other words, $\triangledown f=0$ \\
+
+==================================================\\
+Algorithm to find next position $x_{k+1}$ \\ 
+using SGD \\ 
+
+SGD finds $x_{k+1}$ by using slope information at $x_k$ \\ 
+
+$x_{k+1} \\\\ 
+=x_k - \alpha \times \triangledown f(x_k) \\\\ 
+=x_k - \alpha g(x_k)$
+
+==================================================\\
+Newton method using second order derivative \\ 
+
+Suppose: \\ 
+objective function should be second order function \\ 
+Then, you can find optimal point $x_k$ by one try \\ 
+
+Method: \\ 
+Use gradient vector which is chaned in direction and length \\ 
+which can be obtained by multiplying gradient vector \\
+by inverse matrix of Hessian matrix \\ 
+
+${x}_{n+1} = {x}_n - [{H}f({x}_n)]^{-1} \times \nabla f({x}_n)$ \\ 
+
+Meaning: \\ 
+1. You don't need learning rate \\ 
+2. You need one order derivative for gradient vector \\ 
+2. You need second order derivative for Hessian matrix \\ 
+
+==================================================\\
+Quasi-Newton method \\ 
+
+==================================================\\
+Global optimization problem \\ 
+If f(x) has multiple local minima, \\ 
+you can assure numerical optimization method reaches to global minimum \\
+
+Numerical optimization method depends on initial value, algorithm, parameter, etc \\ 
+
+==================================================\\
+Convex problem \\ 
+Convex problem is optimization problem \\
+which is defined in the range\\
+where second order derivative is greater or equal to 0 \\ 
+
+$\dfrac{\partial^2 f}{\partial x^2} \ge 0$ \\
+
+If f(x) is multivariate function \\ 
+Hessian matrix should always be "positive semidefinite" \\ 
+in given range \\ 
+
+$x^T \times \text{(Hessian mat)} \times x \ge 0$, $\forall$ x \\ 
+
+Convex problem gurantees there exist global optimal point \\ 
+
+\end{document}
