@@ -1,0 +1,246 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{kotex}
+\usepackage{amssymb}
+\usepackage{bigints}
+\begin{document}
+
+==================================================\\
+Optimization problem is to find variable $x^*$ \\ 
+which makes value of f minimum or maximum \\ 
+
+$x^*=\arg_x \max f(x)$ \\ 
+$x^*=\arg_x \min f(x)$ \\ 
+
+$x^*$ is called solution to the optimization problem \\ 
+
+==================================================\\
+Since you can automatically solve max optimization problem,\\
+by adding $-$ like $-f(x)$,\\
+you generally should consider only min optimization problem.\\ 
+
+Function $f(x)$ which you want to minimize is called \\ 
+as objective function, cost function, loss function \\
+
+==================================================\\
+
+Grid search by values: \\ 
+1. you continuously assign various values to x \\ 
+2. you see whether $f(x)$ is mimimum \\
+
+Grid search by graph: \\ 
+1. you draw graph of function \\ 
+2. you find x value which minimizes $f(x)$ \\
+
+==================================================\\
+Numerical optimization: \\ 
+1. you perform trial and error \\ 
+(which means you move x value like gradient descent algorithm) \\ 
+2. you find $x^*$ which satisties necessary condition for optimization
+
+==================================================\\
+To do numerical optimization, \\ 
+you should need 2 algorithms \\ 
+
+1. algorithm to confirm whether current $x_k$ is optimal \\ 
+2. algorithm to find next position $x_{k+1}$ \\ 
+
+==================================================\\
+Algorithm to confirm whether current $x_k$ is optimal \\ 
+using slope information \\ 
+
+If $f(x)$ is N univariate function, \\ 
+$\dfrac{df(x)}{dx}=0$ \\ 
+
+If $f(x)$ is multivariate function, \\ 
+$\dfrac{\partial f(x)}{\partial x_1}=0$ \\ 
+$\dfrac{\partial f(x)}{\partial x_2}=0$ \\ 
+$\vdots$ \\ 
+$\dfrac{\partial f(x)}{\partial x_N}=0$ \\ 
+
+In other words, $\triangledown f=0$ \\
+
+==================================================\\
+Algorithm to find next position $x_{k+1}$ \\ 
+using SGD \\ 
+
+SGD finds $x_{k+1}$ by using slope information at $x_k$ \\ 
+
+$x_{k+1} \\\\ 
+=x_k - \alpha \times \triangledown f(x_k) \\\\ 
+=x_k - \alpha \times g(x_k)$
+
+==================================================\\
+Newton method using second order derivative \\ 
+
+Suppose: \\ 
+objective function should be second order function \\ 
+Then, you can find optimal point $x_k$ by one try \\ 
+
+Method: \\ 
+Use gradient vector which is chaned in direction and length \\ 
+which can be obtained by multiplying gradient vector \\
+by inverse matrix of Hessian matrix \\ 
+
+${x}_{n+1} = {x}_n - [{H}f({x}_n)]^{-1} \times \nabla f({x}_n)$ \\ 
+
+Meaning: \\ 
+1. You don't need learning rate \\ 
+2. You need one order derivative for gradient vector \\ 
+3. You need second order derivative for Hessian matrix \\ 
+
+==================================================\\
+Quasi-Newton method \\ 
+
+==================================================\\
+Global optimization problem \\ 
+If $f(x)$ has multiple local minima, \\ 
+you can assure numerical optimization method reaches to global minimum \\
+
+Numerical optimization method depends on initial value, algorithm, parameter, etc \\ 
+
+==================================================\\
+Convex problem \\ 
+Convex problem is optimization problem \\
+which is defined in the range\\
+where second order derivative is greater or equal to 0 \\ 
+
+$\dfrac{\partial^2 f}{\partial x^2} \ge 0$ \\
+
+If $f(x)$ is multivariate function \\ 
+Hessian matrix should always be "positive semidefinite" \\ 
+in given range \\ 
+
+$x^T \times \text{(Hessian mat)} \times x \ge 0$, $\forall$ x \\ 
+
+Convex problem gurantees there exist global optimal point \\ 
+
+
+
+
+
+% aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Constrained optimization \\ 
+
+$x^{\ast} = \arg_x \min f(x) \;\; (x \in \mathbf{R}^N)$ \\  
+
+Constraint you should satisfy \\ 
+$g_j(x)=0 \;\; (j=1, \ldots, M)$
+
+==================================================\\
+Optimization problem with "equal" constraint can be optimized \\ 
+by using Lagrange multiplier \\ 
+
+==================================================\\
+In Lagrange multiplier, you optimize function $h(x,\lambda)$ instead of f(x) \\
+
+$h(x,\lambda)$ is created as following \\ 
+1. you multipy variable $\lambda$ by constaint function g(x) \\
+2. you add f(x) \\
+
+$h(x, \lambda) = f(x) + \sum\limits_{j=1}^M \{\lambda_j \times g_j(x)\}$ \\ 
+
+If you have M number of constraint functions $g_1(x),\cdots,g_M(x)$ \\ 
+it means you obtain M number of variables $\lambda_1,\cdots,\lambda_M$ \\ 
+
+==================================================\\
+$h(x_1, x_2, \ldots , x_N, \lambda_1, \ldots , \lambda_M)$ \\ 
+
+Constraint functions and corresponding $\lambda$: M number \\ 
+Input variable: N number \\ 
+
+Condition which makes $\nabla h =0$ is N+M number \\ 
+
+
+$\dfrac{\partial h(x, \lambda)}{\partial x_1} = \dfrac{\partial f}{\partial x_1} + \sum\limits_{j=1}^M \lambda_j\dfrac{\partial g_j}{\partial x_1} = 0$ \\
+$\dfrac{\partial h(x, \lambda)}{\partial x_2} = \dfrac{\partial f}{\partial x_2} + \sum\limits_{j=1}^M \lambda_j\dfrac{\partial g_j}{\partial x_2} = 0$ \\
+$\vdots$ \\
+$\dfrac{\partial h(x, \lambda)}{\partial x_N} = \dfrac{\partial f}{\partial x_N} + \sum\limits_{j=1}^M \lambda_j\dfrac{\partial g_j}{\partial x_N} = 0$ \\
+$\dfrac{\partial h(x, \lambda)}{\partial \lambda_1} = g_1 = 0$ \\
+$\vdots$ \\
+$\dfrac{\partial h(x, \lambda)}{\partial \lambda_M} = g_M = 0 $ \\ 
+
+
+If you solve above simultaneous equations, \\ 
+you can get N+M variables $(x_1,\cdots,x_N,\lambda_1,\cdots,\lambda_M)$ \\ 
+
+$x_1,\cdots,x_N$ means values which make f(x) minimum \\ 
+with satisfying constraint function g(x) \\ 
+
+==================================================\\
+Example \\ 
+$f(x)=x_1^2+x_2^2$ \\ 
+Constraint function $g(x)=x_1+x_2-1$ \\ 
+
+Then, you can create function h \\ 
+$h \\\\ 
+= f + \lambda g  \\\\ 
+= x_1^2 + x_2^2 + \lambda ( x_1 + x_2 - 1 )$
+
+
+By using Lagrange multiplier, you find x values which has 0 slope \\ 
+
+$\dfrac{\partial h}{\partial x_1} = 2{x_1} + \lambda = 0$ \\
+$\dfrac{\partial h}{\partial x_2} = 2{x_2} + \lambda = 0$ \\
+$\dfrac{\partial h}{\partial \lambda} = x_1 + x_2 - 1 = 0$ 
+
+You solve above simultaneous equations,\\ 
+then you get \\ 
+$x_1 = x_2 = \dfrac{1}{2}, \;\;\; \lambda = -1$ \\ 
+
+==================================================\\
+Meaning of Lagrange multipier $\lambda$ \\ 
+
+If optimal solution values $x_k$ become different \\ 
+based on either constraint $g_i(x)$ exists or not \\ 
+$\lambda$ is important so $\lambda \ne 0$ \\ 
+
+==================================================\\
+Optimization with inequality constraint \\ 
+
+$x^{\ast} = \text{arg} \min_x f(x)  \;\; (x \in \mathbf{R}^N)$ \\  
+$g_j(x) \leq 0 \;\; (j=1, \ldots, M)$
+
+$g_j(x)$: inequality constraint \\ 
+
+In this case, you also optimize $h(x,\lambda)$ function instead of $f(x)$ \\ 
+
+$h(x, \lambda) = f(x) + \sum\limits_{j=1}^M \{\lambda_j \times g_j(x)\}$
+
+==================================================\\
+Sufficient conditions for solution values x are KKT (Karush-Kuhn-Tucker) \\ 
+
+1. Differentiation value should be 0 \\ 
+with respect to all independant variables $x_1,\cdots,x_N$ \\ 
+$\dfrac{\partial h(x, \lambda)}{\partial x_1} = 0$ \\ 
+$\vdots$ \\ 
+$\dfrac{\partial h(x, \lambda)}{\partial x_N} = 0$ \\ 
+
+2. \\
+$\lambda_1 \times g_1(x) = \lambda_1 \times \dfrac{\partial h(x,\lambda)}{\partial \lambda_1} = 0$ \\ 
+$\vdots$ \\ 
+$\lambda_M \times g_M(x) = \lambda_M \times \dfrac{\partial h(x,\lambda)}{\partial \lambda_M} = 0$ \\ 
+
+3. \\
+Lagrange multipliers ($\lambda_j$) should be $\ge$ 0 \\ 
+
+==================================================\\
+Example \\ 
+
+Objective function $f(x_1,x_2)=x_1^2+x_2^2$ \\ 
+
+Inequality constraint case 1: \\ 
+$g(x_1,x_2)=x_1+x_2-1 \le 0$ \\ 
+
+Inequality constraint case 2: \\ 
+$g(x_1,x_2)=-x_1-x_2+1 \le 0$ \\ 
+
+==================================================\\
+% /home/young/Pictures/2019_03_23_12:27:33.png
+
+Once you solve constrained optimization problem \\ 
+constraint becomes either useless constraint\\
+that constratint doesn't affect optimization\\
+or useful constraint that constratint affects optimization\\
+
+\end{document}

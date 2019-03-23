@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+==================================================
+Constrained optimization  
+
+$$$x^{\ast} = \arg_x \min f(x) \;\; (x \in \mathbf{R}^N)$$$   
+
+Constraint you should satisfy  
+$$$g_j(x)=0 \;\; (j=1, \ldots, M)$$$
+
+==================================================
+Optimization problem with "equal" constraint can be optimized  
+by using Lagrange multiplier  
+
+==================================================
+In Lagrange multiplier, you optimize function $$$h(x,\lambda)$$$ instead of f(x) 
+
+$$$h(x,\lambda)$$$ is created as following  
+1. you multipy variable $$$\lambda$$$ by constaint function g(x) 
+2. you add f(x) 
+
+$$$h(x, \lambda) = f(x) + \sum\limits_{j=1}^M \{\lambda_j \times g_j(x)\}$$$  
+
+If you have M number of constraint functions $$$g_1(x),\cdots,g_M(x)$$$  
+it means you obtain M number of variables $$$\lambda_1,\cdots,\lambda_M$$$  
+
+==================================================
+$$$h(x_1, x_2, \ldots , x_N, \lambda_1, \ldots , \lambda_M)$$$  
+
+Constraint functions and corresponding $$$\lambda$$$: M number  
+Input variable: N number  
+
+Condition which makes $$$\nabla h =0$$$ is N+M number  
+
+$$$\dfrac{\partial h(x, \lambda)}{\partial x_1} = \dfrac{\partial f}{\partial x_1} + \sum\limits_{j=1}^M \lambda_j\dfrac{\partial g_j}{\partial x_1} = 0$$$ 
+$$$\dfrac{\partial h(x, \lambda)}{\partial x_2} = \dfrac{\partial f}{\partial x_2} + \sum\limits_{j=1}^M \lambda_j\dfrac{\partial g_j}{\partial x_2} = 0$$$ 
+$$$\vdots$$$ 
+$$$\dfrac{\partial h(x, \lambda)}{\partial x_N} = \dfrac{\partial f}{\partial x_N} + \sum\limits_{j=1}^M \lambda_j\dfrac{\partial g_j}{\partial x_N} = 0$$$ 
+$$$\dfrac{\partial h(x, \lambda)}{\partial \lambda_1} = g_1 = 0$$$ 
+$$$\vdots$$$ 
+$$$\dfrac{\partial h(x, \lambda)}{\partial \lambda_M} = g_M = 0 $$$  
+
+If you solve above simultaneous equations,  
+you can get N+M variables $$$(x_1,\cdots,x_N,\lambda_1,\cdots,\lambda_M)$$$  
+
+$$$x_1,\cdots,x_N$$$ means values which make f(x) minimum  
+with satisfying constraint function g(x)  
+
+==================================================
+Example  
+$$$f(x)=x_1^2+x_2^2$$$  
+Constraint function $$$g(x)=x_1+x_2-1$$$  
+
+Then, you can create function h  
+$$$h \\ 
+= f + \lambda g  \\ 
+= x_1^2 + x_2^2 + \lambda ( x_1 + x_2 - 1 )$$$
+
+By using Lagrange multiplier, you find x values which has 0 slope  
+
+$$$\dfrac{\partial h}{\partial x_1} = 2{x_1} + \lambda = 0$$$ 
+$$$\dfrac{\partial h}{\partial x_2} = 2{x_2} + \lambda = 0$$$ 
+$$$\dfrac{\partial h}{\partial \lambda} = x_1 + x_2 - 1 = 0$$$ 
+
+You solve above simultaneous equations, 
+then you get  
+$$$x_1 = x_2 = \dfrac{1}{2}, \;\;\; \lambda = -1$$$  
+
+==================================================
+Meaning of Lagrange multipier $$$\lambda$$$  
+
+If optimal solution values $$$x_k$$$ become different  
+based on either constraint $$$g_i(x)$$$ exists or not  
+$$$\lambda$$$ is important so $$$\lambda \ne 0$$$  
+
+==================================================
+Optimization with inequality constraint  
+
+$$$x^{\ast} = \text{arg} \min_x f(x)  \;\; (x \in \mathbf{R}^N)$$$   
+$$$g_j(x) \leq 0 \;\; (j=1, \ldots, M)$$$
+
+$$$g_j(x)$$$: inequality constraint  
+
+In this case, you also optimize $$$h(x,\lambda)$$$ function instead of $$$f(x)$$$  
+
+$$$h(x, \lambda) = f(x) + \sum\limits_{j=1}^M \{\lambda_j \times g_j(x)\}$$$
+
+==================================================
+Sufficient conditions for solution values x are KKT (Karush-Kuhn-Tucker)  
+
+1. Differentiation value should be 0  
+with respect to all independant variables $$$x_1,\cdots,x_N$$$  
+$$$\dfrac{\partial h(x, \lambda)}{\partial x_1} = 0$$$  
+$$$\vdots$$$  
+$$$\dfrac{\partial h(x, \lambda)}{\partial x_N} = 0$$$  
+
+2. 
+$$$\lambda_1 \times g_1(x) = \lambda_1 \times \dfrac{\partial h(x,\lambda)}{\partial \lambda_1} = 0$$$  
+$$$\vdots$$$  
+$$$\lambda_M \times g_M(x) = \lambda_M \times \dfrac{\partial h(x,\lambda)}{\partial \lambda_M} = 0$$$  
+
+3. 
+Lagrange multipliers ($$$\lambda_j$$$) should be $$$\ge$$$ 0  
+
+==================================================
+Example  
+
+Objective function $$$f(x_1,x_2)=x_1^2+x_2^2$$$  
+
+Inequality constraint case 1:  
+$$$g(x_1,x_2)=x_1+x_2-1 \le 0$$$  
+
+Inequality constraint case 2:  
+$$$g(x_1,x_2)=-x_1-x_2+1 \le 0$$$  
+
+==================================================
+</xmp><img src="https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_23_12:27:33.png"><xmp>
+
+Once you solve constrained optimization problem  
+constraint becomes either useless constraint
+that constratint doesn't affect optimization
+or useful constraint that constratint affects optimization
+
+</xmp>
+   </BODY>
+</HTML>
+
