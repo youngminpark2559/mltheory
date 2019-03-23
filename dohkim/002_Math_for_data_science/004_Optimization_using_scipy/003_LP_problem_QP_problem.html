@@ -50,107 +50,107 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
-Linear programming is to minimize linear model (or linear combination) 
-which has equaltity or inequality constraints 
+Linear programming is to minimize linear model (or linear combination)
+which has equaltity or inequality constraints
 
 ==================================================
-Standard form of LP programming  
-Minimize linear model: $$$\min_x c^Tx$$$  
-Equality constraint: $$$Ax=b$$$  
-Inequality constraint: $$$x \ge 0$$$  
-which means all elements of vector x should be $$$\ge 0$$$  
+Standard form of LP programming 
+Minimize linear model: $$$\min_x c^Tx$$$ 
+Equality constraint: $$$Ax=b$$$ 
+Inequality constraint: $$$x \ge 0$$$ 
+which means all elements of vector x should be $$$\ge 0$$$ 
 
 ==================================================
-Canonical form of LP programming  
-Minimize linear model: $$$\min_x c^Tx$$$  
-Equality constraint: $$$Ax\le b$$$  
-Inequality constraint: $$$x \ge 0$$$  
-which means all elements of vector x should be $$$\ge 0$$$  
+Canonical form of LP programming 
+Minimize linear model: $$$\min_x c^Tx$$$ 
+Equality constraint: $$$Ax\le b$$$ 
+Inequality constraint: $$$x \ge 0$$$ 
+which means all elements of vector x should be $$$\ge 0$$$ 
 
 ==================================================
-Example  
-Objective function you minize: $$$-3x_1-5x_2$$$  
+Example 
+Objective function you minize: $$$-3x_1-5x_2$$$ 
 Constraints: 
-$$$-x_1\le -100$$$ 
-$$$-x_2\le -100$$$ 
-$$$x_1+2x_2\le 500$$$ 
-$$$4x_1+5x_2\le 9800$$$ 
-$$$x_1\ge 0$$$ 
-$$$x_2\ge 0$$$ 
+$$$-x_1\le -100$$$
+$$$-x_2\le -100$$$
+$$$x_1+2x_2\le 500$$$
+$$$4x_1+5x_2\le 9800$$$
+$$$x_1\ge 0$$$
+$$$x_2\ge 0$$$
 
 ==================================================
-Let's represent above problem as LP programming  
+Let's represent above problem as LP programming 
 
-$$$\min_x c^Tx$$$  
+$$$\min_x c^Tx$$$ 
 $$$\min_x \begin{bmatrix}
 -3 && -5
 \end{bmatrix}
 \begin{bmatrix}
-x_1  x_2
+x_1\\x_2
 \end{bmatrix}$$$
 
 $$$\begin{bmatrix}
--1 && 0  0 && -1  1 && 2  4 && 5
+-1 && 0\\0 && -1\\1 && 2\\4 && 5
 \end{bmatrix}
 \begin{bmatrix}
-x_1  x_2
+x_1\\x_2
 \end{bmatrix}
 \le
 \begin{bmatrix}
--100-1005009800
+-100\\-100\\500\\9800
 \end{bmatrix}$$$
 
 $$$\begin{bmatrix}
-x_1  x_2
+x_1\\x_2
 \end{bmatrix}
 \ge
 \begin{bmatrix}
-00
+0\\0
 \end{bmatrix}$$$
 
 ==================================================
-QP (Quadratic programming) is to minimize quadratic form  
-which has equality and inequality constraints  
+QP (Quadratic programming) is to minimize quadratic form 
+which has equality and inequality constraints 
 
-$$$\arg_x\min \dfrac{1}{2}x^TQx + c^Tx$$$ 
-$$$Ax = b$$$ 
-$$$x \ge 0$$$ 
-
-==================================================
-Example  
-
-Objective function: $$$x_1^2 + x_2^2$$$  
-$$$\arg_x\min (x_1^2 + x_2^2)$$$  
-
-Quadratic form as constraint: $$$x_1 + x_2 - 1 = 0$$$  
+$$$\arg_x\min \dfrac{1}{2}x^TQx + c^Tx$$$
+$$$Ax = b$$$
+$$$x \ge 0$$$
 
 ==================================================
-Convert above problem into QP  
+Example 
+
+Objective function: $$$x_1^2 + x_2^2$$$ 
+$$$\arg_x\min (x_1^2 + x_2^2)$$$ 
+
+Quadratic form as constraint: $$$x_1 + x_2 - 1 = 0$$$ 
+
+==================================================
+Convert above problem into QP 
 $$$\arg\min_x
 \dfrac{1}{2}
 \begin{bmatrix}
 x_1 & x_2
 \end{bmatrix}
 \begin{bmatrix}
-2 & 0  0 & 2
+2 & 0\\0 & 2
 \end{bmatrix}
 \begin{bmatrix}
-x_1  x_2
+x_1\\x_2
 \end{bmatrix}
 + 
 \begin{bmatrix}
 0 & 0
 \end{bmatrix}
 \begin{bmatrix}
-x_1  x_2
-\end{bmatrix}$$$ 
+x_1\\x_2
+\end{bmatrix}$$$
 
 $$$\begin{bmatrix}
 1 & 1
 \end{bmatrix}
 \begin{bmatrix}
-x_1  x_2
-\end{bmatrix} = 1$$$ 
+x_1\\x_2
+\end{bmatrix} = 1$$$
 
 </xmp>
    </BODY>
