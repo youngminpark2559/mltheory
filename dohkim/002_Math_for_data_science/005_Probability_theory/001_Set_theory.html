@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+Set: distinguishable collection. 
+Element: distinguishable object in the set 
+
+Element x is in set A: 
+$$$x\in A$$$ 
+
+==================================================
+Cardinality is the number of element which the set has 
+
+$$$A=\{1,2,3\}$$$ 
+$$$|A| = \text{card}(A) = 3$$$ 
+
+==================================================
+Union of two sets A and B 
+$$$A\cup B$$$ 
+
+Intersection of two sets A and B 
+$$$A\cap B$$$ 
+
+==================================================
+If set A is sub set of set B: 
+$$$A \subset B$$$ 
+
+$$$A \subset A$$$ is true
+
+If cardinality of A is smaller than B, 
+A is proper subset of B 
+
+==================================================
+Difference set 
+$$$A-B$$$ 
+
+==================================================
+Complement set against entire set $$$\Omega$$$ 
+$$$A^C$$$ 
+
+$$$A^C=\Omega-A$$$ 
+
+==================================================
+Null set $$$\phi$$$ has none element 
+
+$$$\phi \subset$$$ all sets 
+
+Following is true 
+$$$A\cap \phi=\phi$$$ 
+$$$A\cup \phi=A$$$ 
+$$$A\cap A^C=\phi$$$ 
+
+==================================================
+$$$A=\{1,2\}$$$ has 4 number of sub sets 
+
+$$$A_1=\phi$$$
+$$$A_2=\{1\}$$$
+$$$A_3=\{2\}$$$
+$$$A_4=\{1,2\}$$$
+
+==================================================
+If set A has N number of elements, 
+A has $$$2^N$$$ number of sub sets 
+
+==================================================
+Following is true as distribution law 
+$$$A\cup(B\cap C)=(A\cup B)\cap(A\cup C)$$$ 
+$$$A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$$$ 
+
+==================================================
+
+</xmp>
+   </BODY>
+</HTML>
