@@ -3,8 +3,8 @@ entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/003_Probability_distribution_function.tex
-(/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/003_Probability_distribution_function.tex
+**/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/002_Mathematical_definition_of_probability_and_its_meaning.tex
+(/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/002_Mathematical_definition_of_probability_and_its_meaning.tex
 LaTeX2e <2018-12-01>
 (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -153,8 +153,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (/usr/local/texlive/2018/texmf-dist/tex/latex/bigints/bigints.sty
 Package: bigints 2010/02/15 Writing big integrals
 Package bigints Info: This is Bigints by Merciadri Luca. on input line 5.
-) (/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/003_Probability_distribution_function.aux)
-\openout1 = `003_Probability_distribution_function.aux'.
+) (/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/002_Mathematical_definition_of_probability_and_its_meaning.aux)
+\openout1 = `002_Mathematical_definition_of_probability_and_its_meaning.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
@@ -175,183 +175,123 @@ File: lucnanummj.fd 2013/02/12 v0.1 Nanum Myeongjo font definitions
 )
 LaTeX Font Info:    ... okay on input line 6.
 
-Underfull \hbox (badness 10000) in paragraph at lines 8--12
+Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 13--16
-[]\OT1/cmr/m/n/10 ================================================== 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 13--16
-
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 17.
+LaTeX Font Info:    Try loading font information for U+msa on input line 12.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 17.
+LaTeX Font Info:    Try loading font information for U+msb on input line 12.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 17--21
+Underfull \hbox (badness 10000) in paragraph at lines 12--14
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 22--25
+Underfull \hbox (badness 10000) in paragraph at lines 15--18
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 28--33
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 19--22
 []\OT1/cmr/m/n/10 ================================================== 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--33
+Underfull \hbox (badness 10000) in paragraph at lines 19--22
 
  []
 
 
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 34--39
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 23--26
 []\OT1/cmr/m/n/10 ================================================== 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--39
+Underfull \hbox (badness 10000) in paragraph at lines 23--26
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--44
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 45--50
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 27--29
 []\OT1/cmr/m/n/10 ================================================== 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--50
+Underfull \hbox (badness 10000) in paragraph at lines 27--29
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 53--55
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 33--36
 []\OT1/cmr/m/n/10 ================================================== 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--55
+Underfull \hbox (badness 10000) in paragraph at lines 33--36
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--41
+
+ []
+
+
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 42--44
+[]\OT1/cmr/m/n/10 ================================================== 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--44
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--48
+
+ []
+
+
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 49--53
+[]\OT1/cmr/m/n/10 ================================================== 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--53
+
+ []
+
+
+Overfull \hbox (58.89008pt too wide) in paragraph at lines 54--55
+[]\OT1/cmr/m/n/10 ================================================== 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--55
 
  []
 
 [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 56--57
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 58--59
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 62--65
-[]\OT1/cmr/m/n/10 ================================================== 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 62--65
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 66--67
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 68--75
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 76--79
-[]\OT1/cmr/m/n/10 ================================================== 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 76--79
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 80--83
-[]\OT1/cmr/m/n/10 ================================================== 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--83
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 84--89
-[]\OT1/cmr/m/n/10 ================================================== 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--89
-
- []
-
-
-Overfull \hbox (58.89008pt too wide) in paragraph at lines 90--91
-[]\OT1/cmr/m/n/10 ================================================== 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 90--91
-
- []
-
-[2] (/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/003_Probability_distribution_function.aux) ) 
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/002_Mathematical_definition_of_probability_and_its_meaning.aux) ) 
 Here is how much of TeX's memory you used:
- 1545 strings out of 492616
- 20552 string characters out of 6128968
+ 1552 strings out of 492616
+ 20818 string characters out of 6128968
  84267 words of memory out of 5000000
- 5472 multiletter control sequences out of 15000+600000
- 5339 words of font info for 22 fonts, out of 8000000 for 9000
+ 5476 multiletter control sequences out of 15000+600000
+ 6266 words of font info for 25 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 31i,5n,27p,353b,123s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on /home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/003_Probability_distribution_function.pdf (2 pages, 62230 bytes).
+ 31i,5n,27p,374b,123s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on /home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/002_Mathematical_definition_of_probability_and_its_meaning.pdf (2 pages, 46208 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
