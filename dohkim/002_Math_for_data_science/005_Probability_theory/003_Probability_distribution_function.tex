@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{kotex}
+\usepackage{amssymb}
+\usepackage{bigints}
+\begin{document}
+================================================== \\
+Probabilistic sample(or random sample, sample): \\ 
+One realizable phenomenon from the probabilistic problem you want to solve \\ 
+Or one sampled case \\ 
+
+Sample space $\Omega$: \\ 
+Set which contains all possible samples \\ 
+
+Task of defining sample sapce: \\
+Define which phenomenon is possible to occur \\
+and which phenomenon is impossible to occur \\ 
+
+================================================== \\
+Sample space when you toss the coin \\ 
+$\Omega =\{H,T\}$ \\ 
+
+================================================== \\
+Some cases has set of entire real numbers as sample space \\ 
+$\Omega = \mathbf{R}$ \\ 
+
+================================================== \\
+Possible events: possible sub sets of sample space $\Omega$ \\ 
+
+Sample space $\Omega=\{H,T\}$ \\ 
+Possible events: $\phi,\{H\},\{T\},\{H,T\}$
+
+================================================== \\
+Probability is function which takes all events \\
+and which outputs number \\ 
+
+$P(A)=0.1$ \\
+P() is function P \\
+A is event \\
+0.1 is probability value \\
+
+================================================== \\
+Kolmogorov's axioms \\ 
+
+1. $P(\text{all\_events})\ge 0$ \\ 
+2. $P(\Omega)=1$ \\ 
+3. If $A\cap B=\phi$, then $P(A\cup B)=P(A)+P(B)$ \\ 
+
+================================================== \\
+Interpretion about probability value: \\ 
+1. Frequentist \\ 
+2. Baysian \\ 
+
+================================================== \\
+afafaf
+
+Information of "event A has high probability value", \\ 
+"event B has medium probability value", \\ 
+"event C has low probability value", ... \\ 
+is called "probability distribution" \\ 
+
+================================================== \\
+Elementary event (or atomic event): \\ 
+Elementary event has one number of sample \\ 
+
+$P({\text{Diamond}})=0.1$ \\ 
+$P({\text{Heart}})=0.2$ \\ 
+$P({\text{Spade}})=0.3$ \\ 
+$P({\text{Clover}})=0.4$ \\ 
+
+Then, you can calculate probability value of all kinds of events, \\ 
+which has 2 samples, 3 samples, etc \\ 
+according to 3rd rule of Kolmogorov's axiom \\ 
+
+$P({\text{Heart,Spade}})=0.2+0.3=0.5$ \\ 
+
+================================================== \\
+Probability mass function: \\ 
+Probability mass function defines probability values \\
+to each elementary event, \\ 
+when there are only finite number of events \\ 
+
+================================================== \\
+$P(\{1\})=0.2$ \\ 
+$P()$ is probability function \\ 
+$\{1\}$ is event which has one sample \\ 
+$0.2$ is probability value for event $\{1\}$ \\ 
+
+$p(1)=0.2$ \\ 
+$p()$ is probability mass function \\ 
+$1$ is elementary event which has number 1 \\ 
+$0.2$ is probability value for elementary event 1 \\ 
+
+================================================== \\
+$P(\{1,2\})=0.2$ \\ 
+$P()$ is probability function \\ 
+$\{1,2\}$ is event which has 2 samples \\ 
+$0.2$ is probability value for event $\{1,2\}$ \\ 
+
+$p(1,2)$ can be defined \\ 
+
+================================================== \\
+Simple interval event A: $A=\{a\le x <b\}$ \\ 
+
+$A = \{ a \leq x < b \} \;\; \rightarrow \;\; P(A) = P(\{ a \leq x < b \}) = P(a, b)$ \\ 
+
+$P(B) = P(\{ -2 \leq x < 1\}) + P(\{2 \leq x < 3\}) = P(-2, 1) + P(2, 3)$ \\ 
+
+$P(B) = P(\{ -2 \leq x < 3 \}) - P(\{ 1 \leq x < 2\}) = P(-2, 3) - P(1, 2)$ \\ 
+
+================================================== \\
+Cumulative distribution function: \\ 
+From above, you used 2 numbers to define "interval" or "simple interval event A" \\ 
+
+To use only one number, you can use negative infinity \\ 
+
+$
+S_{-1} = \{ -\infty \leq X < -1 \} \\
+S_{0} = \{ -\infty \leq X < 0 \} \\
+S_{1} = \{ -\infty \leq X < 1 \} \\
+S_{2} = \{ -\infty \leq X < 2 \} \\
+\vdots \\
+S_{x} = \{ -\infty \leq X < x \} \\$
+
+================================================== \\
+In interval $\{ a \leq x < b \}$ \\ 
+simple intervale probability $P(a, b) = P(-\infty, b) - P(-\infty, a)$ \\
+
+================================================== \\
+Probability density function: \\ 
+derivative of Cumulative distribution function \\ 
+
+================================================== \\
+Probability distribution function: \\ 
+Probability mass function \\ 
+Cumulative distribution function \\ 
+Probability density function \\ 
+
+================================================== \\
+
+\end{document}
+/home/young/Desktop/git_ssh_mltheory/mltheory/dohkim/002_Math_for_data_science/005_Probability_theory/003_Probability_distribution_function.html
