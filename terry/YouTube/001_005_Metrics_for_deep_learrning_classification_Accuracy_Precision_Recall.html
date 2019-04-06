@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+   font-size: 20px;
+ 
+   margin-top: 50px;
+   margin-bottom: 50px;
+   margin-right: 80px;
+   margin-left: 100px;
+    
+   padding-top: 50px;
+   padding-bottom: 50px;
+   padding-right: 80px;
+   padding-left: 80px;
+    
+   line-height:35px;
+}
+
+img {
+   width:900px;
+}
+
+table, th, td{
+   border: 1px solid #bcbcbc;
+}
+
+/* table {
+   width: 400px;
+   height: 200px;
+} */
+
+th {
+   text-align: center;
+}
+
+td {
+   text-align: center;
+}
+
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+================================================================================
+For training in deep learning, it needs direction
+
+Direction is reflected in objective function.
+
+Note that reducing mistakes in prediction and increasing accuracy in prediction are different.
+
+================================================================================
+The key point when you define objective function is distance (L1, L2, ...) 
+and metrics (accuracy, precision, recall, ...)
+
+================================================================================
+This lecture is about metrics for classification
+
+Classification and regression are distinguished by kind of output.
+
+================================================================================
+When you need to make "truely well approximated function (in other words, model)" against big data,
+you should use all x domain in real number, and should use all y range in real number.
+
+This task is called "regression"
+
+================================================================================
+If outputs (y values) are only several number of things
+such as, tumor/non-tumor (2 classes), this task is called "classification"
+
+================================================================================
+Mathematically, 
+y=f(x)
+f: objective function
+x: input data, $$$x \in \mathbb{R}$$$
+
+if the range y to f function is integer numbers, $$$y \in \mathbb{Z}$$$, it's classification
+if the range y to f function is real numbers, $$$y \in \mathbb{R}$$$, it's regression
+
+================================================================================
+Metrics for "regression" are actually distance between true values and predicted values
+
+The distances which you can use for "regression metrics" are 
+L2 norm, L1 norm, L-infinite norm, etc
+
+================================================================================
+And you sum all distances to create one scalar loss value.
+
+And the goal of deep learning model is to reduce that summed scalar loss value via training step.
+
+================================================================================
+The metirc which you can use for "classification" is like
+
+- Accuracy
+- Precision
+- Recall
+
+================================================================================
+Why do you need those 3 metrics for classification problem?
+
+Suppose following table.
+
+</xmp>
+<table border="1"  cellpadding="5" text-align=center>
+<tbody>
+<tr>
+<td>1000 pics in total</td>
+<td>Model predicted it's non-tumor</td>
+<td>Model predicted it's tumor</td>
+</tr>
+<tr>
+<td>On non-tumor pics</td>
+<td>988</td>
+<td>2</td>
+</tr>
+<tr>
+<td>On tumor pics</td>
+<td>1</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->
+<xmp>
+
+================================================================================
+Let's see it sematically.
+
+Suppose 1000 number of test tumor images which has 10 tumor images and 990 non-tumor images.
+
+If deep learning model predicts all images to "non-tumor",
+its accuracy is 99%=990/1000
+
+But you can't say 99% accuracy in this manners is good
+cause deep learning model didn't find any tumor pic.
+
+So, if you use accuracy in objective function, training won't work correctly.
+
+================================================================================
+Why does this situatino happens?
+
+It's because the balance of classes is very huge like non-tumor (990) / tumor (10)
+
+This situation is called "inbalance in class"
+
+When you have balanced classes like A (100) / B (100) / C (100),
+accuracy works correctly in objective function for deep learning training.
+
+When you have inbalanced classes like A (10) / B (980) / C (10),
+you first resolve that inbalanced classes problem.
+
+================================================================================
+When classes are inbalance, what metircs can you use? They're precision and recall.
+
+Precision cares only cases where the model predicted given images to tumors
+and it calculates correct ration based on it.
+
+For example, when the model reports 11 (2+9) tumor predictions,
+and if 9 pictures are actually tumor pictures,
+correct ration (in other words, precision value) of the model is 9/11=0.81
+
+If the model reports 1000 given images to 1000 non-tumor predictions (0 tumor prediction),
+precision value is $$$\frac{9}{0}=\frac{\text{number of actual tumor picture}}{\text{number of tumor prediction}}=\infty$$$ (very poor performance)
+
+================================================================================
+Recall cares tumor picture cases.
+
+In the above table, tumor picture cases have 10 cases.
+
+On given 10 tumor pictures, the model predicted 1 image would be non-tumor 
+and 9 images would be tumor
+
+So, recall value of this model is $$$\frac{9}{10}$$$
+
+On given 1000 pictures, when the model predicted 1000 images to non-tumor pictures,
+recall value of that model is $$$\frac{0}{10}=\frac{\text{correct prediction}}{\text{tumor pictures in total}}$$$
+      
+</xmp>
+   </BODY>
+</HTML>
