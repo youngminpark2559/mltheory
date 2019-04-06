@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+   font-size: 20px;
+ 
+   margin-top: 50px;
+   margin-bottom: 50px;
+   margin-right: 80px;
+   margin-left: 100px;
+    
+   padding-top: 50px;
+   padding-bottom: 50px;
+   padding-right: 80px;
+   padding-left: 80px;
+    
+   line-height:35px;
+}
+
+img {
+   width:900px;
+}
+
+table, th, td{
+   border: 1px solid #bcbcbc;
+}
+
+/* table {
+   width: 400px;
+   height: 200px;
+} */
+
+th {
+   text-align: center;
+}
+
+td {
+   text-align: center;
+}
+
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+This is note from the following video lecture
+https://www.youtube.com/watch?v=nMAtFhamoRY
+
+================================================================================
+True Positive, True Negative, False Positive, False Negative
+
+True, False: predicton of your model is correct or incorrect
+
+Positive, Negative: 1 and 0 in classes
+
+================================================================================
+</xmp>
+<table border="1"  cellpadding="5" text-align=center>
+<tbody>
+<tr>
+<td>1000 pics in total</td>
+<td>Model predicted it's non-tumor</td>
+<td>Model predicted it's tumor</td>
+</tr>
+<tr>
+<td>On non-tumor pics</td>
+<td>988 (True Negative)</td>
+<td>2 (False Positive)</td>
+</tr>
+<tr>
+<td>On tumor pics</td>
+<td>1 (False Negative)</td>
+<td>9 (True Positive)</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->
+<xmp>
+
+True Negative: The model correctly said 988 non-tumor images would be non-tumor images
+False Positive: The model incorrectly said 2 non-tumor images would be tumor images
+False Negative: The model incorrectly said 1 tumor image would be non-tumor image
+True Positive: The model correctly said 9 tumor images would be tumor images
+
+================================================================================
+$$$\text{Accuracy}$$$
+$$$=\frac{\text{TP}+\text{TN}}{\text{All cases}} $$$
+$$$=\frac{9+988}{1000}$$$
+$$$=0.99$$$
+
+$$$\text{Precison}$$$
+$$$=\frac{\text{TP}}{\text{TP}+\text{FP}} $$$
+$$$=\frac{9}{9+2}$$$
+$$$=0.81$$$
+
+$$$\text{Recall}$$$
+$$$=\frac{\text{TP}}{\text{TP}+\text{FN}} $$$
+$$$=\frac{9}{9+1}$$$
+$$$=0.9$$$
+
+================================================================================
+In addition to accuracy, precision, recall,
+you will see ROC curve.
+
+ROC curve is much used for binary classification and medical appications.
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/terry/YouTube/pics/2019_04_06_10:25:54.png' alt=''><xmp>
+
+================================================================================
+How can you interpret ROC curve?
+
+Red curve line has better performance.
+
+Area under curve line is called AUC (Area Under the Curve). 
+
+================================================================================
+Why do you need to use ROC curve?
+
+Precision and recall are used to complement the weak point of accuracy.
+
+ROC is also used to inspect analyzed result and dataset.
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/terry/YouTube/pics/2019_04_06_10:29:10.png' alt=''><xmp>
+
+Probability distribution N means distribution of non-tumor images
+
+Probability distribution P means distribution of tumor images
+
+You can see clearly separated areas like far-left and far-right
+but note that there are kind of unclear or overlapped areas around the center area.
+
+Even if you have those unclear and overlapped areas,
+you should have the best separating line like green vertical line
+
+It means you can't avoid the errors in your separating line or in your decision.
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/terry/YouTube/pics/2019_04_06_10:33:08.png' alt=''><xmp>
+
+This graph is more easily separable.
+
+Even if green vertical line moves in this graph,
+you won't have many miss classifications because graph is already quite clear separable.
+(decision boundary is less sensitive, you can more trust that you can separate N and P ,
+you have good feature to separate N and P)
+
+This situatino draws red-line-like graph in ROC curve.
+
+================================================================================
+If graph is not easily separable, almost-straight-diagonal-line is plotted on the ROC curve,
+which is bad curve.
+
+================================================================================
+So, it means you can use ROC curve to select good features
+
+================================================================================
+For example, suppose you want to predict fast runners.
+
+To train the mode, suppose you select "weight" and "height" as features.
+
+But there are many vague cases where some tall people run fast, some tall people run slow,
+some overweight people run fast, some lightweight people run fast, etc.
+
+This situation draw distribution like 
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/terry/YouTube/pics/2019_04_06_10:29:10.png' alt=''><xmp>
+and draw almost-straight-diagonal-line on ROC curve
+
+================================================================================
+When you use good feature like record in previous test,
+you can separate people into fast runner and slow runner
+
+And that situation will draw following distribution and red-line-like good curve on ROC curve
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/terry/YouTube/pics/2019_04_06_10:33:08.png' alt=''><xmp>
+
+================================================================================
+True Positive rate (= Recall, sensitivity)
+
+$$$\text{TPR=R}$$$
+$$$=\frac{\text{TP}}{\text{TP}+\text{FN}}$$$
+
+================================================================================
+True Negative rate (= Specificity)
+
+$$$\text{TNR}$$$
+$$$=\frac{\text{TN}}{\text{TN}+\text{FP}}$$$
+
+================================================================================
+Summary
+
+1. Accuracy is not all
+Especiialy, when class is inbalanced, you should see precision and recall
+For example, first medical inspection should use recall cause it should detect every tumor patient.
+Precision should be used for the case where your judgement shouldn't have mistake 
+such as conviction.
+
+2. Use ROC curve to confirm
+that you're using good features, your decision is reliable and stable judgement
+by checking your AUC has large area
+
+</xmp>
+   </BODY>
+</HTML>
