@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================
+"Statistical phenomena"
+- Suppose there are undefined phenomena
+- You iteratively observe phenomena
+- You may find intrinsic pattern from those phenomena
+- In this situation, "those phenomena" is called statistical phenomena
+
+================================================================================
+On statistical phenomena, you can perform "random experimental (or trial)"
+- Trial is what you can "iterate" under "same condition"
+- You can't predict results of every trials but you can know the set of all possible result
+For example, you don't know what number occurs in rolling the dice.
+But you know there are six possible events.
+- Each result will show in irregular pattern.
+But as you increase number of trials, results will show some pattern.
+
+================================================================================
+Through trial, you get "probability"
+- Probability is a metric which shows intensity of clearness on statistical phenomena.
+- Probability is the number which is assigned into events
+
+Example
+- Toss coin as trials
+- You can assign probability value number into events H and T
+
+================================================================================
+Sample space S: entire set which contains all possible events.
+
+================================================================================
+Mathematical probability
+Suppose all events from sample space S have same probability of occuring,
+then, $$$\dfrac{n(A)}{n(S)}$$$ is mathematical probability of event A.
+
+$$$n(A)$$$: number of samples which are involved in event A
+$$$n(S)$$$: number of samples which are involved in sample space S
+
+================================================================================
+Example: a dice has 6 events
+
+================================================================================
+Statistical probability
+
+Natural phenomena and social phenomena generally don't have phenomena
+which have same probability in each event.
+
+In that case, how can you obtain probability?
+
+It can be done also by performing trials.
+
+Example:
+- Toss coin many times
+- Probability on H is predicted by relative frequency
+- Relative frequency: suppose n trials and suppose event what you want to know happens r times
+then, you can write $$$\frac{r}{n}$$$
+$$$\frac{r}{n}$$$ is relative frequency (r is not entire sample space)
+      
+</xmp>
+   </BODY>
+</HTML>
