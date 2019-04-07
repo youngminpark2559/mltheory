@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================
+- Sample space: the set which contains all possible events.
+
+- Example:
+* Trial: toss a coin one time.
+* Sample space $$$S=\{H,T\}$$$
+* H, T from S: sample points
+* Possible events (subset of S): 
+$$$\phi$$$ (event where you get nothing), {H} (event where you get H), {T} (event where you get T), {H,T} (event you get H or T)
+* {H}, {T} from all possible events: fundamental events which composed of sample points
+* {H,T}: event, fundamental events $$$\in$$$ event
+* Probability: function, domain is all possible events, range is numbers
+$$$\text{domain: all possible events} \xrightarrow {\text{Probability as function}} \text{numbers as probability value}$$$
+
+</xmp>
+<!-- numbers_as_probability_value=probability_as_function(all_possible_events) -->
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">numbers_as_probability_value<span style="color: #333333">=</span>probability_as_function(all_possible_events)
+</pre></div>
+<xmp>
+
+================================================================================
+If sample space S is mapped to probability values, it becomes probability space.
+
+Each event has probability value.
+
+================================================================================
+Axioms on probability
+
+- $$$0 \le P[A_i]$$$
+$$$A_i$$$: ith event
+$$$P[A_i]$$$: probability value of ith event A occuring
+
+- $$$\sum\limits_{i=1}^n P[A_i]=1$$$
+
+- If $$$A_i \cap A_j = \phi$$$, then, $$$P[A_i \cup A_j] = P[A_i] + P[A_j]$$$
+For example, $$$P(\{H \cup T\})=P(\{H\})+P(\{T\})$$$
+
+================================================================================
+Expanded characteristics of probability from axioms
+
+- $$$P[A^c]=1-P[A]$$$
+
+- $$$P[A] \le 1$$$
+
+- $$$P[\phi] = 0$$$
+
+- When $$$\{A_1,A_2,\cdots,A_N\}$$$ is given, if $$${A_i\cap A_j=\phi}$$$ is true,
+then, $$$P[\cup_{k=1}^N A_k]=\sum\limits_{k=1}^N P[A_k]$$$
+
+- $$$P[A_1\cup A_2]=P[A_1]+P[A_2]-P[A_1\cap A_2]$$$
+
+- $$$P[\cup_{k=1}^N A_k]=\sum\limits_{k=1}^N P[A_k] - \sum\limits_{j\lt k}^N P[A_k\cap A_j]+\cdots+(-1)^{N+1} P[A_1\cap A_2 \cap \cdots \cap A_N]$$$
+
+- If $$$A_1 \subset A_2$$$ is true, then, $$$P[A_1] \le P[A_2]$$$
+      
+</xmp>
+   </BODY>
+</HTML>
