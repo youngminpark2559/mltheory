@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+================================================================================
+Marginal probability: probability value which is assinged into one event without conditions
+
+================================================================================
+Conditional probability
+- Suppose there are 2 events A and B
+
+- When probability value of event B occuring is known,
+you can calculate probability of event A occuring in the situation of B occurred.
+
+- $$$P[A|B]$$$
+/home/young/Pictures/2019_04_07_10:50:47.png
+
+Under constraint of $$$P[B]>0$$$,
+$$$P[A|B]=\dfrac{P[A\cup B]}{P[B]}$$$
+
+- It's like a sample space becomes B
+
+================================================================================
+Joint probability
+- You can get following equation from conditional probability.
+$$$P[B]P[A|B]=P[A\cap B]$$$ or $$$P[A]P[B|A]=P[A\cap B]$$$
+
+- Joint probability is the probability of both A and B occuring
+
+- Independent trial: trial where each trial is independent to others like rolling a dice twice.
+If A and B are independent events, $$$P[A|B]=P[A]$$$
+
+- Therefore, you can write $$$P[A\cap B] = P[B] \times P[A]$$$
+
+================================================================================
+Law of the total probability
+
+- Suppose sample space is composed of $$$B_1, B_2, \cdots, B_N$$$
+/home/young/Pictures/2019_04_07_16:38:09.png
+
+- Suppose all Bs are not overlapped.
+
+- Suppose event A is located like above.
+Since A is entirely involved in S, A can be written as $$$a=A\cap S$$$
+
+- You already supposed S is composed of $$$B_1 \cup B_2 \cup \cdots \cup B_N$$$
+Therefore, you can write,
+$$$A \cap (B_1 \cup B_2 \cup \cdots \cup B_N)$$$
+
+- And you can write this,
+$$$(A\cap B_1) \cap (A\cap B_2) \cup \cdots \cup (A\cap B_N)$$$
+
+/home/young/Pictures/2019_04_07_16:42:52.png
+
+================================================================================
+You can write above concept in terms of probability.
+
+- $$$P[A]=P[A\cap B_1]+P[A\cap B_2]+\cdots+P[A\cap B_N]$$$
+
+- You can use $$$P[A\cap B]=P[A|B]P[B]$$$ on above notation.
+$$$P[A]=P[A\cap B_1]=P[A|B_1]P[B_1] + \cdots + P[A|B_N]P[B_N]$$$
+
+- You can call above notation as the total probability of event A.
+
+================================================================================
+      
+</xmp>
+   </BODY>
+</HTML>
