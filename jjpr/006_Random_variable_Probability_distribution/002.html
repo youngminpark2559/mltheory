@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================   
+Expectation value: average of random variable
+
+================================================================================
+Suppose there is data.
+
+You can obtain parameters as statistical characteristics from that data.
+
+Parameters as statistical characteristics is called "sample characteristics"
+when you deal with sample.
+
+================================================================================
+When you deal with characteristics of probability distribution,
+it's called as model or characteristics of universal population.
+
+================================================================================
+Sample data's average: $$$\bar{x}$$$
+Sample data's variance: $$$s^2$$$
+which are not "population's characteristics" but prediction for characteristics of population.
+
+Universal population's average: $$$\mu$$$
+Universal population's variance: $$$\sigma^2$$$
+
+================================================================================
+$$$\bar{x} \\
+=\frac{1}{n}\sum\limits_{i=1}^n x_i \\
+=\frac{1}{n}\sum\limits_{\text{all x}} n_x x \\
+=\sum\limits_{\text{all x}} x \frac{n_x}{x}$$$
+
+$$$\frac{n_x}{n}$$$ is relative frequency
+
+================================================================================
+$$$E[X]=\mu=\sum\limits_{\text{all x}} xp(x)$$$
+
+Best proper value you can expect from random variable X
+
+================================================================================
+In the case of where you use continuous random variable
+$$$E[X]=\mu=\int_{-\infty}^{\infty} xf_x(x)dx$$$
+
+================================================================================
+Discrete random variable
+
+- Sample data
+$$$s^2
+= \frac{1}{n-1} \sum\limits_{i=1}^n (x_i-\bar{x})^2
+= \sum\limits_{\text{all x}} (x-\bar{x})^2 \frac{n_x}{n-1}$$$
+where, $$$\frac{n_x}{n-1}$$$ is relative frequency
+
+- Population data
+$$$\sigma^2
+= \sum\limits_{\text{all x}} (x-\mu)^2 p(x)$$$
+
+================================================================================
+Continuous random variable
+
+- Sample data
+$$$Var[X]
+= E[(X-E[X])^2]
+= \int_{-\infty}^{\infty}(x-\mu)^2 f_X(x)dx$$$
+where, $$$\frac{n_x}{n-1}$$$ is relative frequency
+
+- Population data
+$$$STD[X] = Var[X]^{\frac{1}{2}}$$$
+
+================================================================================
+
+
+
+
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>

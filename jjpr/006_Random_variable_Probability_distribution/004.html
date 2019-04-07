@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================
+Covariance matrix is composed of variance and covariance
+
+Variance values are located in diagonal axis
+
+Covariance values are located in off-diagonal regions
+
+================================================================================
+Characteristics of covariance
+
+- If $$$x_i$$$ and $$$x_k$$$ increase together, covariance value $$$c_{ik}>0$$$
+
+- If $$$x_k$$$ increases and $$$x_i$$$ decreases, covariance value $$$c_{ik}\lt 0$$$
+
+- If $$$x_i$$$ and $$$x_k$$$ are uncorrelated, covariance value $$$c_{ik} = 0$$$
+
+- $$$|c_{ik}| \lt \sigma_i\times \sigma_k$$$, $$$\sigma_i$$$ is standard deviation of $$$x_i$$$
+
+- $$$c_{ii} = \sigma_i^2 = VAR(x_i)$$$
+
+================================================================================
+/home/young/Pictures/2019_04_07_22:16:53.png
+
+$$$\rho_{ik}$$$: correlation coefficient
+
+$$$c_{ik} = \rho_{ik} \sigma_i\sigma_k$$$
+
+$$$\rho_{ik}=\dfrac{c_{ik}}{\sigma_i\sigma_k}$$$
+
+
+
+
+
+
+
+ffff
+
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>
