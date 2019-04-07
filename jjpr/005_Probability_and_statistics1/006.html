@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+================================================================================
+- When independent $$$B_1, B_2, \cdots, B_N$$$ consists of sample space S,
+and when event A (which is composed of partial Bs) occurs in S,
+what probability value of A occuring will be?
+
+- In previous lecture, you've heard that an event A can occur from sum of multiple partial Bs.
+
+So, you can start to consider in which B event A occurs.
+That question is the topic of the Bayes theorem, which is written as: $$$P[B_j|A]$$$
+
+$$$P[B_j|A]$$$: when event A had been occured, the probability value of "$$$A$$$ had occured in $$$B_j$$$"
+
+- You can use conditional probability: $$$P[B_j|A]=\dfrac{P[A\cap B_j]}{P[A]}$$$
+
+- In previous lecture, probability value of A occuring could be written as:
+$$$P[A]=\sum\limits_{k=1}^N P[A|B_k]P[B_k]$$$
+
+- You already know that $$$P[A\cap B]=P[A|B]P[B]$$$
+
+- Therefore, finally you can write:
+
+$$$P[B_j|A] = \dfrac{P[A|B_j]P[B_j]}{\sum\limits_{k=1}^N P[A|B_k]P[B_k]}$$$
+
+- Above theorem is called Bayes theorem.
+
+================================================================================
+Let's try to see Bayes theorem in terms of pattern recognition.
+
+$$$P[\omega_j|x]
+= \dfrac{P[x|\omega_j]P[\omega_j]}{\sum\limits_{k=1}^N P[x|\omega_k]P[\omega_k]}
+= \dfrac{P[x|\omega_j]P[\omega_j]}{P[x]}$$$
+
+$$$w_j$$$: jth class, like $$$\omega_1=\text{male}$$$, $$$\omega_2=\text{female}$$$
+$$$x$$$: feature vector, particular each pattern, like $$$x_1=[170,60]$$$, $$$x_2=[160,50]$$$
+$$$P[\omega_j]$$$: prior probability of "class $$$\omega_j$$$" occuring
+$$$P[\omega_j|x]$$$: when observation x is given, posterior probability of $$$\omega_j$$$
+$$$P[x|\omega_j]$$$: likelihood, conditional probability value of observation event x occuring when class $$$\omega_j$$$ is given
+
+================================================================================
+Goal you would ultimately like to solve: $$$P[\omega_j|x]$$$
+when patern (or feature vector) is given, that pattern is involed into which class $$$\omega$$$?
+
+Bayes theorem says, to know $$$P[\omega_j|x]$$$, you first should know 
+1. $$$P[x]$$$: probability value of pattern $$$x$$$ occuring
+2. $$$P[\omega_j]$$$: probability value of each class occuring
+3. $$$P[x|\omega_j]$$$: probability value of pattern x occuring from given class $$$\omega_j$$$
+according to 
+$$$P[\omega_j|x]
+= \dfrac{P[x|\omega_j]P[\omega_j]}{\sum\limits_{k=1}^N P[x|\omega_k]P[\omega_k]}
+= \dfrac{P[x|\omega_j]P[\omega_j]}{P[x]}$$$
+
+================================================================================
+It means if you know those 3 things, you can find your ultimate goal $$$P[\omega_j|x]$$$
+
+Since those 3 things (+posterior probability) are important, 
+you name them as you saw from above.
+
+As a review,
+1. $$$P[\omega_j]$$$: probability value of class $$$\omega_j$$$ occuring, prior probability of $$$\omega_j$$$
+Why should you call $$$P[\omega_j]$$$ as prior probability?
+It's because you should call $$$P[\omega_j|x]$$$ as posterior probability
+
+2. $$$P[\omega_j|x]$$$: after you've got pattern x, probability value of "x came from class $$$\omega_j$$$"
+It's posterior because it deals with problem after "event" already happened.
+
+3. $$$P[x|\omega_j]$$$: probability value of x comes from $$$\omega_j$$$
+For example, probability of patttern [170,60] occuring from class male 
+and probability of patttern [170,60] occuring from class female are different.
+
+Probability values of pattern occuring are different per class.
+
+4. P[x]: probability value of given pattern x occuring, non-influencial,
+which is used for normalization as normalization constant term.
+
+================================================================================
+Pattern recognition using Bayes theorem
+$$$\text{posterior probability}=\dfrac{\text{likelihood}\times \text{prior probability}}{\text{normalization term}}$$$
+
+================================================================================
+Example - law of the total probability
+
+================================================================================
+Example - Bayes theorem
+
+================================================================================
+      
+</xmp>
+   </BODY>
+</HTML>
