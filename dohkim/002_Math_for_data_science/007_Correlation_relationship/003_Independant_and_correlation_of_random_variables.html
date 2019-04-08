@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+================================================================================
+- Suppose there are 2 random variables.
+
+- When samples of one random variable vary, if conditional samples of other random variable vary,
+you say they're in correlation to each other.
+
+- Otherwise, you say they're independent
+
+================================================================================
+Independence of random variables
+
+$$$f_{XY}(x,y)=f_X(x)f_Y(y)$$$
+
+$$$f_{XY}(x,y)$$$: joint pdf of X and Y
+$$$f_X(x)$$$: marginal pdf of X
+$$$f_Y(y)$$$: marginal pdf of Y
+
+================================================================================
+Independence of 3 random variables
+
+$$$f_{XYZ}(x,y,z)=f_X(x)f_Y(y)f_Z(z)$$$
+
+In that situation, all following are also independent.
+XY, XZ, YZ, ...
+
+================================================================================
+Iterative trial.
+
+- Suppose you extract multiple samples from one random variable.
+
+- You can consider samples as the samples which are from independent random variables.
+
+- Therefore, 
+$$$f(x_1,x_2,\cdots,x_N) \\
+=f(x_1)\times f(x_2) \times \cdots f(x_N) \\
+=\prod\limits_{i=1}^{N} f(x_i)$$$
+f(x): PDF
+$$$x_1,x_2,\cdots,x_N$$$: sample data
+$$$f(x_1,x_2,\cdots,x_N)$$$: probability value of $$$x_1,x_2,\cdots,x_N$$$ occuring
+
+================================================================================
+Conditional probability distribution
+
+- Suppose 2 independent random variables X and Y
+
+- Conditional probability distribution of X and Y is identical to marginal PDF
+
+$$$f_{X \mid Y} (x | y) = \dfrac{f_{XY}(x, y)}{f_{Y}(y)} = \dfrac{f_{X}(x) f_{Y}(y)}{f_{Y}(y)} = f_{X}(x)$$$
+$$$f_{Y \mid X} (y | x) = \dfrac{f_{XY}(x, y)}{f_{X}(x)} = \dfrac{f_{X}(x) f_{Y}(y)}{f_{X}(x)} = f_{Y}(y)$$$
+
+- It means if random variable X is independent to Y,
+conditional probability distribution is not affected by conditional random variable
+
+- That is, $$$f(x|y_1)=f(x|y_2)$$$
+
+================================================================================
+Expectation value of independent random variables
+
+- Suppose 2 indenpendent random variable X and Y
+
+- Then, following are true
+
+$$$E[XY]=E[X]E[Y]$$$
+$$$E[(X-\mu_X)(Y-\mu_Y)]=0$$$
+
+================================================================================
+Variance value of independent random variables
+
+$$$Var[X+y]=Var[X]+Var[Y]$$$
+
+</xmp>
+   </BODY>
+</HTML>
+
