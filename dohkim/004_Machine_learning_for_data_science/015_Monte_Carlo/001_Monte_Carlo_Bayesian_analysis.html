@@ -194,7 +194,7 @@ Markov Chain Monte Carlo generates samples using Markov chain.
 
 You first create Markov chain for Markov chain's convergence distribution to have p(x) 
 
-Then, you run this Markov chain for $$$t^'$$$ hours,
+Then, you run this Markov chain for $$$t^{'}$$$ hours,
 after that, you can get samples in distribution you want.
 
 ================================================================================
@@ -250,6 +250,7 @@ PyMC3 can use GPU
 # If you already installed MKL library, you first need to execute this
 import os
 os.environ["MKL_THREADING_LAYER"]="GNU"
+
 # ================================================================================
 import pymc3 as pm -->
 
@@ -280,20 +281,26 @@ Step of usage:
 cov=np.array([[1.,1.5],[1.5,4]])
 # c mu: mean value
 mu=np.array([1,-1])
+
 # ================================================================================
 # Create Model scope
 with pm.Model() as model:
   # c x: instance of multivariate Gaussian normal distribution
   x = pm.MvNormal('x',mu=mu,cov=cov,shape=(1,2))
+
   # c step: instance of Metropolis
   step = pm.Metropolis()
+
   # @ Execute generating 1000 sample
   trace = pm.sample(1000, step)
+
 # ================================================================================
 import warnings
 warnings.simplefilter("ignore")
+
 pm.traceplot(trace)
 plt.show()
+
 plt.scatter(trace['x'][:, 0, 0], trace['x'][:, 0, 1])
 plt.show() -->
 
@@ -338,21 +345,30 @@ $$$P(x_1,\cdots,x_N|\theta)$$$: Binomial
 </xmp>
 <!-- # @ Code
 theta0=0.7
+
 # @ Set seed number
 np.random.seed(0)
+
 # c x_data1: generated 10 data which follow bernoulli distribution
 x_data1=sp.stats.bernoulli(theta0).rvs(10)
 print(x_data1)
 # array([1, 0, 1, 1, 1, 1, 1, 0, 0, 1])
+
 # @ create model scope
 with pm.Model() as model:
   theta=pm.Beta('theta',alpha=1,beta=1)
+
   x=pm.Bernoulli('x',p=theta,observed=x_data1)
+
   start=pm.find_MAP()
+
   step=pm.NUTS()
+
   trace1=pm.sample(2000,step=step,start=start)
+
 pm.traceplot(trace1)
 plt.show()
+
 pm.plot_posterior(trace1)
 plt.xlim(0, 1)
 plt.show() -->
@@ -395,33 +411,42 @@ Bayesian Linear Regression using MCMC
 </xmp>
 <!-- # @ Code
 from sklearn.datasets import make_regression
+
 # @ Create data for regression task
 # 100 samples, 1 feature
 x,y_data,coef=make_regression(n_samples=100,n_features=1,bias=0,noise=20,coef=True,random_state=1)
 x = x.flatten()
+
 # ================================================================================
 print(coef)
 # array(80.71051956)
+
 # ================================================================================
 plt.scatter(x, y_data)
 plt.show()
+
 # ================================================================================
 # Create Model scope
 with pm.Model() as m:
+
   w=pm.Normal('w',mu=0,sd=50)
   b=pm.Normal('b',mu=0,sd=50)
   esd=pm.HalfCauchy('esd',5)
   y=pm.Normal('y',mu=w*x+b,sd=esd,observed=y_data)
+
   start = pm.find_MAP()
   step = pm.NUTS()
   trace1 = pm.sample(10000, step=step, start=start)
+
 # logp = -448.82, ||grad|| = 6.8486: 100%|██████████| 37/37 [00:00<00:00, 1599.20it/s]  
 # Multiprocess sampling (4 chains in 4 jobs)
 # NUTS: [esd, b, w]
 # Sampling 4 chains: 100%|██████████| 42000/42000 [00:16<00:00, 2477.73draws/s]
+
 # ================================================================================
 pm.traceplot(trace1)
 plt.show()
+
 # ================================================================================
 pm.summary(trace1) -->
 
