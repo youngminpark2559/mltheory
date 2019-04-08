@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+Probablistic model wrt random variable X is defined by probability density function $$$p(x;\theta)$$$
+(or probability mass function $$$P(x;\theta)$$$)
+
+$$$x$$$ from $$$p(x;\theta)$$$: real numbers which X can have
+$$$\theta$$$: representive symbol for parameters which is for probability density function (probablistic model)
+
+================================================================================
+For example, $$$\theta$$$ is $$$\mu$$$ and $$$\sigma^2$$$ 
+in the case of Gaussian normal probability distribution function
+
+$$$p(x; \theta) \\
+=p(x; \mu, \sigma^2) \\
+=\dfrac{1}{\sqrt{2\pi\sigma^2}} \exp\left({-\frac{(x-\mu)^2}{2\sigma^2}}\right)$$$
+
+================================================================================
+In the perspective of function, $$$\theta$$$ is fixed value and $$$x$$$ is variable
+
+For example, it's like random variable model is already fixed,
+and it's like it outputs relative probability against given real number input data.
+
+================================================================================
+But in the perspective of inference problem,
+you know x (which is realized sample) but you want to know parameter $$$\theta$$$
+
+So, it's like you should see probability density function to find $$$\theta$$$ 
+in the situation where you're given x
+
+================================================================================
+MLE (Maximum Likelihood Estimation)
+
+It's the method which finds $$$\theta$$$ which makes maximal likelihood wrt given sample.
+
+================================================================================
+- Suppose you know a random variable which follows normal distribution.
+
+- Suppose variance $$$\sigma^2$$$ of that random variable is 1
+
+- Suppose you don't know $$$\mu$$$ of that random variable and you would like to find it.
+
+- Suppose you have one sample $$$x_1=1$$$
+
+- Which $$$\mu$$$ has maximal likelihood?
+
+================================================================================
+/home/young/Pictures/2019_04_08_10:54:29.png
+
+- Likelihood (probability density) where $$$x=1$$$ occurs from $$$N(x;\mu=-1)$$$ is 0.05 (red under triangle point)
+- Likelihood (probability density) where $$$x=1$$$ occurs from $$$N(x;\mu=0)$$$ is 0.24 (blue triangle point)
+- Likelihood (probability density) where $$$x=1$$$ occurs from $$$N(x;\mu=1)$$$ is 0.40 (green square point)
+
+In conclusion, inferenced value based on MLE is 1
+$$$\hat{\mu}_{\text{Maximul Likelihood}}=1$$$
+
+================================================================================
+For inference, you generally have multiple samples like $$$\{x_1,\cdots,x_N\}$$$ of random variable
+
+So, likelihood should also be found from joint probability density $$$p_{X_1,\cdots,X_N}(x_1,\cdots,x_N;\theta)$$$
+
+$$$\{x_1,\cdots,x_N\}$$$ is independent values which come from same random variable
+so, you can use multiplication
+
+$$$\text{Likelihood}(\theta;x_1,\cdots,x_N) \\
+=L(\theta;\{x_i\}_{i=1}^N) \\
+=p(x_1;\theta)\times p(x_2;\theta)\times \cdots \times p(x_N;\theta) \\
+=\prod\limits_{i=1}^N p(x_i;\theta)$$$
+
+================================================================================
+For example, if sample data is $$$x_1=1, x_2=0, x_3=-3$$$ which you get from Gaussian normal distribution,
+likelihood function is following:
+
+$$$\text{Likelihood}(\theta;x_1,x_2,x_3) \\
+= \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left( -\frac{(1-\mu)^2}{2\sigma^2} \right) \times 
+\dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left( -\frac{(0-\mu)^2}{2\sigma^2} \right) \times
+\dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left( -\frac{(-3-\mu)^2}{2\sigma^2} \right) \\
+= \dfrac{1}{(2\pi\sigma^2)^{\frac{3}{2}}} \exp\left({-\frac{\mu^2 + (1-\mu)^2 + (-3-\mu)^2}{2\sigma^2}}\right) \\
+= \dfrac{1}{(2\pi\sigma^2)^{\frac{3}{2}}} \exp\left({-\frac{3\mu^2+4\mu+10}{2\sigma^2}}\right)$$$
+
+/home/young/Pictures/2019_04_08_11:13:52.png
+
+================================================================================
+Implement MLE algorithm
+
+It's numerical optimization problem where you should find $$$\theta$$$ which makes likelihood maximum
+
+$$$\hat{\theta}_{\text{Maximum Likelihood}} = \arg_{\theta}\max L(\theta;\{x_i\})$$$
+
+================================================================================
+Instead you use likelihood function L, you generally use log likelihood function $$$LL=\log{L}$$$
+
+$$$\hat{\theta}_{\text{Maximum Likelihood}} = \arg_{\theta}\max \log{L(\theta;\{x_i\})}$$$
+
+The reason of using LL is
+- Maximum value location doesn't change
+- Calculation will be simple by using $$$\log{AB}=\log{A}+\log{B}$$$
+
+</xmp>
+   </BODY>
+</HTML>
