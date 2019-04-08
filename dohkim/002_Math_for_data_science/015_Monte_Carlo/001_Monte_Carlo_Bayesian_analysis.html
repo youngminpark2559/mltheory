@@ -51,6 +51,8 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
+This is notes which I wrote based on the lecture originated from 
+https://datascienceschool.net/view-notebook/ea4584bde04140368950ee50ef038833/
 
 ================================================================================
 - Suppose you know probability distribution function p(X) of random variable
@@ -147,7 +149,7 @@ Markov chain
 
 - Suppose that time series probability procedure has K finite states
 
-- If probability distribution p(x_t) depends on p(x_{t-1}) and p(x_t|x_{t-1})
+- If probability distribution $$$p(x_t) depends on p(x_{t-1}) and p(x_t|x_{t-1})$$$
 this time series probability procedure is called "Markov chain"
 
 - Note that "Markov chain" is different from "linear chain Markov network"
@@ -160,7 +162,7 @@ Then, following is true.
 $$$p(x_{t}) = \sum_{x_{t-1}} p(x_t, x_{t-1}) = \sum_{x_{t-1}} p(x_t | x_{t-1}) p(x_{t-1})$$$
 
 ================================================================================
-p(x_t) is category distribution, you can express it as row vector $$$p_t$$$
+$$$p(x_t)$$$ is category distribution, you can express it as row vector $$$p_t$$$
 
 then, you can convert $$$p(x_{t}) = \sum_{x_{t-1}} p(x_t, x_{t-1}) = \sum_{x_{t-1}} p(x_t | x_{t-1}) p(x_{t-1})$$$ to following matrix form
 $$$p_t=p_{t-1}T$$$
@@ -192,7 +194,7 @@ Markov Chain Monte Carlo generates samples using Markov chain.
 
 You first create Markov chain for Markov chain's convergence distribution to have p(x) 
 
-Then, you run this Markov chain for t^' hours,
+Then, you run this Markov chain for $$$t^'$$$ hours,
 after that, you can get samples in distribution you want.
 
 ================================================================================
@@ -223,8 +225,8 @@ $$$x_{t+1}=x_t$$$
 - You iterate above step until you have enough number of samples.
 
 ================================================================================
-If calculation distribution q(x^*|x_t) is Gaussian normal distribution,
-if condition x_t and result x^* are changed, probability is same.
+If calculation distribution $$$q(x^*|x_t)$$$ is Gaussian normal distribution,
+if condition x_t and result $$$x^*$$$ are changed, probability is same.
 $$$q(x^{\ast} \mid x_t) = q(x_t \mid x^{\ast})$$$
 
 ================================================================================
@@ -490,6 +492,7 @@ plt<span style="color: #333333">.</span>show()
 pm<span style="color: #333333">.</span>summary(trace1)
 </pre></div>
 <xmp>
+
 
 </xmp>
    </BODY>
