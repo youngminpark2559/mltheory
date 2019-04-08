@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+================================================================================
+Since Gaussian probability distribution is very much used,
+Gaussian probability distribution is also called Normal distribution
+
+================================================================================
+The reason that Gaussian distribution is much used:
+
+- When you use 1D feature vector, 
+it is enough to find normal distribution with 2 paramters; mean $$$\mu$$$ and std $$$\sigma$$$
+
+- Due to central limit theorem, there are many cases where you need to use Gaussian distribution
+
+================================================================================
+central limit theorem
+
+- Suppose mean $$$\mu$$$, variance $$$\sigma^2$$$ of population.
+
+- Since it's difficult to analyze entire population,
+you extract sample from population.
+
+- As size of sample becomes bigger and bigger, 
+that sample becomes data which has $$$\mu$$$ and $$$\frac{\sigma^2}{N}$$$
+
+================================================================================
+Example.
+
+- Suppose you want to predict average height of entire population.
+
+- You would extract sample.
+
+- Suppose you extract 1 person and you calculate average height of that person
+Then, you will get this distribution
+/home/young/Pictures/2019_04_08_09:20:38.png
+
+- Suppose you extract 4 people and you calculate average height of that people
+Then, you will get this distribution
+/home/young/Pictures/2019_04_08_09:21:21.png
+
+- Suppose you extract 7 people and you calculate average height of that people
+Then, you will get this distribution
+/home/young/Pictures/2019_04_08_09:21:42.png
+
+- Suppose you extract 10 people and you calculate average height of that people
+Then, you will get this distribution
+/home/young/Pictures/2019_04_08_09:22:00.png
+
+- As you increase size of sample, distribution becomes Gaussian distribution more and more.
+
+================================================================================
+Multivariate Gaussian probability distribution function
+
+$$$f_X(X)= \frac{1}{\sqrt{2\pi}^{\frac{n}{2}} |\Sigma|^{\frac{1}{2}}} \exp \left[ -\frac{1}{2} (X-\mu)^T \Sigma^-1 (X-\mu) \right]$$$
+
+Shape of Gaussian distribution is determined by $$$\Sigma$$$
+$$$\mu$$$ only affects the peak, not for the shape.
+
+================================================================================
+If data has following distribution
+/home/young/Pictures/2019_04_08_09:30:44.png
+
+that data has following covariance
+$$$\Sigma = \begin{bmatrix} \sigma_1^2&&c_{12}\\c_{12}&&\sigma_2^2 \end{bmatrix}$$$
+
+================================================================================
+If data has following distribution
+/home/young/Pictures/2019_04_08_09:31:32.png
+
+that data has following covariance
+$$$\Sigma = \begin{bmatrix} \sigma_1^2&&0\\0&&\sigma_2^2 \end{bmatrix}$$$
+
+$$$0$$$: correlation of data has none
+
+$$$\sigma_1^2 > \sigma_2^2$$$
+
+================================================================================
+If data has following distribution
+/home/young/Pictures/2019_04_08_09:31:59.png
+
+that data has following covariance
+$$$\Sigma = \begin{bmatrix} \sigma^2&&0\\0&&\sigma^2 \end{bmatrix}$$$
+
+$$$0$$$: correlation of data has none
+
+$$$\sigma^2 = \sigma^2$$$
+
+================================================================================
+It also means that you can know the distribution of data by looking at the shape of covariance matrix
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
