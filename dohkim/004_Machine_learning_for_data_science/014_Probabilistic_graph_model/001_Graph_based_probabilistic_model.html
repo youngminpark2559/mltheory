@@ -65,7 +65,7 @@ A	B	C	P(A,B,C)
 Number of parameters of joint probability distribution of A,B,C is $$$3^3-1=26$$$ 
 which means you need 26 storages to store these parameters  
 
-==================================================
+================================================================================
 In the real world,  
 the case where several sepecific random variables affect each other is more often 
 than the case where all random variables affect each other  
@@ -73,14 +73,14 @@ than the case where all random variables affect each other
 Graphical probability model means you describe the relationships  
 between "only several random variables" out of "all random variables"  
 
-==================================================
+================================================================================
 If cause-result relationship is clear from the graphical probability model, 
 you can use arrows to represent that cause-result relationship, 
 
 which is called "Bayesian network model"  
 
-==================================================
-% /home/young/Pictures/2019_03_22_13:46:39.png
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_13:46:39.png' alt=''><xmp>
 
 This is also called "directed graph" or "directed acyclic graph" 
 out of "Bayesian network model" 
@@ -88,17 +88,17 @@ out of "Bayesian network model"
 Circle (node) stands for random variable  
 Array (edge, link) stands for the relationship  
 
-==================================================
+================================================================================
 A is cause and B is result.  
 It can be represented by $$$P(B|A)$$$  
 
-==================================================
+================================================================================
 Relationship of entire random variables can be represented 
 by combining conditional probability distribution  
 
 $$$P(A,B,C) = P(A)P(B|A)P(C|B)$$$  
 
-==================================================
+================================================================================
 If you add information of relationship on each variable  
 you can reduce number of parameters you should know  
 
@@ -111,7 +111,7 @@ you should know $$$(3-1)\times 2=6$$$ number of parameters
 In the case of P(C|B): 
 you should know $$$(3-1)\times 2=6$$$ number of parameters  
 
-==================================================
+================================================================================
 Joint probability distribution of Bayesian network  
 
 1. You create Bayesian network 
@@ -127,21 +127,21 @@ $$$P(X_1,\cdots,X_N) \\
 $$$Pa(X_i)$$$ stands for random variable playing a cause, parent node  
 $$$X_i$$$ stands for random variable playing a result, child node  
 
-==================================================
+================================================================================
 Example of Bayesian network  
-% /home/young/Pictures/2019_03_22_14:02:49.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_14:02:49.png' alt=''><xmp>
 
 Joint probability distribution  
 of random variables $$$(X_1,X_2,X_3,X_4,X_5,X_6)$$$  
 $$$P(X_1, X_2, X_3, X_4, X_5, X_6, X_7) \\ 
 = P(X_1) P(X_2) P(X_3 | X_2) P(X_4| X_2, X_3) P(X_5|X_4) P(X_6|X_4) P(X_7|X_2)$$$
 
-==================================================
+================================================================================
 Important point when you create Bayesian network is  
 that conditional independence relationship between random variables  
 should show in the graph  
 
-==================================================
+================================================================================
 If random variables A and B are "independent" to each other  
 $$$P(A,B)=P(A)P(B)$$$  
 
@@ -149,13 +149,13 @@ If random variables A and B are "conditional independent" to each other
 over condition C   
 $$$P(A,B|C)=P(A|C)P(B|C)$$$  
 
-==================================================
+================================================================================
 Above means  
 Joint probability distribution of A and B over condition C  
 = conditional probability distribution of A over condition C $$$\times$$$  
 conditional probability distribution of B over condition C  
 
-==================================================
+================================================================================
 Directed separation is the way to know  
 whether 2 nodes (random variables) are conditional independence or not  
 
@@ -164,9 +164,9 @@ To use this, you should know following 3 things
 2. Head-tail binding  
 3. Head-head binding  
 
-==================================================
+================================================================================
 Tail-tail biding  
-% /home/young/Pictures/2019_03_22_14:14:00.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_14:14:00.png' alt=''><xmp>
 
 In this case,  
 A and B is not independent  
@@ -178,10 +178,10 @@ $$$P(A,B|C)\\
 
 You call this status as "C" blocks between of A and B  
 
-==================================================
+================================================================================
 Head-tail binding  
 
-% /home/young/Pictures/2019_03_22_14:15:44.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_14:15:44.png' alt=''><xmp>
 
 In this case,  
 A and B is not independent  
@@ -195,9 +195,9 @@ $$$P(A,B|C) \\
 
 You call this status as "C" blocks between of A and B  
 
-==================================================
+================================================================================
 Head-head binding (or V structure) 
-% /home/young/Pictures/2019_03_22_14:18:55.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_14:18:55.png' alt=''><xmp>
 
 In this case,  
 A and B is independent  
@@ -207,23 +207,23 @@ $$$P(A,B) = \sum_c P(A)P(B)P(C|A,B) = P(A)P(B)$$$
 but they're NOT conditional independent  
 
 
-==================================================
+================================================================================
 Head-head binding having descendent 
 
-% /home/young/Pictures/2019_03_22_14:20:55.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_14:20:55.png' alt=''><xmp>
 
 Same characteristics with head-head binding 
 
-==================================================
+================================================================================
 There are cases you can represent the relationships between random variables 
 by using Bayesian network  
 because random variables form the cyclic relationship  
 
 In this case, you can use "Markov network" which is "undirected graph"  
 
-% /home/young/Pictures/2019_03_22_14:32:52.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/pic/2019_03_22_14:32:52.png' alt=''><xmp>
 
-==================================================
+================================================================================
 Markov network is composed of cliques  
 
 Clique is composed of random variable  
@@ -237,7 +237,7 @@ on joint probability distribution
 There is no limitation  
 that sum of all probabilities should be 1 to Markov network 
 
-==================================================
+================================================================================
 Joint probability distribution of Markov network is represented  
 by multiplication of all cliques which consist of Markov network  
 
@@ -250,7 +250,7 @@ $$$X_C$$$: random variable in clique
 $$$\psi_C$$$: factor of clique  
 $$$\{C\}$$$: set of all cliques  
 
-==================================================
+================================================================================
 Suppose you have 3x3 image  
 3x3 image has 9 random variables  
 
@@ -265,7 +265,7 @@ $$$P(X_{11}, \ldots, X_{33}) =
 \psi(X_{23}, X_{33}) 
 \psi(X_{32}, X_{33})$$$  
 
-==================================================
+================================================================================
 Factor function is also represented as  
 $$$\psi(X) = \exp(-E(X))$$$  
 
@@ -273,7 +273,7 @@ $$$E(X)$$$: energy function
 
 Higher probability makes lower energy function  
 
-==================================================
+================================================================================
 
 </xmp>
    </BODY>
