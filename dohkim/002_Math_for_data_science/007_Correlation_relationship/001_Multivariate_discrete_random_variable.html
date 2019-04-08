@@ -5,12 +5,12 @@
       <TITLE>My first HTML document</TITLE>
       <style rel="stylesheet" type="text/css">
 body {
- font-size: 23px;
+ font-size: 20px;
  
  margin-top: 50px;
     margin-bottom: 50px;
     margin-right: 80px;
-    margin-left: 80px;
+    margin-left: 100px;
     
     padding-top: 50px;
     padding-bottom: 50px;
@@ -49,56 +49,57 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
+
 <xmp>
-Suppose 2 random variables X and Y  
-X and Y can have values from 1 to 6  
+- Suppose 2 random variables X and Y
 
-Probability mass functions of X and Y  
-$$$P_X(x)$$$  
-$$$P_Y(y)$$$  
+- Suppose X and Y can have categorical values from 1 to 6
 
-$$$P_X(x=1)$$$ means probability of occuring 1 from random variable X  
+- You need to consider 
+probability distribution of random variable X, 
+probability distribution of random variable Y, 
+probability distribution of random variable pair of X,Y
 
-==================================================
-Joint probability mass function of X and Y  
-$$$P_{XY}(x,y)$$$  
+================================================================================
+Probability distribution of random variables X and Y can be expressed by probability mass functions
+$$$P_X(x)$$$, $$$P_Y(y)$$$
 
-$$$P_{XY}(x=2,y=3)$$$ means  
-probability of occuring 2 from random variable X and  
-occuring 3 from random variable Y  
+$$$P_X(x)$$$: probability mass function of random variable X
+$$$P_Y(x)$$$: probability mass function of random variable Y
 
-==================================================
-Marginal probability mass function  
+================================================================================
+$$$P_X(x=1) or P_X(1)$$$: means probability of 1 occuring from random variable X
 
-It means univariate probability mass function  
-before it becomes multivariate probability mass function  
+================================================================================
+Joint probability mass function of X and Y: $$$P_{XY}(x,y)$$$
 
-You can calculate marginal probability mass function  
-from joint probability mass function  
-by using the rule of entire probability  
+$$$P_{XY}(x=2,y=3)$$$: means
+- probability of event {x=2,y=3} occuring
+
+================================================================================
+Marginal probability mass function
+
+It's probability distribution function wrt one random variable from joint probability mass function
+
+================================================================================
+How to calculate marginal probability mass function
+
+$$$P_X(x)=\sum\limits_{y_i} P_{XY}(x,y_i)$$$
+$$$P_Y(y)=\sum\limits_{x_i} P_{XY}(x_i,y)$$$
 
 $$$P_X(A) \\
-= P_{XY}(A,A) + P_{XY}(A,B) + P_{XY}(A,C) + P_{XY}(A,D) + P_{XY}(A,E) + P_{XY}(A,F) \\ 
+= P_{XY}(A,A) + P_{XY}(A,B) + P_{XY}(A,C) + P_{XY}(A,D) + P_{XY}(A,E) + P_{XY}(A,F) \\
 = 0.02$$$
 
-==================================================
-Generalized notation  
+================================================================================
+Conditional probability mass function
 
-$$$P_X(x) = \sum\limits_{y_i} P_{XY}(x,y_i)$$$ 
-$$$P_Y(y) = \sum\limits_{x_i} P_{XY}(x_i,y)$$$ 
+When y is already occurred and fixed, 
+$$$P_{X \mid Y}(x \mid y) = \dfrac{P_{XY}(x, y)}{P_{Y}(y)}$$$
 
-==================================================
-Conditional probability mass function  
-
-When y is already occurred  
-$$$P_{X \mid Y}(x \mid y) = \dfrac{P_{XY}(x, y)}{P_{Y}(y)}$$$  
-
-When x is already occurred  
-$$$P_{Y \mid X}(y \mid x) = \dfrac{P_{XY}(x, y)}{P_{X}(x)}$$$  
-
-==================================================
-
+When x is already occurred and fixed, 
+$$$P_{Y \mid X}(y \mid x) = \dfrac{P_{XY}(x, y)}{P_{X}(x)}$$$
+      
 </xmp>
    </BODY>
 </HTML>
-
