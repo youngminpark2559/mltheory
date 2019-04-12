@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is note I wrote as I was take following lecture
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
+
+- How_to_predict_likelihood_pdf_Parameter_estimation_Non_parameter_density_function_Maximum_likelihood_estimation
+
+================================================================================
+So far, you've learned the way which classifies feature vector "when you know likelihood (as PDF)"
+
+================================================================================
+Then, how can you predict that likelihood PDF itself?
+
+For example, you supposed you already know the distribution of heights of male and female.
+But you actually don't know it. You should predict PDF from experiments and samples.
+
+Techniques to predict likelihood PDF:
+1. Parameter Estimation:
+- You suppose the fact that PDF will have specific shape (Gaussian shape specifically)
+Mean and variance are core elements which define Gaussian shape
+- Parameter Estimation finds mean and variance of Gaussian distiribution by using Maximum Likelihood Estimation
+
+2. Non-parametric Density Estimation
+- You don't suppose the fact that PDF will not have specific shape
+- Non-parametric Density Estimation just predicts likelihood PDF from data
+- Kernel Density Esitimation, K Nearest Neighbor Estimation, etc
+
+================================================================================
+Maximum Likelihood Estimation (MLE)
+
+- It's the way which finds likelihood PDF by selecting best proper mean and variance
+
+================================================================================
+/home/young/Pictures/2019_04_12_13:45:14.png
+
+X: feature vector like heights
+
+There should be population which generates feature vectors
+
+What you want to do is to find the parameters which defines the shape of that population.
+
+$$$\theta_1$$$: parameters which defines candidate population 1
+$$$\theta_2$$$: parameters which defines candidate population 2
+
+$$$P(X|\theta_1)$$$: probability of X occuring from population 1 which is defined by $$$\theta_1$$$
+$$$P(X|\theta_2)$$$: probability of X occuring from population 2 which is defined by $$$\theta_2$$$
+
+================================================================================
+- Suppose there are other population and its corresponding $$$\theta$$$
+/home/young/Pictures/2019_04_12_13:48:27.png
+
+================================================================================
+Then, you get this distribution
+
+/home/young/Pictures/2019_04_12_13:49:54.png
+
+$$$p(X|\theta)$$$: probability value of $$$X$$$ occuring from populations which are defined $$$\theta$$$
+
+$$$\hat{\theta} = \arg_{\theta} \max[p(X|\theta)]$$$
+
+$$$\hat{\theta}$$$: found $$$\theta$$$ which is best preper which defines best proper population
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>

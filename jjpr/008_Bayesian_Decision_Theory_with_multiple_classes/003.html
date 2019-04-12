@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is note I wrote as I was take following lecture
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
+
+- 
+
+================================================================================
+- Suppose there are parameters $$$\theta=[\theta_1,\cdots,\theta_N]^T$$$ 
+which consist of "one" PDF $$$p(x|\theta)$$$
+
+- Sample from PDF $$$p(x|\theta)$$$, $$$X=\{x^1,x_2,\cdots,x_N\}$$$
+$$$x^1,x_2,\cdots,x_N$$$ are like heights from N number of people
+
+- You goal is to inference $$$\theta=[\theta_1,\cdots,\theta_N]^T$$$ from $$$X=\{x^1,x_2,\cdots,x_N\}$$$
+using MLE (Maximum Likelihood Estimation)
+
+================================================================================
+$$$p(X|\theta) \\
+= p(x_1|\theta) \times p(x_2|\theta) \times \cdots \times p(x_N|\theta) \\
+= \prod\limits_{k=1}^{N} p(x_k|\theta)$$$
+
+$$$p(X|\theta)$$$: likelihood PDF
+
+================================================================================
+Multiplication to summation on $$$p(X|\theta)$$$ likelihood PDF
+
+- Multiplication version:
+$$$\hat{\theta} = \arg_\theta \max[p(X|\theta)]$$$
+
+- Log version
+$$$\hat{\theta} \\
+= \arg_\theta \max[ \log{p(X|\theta)}] \\
+= \arg_\theta \max[ \log{ p(x_1|\theta) p(x_2|\theta) \cdots p(x_N|\theta) }] \\
+= \arg_\theta \max[ \log{p(x_1|\theta)} + \log{p(x_2|\theta)} + \cdots + \log{p(x_N|\theta)} ] $$$
+
+================================================================================
+Why you should use "log-likelihood" $$$\log(\text{Likelihood})$$$?
+
+$$$\hat{\theta}=\arg_{\theta}\max [p(X|\theta)] = \arg_{\theta}\max [ \log{p(X|\theta)} ]$$$
+
+/home/young/Pictures/2019_04_12_14:40:24.png
+
+1. Log function is monotonic function
+
+$$$\hat{\theta} \\
+= \arg_{\theta}\max [ \log \prod\limits_{k=1}^{N} p(x_k|\theta) ] \\
+= \arg_{\theta}\max [ \sum\limits_{k=1}^{N} \log p(x_k|\theta) ] $$$
+
+2. If distribution is Gaussian, equation becomes simple by following rule
+$$$\log[Ae^{-B}]=\log{A}+ \log{e^{-B}} =  \log{A}+ -B$$$
+
+================================================================================
+Univariate Gaussian which has one kind of feature like height
+
+PDF $$$p(x)=N(\mu,\sigma)$$$
+
+- $$$N(\mu,\sigma)$$$: normal distribution
+- Given data $$$X=\{x_1,x_2,\cdots,x_N\}$$$
+
+You goal is to find $$$\hat{\theta}$$$
+$$$\hat{\theta}
+=\arg_{\theta}\max \sum\limits_{k=1}^{N} \log{ p(x_k)|\theta }$$$
+
+Since you suppose Gaussian distribution $$$N(\mu,\sigma)=\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}\cdot \frac{X-\mu}{\sigma^2} }$$$ as shape of population
+Put $$$X^K$$$ into $$$X$$$
+
+$$$\hat{\theta}
+=\arg_{\theta}\max \sum\limits_{k=1}^{N} \log{ \left( \frac{1}{\sqrt{2\pi}\sigma} \exp \left( -\frac{1}{2\sigma^2} (x_k-\mu) \right)^2 \right) }$$$
+
+Use $$$\log{[Ae^{-B}]}=\log{A}-B$$$
+
+$$$\hat{\theta}
+=\arg_{\theta}\max \sum\limits_{k=1}^{N} \left\{ \log{(\frac{1}{\sqrt{2\pi}\sigma})} - \frac{1}{2\sigma^2} (x_k-\mu)^2 \right\}$$$
+
+================================================================================
+Minimum or maximum are located in differentiation=0
+
+$$$\dfrac{\partial}{\partial \mu} \sum\limits_{k=1}^{N} \left\{ \log{(\frac{1}{\sqrt{2\pi}\sigma})} - \frac{1}{2\sigma^2} (x_k-\mu)^2 \right\}$$$
+
+================================================================================
+Conclusion:
+
+$$$\mu = \frac{1}{N} \sum\limits_{k=1}^{N} x_k$$$
+
+You induced above formula
+
+================================================================================
+When you deal with Univariate Gaussian, what you should find is $$$\mu$$$ for peak and $$$\sigma$$$ for width
+
+- PDF $$$p(x)=N(\mu,\sigma)$$$
+- Given data $$$X=\{x_1,x_2,\cdots,x_N\}$$$
+
+You goal is to inference parameters $$$\mu$$$ and $$$\sigma$$$ using MLE
+Since variable is 2; $$$\mu$$$ and $$$\sigma$$$, differentiation becomes gradient than differentiation
+
+================================================================================
+$$$\hat{\theta}= \begin{bmatrix} \theta_1=\mu\\\theta_2=\sigma^2 \end{bmatrix}$$$
+
+Perform gradient $$$\triangledown$$$ wrt $$$\theta_1$$$ and $$$\theta_2$$$
+
+$$$\triangledown_{\theta} \\
+= \begin{bmatrix} \frac{\partial}{\partial \theta_1} \sum\limits_{k=1}^{N} \log p(x_k|\theta)\\\frac{\partial}{\partial \theta_2} \sum\limits_{k=1}^{N} \log p(x_k|\theta) \end{bmatrix} \\
+= \begin{bmatrix} \frac{1}{\theta_2} (x_k-\theta_1)\\-\frac{1}{2 \theta_2} + \frac{(x_k-\theta_1)^2}{2\theta_2^2} \end{bmatrix} \\
+= 0$$$
+
+================================================================================
+Simplify above equation wrt $$$\theta_1$$$ and $$$\theta_2$$$
+
+$$$\hat{\theta_1} = \frac{1}{N} \sum\limits_{k=1}^{N} x_k$$$
+$$$\hat{\theta_2} = \frac{1}{N} \sum\limits_{k=1}^{N} (x_k - \hat{\theta_1})^2$$$
+
+================================================================================
+Conclusion:
+
+- Suppose shape of population is Gaussian distribution
+- Find best mean and variance of that Gaussian distribution by using MLE
+- You can induce mean and variance formulas
+
+================================================================================
+In the case of you deal with multivariate Gaussian distribution
+
+- Mean: mean vector
+- Variance: covariance matrix
+
+
+
+
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>

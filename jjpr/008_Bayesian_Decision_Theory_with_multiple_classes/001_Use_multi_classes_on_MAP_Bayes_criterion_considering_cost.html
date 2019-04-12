@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is note I wrote as I was take following lecture
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
+
+Use_multi_classes_on_MAP_Bayes_criterion_considering_cost
+
+================================================================================
+
+$$$P[\text{correct}] \\
+= \sum\limits_{i=1}^{C} P(\omega_i) \int_{R_i} P(x|\omega_i) dx \\
+= \sum\limits_{i=1}^{C} \int_{R_i} P(x|\omega_i) P(\omega_i) dx \\
+= \sum\limits_{i=1}^{C} \int_{R_i} P(\omega_i|x) P(x) dx$$$
+
+$$$P[\text{correct}]$$$: probability value of classifier correctly classifies multiple classes
+
+- $$$P(x|\omega_i)$$$: likelihood, PDF
+- $$$\int_{R_i} P(x|\omega_i) dx$$$: probability of P(x|\omega_i) being correct
+- $$$P(\omega_i)$$$: prior probability value, prior probability of 170 occurring from male group 
+and prior probability of 170 occurring from female group are different
+- $$$\sum\limits_{i=1}^{C}$$$: probability of class 1 is classified correctly + 
+probability of class 2 is classified correctly + ... + probability of class C is classified correctly
+
+================================================================================
+- $$$\sum\limits_{i=1}^{C} \int_{R_i} P(x|\omega_i) P(\omega_i) dx$$$: constant term $$$P(\omega_i)$$$ is inserted into integration
+
+================================================================================
+- Use Bayes rule:
+(Likelihood) $$$\times$$$ (Prior probability) = (Posterior probability) $$$\times$$$ (constant term)
+
+- For a reference,
+1. Joint probability: $$$P[A|B] = \frac{P[A\cap B]}{P[B]}$$$
+$$$P[B]P[A|B]=P[A\cap B]=P[A]P[B|A]$$$
+
+================================================================================
+To maximize $$$P[\text{correct}]$$$, each integration should be maximized from $$$\sum\limits_{i=1}^{C} \int_{R_i} P(\omega_i|x) P(x) dx$$$
+
+But P(x) is constant term.
+
+================================================================================
+/home/young/Pictures/2019_04_12_12:54:58.png
+
+$$$x$$$: given feature vector.
+$$$P(\omega_1|x)$$$: purple PDF, when x is given, probability of $$$\omega_1$$$ occuring
+
+See far left, when you integrate PDF wrt $$$\omega_2$$$ (red line), area is maximum,
+So, classify feature vectors in that area into $$$\omega_2$$$
+
+================================================================================
+- Suppose $$$\alpha_1$$$: decision which classifies feature vector into class $$$\omega_1$$$
+
+- $$$\alpha(x) \rightarrow \{\alpha_1, \alpha_2, \cdots, \alpha_C\}$$$:
+when feature vector x is given, selectable decisions are $$$\{\alpha_1, \alpha_2, \cdots, \alpha_C\}$$$
+
+================================================================================
+
+$$$R(\alpha(x)\rightarrow \alpha_i) \\
+= R(\alpha_i|x) \\
+= \sum\limits_{j=1}^{C} C_{ij} P(\omega_j|x)$$$
+
+- $$$R(\alpha_i|x)$$$: Bayes risk when x is given and when decision is $$$\alpha_i$$$
+- $$$P(\omega_j|x)$$$: posterior probability value
+- $$$C_{ij}$$$: cost value when i is classified into j
+
+================================================================================
+Apply above equation for all selectable decisions $$$\{\alpha_1, \alpha_2, \cdots, \alpha_C\}$$$
+
+$$$R(\alpha(x)) = \int R(\alpha(x)|x) P(x) dx$$$
+
+================================================================================
+/home/young/Pictures/2019_04_12_13:15:44.png
+
+Green line: risk function when classifier classifies feature vector x into class $$$\omega_3$$$ (decision $$$\alpha_3$$$)
+
+================================================================================
+Since y value is "risk", integration should be minimized
+
+================================================================================
+
+
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>
