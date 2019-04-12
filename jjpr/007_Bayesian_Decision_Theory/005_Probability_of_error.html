@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+When you use Bayes classifier against 2 number of classes,
+your goal is to separate feature space into 2 spaces; $$$R_1$$$, $$$R_2$$$
+based on their classes $$$\omega_1$$$, $$$\omega_2$$$
+
+================================================================================
+Error case is following
+
+- Bayes classifier incorrectly says given feature vector x (which is in class of $$$\omega_1$$$) is involved in $$$R_2$$$
+- Bayes classifier incorrectly says given feature vector x (which is in class of $$$\omega_2$$$) is involved in $$$R_1$$$
+
+================================================================================
+Above error cases are exclusive to each other, that is $$$\text{case1} \cap \text{case2} = \phi$$$
+
+So, you can use summation on probability values
+
+$$$P[\text{error}] \\
+=P[\text{error}|\omega_1]P[\omega_1]+P[\text{error}|\omega_2]P[\omega_2]+\cdots+P[\text{error}|\omega_i]P[\omega_i] \\
+=\sum\limits_{i=1}^{C} P[\text{error}|\omega_i] P[\omega_i]$$$
+
+================================================================================
+$$$P[\text{error}|\omega_i]=P[\text{choose } \omega_j|\omega_i] = \int_{R_j} P(x|\omega_i)dx$$$
+
+/home/young/Pictures/2019_04_12_08:56:07.png
+Center vertical line: decision line
+Colored area: probability of error that $$$x$$$ is classified into $$$R_1$$$
+
+================================================================================
+In conclusion, probability of error on 2 classes is following
+
+$$$P[\text{error}]=P[\omega_1] \int_{R_2} P(x|\omega_1) dx + P[\omega_2] \int_{R_1} P(x|\omega_2) dx$$$
+
+================================================================================
+Let's say
+$$$\int_{R_2} P(x|\omega_1) dx = \epsilon_1$$$
+$$$\int_{R_1} P(x|\omega_2) dx = \epsilon_2$$$
+
+/home/young/Pictures/2019_04_12_09:12:45.png
+
+================================================================================
+In any cases, minimum probability of error is obtained via LRT decision rule.
+
+Minimum probability of error which is obtained via LRT decision rule is called 
+Bayes Error Rate, and it becomes best classifier.
+
+================================================================================
+
+
+
+
+
+
+
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>

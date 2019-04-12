@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+================================================================================
+When you classify 2 products (one is expensive, one is cheap),
+if your classifier classifies expensive one to cheap one, customer doesn't make a complain.
+
+But your classifier classifies cheap one to expensive one, customer will make a complain.
+
+================================================================================
+That is, you should consider this scenario where cost happens when classifier makes mis-classification.
+
+================================================================================
+Let's call cost as $$$C_{ij}$$$
+
+$$$\text{Final Cost} \\
+= E[C] \\
+= \sum\limits_{i=1}^{2} \sum\limits_{j=1}^{2} C_{ij} \cdot P[\text{choose }\omega_i \text{ and } x\in \omega_j] \\
+= \sum\limits_{i=1}^{2} \sum\limits_{j=1}^{2} C_{ij} \cdot P[x\in R_i|\omega_j] \cdot P[\omega_j]$$$
+
+================================================================================
+Conclusion of this lecture:
+You can define "decision boundary" by using "minimizing Bayes risk"
+
+And that fact can be proved via Likelihood Rate Test (LRT)
+
+================================================================================
+$$$\frac{P(x|\omega_1)}{P(x|\omega_2)}  \;\; \frac{\overset{\omega_1}{>}}{\overset{<}{\omega_2}} \;\;   \frac{(C_{12}-C_{22})P[\omega_2]}{(C_{21}-C_{11})P[\omega_1]}$$$
+
+If likelihood ratio of $$$\omega_1$$$ and $$$\omega_2$$$ is greater than \frac{\text{prior probablity of \omega_1}}{\text{prior probablity of \omega_2}}
+you choose $$$\omega_1$$$
+
+If likelihood ratio of $$$\omega_1$$$ and $$$\omega_2$$$ is less than \frac{\text{prior probablity of \omega_1}}{\text{prior probablity of \omega_2}}
+you choose $$$\omega_2$$$
+
+Above one is LRT decision rule. 
+
+But cost constant term is added onto it.
+
+Then, it becomes decision boundary which minimizes Bayes risk
+
+================================================================================
+Example
+
+/home/young/Pictures/2019_04_12_11:06:07.png
+
+Red line: likelihood function of $$$\omega_1$$$ group
+Blue line: likelihood function of $$$\omega_2$$$ group
+
+$$$0$$$: mean value of $$$\omega_1$$$ group
+$$$2$$$: mean value of $$$\omega_2$$$ group
+
+$$$\sqrt{3}$$$: variance of $$$\omega_1$$$ group
+$$$1$$$: variance of $$$\omega_2$$$ group
+
+================================================================================
+/home/young/Pictures/2019_04_12_11:06:45.png
+
+$$$\omega_1$$$: class 1
+$$$\omega_2$$$: class 2
+$$$R_1$$$: region of class \omega_1
+$$$R_2$$$: region of class \omega_2
+
+================================================================================
+Suppose prior probability is same: $$$P[\omega_1]=P[\omega_2]=0.5$$$
+$$$C_{11}=C_{22}=0$$$: classify class 1 to class 1, classify class 2 to class 2, then, costs are 0
+$$$C_{12}=1$$$: classify class 1 to class 2, then, cost is 1
+$$$C_{21}=\sqrt{3}$$$: classify class 2 to class 1, then, cost is $$$\sqrt{3}$$$
+
+================================================================================
+Put values into following equation
+$$$\frac{P(x|\omega_1)}{P(x|\omega_2)}  \;\; \frac{\overset{\omega_1}{>}}{\overset{<}{\omega_2}} \;\;   \frac{(C_{12}-C_{22})P[\omega_2]}{(C_{21}-C_{11})P[\omega_1]}$$$
+
+$$$P(x|\omega_1)=\frac{1}{\sqrt{2\pi}\sqrt{3}} e^{-\frac{1}{2}\times \frac{x^2}{3}}$$$
+$$$P(x|\omega_2)=\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}\times (x-2)^2}$$$
+
+
+$$$\frac{\frac{1}{\sqrt{2\pi}\sqrt{3}} e^{-\frac{1}{2}\times \frac{x^2}{3}}}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}\times (x-2)^2}}  \;\; \frac{\overset{\omega_1}{>}}{\overset{<}{\omega_2}} \;\; \frac{1}{\sqrt{3}} $$$
+
+Simplify above equation, then, you get:
+$$$2x^2-12x+12 \;\; \frac{\text{if } > \text{ then you choose } \omega_1}{\text{if } < \text{ then you choose } \omega_2} \;\; 0 \Rightarrow x=4.73, 1.27$$$
+
+/home/young/Pictures/2019_04_12_11:21:10.png
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
