@@ -51,6 +51,12 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
+- Keywords:
+Normal distribution
+Central limit theorem
+The reason that gaussian distribution is much used
+Relationship between pattern of covariance and data's distribution
+
 ================================================================================
 Since Gaussian probability distribution is very much used,
 Gaussian probability distribution is also called Normal distribution
@@ -58,28 +64,30 @@ Gaussian probability distribution is also called Normal distribution
 ================================================================================
 The reason that Gaussian distribution is much used:
 
-- When you use 1D feature vector, 
-it is enough to find normal distribution with 2 paramters; mean $$$\mu$$$ and std $$$\sigma$$$
+- When you use 1D feature vector like $$$x=[170,160,180]$$$ representing height values
+it is enough to define normal distribution by using 2 paramters; mean $$$\mu$$$ and std $$$\sigma$$$
 
-- Due to central limit theorem, there are many cases where you need to use Gaussian distribution
+- Due to central limit theorem
+
+- There are many cases where you need to use Gaussian distribution
 
 ================================================================================
-central limit theorem
+Central limit theorem
 
 - Suppose mean $$$\mu$$$, variance $$$\sigma^2$$$ of population.
 
-- Since it's difficult to analyze entire population,
-you extract sample from population.
+- Since it's difficult to analyze entire population, you extract sample from population.
 
 - As size of sample becomes bigger and bigger, 
 that sample becomes data which has $$$\mu$$$ and $$$\frac{\sigma^2}{N}$$$
+which represent statistical values of population
 
 ================================================================================
 Example.
 
 - Suppose you want to predict average height of entire population.
 
-- You would extract sample.
+- You would extract sample (people).
 
 - Suppose you extract 1 person and you calculate average height of that person
 Then, you will get this distribution
@@ -137,7 +145,8 @@ $$$0$$$: correlation of data has none
 $$$\sigma^2 = \sigma^2$$$
 
 ================================================================================
-It also means that you can know the distribution of data by looking at the shape of covariance matrix
+It also means that you can predict the distribution of data 
+by looking at the shape of covariance matrix
 
 ================================================================================
 
