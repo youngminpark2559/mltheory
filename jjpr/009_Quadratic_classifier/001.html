@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is note I wrote as I was take following lecture
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
+
+================================================================================
+Various covariance matrix shape in Gaussian distribution makes various quadratic classifiers.
+
+================================================================================
+Shape of Gaussian distribution function is defined 
+by mean (location), std (width) when you deal with univariate random variable, 
+covariance (shape of distribution) when you deal with multivariate random variable
+
+================================================================================
+$$$\Sigma_i=\sigma^2 I = \begin{bmatrix} \sigma^2&&0&&0\\0&&\sigma^2&&0\\0&&0&&\sigma^2 \end{bmatrix}$$$
+
+(3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
+i: class like man and woman
+variances of classes are equal
+$$$\sigma^2$$$: variance of feature 1
+$$$\sigma^2$$$: variance of feature 2
+$$$\sigma^2$$$: variance of feature 3
+Distribution of data: in 3D, perfect shape of sphere
+
+Distribution of data which has 2 classes
+Size and shape are same
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:08:33.png' alt=''><xmp>
+
+================================================================================
+$$$\Sigma_i= \Sigma = \begin{bmatrix} \sigma_1^2&&0&&0\\0&&\sigma_2^2&&0\\0&&0&&\sigma_3^2 \end{bmatrix}$$$
+
+(3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
+i: class like man and woman
+variances of classes are equal
+$$$\sigma_1^2$$$: variance of feature 1
+$$$\sigma_2^2$$$: variance of feature 2
+$$$\sigma_3^2$$$: variance of feature 3
+$$$\sigma_1^2\ne \sigma_2^2 \ne \sigma_3^2$$$
+Variances of classes are equal but direction is different.
+In 2D,
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:09:33.png' alt=''><xmp>
+
+================================================================================
+$$$\Sigma_i= \Sigma = \begin{bmatrix} \sigma_1^2&&c_{12}&&c_{13}\\c_{12}&&\sigma_2^2&&c_{23}\\c_{13}&&c_{23}&&\sigma_3^2 \end{bmatrix}$$$
+
+(3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
+i: class like man and woman
+variances of classes are equal
+$$$\sigma_1^2$$$: variance of feature 1
+$$$\sigma_2^2$$$: variance of feature 2
+$$$\sigma_3^2$$$: variance of feature 3
+$$$\sigma_1^2\ne \sigma_2^2 \ne \sigma_3^2$$$
+Variances of classes are equal but direction is different.
+In 2D,
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:09:48.png' alt=''><xmp>
+
+================================================================================
+$$$\Sigma_i= \sigma_i^2 I = \begin{bmatrix} \sigma_i^2&&0&&0\\0&&\sigma_i^2&&0\\0&&0&&\sigma_i^2 \end{bmatrix}$$$
+
+Variances of classes are different.
+
+Distribution of data which has 3 classes
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:07:18.png' alt=''><xmp>
+
+Variance is different but shape (or direction) is same
+
+================================================================================
+General form.
+
+$$$\Sigma_i \ne \Sigma_j$$$
+
+Variance of classes are different.
+
+Data distribution which has 3 classes
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:11:06.png' alt=''><xmp>
+
+================================================================================
+Shape of decision boundary (as quadratic classifier) which classifies data will be various 
+based on distribution of data as you can see from above.
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
