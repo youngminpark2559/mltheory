@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+https://datascienceschool.net/view-notebook/86c3c9c806c14534bbbf58e5c31dbf09/
+
+================================================================================
+* When you know some of random variables in probabilistic model,
+you can find "other random variables"
+* And this finding is called "inference"
+
+================================================================================
+* Suppose you know conditional probability distribution function $$$p(X_{\text{unknown}}|\{X\}_{\text{known}})$$$
+* And suppose you know some of random variables $$$\{X\}_{\text{known}}$$$
+* Then, you can find probability $$$p(X_{\text{unknown}})$$$ of unknown random variables $$$X_{\text{unknown}}$$$
+* So, goal of inference is to find $$$p(X_{\text{unknown}}|\{X\}_{\text{known}})$$$
+
+================================================================================
+* Suppose there are 3 random variables A,B,C to the one student
+- A: health status
+- B: study time
+- C: test score
+
+* Each random variable can have $$$\{0,1,2\}$$$ representing low, medium, high
+
+================================================================================
+probabilistic graph model like Bayesian network and Markov network 
+uses "variable elimination" and "belief propagation" to perform inference
+
+================================================================================
+Variable elimination
+
+* You calculate probability distribution
+* from random variable which you already know along the network model
+
+================================================================================
+Belief propagation (message passing)
+
+* Belief propagation can be used for general network like linear chain markov network, etc
+
+================================================================================
+Joint probability in linear chain markov network
+where N number of random variable $$$X_1,\cdots,X_N$$$ is connected in chain
+
+$$$p(X_1, \ldots, X_N) = \dfrac{1}{Z}\psi(X_1, X_2) \psi(X_2, X_3) \cdots \psi(X_{N-1}, X_{N})$$$
+
+</xmp>
+   </BODY>
+</HTML>
