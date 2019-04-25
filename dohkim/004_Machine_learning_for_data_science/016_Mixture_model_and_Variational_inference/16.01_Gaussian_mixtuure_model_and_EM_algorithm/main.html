@@ -1,0 +1,327 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+https://datascienceschool.net/view-notebook/c2934b8a2f9140e4b8364b266b1aa0d8/
+
+================================================================================
+* Suppose categorical random variable Z.
+
+* Probability distribution function of Z is $$$p(z=k)=\pi_k$$$
+
+* Suppose random variable X which outputs real numbers.
+
+* Suppose when sample k of random variable Z varies,
+expectation value $$$\mu_k$$$ and variance $$$\Sigma_k$$$ of random variable X vary
+
+* $$$p(x|z) = \mathcal{N}(x|\mu_k,\Sigma_k)$$$
+
+* You can merge above ones.
+
+$$$p(x)$$$
+$$$= \sum\limits_Z p(z)p(x\mid z) $$$
+$$$= \sum\limits_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)$$$
+
+================================================================================
+* As sample k of K-class categorical random variable Z varies,
+random variable X can have multiple Gaussian normal distributions 
+which have different expectation and variance
+
+================================================================================
+* In Gaussian mixture model, you can't know value of categorical random variable Z.
+
+* A model which includes hidden random variable (like random variable Z) is called 
+"latent variable model"
+
+* Latent variable is categorical values in mixture model or real number in other model.
+
+================================================================================
+Bernouilli Gaussian mixture mdoel: category is 2
+
+================================================================================
+Gaussian mixture model which has
+
+(1) 2 categories
+(2) 2D Gaussian normal distribution
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_04_25_22:21:01.png' alt=''><xmp>
+
+================================================================================
+How to inference parameters of Gaussian mixture model
+
+* Inferencing parameters of Gaussian mixture model via data means
+you inference "probability distribution" of categorical distribution which can't be observed 
+and "parameters" of Gaussian normal distribution of each category 
+
+* The difficult part when you inference parameters of Gaussian mixture model 
+is that probability distribution function of Gaussian mixture model has complicated shape 
+where you can't easily find probability distribution function of Gaussian mixture 
+by using linear algebra method
+
+================================================================================
+Probability distribution of random variable X which has N number of data is as follow
+
+$$$p(x)$$$
+$$$=\prod\limits_{i=1}^N p(x_i)$$$
+$$$=\prod\limits_{i=1}^N \sum\limits_{z_i} p(x_i,z_i)$$$
+$$$=\prod\limits_{i=1}^N \sum\limits_{z_i} p(z_i)p(x_i\mid z_i)$$$
+$$$=\prod\limits_{i=1}^N \sum\limits_{k=1}^{K} \pi_k \mathcal{N}(x_i\mid \mu_k, \Sigma_k)$$$
+
+* You can use log
+$$$\log p(x) = \sum\limits_{i=1}^N \log \left( \sum\limits_{k=1}^{K} \pi_k \mathcal{N}(x_i\mid \mu_k, \Sigma_k) \right)$$$
+
+* You can find parameter values which make 0 on derivatives from above both equation
+
+================================================================================
+* If you know which category $$$z_i$$$ data $$$x_i$$$ is involved in,
+you can collect all data $$$x_i$$$ in same category $$$z_i$$$
+and you can find categorical probability distribution $$$\pi_k$$$
+and you can find parameters $$$\mu_k$$$ and $$$\Sigma_k$$$ of Gaussian normal distribution
+
+* However, you can't know category $$$z_i$$$ which data $$$x_i$$$ has.
+So, you should find $$$\pi_k, \mu_k, \Sigma_k$$$ which maximize p(x) 
+by using non-linear optimization
+
+* In network graphical probabilistic model perspective,
+this is simple model where random varialbe $$$Z_i$$$ affect random variable $$$X_i$$$
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_04_25_22:44:07.png' alt=''><xmp>
+
+* But, $$$Z_i$$$ affects $$$X_i$$$ sequentially from 1 to N
+So, you should express like this
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_04_25_22:44:57.png' alt=''><xmp>
+
+* Above graph can be expressed as following panel model
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_04_25_22:45:30.png' alt=''><xmp>
+
+================================================================================
+EM (Expectation-Maximization)
+
+
+* When you inference parameters of mixture model,
+conditional probability p(z|x) is important, 
+which shows that data in involved in which category
+
+* Conditional probability p(z|x) which is used for this case is called "responsibility"
+
+* Responsibility $$$\pi_{ik}$$$ is written as follow
+$$$\pi_{ik} \\
+=p(z_i=k\mid x_i) \\
+=\dfrac{p(z_i=k)p(x_i\mid z_i=k)}{p(x_i)} \\
+=\dfrac{p(z_i=k)p(x_i\mid z_i=k)}{\sum\limits_{k=1}^K p(x_i,z_i=k)} \\
+=\dfrac{p(z_i=k)p(x_i\mid z_i=k)}{\sum\limits_{k=1}^K p(z_i=k)p(x_i\mid z_i=k)}$$$
+
+* Responsibility $$$\pi_{ik}$$$ for Gaussian mixture model is written as follwo
+$$$\pi_{ik} = \dfrac{\pi_k \mathcal{N}(x_i\mid \mu_k, \Sigma_k)}{\sum\limits_{k=1}^K \pi_k \mathcal{N}(x_i\mid \mu_k, \Sigma_k)}$$$
+
+================================================================================
+* Above equation inferences responsibility $$$\pi_{ik}$$$ from parameters $$$\pi_k,\mu_k,\Sigma_k$$$
+
+* $$$\pi_{ik}$$$ means the probability of that ith data $$$x_i$$$ is created from category k
+
+================================================================================
+* Now, you will maximize log-joint probability distribution function
+
+* First, you perform differentiation by $$$\mu_k$$$ to create equation
+$$$0 = - \sum\limits_{i=1}^N \dfrac{p(z_i=k)p(x_i\mid z_i=k)}{\sum\limits_{k=1}^K p(z_i=k)p(x_i\mid z_i=k)} \Sigma_k (x_i - \mu_k )$$$
+
+================================================================================
+* You will simplify it
+$$$\sum\limits_{i=1}^N \pi_{ik} (x_i - \mu_k ) = 0 $$$
+
+$$$\mu_k = \dfrac{1}{N_k} \sum\limits_{i=1}^N \pi_{ik} x_i$$$
+
+================================================================================
+Blah blah blah it's complicated to inference parameters using simultaneous equations
+
+================================================================================
+* So, you can use iterative method called EM
+
+* EM inferences "parameter" and "responsibility" in turn with increasing precision
+
+================================================================================
+E step
+
+* you assume parameters you know are precise.
+So, you inference responsibility (representing data is involved in which category) 
+by using assumed parameters
+
+$$$(\pi_k,\mu_k,\Sigma_k) \Rightarrow \pi_{ik}$$$
+
+================================================================================
+M step
+
+* you assume responsibility you know is precise.
+So, you inference parameters of Gaussian mixture model by using assumed responsibility
+
+$$$\pi_{ik} \Rightarrow (\pi_k,\mu_k,\Sigma_k)$$$
+
+================================================================================
+If you iterate above one, you can make parameter and responsibility better gradually
+
+================================================================================
+K-means clustering $$$\subset$$$ EM
+
+Each data has responsibilities
+You should find category which has largest responsibility
+That responsibility lets you know data is involved in which category
+$$$k_i=\arg_k \max \pi_{ik}$$$
+
+If you know category, you can do clustering on data
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_04_25_23:39:57.png' alt=''><xmp>
+
+================================================================================
+General EM algorithm
+
+* EM algorithm inferences probability distribution p(x)
+when there is "random variable x"
+which is dependent on latent random variable z
+and when latent random variable z is not observable
+but random variable x is observable
+
+* But you should assume you know conditional probability distribution $$$p(x|z,\theta)$$$
+which is defined by $$$\theta$$$ via network probabilistic model
+
+* In the case of mixture model, z is discrete random variable
+
+* So, following is true
+
+$$$p(x \mid  \theta) = \sum\limits_z p(x, z \mid  \theta) = \sum\limits_z q(z) p(x\mid z, \theta)$$$
+
+================================================================================
+Goal of EM algorithm
+
+* You should find "probability distribution $$$q(z)$$$ of latent random variable",
+and "$$$\theta$$$", which maximizes likelihood $$$p(x|\theta)$$$ of given data x
+
+================================================================================
+* First, you should prove following equation
+$$$\log p(x) \\
+= \sum\limits_z q(z) \log \left(\dfrac{p(x, z \mid  \theta)}{q(z)}\right) -
+\sum\limits_z q(z) \log \left(\dfrac{p(z\mid x,  \theta)}{q(z)}\right)$$$
+
+================================================================================
+* Proof
+$$$\sum\limits_z q(z) \log \left(\dfrac{p(x, z \mid  \theta)}{q(z)}\right) \\
+=\sum\limits_z q(z) \log \left(\dfrac{p(z \mid  x, \theta)p(x \mid  \theta)}{q(z)}\right) \\
+=\sum\limits_z \left( q(z) \log \left(\dfrac{p(z \mid  x, \theta)}{q(z)}\right) + q(z) \log p(x \mid  \theta) \right) \\
+=\sum\limits_z  q(z) \log \left(\dfrac{p(z \mid  x, \theta)}{q(z)}\right) + \sum\limits_z q(z) \log p(x \mid  \theta)  \\
+=\sum\limits_z  q(z) \log \left(\dfrac{p(z \mid  x, \theta)}{q(z)}\right) + \log p(x \mid  \theta)$$$
+
+================================================================================
+* From following proven equation,
+$$$\log p(x) \\
+= \sum\limits_z q(z) \log \left(\dfrac{p(x, z \mid  \theta)}{q(z)}\right) -
+\sum\limits_z q(z) \log \left(\dfrac{p(z\mid x,  \theta)}{q(z)}\right)$$$
+
+* You will write $$$L(q,\theta)$$$ and $$$KL(q|p)$$$
+$$$L(q, \theta) = \sum_z q(z) \log \left(\dfrac{P(x, z \mid  \theta)}{q(z)}\right)$$$
+
+$$$KL(q \mid  p) = -\sum_z q(z) \log \left(\dfrac{p(z\mid x,  \theta)}{q(z)}\right)$$$
+
+$$$\log p(x) = L(q, \theta) + KL(q \mid  p)$$$
+
+================================================================================
+* $$$L(q,\theta)$$$ is "functional" which outputs "number" 
+when $$$L(q,\theta)$$$ is given by distribution function $$$q(z)$$$
+ 
+================================================================================
+* KL(q|p) is kullback leibler divergence 
+which shows difference between "probability distribution function $$$q(z)$$$" 
+and "probability distribution function $$$p(z|x,\theta)$$$" 
+
+* KL-divergence $$$\ge$$$ 0
+
+* Therefore, L(q,\theta) is lower bound of $$$\log{p(x)}$$$
+
+* So, L is called ELBO (evidence lower bound)
+$$$\log{p(x)} \ge L(q,\theta)$$$
+
+* Conversely, $$$\log{p(x)}$$$ is upper bound of $$$L(q,\theta)$$$
+
+================================================================================
+* If you maximize $$$L(q,\theta)$$$, $$$\log{p(x)}$$$ is maximized
+
+* EM algorithm finds $$$q$$$ and $$$\theta$$$ values in turn and by iterative method,
+to maximize $$$L(q,\theta)$$$
+
+================================================================================
+* EM algorithm
+
+(1) E step
+* You fix $$$\theta$$$ to $$$\theta_{\text{old}}$$$
+* You find $$$q_{\text{new}}$$$ which maximizes $$$L(q_{\text{old}},\theta_{\text{old}})$$$
+* If you can find correct $$$q_{\text{new}}$$$, 
+$$$L(q_{\text{new}},\theta_{\text{old}})$$$ becomes equal to upper bound $$$\log{p(x)}$$$
+* That is, $$$KL(q_{\text{new}}|p)$$$ becomes 0
+
+$$$L(q_{\text{new}},\theta_{\text{old}})=\log{p(x)}$$$
+$$$KL(q_{\text{new}}|p)=0$$$
+$$$q_{\text{new}}=p(z|x,\theta_{\text{old}})$$$
+
+================================================================================
+(2) M step
+* You fix $$$q$$$ to current function $$$q_{\text{new}}$$$
+* You find $$$\theta_{\text{new}}$$$ which maximizes $$$L(q_{\text{new}},\theta)$$$
+* Since you performed maximization, 
+$$$L(q_{\text{new}},\theta_{\text{new}})$$$ becomes larger than previous value
+$$$L(q_{\text{new}},\theta_{\text{new}}) > L(q_{\text{new}},\theta_{\text{old}})$$$
+* And since $$$p(Z|X,\theta_{\text{new}})$$$ becomes different from previous value $$$p(Z|X,\theta_{\text{old}})$$$ 
+$$$q_{\text{new}}$$$ also becomes different to $$$p(Z|X,\theta_{\text{new}})$$$
+* Then, KL-divergence becomes larger than 0
+* $$$q_{\text{new}} \ne p(Z|X,\theta_{\text{new}})$$$
+$$$KL(q_{\text{new}}|p) > 0$$$
+
+</xmp>
+   </BODY>
+</HTML>
