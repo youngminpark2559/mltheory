@@ -51,29 +51,17 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
-
 ================================================================================   
 Expectation value: average of random variable
 
 ================================================================================
-Suppose there is data.
-
-You can obtain parameters as statistical characteristics from that data.
-
-Parameters as statistical characteristics is called "sample characteristics"
-when you deal with sample.
-
-================================================================================
-When you deal with characteristics of probability distribution,
-it's called as model or characteristics of universal population.
-
-================================================================================
 Sample data's average: $$$\bar{x}$$$
 Sample data's variance: $$$s^2$$$
-which are not "population's characteristics" but prediction for characteristics of population.
+which are not "population's characteristics" 
+but they're prediction for characteristics of population.
 
-Universal population's average: $$$\mu$$$
-Universal population's variance: $$$\sigma^2$$$
+Population's average: $$$\mu$$$
+Population's variance: $$$\sigma^2$$$
 
 ================================================================================
 $$$\bar{x} \\
@@ -90,41 +78,35 @@ Best proper value you can expect from random variable X
 
 ================================================================================
 In the case of where you use continuous random variable
+
 $$$E[X]=\mu=\int_{-\infty}^{\infty} xf_x(x)dx$$$
 
 ================================================================================
-Discrete random variable
+Variance of discrete random variable
 
-- Sample data
-$$$s^2
-= \frac{1}{n-1} \sum\limits_{i=1}^n (x_i-\bar{x})^2
+* Variance of sample
+$$$s^2 \\
+= \frac{1}{n-1} \sum\limits_{i=1}^n (x_i-\bar{x})^2 \\
 = \sum\limits_{\text{all x}} (x-\bar{x})^2 \frac{n_x}{n-1}$$$
-where, $$$\frac{n_x}{n-1}$$$ is relative frequency
+* $$$\frac{n_x}{n-1}$$$: relative frequency
 
-- Population data
+* Variance of population
 $$$\sigma^2
 = \sum\limits_{\text{all x}} (x-\mu)^2 p(x)$$$
 
 ================================================================================
-Continuous random variable
+Variance of continuous random variable
 
-- Sample data
-$$$Var[X]
-= E[(X-E[X])^2]
+* Variance of sample
+$$$Var[X] \\
+= E[(X-E[X])^2] \\
 = \int_{-\infty}^{\infty}(x-\mu)^2 f_X(x)dx$$$
-where, $$$\frac{n_x}{n-1}$$$ is relative frequency
+* $$$\frac{n_x}{n-1}$$$: relative frequency
 
-- Population data
+* Variance of population
 $$$STD[X] = Var[X]^{\frac{1}{2}}$$$
 
 ================================================================================
-
-
-
-
-
-
-
 
 </xmp>
    </BODY>
