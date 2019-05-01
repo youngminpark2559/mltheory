@@ -52,153 +52,147 @@ MathJax.Hub.Config({
 
 <xmp>
 /mnt/1T-5e7/mycodehtml/ML_theory/PRJJ/006_Random_variable_Probability_distribution/001.html
-================================================================================
-Probability value of 3 occuring when you roll a dice is $$$P(X=3)=\dfrac{1}{6}$$$
-
-P(X=3): probabilty value of X having 3
 
 ================================================================================
-Radom variable is function.
+What is the probability?
 
-</xmp>
-<!-- 1=random_variable_function(throw_a_dice)
-2=random_variable_function(throw_a_dice)
-...
-6=random_variable_function(throw_a_dice) -->
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">=</span>random_variable_function(throw_a_dice)
-<span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">=</span>random_variable_function(throw_a_dice)
-<span style="color: #333333">...</span>
-<span style="color: #0000DD; font-weight: bold">6</span><span style="color: #333333">=</span>random_variable_function(throw_a_dice)
-</pre></div>
-<xmp>
+Let's see probabilty as distribution state
+
+So, you should know what is the probability distribution
+
+Before that, you should know what is the random variable
 
 ================================================================================
-/home/young/Pictures/2019_04_07_18:23:30.png
+* $$$P(X=3)=\dfrac{1}{6}$$$
+
+* Probability of 3 occurring when you roll the dice
+* Probability of random variable X having 3 when you roll the dice
+
+================================================================================
+* Radom variable is function
+
+1=random_variable_function(trial_result_by_rolling_a_dice)
+2=random_variable_function(trial_result_by_rolling_a_dice)
+# ...
+6=random_variable_function(trial_result_by_rolling_a_dice)
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_07_18:23:30.png' alt=''><xmp>
 
 $$$S$$$: sample space
-$$$\zeta$$$: result from trial.
+$$$\zeta$$$: result from trial
 $$$X()$$$: random variable
 $$$x$$$: real number
 
 ================================================================================
-</xmp>
-<!-- discrete_numbers_like_integers=discrete_random_variable(result_from_trials)
+discrete_numbers_like_integers=discrete_random_variable(result_from_trials)
 
-continuous_numbers_like_real_numbers=continuous_random_variable(result_from_trials) -->
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">discrete_numbers_like_integers<span style="color: #333333">=</span>discrete_random_variable(result_from_trials)
-
-continuous_numbers_like_real_numbers<span style="color: #333333">=</span>continuous_random_variable(result_from_trials)
-</pre></div>
-<xmp>
+continuous_numbers_like_real_numbers=continuous_random_variable(result_from_trials)
 
 ================================================================================
-Results which can be assigned into random variable will have some distribution.
+Results from trial which can be assigned into random variable will have some distribution.
 
-Some result occurs more often, some occurs more less.
+For example, some result occurs more often (that result has high probability value), 
+some occurs more less (that result has low probability value).
 
 Probability values which are assigned to each result can have some distribution or pattern.
 That pattern is called probability distribution.
 
 ================================================================================
-</xmp>
-<!-- probability_value=probability_distribution_function(result_from_trial) -->
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">probability_value<span style="color: #333333">=</span>probability_distribution_function(result_from_trial)
-</pre></div>
-<xmp>
+probability_value=probability_distribution_function(result_from_trial)
 
 ================================================================================
-/home/young/Pictures/2019_04_07_18:31:59.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_07_18:31:59.png' alt=''><xmp>
 
-Suppose results from rolling a dice trial is: 0,1,2
-
-X: random variable
-
-</xmp>
-<!-- 0=random_variable_X(case_where_you_got_zero)
-1=random_variable_X(case_where_you_got_one)
-2=random_variable_X(case_where_you_got_two) -->
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">=</span>random_variable_X(case_where_you_got_zero)
-<span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">=</span>random_variable_X(case_where_you_got_one)
-<span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">=</span>random_variable_X(case_where_you_got_two)
-</pre></div>
-<xmp>
+0=random_variable_X(trial_result_from_rolling_a_dice)
+1=random_variable_X(trial_result_from_rolling_a_dice)
+2=random_variable_X(trial_result_from_rolling_a_dice)
 
 ================================================================================
-P(): probability distribution function
-</xmp>
-<!-- 1/4=probability_distribution_function(0)
+1/4=probability_distribution_function(0)
 1/2=probability_distribution_function(1)
-1/4=probability_distribution_function(2) -->
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">/</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">=</span>probability_distribution_function(<span style="color: #0000DD; font-weight: bold">0</span>)
-<span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">/</span><span style="color: #0000DD; font-weight: bold">2</span><span style="color: #333333">=</span>probability_distribution_function(<span style="color: #0000DD; font-weight: bold">1</span>)
-<span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">/</span><span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">=</span>probability_distribution_function(<span style="color: #0000DD; font-weight: bold">2</span>)
-</pre></div>
-<xmp>
+1/4=probability_distribution_function(2)
+
+1/4,1/2,1/4: probability distribution
 
 ================================================================================
-Various probability distribution functions (CDF, PDF, PMF)
-
-cumulitive (probability) distribution function: CDF, $$$F_X(x)$$$, $$$P[X\le x]$$$ for $$$-\infty < x < \infty$$$
-
-X: random variable
+Probability distribution functions: CDF, PDF, PMF
 
 ================================================================================
-/home/young/Pictures/2019_04_07_18:40:59.png
+Cumulitive (probability) distribution function: 
+
+* $$$F_X(x) = P[X\le x]$$$
+* for $$$-\infty < x < \infty$$$
+* $$$X$$$: random variable
+
+================================================================================
+If x=80kg, possible $$$X=10,20,\cdots,79.999$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_07_18:40:59.png' alt=''><xmp>
 
 CDF deals with probability values of X is less than 100, 200, etc
 
 ================================================================================
 Characteristics of cumulitive distribution function
 
-- $$$0\le F_X(x) \le 1$$$
+* $$$0\le F_X(x) \le 1$$$
 
-- $$$\lim\limits_{x\to\infty} F_X(x)=1$$$
+* $$$\lim\limits_{x\to\infty} F_X(x)=1$$$
 
-- $$$\lim\limits_{x\to-\infty} F_X(x)=0$$$
+* $$$\lim\limits_{x\to-\infty} F_X(x)=0$$$
 
-- $$$F_X(a)\lt F_X(b)$$$, if $$$a\le b$$$
-
-================================================================================
-/home/young/Pictures/2019_04_07_18:45:49.png
-
-1. When you use continuous random variable
-2. When you use discrete random variable
+* $$$F_X(a) \le F_X(b)$$$, if $$$a\le b$$$
 
 ================================================================================
-probability_density_function: PDF, $$$f_X(x)$$$, continuous randome variable
-You perform differentiation on cumulitive distribution function F_X(x) 
-where X is continuous random variablee, and you get PDF
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_07_18:45:49.png' alt=''><xmp>
 
-$$$f_X(x)=\frac{d}{dX} F_X(x)$$$
+1. continuous_values=continuous_random_variable(trial_result)
+2. discrete_values=discrete_random_variable(trial_result)
 
-PDF $$$\simeq$$$ probability_mass_function: PMF, discrete randome variable
+================================================================================
+prob_value=probability_density_function(continuous_value_from_RV)
+
+prob_value=probability_mass_function(discrete_value_from_RV)
+
+================================================================================
+PDF
+
+* $$$f_X(x)$$$
+* X: continuous randome variable
+* $$$f_X(x)=\frac{d}{dX} F_X(x)$$$
+
+================================================================================
+PDF $$$\simeq$$$ PMF
+
 $$$f_X(x)=\frac{\Delta F_X(x)}{\Delta X}$$$
 
-because discrete variable can be differentiated you use $$$\Delta$$$ than d
+because discrete variable can be differentiated, you use $$$\Delta$$$ than d
 
 ================================================================================
-- $$$f_X(x)>0$$$
+* $$$f_X(x)>0$$$
 
-- $$$P[a\lt x \lt b] = \int_a^b f_X(x)dx$$$
+* $$$P[a\lt x \lt b] = \int_a^b f_X(x)dx$$$
 
-- $$$F_X(x)=\int_{-\infty}^{\infty} f_X(x)dx$$$
+* $$$F_X(x)=\int_{-\infty}^{\infty} f_X(x)dx$$$
 
-- $$$1=\int_{-\infty}^{\infty} f_X(x) dx$$$
+* $$$1=\int_{-\infty}^{\infty} f_X(x) dx$$$
 
-- $$$f_X(x|A)=\dfrac{d}{dx}F_X(x|A)$$$ where $$$F_X(x|A)=\dfrac{P[\{X\lt x\}\cap A]}{P[A]}$$$ if $$$P[A]>0$$$
+* $$$f_X(x|A)=\dfrac{d}{dx}F_X(x|A)$$$ where $$$F_X(x|A)=\dfrac{P[\{X\lt x\}\cap A]}{P[A]}$$$ if $$$P[A]>0$$$
 
 ================================================================================
 Meaning of probability density function
 
-/home/young/Pictures/2019_04_07_19:17:14.png
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_07_19:17:14.png' alt=''><xmp>
 
-What you deal with is probability than probability density
+What you deal with is probability value itself than probability density
 
-But actually and mathematically, 
-only probability density exists in probability density function
-because you deal with continuous random variable X
+But mathematically, it's fair to say 
+that only probability density exists in probability density function
+because you deal with "continuous" random variable X
 
-And you integrate some interval on that probability density, it becomes probability
+You cap perform integration in interval on that probability density, 
+then, result of integration becomes probability
 
 ================================================================================
 In case of probability mass function, function becomes probability itself.
