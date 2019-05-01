@@ -51,90 +51,132 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
-- Bayes_theorem
-================================================================================
-- When independent $$$B_1, B_2, \cdots, B_N$$$ consists of sample space S,
-and when event A (which is composed of partial Bs) occurs in S,
-what probability value of A occuring will be?
-
-- In previous lecture, you've heard that an event A can occur from sum of multiple partial Bs.
-
-So, you can start to consider in which B event A occurs.
-That question is the topic of the Bayes theorem, which is written as: $$$P[B_j|A]$$$
-
-$$$P[B_j|A]$$$: when event A had been occured, the probability value of "$$$A$$$ had occured in $$$B_j$$$"
-
-- You can use conditional probability: $$$P[B_j|A]=\dfrac{P[A\cap B_j]}{P[A]}$$$
-
-- In previous lecture, probability value of A occuring could be written as:
-$$$P[A]=\sum\limits_{k=1}^N P[A|B_k]P[B_k]$$$
-
-- You already know that $$$P[A\cap B]=P[A|B]P[B]$$$
-
-- Therefore, finally you can write:
-
-$$$P[B_j|A] = \dfrac{P[A|B_j]P[B_j]}{\sum\limits_{k=1}^N P[A|B_k]P[B_k]}$$$
-
-- Above theorem is called Bayes theorem.
+* Bayes_theorem
 
 ================================================================================
-Let's try to see Bayes theorem in terms of pattern recognition.
-
-$$$P[\omega_j|x]
-= \dfrac{P[x|\omega_j]P[\omega_j]}{\sum\limits_{k=1}^N P[x|\omega_k]P[\omega_k]}
-= \dfrac{P[x|\omega_j]P[\omega_j]}{P[x]}$$$
-
-$$$w_j$$$: jth class, like $$$\omega_1=\text{male}$$$, $$$\omega_2=\text{female}$$$
-$$$x$$$: feature vector, particular each pattern, like $$$x_1=[170,60]$$$, $$$x_2=[160,50]$$$
-$$$P[\omega_j]$$$: prior probability of "class $$$\omega_j$$$" occuring
-$$$P[\omega_j|x]$$$: when observation x is given, posterior probability of $$$\omega_j$$$
-$$$P[x|\omega_j]$$$: likelihood, conditional probability value of observation event x occuring when class $$$\omega_j$$$ is given
+Bayes theorem is equation which is simplified version from conditional probability 
+to use Bayes theorem for pattern recognition
 
 ================================================================================
-Goal you would ultimately like to solve: $$$P[\omega_j|x]$$$
-when patern (or feature vector) is given, that pattern is involed into which class $$$\omega$$$?
+* $$$B_1, B_2, \cdots, B_N$$$: events which consists of sample space S
+* $$$B_1, B_2, \cdots, B_N$$$: independent to each other
 
-Bayes theorem says, to know $$$P[\omega_j|x]$$$, you first should know 
-1. $$$P[x]$$$: probability value of pattern $$$x$$$ occuring
+* Event A is composed of multiple events of B
+
+* Question: when event A occured, probability of A occurring in event $$$B_j$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_05_01_11:04:10.png' alt=''><xmp>
+
+* S: sample space
+* S is composed of multiple events Bs
+* A: set of event
+* when A occured, A occurred from $$$B_1$$$ or $$$B_2$$$ or?
+
+================================================================================
+* Bayes theorem is expression of above situation
+
+* $$$P[B_j|A] \;\;\;\; (1) \\
+= \dfrac{P[A\cap B_j]}{P[A]} \;\;\;\; (2) \\
+= \dfrac{P[A|B_j]P[B_j]}{\sum\limits_{k=1}^N P[A|B_k]P[B_k]} \;\;\;\; (3)$$$
+
+* $$$P[B_j|A]$$$: conditional probability
+when event A occured, the probability value of "$$$A$$$ occured from $$$B_j$$$"
+
+* (1) -> (2): conditional probability 
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_05_01_11:13:19.png' alt=''><xmp>
+
+* Law of total probability of event A:
+$$$P[A] \\
+= P[A|B_1]P[B_1] + \cdots + P[A|B_N]P[B_N] \\
+= \sum\limits_{k=1}^N P[A|B_k]P[B_k]$$$
+
+================================================================================
+In (3), you replace $$$P[A]$$$ with $$$\sum\limits_{k=1}^N P[A|B_k]P[B_k]$$$
+
+================================================================================
+In (3), according to following conditional probability theorem,
+$$$P[A\cap B_j] \\
+= P[A|B_j]P[B_j] \\
+= P[B_j|A]P[A]$$$
+
+you can replace $$$P[A\cap B_j] with P[A|B_j]p[B_j]$$$
+
+================================================================================
+* Let's see Bayes theorem in terms of pattern recognition.
+
+* $$$P[\omega_j|x] \;\;\;\; (1) \\
+= \dfrac{P[x|\omega_j]P[\omega_j]}{\sum\limits_{k=1}^N P[x|\omega_k]P[\omega_k]} \;\;\;\; (2) \\
+= \dfrac{P[x|\omega_j]P[\omega_j]}{P[x]} \;\;\;\; (3) $$$
+
+* $$$w_j$$$: jth class, like $$$\omega_1=\text{male}$$$, $$$\omega_2=\text{female}$$$
+
+* $$$x$$$: feature vector, like weight data $$$x_1=[70,60]$$$, $$$x_2=[40,50]$$$
+* $$$P[\omega_j]$$$: prior probability of "class $$$\omega_j$$$" occuring
+
+* $$$P[\omega_j|x]$$$: posterior probability of $$$\omega_j$$$ wrt feature vector x
+when feature vector x occurred, probability of feature vector x occurring from class $$$\omega_j$$$
+
+* $$$P[x|\omega_j]$$$: likelihood, 
+when class \omega_j occurred, probability of x occurring from $$$\omega_j$$$
+
+================================================================================
+* Goal you would ultimately like to solve: $$$P[\omega_j|x]$$$
+when feature vector x is given, which class $$$\omega_j$$$ has that feature vector x? 
+
+* You will get probability values on each class
+$$$\omega_{\text{male}}=0.7$$$
+$$$\omega_{\text{female}}=0.3$$$
+
+* You can decide class is $$$\omega_{\text{male}}$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_05_01_11:32:36.png' alt=''><xmp>
+
+* To know $$$P[\omega_j|x]$$$ by using Bayes theorem, you should know followings:
+
+1. $$$P[x]$$$: probability value of feature vector x occurs
 2. $$$P[\omega_j]$$$: probability value of each class occuring
-3. $$$P[x|\omega_j]$$$: probability value of pattern x occuring from given class $$$\omega_j$$$
-according to 
-$$$P[\omega_j|x]
-= \dfrac{P[x|\omega_j]P[\omega_j]}{\sum\limits_{k=1}^N P[x|\omega_k]P[\omega_k]}
-= \dfrac{P[x|\omega_j]P[\omega_j]}{P[x]}$$$
+3. $$$P[x|\omega_j]$$$: probability value of feature vector x occuring 
+from given class $$$\omega_j$$$
 
 ================================================================================
-It means if you know those 3 things, you can find your ultimate goal $$$P[\omega_j|x]$$$
+1. $$$P[\omega_j]$$$: prior probability of $$$\omega_j$$$
+probability value of class $$$\omega_j$$$ occuring
 
-Since those 3 things (+posterior probability) are important, 
-you name them as you saw from above.
+2. $$$P[\omega_j|x]$$$: posterior probability of  $$$\omega_j$$$ wrt feature vector x
+after you've got feature vector x, 
+probability value of "x came from class $$$\omega_j$$$"
 
-As a review,
-1. $$$P[\omega_j]$$$: probability value of class $$$\omega_j$$$ occuring, prior probability of $$$\omega_j$$$
-Why should you call $$$P[\omega_j]$$$ as prior probability?
-It's because you should call $$$P[\omega_j|x]$$$ as posterior probability
+3. $$$P[x|\omega_j]$$$: likelihood,
+probability value of x occuring when $$$\omega_j$$$ is given
+For example, probability of height feature vector [170,180] occuring from class male 
+and probability of height feature vector [160,162] occuring from class female are different.
 
-2. $$$P[\omega_j|x]$$$: after you've got pattern x, probability value of "x came from class $$$\omega_j$$$"
-It's posterior because it deals with problem after "event" already happened.
+Probability values of feature vector occuring are different per class.
 
-3. $$$P[x|\omega_j]$$$: probability value of x comes from $$$\omega_j$$$
-For example, probability of patttern [170,60] occuring from class male 
-and probability of patttern [170,60] occuring from class female are different.
-
-Probability values of pattern occuring are different per class.
-
-4. P[x]: probability value of given pattern x occuring, non-influencial,
-which is used for normalization as normalization constant term.
+4. P[x]: probability value of given pattern x occuring, 
+non-influencial to the classification,
+which is used as normalization constant term.
 
 ================================================================================
-Pattern recognition using Bayes theorem
+* Pattern recognition using Bayes theorem
+
+* With constant term
 $$$\text{posterior probability}=\dfrac{\text{likelihood}\times \text{prior probability}}{\text{normalization term}}$$$
 
-================================================================================
-Example - law of the total probability
+* Without constant term
+$$$\text{posterior probability}=\text{likelihood} \times \text{prior probability}$$$
 
 ================================================================================
-Example - Bayes theorem
+Example 
+* law of the total probability
+
+================================================================================
+Example 
+* Bayes theorem
 
 ================================================================================
       
