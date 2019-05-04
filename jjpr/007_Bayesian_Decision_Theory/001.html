@@ -64,65 +64,79 @@ Covariance
 ================================================================================
 Univariate Gaussian probability density function.
 
-When you use "discrete random variable" for cumulitive distribution function,
-derivative of cumulitive distribution function becomes "probability mass function".
+# When you use discrete random variable
+discrete_values=discrete_random_variable(result_from_trials)
+prob_values=cumulitive_distribution_func(discrete_values)
 
-When you use "continuous random variable" for cumulitive distribution function,
-derivative of cumulitive distribution function becomes "probability density function".
+probability_mass_func=defferentiation(cumulitive_distribution_func)
+
+# When you use continuous random variable
+continuous_values=continuous_random_variable(result_from_trials)
+prob_values=cumulitive_distribution_func(continuous_values)
+
+probability_density_func=defferentiation(cumulitive_distribution_func)
 
 ================================================================================
 When you deal with continuous random variable in your statistical project,
 how can you give values to other people?
 
-For example, will you give all continuous x values and its y probability values like this?
-x=-1 -> probability value 0.3
-x=0 -> probability value 0.2
-x=1 -> probability value 0.3
-...?
+continuous_values=continuous_random_variable(result_from_trials)
+continuous_prob_vals=probability_density_func(continuous_values)
 
-Giving infinite continuous x values and its y probability values manually is not possible 
+$$$-\infty<$$$ continuous_prob_vals $$$< \infty$$$
 
 ================================================================================
-That's the reason why you need a formula.
+* Question: how can you hand in continuous_prob_vals to other people 
+because it's too many?
+
+* You actually can't do it.
+
+* You should hand in "equation" to other people, which can generate continuous_prob_vals
+
+* Predefined equations are like Gaussian normal distribution, bernoulli distribution, dirichlet distribution, etc
 
 ================================================================================
-Functions which represent "probability density" can have various and arbitrary shapes.
+* Functions which can represent "probability density or probability distribution" can have various and arbitrary shapes.
 
-But practically, many cases have pattern-based probability distribution like this
+* But practically, in real world problems, many cases have pattern-based probability distribution like this
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_07:45:58.png' alt=''><xmp>
 
 ================================================================================
-How to express those graphs into a formula?
+* How can you express those graphs into a math formula?
 
-Formulas which can represent above graphs are created by mathematicians.
-
-================================================================================
-This is "univariate Gaussian probability density function"
-
-$$$f_X(X)=\frac{1}{\sqrt{2\pi}\sigma}\exp \left[ -\frac{1}{2} \left( \frac{X-\mu}{\sigma} \right)^2 \right]$$$
-
-$$$f_X(X)$$$: univariate X, function f changes wrt X
-$$$\sigma$$$: standard deviation ($$$\sigma^2$$$ is variance)
-$$$\mu$$$: expectation value, average
-$$$e$$$: 2.146...
+* Math formulas which can represent above graphs are created by mathematicians.
 
 ================================================================================
-Simple notation for Gaussian probability density function
+* Math formular for "univariate Gaussian probability density function"
+
+* $$$f_X(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp \left[ -\frac{1}{2} \left( \frac{X-\mu}{\sigma} \right)^2 \right]$$$
+
+* $$$f_X(x)$$$: function f is function wrt univariate random variable X
+numbers=random_variable_X(x)
+* $$$\sigma$$$: standard deviation ($$$\sigma^2$$$ is variance)
+* $$$\mu$$$: expectation value, average
+* $$$e$$$: 2.146...
+
+================================================================================
+* Simple notation for Gaussian probability density function
 $$$f(x;\mu=0,\sigma^2=4)$$$
 
-Formula notation for Gaussian probability density function
+* Formula notation for Gaussian probability density function
 $$$\frac{1}{\sqrt{2\pi}2}\exp \left[ -\frac{1}{2} \left( \frac{X-0}{2} \right)^2 \right]$$$
 
 ================================================================================
-"Univariate Gaussian probability density function" has one variable X like this
+"Univariate Gaussian probability density function" has one random variable X like this
 See x axis. It can have one value at a time like $$$x=-5, -4, \cdots$$$
+
+-5=random_variable_X(result1)
+-4=random_variable_X(result2)
 
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_07:56:32.png' alt=''><xmp>
 
 ================================================================================
 "Multivariate Gaussian probability density function"
 
-$$$f_X(X)=\frac{1}{(2\pi)^{\frac{n}{2}}\sqrt{|\Sigma|}} \exp \left[ -\frac{1}{2} (X-\mu)^T\Sigma^{-1}(X-\mu) \right]$$$
+$$$f_X(x)=\frac{1}{(2\pi)^{\frac{n}{2}}\sqrt{|\Sigma|}} \exp \left[ -\frac{1}{2} (x-\mu)^T\Sigma^{-1}(x-\mu) \right]$$$
 
 $$$n$$$: dimension of vectors
 
