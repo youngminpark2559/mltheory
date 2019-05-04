@@ -59,13 +59,13 @@ Relationship between pattern of covariance and data's distribution
 
 ================================================================================
 Since Gaussian probability distribution is very much used,
-Gaussian probability distribution is also called Normal distribution
+Gaussian probability distribution is also alternatively called normal distribution
 
 ================================================================================
 The reason that Gaussian distribution is much used:
 
 - When you use 1D feature vector like $$$x=[170,160,180]$$$ representing height values
-it is enough to define normal distribution by using 2 paramters; mean $$$\mu$$$ and std $$$\sigma$$$
+only 2 parameters are enough to define normal distribution; mean $$$\mu$$$ and std $$$\sigma$$$
 
 - Due to central limit theorem
 
@@ -82,71 +82,75 @@ Central limit theorem
 that sample becomes data which has $$$\mu$$$ and $$$\frac{\sigma^2}{N}$$$
 which represent statistical values of population
 
+* Code
+mean_of_pop=mean(population_data)
+variance_of_pop=variance(population_data)
+
+mean_of_sample=mean(large_sample_from_pop)
+variance_of_sample=variance(large_sample_from_pop)
+
+If n is enough big, 
+mean_of_pop $$$\approx$$$ mean_of_sample
+variance_of_pop $$$\approx$$$ variance_of_sample
+
 ================================================================================
-Example.
+* Example
 
-- Suppose you want to predict average height of entire population.
+* Suppose you want to predict average height of entire population.
 
-- You would extract sample (people).
+* You would extract sample (people).
 
-- Suppose you extract 1 person and you calculate average height of that person
+* Suppose you extract 1 person and you calculate average height of that person
 Then, you will get this distribution
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:20:38.png' alt=''><xmp>
 
-- Suppose you extract 4 people and you calculate average height of that people
+* Suppose you extract 4 people and you calculate average height of that people
 Then, you will get this distribution
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:21:21.png' alt=''><xmp>
 
-- Suppose you extract 7 people and you calculate average height of that people
+* Suppose you extract 7 people and you calculate average height of that people
 Then, you will get this distribution
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:21:42.png' alt=''><xmp>
 
-- Suppose you extract 10 people and you calculate average height of that people
+* Suppose you extract 10 people and you calculate average height of that people
 Then, you will get this distribution
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:22:00.png' alt=''><xmp>
 
-- As you increase size of sample, distribution becomes Gaussian distribution more and more.
+* As you increase size of sample, distribution becomes Gaussian distribution more and more.
 
 ================================================================================
-Multivariate Gaussian probability distribution function
+* Multivariate Gaussian probability distribution function
 
-$$$f_X(X)= \frac{1}{\sqrt{2\pi}^{\frac{n}{2}} |\Sigma|^{\frac{1}{2}}} \exp \left[ -\frac{1}{2} (X-\mu)^T \Sigma^-1 (X-\mu) \right]$$$
+$$$f_X(x)= \dfrac{1}{\sqrt{2\pi}^{\frac{n}{2}} |\Sigma|^{\frac{1}{2}}} \exp \left[ -\frac{1}{2} (x-\mu)^T \Sigma^-1 (x-\mu) \right]$$$
 
-Shape of Gaussian distribution is determined by $$$\Sigma$$$
-$$$\mu$$$ only affects the peak, not for the shape.
+* Shape of Gaussian probability distribution is determined 
+by covariance $$$\Sigma$$$ between random variables
+* $$$\mu$$$ only affects the peak, not for the shape.
 
 ================================================================================
-If data has following distribution
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:30:44.png' alt=''><xmp>
-
-that data has following covariance
+* If covariance between random variables is shaped like following
 $$$\Sigma = \begin{bmatrix} \sigma_1^2&&c_{12}\\c_{12}&&\sigma_2^2 \end{bmatrix}$$$
 
+that data which is expressed via random variables has following distribution
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:30:44.png' alt=''><xmp>
+
 ================================================================================
-If data has following distribution
+* If covariance between random variables has following shape
+$$$\Sigma = \begin{bmatrix} \sigma_1^2&&0\\0&&\sigma_2^2 \end{bmatrix}$$$
+* $$$0$$$: correlation of data has none
+* $$$\sigma_1^2 > \sigma_2^2$$$
+
+data has following distribution
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:31:32.png' alt=''><xmp>
 
-that data has following covariance
-$$$\Sigma = \begin{bmatrix} \sigma_1^2&&0\\0&&\sigma_2^2 \end{bmatrix}$$$
-
-$$$0$$$: correlation of data has none
-
-$$$\sigma_1^2 > \sigma_2^2$$$
-
 ================================================================================
-If data has following distribution
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:31:59.png' alt=''><xmp>
-
-that data has following covariance
+* If covariance between random variables has following shape
 $$$\Sigma = \begin{bmatrix} \sigma^2&&0\\0&&\sigma^2 \end{bmatrix}$$$
+* $$$0$$$: correlation of data has none
+* $$$\sigma^2 = \sigma^2$$$
 
-$$$0$$$: correlation of data has none
-
-$$$\sigma^2 = \sigma^2$$$
-
-================================================================================
-It also means that you can predict the distribution of data 
-by looking at the shape of covariance matrix
+data has following distribution
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_09:31:59.png' alt=''><xmp>
 
 ================================================================================
 
