@@ -106,8 +106,78 @@ $$$N$$$: number of samples
 $$$N_i$$$: number of samples resided in class $$$\omega_i$$$
 If $$$N$$$ is enough bigger, $$$\frac{N_i}{N}$$$ becomes more similar to $$$P(\omega_i)$$$
 
+* If P(\omega_1|x) > P(\omega_2|x), choose class $$$\omega_1$$$
+else, choose class $$$\omega_2$$$
 
+* Math notation for above sentence
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_17:17:06.png' alt=''><xmp>
 
+* Red square is likelihood ratio
+
+* You can classify class of feature vector 
+based on likelihood ratio and prior probability ratio
+
+================================================================================
+* Example
+
+* 2 classes: $$$\omega_1$$$, $$$\omega_2$$$ 
+
+* probability density function
+1. Probability distribution of $$$\omega_1$$$ occuring
+$$$P(x|\omega_1)= \frac{1}{\sqrt{2\pi}} e^{\frac{1}{2} (x-4)^2}$$$
+$$$N(\mu=4,\sigma=1)$$$
+
+2. Probability distribution of $$$\omega_2$$$ occuring
+$$$P(x|\omega_2)= \frac{1}{\sqrt{2\pi}} e^{\frac{1}{2} (x-10)^2}$$$
+$$$N(\mu=10,\sigma=1)$$$
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:40:56.png' alt=''><xmp>
+
+* Supposed condition: same prior probability
+$$$P(\omega_1)=P(\omega_2)$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:41:31.png' alt=''><xmp>
+
+* When you're given data of 6
+
+* its class should be classified to $$$\omega_1$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:42:41.png' alt=''><xmp>
+
+* Decision boundary: center vertical line, x=7
+
+* It's "finding a classification boundary via LRT"
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:44:04.png' alt=''><xmp>
+
+* Since you had supposed that $$$P(\omega_1)=P(\omega_2)$$$
+
+* $$$\dfrac{\text{likelihood of class\;}$$$\omega_1$$$}{\text{likelihood of class\;}$$$\omega_2$$$}$$$
+
+================================================================================
+* Above equation becomes simplified into
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:46:17.png' alt=''><xmp>
+
+================================================================================
+* Left fraction term can be simplified to
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:47:09.png' alt=''><xmp>
+
+================================================================================
+* You apply log
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:48:18.png' alt=''><xmp>
+
+================================================================================
+* Finally, you get
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/007_Bayesian_Decision_Theory/pics/2019_05_04_19:48:41.png' alt=''><xmp>
+
+================================================================================
 
 </xmp>
    </BODY>
