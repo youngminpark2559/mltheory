@@ -177,6 +177,14 @@ mu_2s=mean([weight_val1,...,weight_val10])
 When you use univariate ramdom variable, you use variance 
 (actually you use std $$$\sigma$$$ from $$$\sqrt{\sigma^2}$$$).
 
+* Code
+height_val1=random_variable_1(measured_height1)
+...
+height_val10=random_variable_1(measured_height10)
+
+variance_val_of_RV1=variance_func([height_val1,...,height_val10])
+
+================================================================================
 But when you use multivariate ramdom variable, you use covariance $$$\Sigma$$$.
 
 $$$\Sigma=\begin{bmatrix}
@@ -190,11 +198,11 @@ $$$\sigma_1^2$$$: variance of random variable 1
 $$$\vdots$$$
 $$$\sigma_N^2$$$: variance of random variable N
 
-Off-diagonal regions: covariance values
+Elements in off-diagonal regions: covariance values between random variables
 
 ================================================================================
 When $$$n=2$$$, for example, 
-when you have 2 random variables like random_variable1=body_weight, random_variable2=body_height
+when you have 2 random variables like random_variable1 for body_weight, random_variable2 for body_height
 multivariate Gaussian probability distribution function shapes like this
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_08:16:22.png' alt=''><xmp>
 
