@@ -67,11 +67,47 @@ decision_function,decision_region,decision_boundary=likelihood_ratio_test()
 estimated_prob_density_function=maximum_likelihood_estimation(data)
 
 ================================================================================
-Likelihood: how much is it similar?
+Likelihood: how much similar?
+
+LRT: test "similarity" by using "ratio"
 
 ================================================================================
-When you already know the probability density function of data,
-how could you classify data based on that known probability density function?
+* LRT:
+* You suppose you know probability density function of data
+* Now, you want to classify that data based on probability density function
+
+================================================================================
+* Classification example
+* You have data composed of weight values and height values
+* By using that data, create classifier model, 
+* and classify given feature vector x composed of height and weight
+
+================================================================================
+* Method1
+* Code
+posterior_prob_val_of_class1=posterior_prob_of_class1(feature_vec1)
+posterior_prob_val_of_class2=posterior_prob_of_class2(feature_vec1)
+
+posterior_prob_list=[posterior_prob_val_of_class1,posterior_prob_val_of_class2]
+
+idx_of_max=max(posterior_prob_list)
+
+selected_class=posterior_prob_list[idx_of_max]
+
+================================================================================
+* Method1
+* Math
+
+Posterior prob = prior prob $$$\times$$$ likelihood
+$$$P(\omega_i|x) = P(\omega_i) \times P(x|\omega_i)$$$
+
+* $$$P(\omega_i) \approx \frac{N_i}{N}$$$
+$$$N$$$: number of samples
+$$$N_i$$$: number of samples resided in class $$$\omega_i$$$
+If $$$N$$$ is enough bigger, $$$\frac{N_i}{N}$$$ becomes more similar to $$$P(\omega_i)$$$
+
+
+
 
 </xmp>
    </BODY>
