@@ -51,24 +51,28 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
-3 variants of LRT decision rule.
-3 variants basically depend on LRT 
-Likelihood is probability density function
-LRT means if you know 2 probability density function, you can utilize them for decision
+* 3 variants from LRT decision rule.
+
+* Likelihood is probability density function
+
+* LRT means if you know 2 probability density functions, 
+you can utilize them for the decision
 
 ================================================================================
 - Bayes Criterion
-It utilizes LRT decision rule with considering cost which occurs when classifier makes mis-classification
 
-$$$\frac{P(x|\omega_1)}{P(x|\omega_2)} \;\; \frac{\text{if } > \text{ then classifier chooses } \omega_1}{\text{if } < \text{ then classifier chooses } \omega_2} \;\; \frac{(C_{12}-C_{22})P[\omega_2]}{(C_{21}-C_{11})P[\omega_1]}$$$
+* It uses cost terms as well as LRT
+
+$$$\dfrac{P(x|\omega_1)}{P(x|\omega_2)} \;\; \dfrac{\text{if } > \text{ then classifier chooses } \omega_1}{\text{if } < \text{ then classifier chooses } \omega_2} \;\; \dfrac{(C_{12}-C_{22})P[\omega_2]}{(C_{21}-C_{11})P[\omega_1]}$$$
 
 $$$C{12}$$$: cost when classifier classifies 1 to 2
 
 ================================================================================
-- MAP (Maximum A Posteriori) criterion (simplified version from Bayes criterion)
+* Maximum A Posteriori criterion: it has simple cost term
 
-Zero-one cost function: if classifier classifies correctly, then, cost is 0
-if classifier classifies incorrectly, then, cost is 1
+* Zero-one cost function: 
+* if classifier classifies correctly, then, cost is 0
+* if classifier classifies incorrectly, then, cost is 1
 
 $$$\frac{P(x|\omega_1)}{P(x|\omega_2)} \;\; \frac{\text{if } > \text{ then classifier chooses } \omega_1}{\text{if } < \text{ then classifier chooses } \omega_2} \;\; \frac{P[\omega_2]}{P[\omega_1]}$$$
 
@@ -77,11 +81,11 @@ $$$\frac{P(x|\omega_1)\times P[\omega_1]}{P(x|\omega_2)\times P[\omega_2]} \;\; 
 $$$\frac{P(\omega_1|x)}{P(\omega_2|x)} \;\; \frac{\text{if } > \text{ then classifier chooses } \omega_1}{\text{if } < \text{ then classifier chooses } \omega_2} \;\; 1$$$
 
 ================================================================================
-- ML criterion
+* Maximum Likelihood criterion: 
+* it has same prior probability, $$$\frac{P[\omega_1]}{P[\omega_2]}=1$$$
+* it has zero-one cost function
 
-You can simplify MAP to ML (Maximum Likelihoos) criterion 
-by suppose prior probability values are same like $$$\frac{P[\omega_1]}{P[\omega_2]}=1$$$
-
+* Then, ML can be written as following
 $$$\frac{P(x|\omega_1)}{P(x|\omega_2)} \;\; \frac{\text{if } > \text{ then classifier chooses } \omega_1}{\text{if } < \text{ then classifier chooses } \omega_2} \;\; 1$$$
 
 </xmp>
