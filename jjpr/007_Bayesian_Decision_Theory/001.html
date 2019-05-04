@@ -134,15 +134,18 @@ See x axis. It can have one value at a time like $$$x=-5, -4, \cdots$$$
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_08_07:56:32.png' alt=''><xmp>
 
 ================================================================================
-"Multivariate Gaussian probability density function"
+* "Multivariate Gaussian probability density function"
 
-$$$f_X(x)=\frac{1}{(2\pi)^{\frac{n}{2}}\sqrt{|\Sigma|}} \exp \left[ -\frac{1}{2} (x-\mu)^T\Sigma^{-1}(x-\mu) \right]$$$
+$$$f_X(x)=\dfrac{1}{(2\pi)^{\frac{n}{2}}\sqrt{|\Sigma|}} \exp \left[ -\frac{1}{2} (x-\mu)^T\Sigma^{-1}(x-\mu) \right]$$$
 
-$$$n$$$: dimension of vectors
+* $$$n$$$: dimension of vectors
 
 ================================================================================
 $$$X=\begin{bmatrix} x_1\\x_2\\\vdots\\x_N \end{bmatrix}$$$
-If $$$n=2$$$, X can have 2 variables like height=170, weight=60 at a time.
+If $$$n=2$$$, X can have 2 random variables like height=170, weight=60 at a time.
+
+170=random_variable_1(result_from_measuring_height)
+60=random_variable_2(result_from_measuring_weight)
 
 ================================================================================
 $$$\mu=\begin{bmatrix} \mu_1\\\mu_2\\\vdots\\\mu_N \end{bmatrix}$$$
@@ -151,10 +154,24 @@ $$$\mu_1$$$: Average from random variable 1
 $$$\vdots$$$
 $$$\mu_N$$$: Average from random variable N
 
-If $$$n=2$$$ like height and weight, and suppose you extract height and weight data from 10 people.
+If $$$n=2$$$ like height and weight, 
+and suppose you extract height and weight data from 10 people.
 
 $$$\mu_1$$$: average of 10 heights
 $$$\mu_2$$$: average of 10 weights
+
+* Code
+height_val1=random_variable_1(measured_height1)
+...
+height_val10=random_variable_1(measured_height10)
+
+mu_1=mean([height_val1,...,height_val10])
+
+weight_val1=random_variable_2(measured_weight1)
+...
+weight_val10=random_variable_2(measured_weight10)
+
+mu_2s=mean([weight_val1,...,weight_val10])
 
 ================================================================================
 When you use univariate ramdom variable, you use variance 
