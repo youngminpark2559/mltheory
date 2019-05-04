@@ -51,18 +51,26 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
-When you use Bayes classifier against 2 number of classes,
-your goal is to separate feature space into 2 spaces; $$$R_1$$$, $$$R_2$$$
+================================================================================
+* Classifier can be considered as a tool which separate feature space into decision areas
+
+* For example, separate feature height space.
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_05_04_19:59:34.png' alt=''><xmp>
+
+================================================================================
+When you use Bayes classifier with 2 classes,
+your goal is to separate feature space $$$R$$$ into 2 spaces; $$$R_1$$$, $$$R_2$$$
 based on their classes $$$\omega_1$$$, $$$\omega_2$$$
 
 ================================================================================
-Error case is following
+Error cases of above example are following
 
 - Bayes classifier incorrectly says given feature vector x (which is in class of $$$\omega_1$$$) is involved in $$$R_2$$$
 - Bayes classifier incorrectly says given feature vector x (which is in class of $$$\omega_2$$$) is involved in $$$R_1$$$
 
 ================================================================================
-Above error cases are exclusive to each other, that is $$$\text{case1} \cap \text{case2} = \phi$$$
+Above error cases are exclusive to each other, that is, $$$\text{case1} \cap \text{case2} = \phi$$$
 
 So, you can use summation on probability values
 
@@ -71,11 +79,22 @@ $$$P[\text{error}] \\
 =\sum\limits_{i=1}^{C} P[\text{error}|\omega_i] P[\omega_i]$$$
 
 ================================================================================
-$$$P[\text{error}|\omega_i]=P[\text{choose } \omega_j|\omega_i] = \int_{R_j} P(x|\omega_i)dx$$$
+$$$P[\text{error}|\omega_i] \\
+= P[\text{choose } \omega_j|\omega_i] \\
+= \int_{R_j} P(x|\omega_i)dx$$$
 
+* $$$P[\text{error}|\omega_i]$$$: probability of error occuring when $$$\omega_1$$$ is given
+
+* $$$P[\text{choose } \omega_j|\omega_i]$$$: probability of "$$$\text{choose} \; \omega_j$$$" occuring when $$$\omega_1$$$ is given
+
+* $$$\int_{R_j} P(x|\omega_i)dx$$$: Sum of probability of x occuring in $$$R_i$$$ area when $$$\omega_i$$$ is given
+
+================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_12_08:56:07.png' alt=''><xmp>
-Center vertical line: decision line
-Colored area: probability of error that $$$x$$$ is classified into $$$R_1$$$
+
+* Center vertical line: decision line
+* Colored area: probability of error that $$$x$$$ is misclassified into $$$R_2$$$
+* $$$\int_{R_j} P(x|\omega_i)dx$$$
 
 ================================================================================
 In conclusion, probability of error on 2 classes is following
@@ -89,23 +108,15 @@ $$$\int_{R_1} P(x|\omega_2) dx = \epsilon_2$$$
 
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_12_09:12:45.png' alt=''><xmp>
 
+* Why do you divide by 2? Because you had supposed same prior probability
+
 ================================================================================
 In any cases, minimum probability of error is obtained via LRT decision rule.
 
-Minimum probability of error which is obtained via LRT decision rule is called 
-Bayes Error Rate, and it becomes best classifier.
+Minimum probability of error (which is obtained via LRT decision rule) is called 
+Bayes Error Rate, and classifier which uses Bayes Error Rate becomes best classifier.
 
 ================================================================================
-
-
-
-
-
-
-
-
-
-
 
 </xmp>
    </BODY>
