@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is note I wrote as I was take following lecture
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
+
+================================================================================
+* Code
+
+# Random variables X1, X2
+
+# c N: number of sample
+N=100
+
+# ================================================================================
+# c mu_1: expectation value of random variable X1
+mu_1=[380,300]
+# c sigma_1: covariance matrix
+sigma_1=[[300,30],[30,200]]
+
+# Generate random data (100,2) which follows above parameters
+X1=generate_data_using_parameters(mu_1,sigma_1,N)
+
+# ================================================================================
+# c mu_2: expectation value of random variable X1
+mu_2=[430,350]
+# c sigma_2: covariance matrix
+sigma_2=[[400,100],[100,90]]
+
+# Generate random data (100,2) which follows above parameters
+X2=generate_data_using_parameters(mu_2,sigma_2,N)
+
+# ================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/008_Bayesian_Decision_Theory_with_multiple_classes/pics/2019_05_05_13:01:05.png' alt=''><xmp>
+
+================================================================================
+plot(X1,X2)
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/008_Bayesian_Decision_Theory_with_multiple_classes/pics/2019_05_05_13:05:15.png' alt=''><xmp>
+
+================================================================================
+plot_gaus(X1,X2)
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/008_Bayesian_Decision_Theory_with_multiple_classes/pics/2019_05_05_13:06:03.png' alt=''><xmp>
+
+Abvoe shows "TRUE" mean and covariance
+
+================================================================================
+* Let's inference mean and variance of population by using Maximum Likelihood (ML) inference
+
+inferenced1=ML(X1)
+inferenced2=ML(X2)
+
+plot(inferenced1,inferenced2)
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/008_Bayesian_Decision_Theory_with_multiple_classes/pics/2019_05_05_13:08:23.png' alt=''><xmp>
+
+* Meaning: parameters ($$$\mu$$$ and $$$\sigma$$$) correctly inferenced
+
+================================================================================
+data=generate_one_sample_data_point()
+plot(data)
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/008_Bayesian_Decision_Theory_with_multiple_classes/pics/2019_05_05_13:14:59.png' alt=''><xmp>
+
+* Posterior probability of "new data" occuring from class1 (red) = 0.0020
+* Posterior probability of "new data" occuring from class1 (green) = 0.4476
+* Selected class for that new data: green class
+
+================================================================================
+* Summary you should remember
+
+* You are given population data
+* You sample data from population
+* You inference parameters from sampled data by using ML, MLE
+* You inference "probability density function of population" from inferenced parameters
+* You use posterior probability by using for example LRT, Bayes risk, etc
+to classify given new data into best proper class
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
