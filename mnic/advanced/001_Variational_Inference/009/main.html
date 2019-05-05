@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=ZvSyoEQTsAA&list=PLbhbGI_ppZIRPeAjprW9u9A46IJlGFdLn&index=4
+
+================================================================================
+* Decompse $$$\ln{P(E|\theta)}$$$ by using Jensen's inequality
+* Result of decomposition: evidence lower bound $$$E_{Q(H|E)}$$$
+
+$$$\ln{P(E|\theta)} \ge \sum\limits_{n} Q(H|E,\lambda) \ln{P(H,E|\theta)}
+- Q(H|E,\lambda) \ln{Q(H|E,\lambda)} \\$$$
+* Above right terms is induced by using Jenson's inequality
+* $$$Q(H|E,\lambda)$$$ is introduced term as a trick in purpose
+* $$$Q(H|E,\lambda)$$$ can be considered as variational function which is used variational transform
+* $$$Q(H|E,\lambda)$$$ will be converted into variational distribution (as probabilistic model)
+* Essence of variational transform: complicated function -> simple function
+But variational parameters should be introduced and should be adjusted to create simpler function
+* $$$\lambda$$$: variational parameter
+
+$$$= \sum\limits_{n} Q(H|E)\ln{P(E|H,\theta)} - Q(H|E)\ln{\frac{Q(H|E)}{P(H|\theta)}} \\$$$
+* $$$P(H,E|\theta)$$$ is decomposed into $$$P(E|H,\theta)$$$ and $$$\frac{1}{P(H|\theta)}$$$
+* $$$Q(H|E)\ln{\frac{Q(H|E)}{P(H|\theta)}}$$$ terms will induce KL divergence term
+* sum[weight*something] --> expectation form ($$$E_{Q(H|E)} \ln{P(E|H)}$$$)
+
+$$$= E_{Q(H|E)} \ln{P(E|H)} - KL(Q(H|E)|| P(H|\theta))$$$
+* $$$E_{Q(H|E)} \ln{P(E|H)}$$$: lower bound from Jansen's inequality
+It's lower bound when evidence E (ELBO term) is given when optimizing above equation
+
+================================================================================
+ELBO form = expectation + KLDiv
+
+You will use lower bound for optimization step
+
+================================================================================
+$$$\ln{P(E|\theta)} \ge \sum\limits_{n} Q(H|E,\lambda) \ln{P(H,E|\theta)} \\
+= \sum\limits_{n} Q(H|E)\ln{P(E|H,\theta)} - Q(H|E)\ln{\frac{Q(H|E)}{P(H|\theta)}} \\
+= E_{Q(H|E)} \ln{P(E|H)} - KL(Q(H|E)|| P(H|\theta))$$$
+
+Parameters you can adjust on optimization:
+$$$\theta$$$ at line (1): parameter of probabilistic model
+$$$\lambda$$$ at line (1): variational parameter
+
+================================================================================
+You adjust $$$\theta$$$ and $$$\lambda$$$ iteratively to make lower bound larger value
+
+Lower bound increases -> Likelihood $$$\ln{P(E|\theta)}$$$ increases
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/advanced/001_Variational_Inference/009/pics/2019_05_06_00:28:51.png' alt=''><xmp>
+
+================================================================================
+Lower bound equation can be define as following
+
+$$$L(\lambda,\theta) 
+= \sum\limits_{H} Q(H|E,\lambda)\ln{P(H,E|\theta)} - Q(H|E,\lambda)\ln{Q(H|E,A)}$$$
+
+================================================================================
+Optimization method
+
+* Coordinated ascent:
+Optimize one (like $$$\lambda$$$)
+Apply optimized equation
+Optimize another one (like $$$\theta$$$)
+Iterate above step
+
+8 21
+      
+</xmp>
+   </BODY>
+</HTML>
