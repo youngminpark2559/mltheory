@@ -55,79 +55,112 @@ This is note I wrote as I was take following lecture
 http://www.kocw.net/home/search/kemView.do?kemId=1189957
 
 ================================================================================
-Various covariance matrix shape in Gaussian distribution makes various quadratic classifiers.
+* If you use decision function on Gaussian shape probability density function,
+decision formular is expressed by 2-order of matrix wrt some variables
+
+* That's why above method is called "2-order classifier"
 
 ================================================================================
-Shape of Gaussian distribution function is defined 
+* Various covariance matrix shape in Gaussian distribution makes various quadratic classifiers.
+
+================================================================================
+* Shape of Gaussian distribution function is defined 
 by mean (location), std (width) when you deal with univariate random variable, 
 covariance (shape of distribution) when you deal with multivariate random variable
 
 ================================================================================
+* Case 1
 $$$\Sigma_i=\sigma^2 I = \begin{bmatrix} \sigma^2&&0&&0\\0&&\sigma^2&&0\\0&&0&&\sigma^2 \end{bmatrix}$$$
 
-(3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
-i: class like man and woman
-variances of classes are equal
-$$$\sigma^2$$$: variance of feature 1
-$$$\sigma^2$$$: variance of feature 2
-$$$\sigma^2$$$: variance of feature 3
-Distribution of data: in 3D, perfect shape of sphere
+* (3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
+* i: class like man and woman
+* variances of classes are equal as follow
+variance values are not dependent to class i
+- $$$\sigma^2$$$: variance of feature 1
+- $$$\sigma^2$$$: variance of feature 2
+- $$$\sigma^2$$$: variance of feature 3
+* Distribution of data: in 3D, perfect shape of sphere
 
-Distribution of data which has 2 classes
-Size and shape are same
+* Distribution of data which has 2 classes
+Size of variance and direction (or shape) are all same
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:08:33.png' alt=''><xmp>
 
 ================================================================================
+* Case 2
 $$$\Sigma_i= \Sigma = \begin{bmatrix} \sigma_1^2&&0&&0\\0&&\sigma_2^2&&0\\0&&0&&\sigma_3^2 \end{bmatrix}$$$
 
-(3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
-i: class like man and woman
-variances of classes are equal
-$$$\sigma_1^2$$$: variance of feature 1
-$$$\sigma_2^2$$$: variance of feature 2
-$$$\sigma_3^2$$$: variance of feature 3
-$$$\sigma_1^2\ne \sigma_2^2 \ne \sigma_3^2$$$
-Variances of classes are equal but direction is different.
-In 2D,
+* (3,3) matrix: when you have 3 features (like height, weight, age), 
+covariance matrix is (3,3)
+* i: class like man and woman
+* size of variances of all classes are equal (how much of distribution spread is all same)
+- $$$\sigma_1^2$$$: variance of feature 1
+- $$$\sigma_2^2$$$: variance of feature 2
+- $$$\sigma_3^2$$$: variance of feature 3
+* $$$\sigma_1^2\ne \sigma_2^2 \ne \sigma_3^2$$$
+- Size of variances of classes are equal but direction is different.
+(long shape in y axis or long shape in x axis)
+
+* Example in 2D
+* There are 2 classes (like male and female)
+* Each class has 2 features (like height and weight)
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:09:33.png' alt=''><xmp>
 
 ================================================================================
+* Case 3
+
 $$$\Sigma_i= \Sigma = \begin{bmatrix} \sigma_1^2&&c_{12}&&c_{13}\\c_{12}&&\sigma_2^2&&c_{23}\\c_{13}&&c_{23}&&\sigma_3^2 \end{bmatrix}$$$
 
-(3,3) matrix: when you have 3 features (like height, weight, age), covariance matrix is (3,3)
-i: class like man and woman
-variances of classes are equal
-$$$\sigma_1^2$$$: variance of feature 1
-$$$\sigma_2^2$$$: variance of feature 2
-$$$\sigma_3^2$$$: variance of feature 3
-$$$\sigma_1^2\ne \sigma_2^2 \ne \sigma_3^2$$$
-Variances of classes are equal but direction is different.
-In 2D,
+* (3,3) matrix: when you have 3 features (like height, weight, age), 
+covariance matrix is (3,3)
+* i: class like man and woman
+* Size of variances of all classes are equal
+- $$$\sigma_1^2$$$: variance of feature 1
+- $$$\sigma_2^2$$$: variance of feature 2
+- $$$\sigma_3^2$$$: variance of feature 3
+* $$$\sigma_1^2\ne \sigma_2^2 \ne \sigma_3^2$$$
+- Size of variances of classes are equal but direction is different.
+
+* Example in 2D
+* There are 2 classes (like male and female)
+* Each class has 2 features (like height and weight)
+* Note that direction of distributions how it's different from Case 2
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:09:48.png' alt=''><xmp>
 
 ================================================================================
+* Case 4
+
 $$$\Sigma_i= \sigma_i^2 I = \begin{bmatrix} \sigma_i^2&&0&&0\\0&&\sigma_i^2&&0\\0&&0&&\sigma_i^2 \end{bmatrix}$$$
 
-Variances of classes are different.
+* Size of variances of all classes are different
 
-Distribution of data which has 3 classes
+* Distribution of data which has 3 classes (small, medium, large circles)
+- Direction of spread is all same
+- Size of variance is all different
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:07:18.png' alt=''><xmp>
 
 Variance is different but shape (or direction) is same
 
 ================================================================================
-General form.
+* Case 5 (General case)
 
-$$$\Sigma_i \ne \Sigma_j$$$
+* $$$\Sigma_i \ne \Sigma_j$$$
 
-Variance of classes are different.
+* Size of variance of all classes are different.
 
-Data distribution which has 3 classes
+* Direction of spead is all different
+
+* Example of distributions of 3 classes
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/pic/2019_04_17_11:11:06.png' alt=''><xmp>
 
 ================================================================================
-Shape of decision boundary (as quadratic classifier) which classifies data will be various 
-based on distribution of data as you can see from above.
+* Your goal is to find the optimal decision boundary
+based on above distributions of classes
+
+* Decision boundary is different per case
+
+* Sometimes, it's linear line or curve line
+
+* But all functions which represent that decision boundary are 2-order equation form
 
 ================================================================================
 
