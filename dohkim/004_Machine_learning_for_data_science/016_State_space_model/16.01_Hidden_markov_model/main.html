@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://datascienceschool.net/view-notebook/d18fae471dd5463bb5fc06d24dabfdc9/
+
+================================================================================
+* Independent mixture model
+* Suppose one continuous random variable
+* Suppose that continuous random variable has multiple continuous probability distributions
+* Independent mixture model selects one continuous probability distribution
+from multiple continuous probability distributions
+* When selecting continuous probability distribution,
+independent mixture model uses independent discrete probability distribution
+
+================================================================================
+$$$p(x) \\
+= \sum\limits_{i=1}^{m} P(C=i) \times P(X=x|C=i) \\
+= \sum\limits_{i=1}^{m} \delta_i p_i(x)$$$
+
+* $$$p(x)$$$: distribution of entire independet mixure
+* $$$p_i(x)$$$: each individual probability distribution (each component) which consisits of entire independent mixture
+* $$$\delta_i$$$: mixing parameter, probability of specific $$$p_i(x)$$$ is selected 
+from all components during specific time, discrete probability distribution
+
+================================================================================
+* Bernoulli-Gaussian mixture model
+
+* Bernoulli-Gaussian mixture model selects one continuous Gaussian normal distribution
+from multiple continuous Gaussian normal distributions 
+based on value of Bernoulli random variable
+
+================================================================================
+/home/young/Pictures/2019_05_06_13:50:33.png
+
+* Observation: occurred value from Bernoulli random variable
+
+* $$$p_1(x)$$$ and $$$p_2(x)$$$: 2 difference Gaussian normal distributions
+
+* active component: selected Gaussian normal distributions ($$$p_1(x)$$$ or $$$p_2(x)$$$)
+
+================================================================================
+* Markov chain
+
+* Discrete-time based probability process
+
+* Markov chain has markov characteristic
+
+* $$$P(C_{t+1}|C_t,\cdots,C_1) = P(C_{t+1}|C_t)$$$
+
+================================================================================
+* Transition probatility: probability of A moving from i-state to j-state during time t
+
+* $$$\gamma_{i\to j}(t) = P(C_{s+t}=j|C_{s}=i)$$$
+
+================================================================================
+* Transition probability matrix
+* It displays all transition probatilities for all possible cases
+
+* $$$\Gamma(t)= \{\gamma_{i\to j}(t)\}$$$
+* $$$\Gamma=\Gamma(1)$$$
+
+================================================================================
+* Transition probatility matrix by using "Chapman-Kolmogorov equation"
+* $$$\Gamma(t+u) = \Gamma(t) \times \Gamma(u)$$$
+
+* $$$t+u$$$: summed time from t and u
+
+================================================================================
+* Hidden markov model
+
+* Variant case from independent mixture model
+
+* $$$C_t$$$ is markov chain and discrete probability process
+$$$C_t$$$ selects one continuous probability distribution from independent mixture model
+
+* Being selected continuous probability distributions $$$X_t$$$ are dependent 
+on value of discrete probatility process $$$C_t$$$ at time $$$t$$$
+
+* But you can't measure value of discrete probatility process $$$C_t$$$ at time $$$t$$$ 
+You can only measure value of continuous probability distributions $$$X_t$$$
+
+================================================================================
+$$$P(C_t \mid |C_{t-1}, \cdots, C_1) = P(C_t \mid C_{t-1})$$$
+
+$$$P(X_t \mid X_t, \cdots, X_1, C_t, \cdots, C_1) = P(X_t \mid C_t)$$$
+
+================================================================================
+/home/young/Pictures/2019_05_06_14:11:09.png
+
+================================================================================
+* Decode
+
+* You inference value of discrete random variable in observed hidden markov model
+based on values of continuous random variable 
+
+* Viterbi algorithm is most much used algorithm 
+to inference value of discrete random variable in observed hidden markov model
+
+
+</xmp>
+   </BODY>
+</HTML>
