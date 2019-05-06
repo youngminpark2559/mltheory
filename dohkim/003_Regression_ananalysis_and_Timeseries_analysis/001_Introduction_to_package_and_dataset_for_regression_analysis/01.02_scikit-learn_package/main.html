@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/293ece8b0d124fbaa4d4d52bb8f1cb42/
+
+================================================================================
+* scikit-learn package
+* dataset for benchmark
+* preprocessing datasets
+* supervised learning algorithms
+* unsupervised learning algorithms
+* evaluation and selection models
+
+================================================================================
+Datasets which are provided by scikit-learn
+
+* sklearn.datasets provides datasets
+
+* sk.datasets.load() 계열 명령: small datasets
+* sk.datasets.fetch() 계열 명령: large datasets
+* sk.datasets.make() 계열 명령: dummy datasets which ared created by probability distributions
+
+================================================================================
+* sk.datasets.load()
+
+* load_boston: Boston house prices data for regression
+* load_diabetes: Diebete data for regression
+* load_linnerud: linnerud data for regression
+* load_iris: Iris data for classification
+* load_digits: Digit data for classification
+* load_wine: Wine data for classification
+* load_breast_cancer: Breast cancer data for classification
+
+================================================================================
+* sk.datasets.fetch()
+
+* fetch_california_housing: Californial house prices for regression
+* fetch_covtype : Ground data for regression
+* fetch_20newsgroups : News text data
+* fetch_olivetti_faces : Facial image data
+* fetch_lfw_people : Famous people's facial image data
+* fetch_lfw_pairs : Famous people's facial image data
+* fetch_rcv1 : Roiter news corpus data
+* fetch_kddcup99 : Kddcup 99 Tcp dump data
+
+================================================================================
+* sk.datasets.make()
+
+make_regression: create dummy data for regression
+make_classification: create dummy data for classification
+make_blobs: create dummy data for clustering
+
+================================================================================
+Properties of data
+
+* Bunch: dataset object
+* data: numpy array, feature data, independent variables
+* target: numpy array, label data, dependent variables
+* feature_names
+* target_names
+* DESCR: description on data
+
+</xmp>
+   </BODY>
+</HTML>
