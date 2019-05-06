@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 23px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 80px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+Note from original reference by
+https://datascienceschool.net/view-notebook/bd71d90bc09d4568b50411b0a38bd580/
+
+================================================================================
+Graph = node(vertex) + edge
+
+================================================================================
+* Graph G
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/014_Probabilistic_graph_model/pics/2019_05_06_10:37:42.png' alt=''><xmp>
+
+================================================================================
+* Graph = set of nodes + set of edges
+
+* G = (V,E)
+
+* Edge E: composed of 2 nodes, "ordered" pair
+
+* $$$V=\{0,1,2,3\}$$$
+
+* $$$E=\{ (0,1),(0,2),(0,3),(1,2),(1,3),(2,3) \}$$$
+
+================================================================================
+* Edge between a and b
+If edge (a,b) $$$\ne$$$ edge (b,a), it's "directed graph" with arrow
+If edge (a,b) $$$=$$$ edge (b,a), it's "undirected graph" with line
+
+================================================================================
+* Cardinality of graph = number of nodes in graph
+
+* |G| or |V|
+
+* Number of edges: |E|
+
+================================================================================
+2 nodes can be neighbor
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/014_Probabilistic_graph_model/pics/2019_05_06_10:44:01.png' alt=''><xmp>
+
+* Some edges are self-loop
+
+* self-loop $$$\subset$$$ edges
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/014_Probabilistic_graph_model/pics/2019_05_06_10:45:08.png' alt=''><xmp>
+
+* a-c-d-c-e: walk to go from a to c, not trail and path to go from a to c
+* a-b-c-d-e: trail (not walking on duplicated node, there are not duplicated node)
+* a-b-c-d-e-c: path, not trail (duplication is allowed only for "start" and "end",
+there are duplicated c which is end point)
+* a-b-c-a: cycle (from path, when start and end are same)
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/014_Probabilistic_graph_model/pics/2019_05_06_10:52:27.png' alt=''><xmp>
+
+* Clique: If all nodes have connected edges, those all nodes are called one clique
+a,b,c are fully connected so they're clique
+a,b,c,d are not fully connected so they're not clique
+a,b,c are fully connected clique, (a,b),(a,c),(b,c) are also (small) cliques
+(a,b,c) are maximal clique
+
+* Cliques which contains node a: {'a': [['a', 'b', 'c']]}
+
+* Cliques which contains node a and b: {'a': [['a', 'b', 'c']], 'b': [['a', 'b', 'c'], ['d', 'b', 'c']]}
+
+* All possible cliques: [['a'],
+                         ['b'],
+                         ['c'],
+                         ['d'],
+                         ['e'],
+                         ['f'],
+                         ['a', 'b'],
+                         ['a', 'c'],
+                         ['b', 'c'],
+                         ['b', 'd'],
+                         ['c', 'd'],
+                         ['d', 'e'],
+                         ['d', 'f'],
+                         ['e', 'f'],
+                         ['a', 'b', 'c'],
+                         ['b', 'c', 'd'],
+                         ['d', 'e', 'f']]
+
+* All possible maximal cliques: [['a', 'b', 'c'], ['d', 'b', 'c'], ['d', 'e', 'f']]
+
+</xmp>
+   </BODY>
+</HTML>
