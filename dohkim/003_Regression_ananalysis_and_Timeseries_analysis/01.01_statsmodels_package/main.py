@@ -49,7 +49,7 @@ import matplotlib.pyplot as plt
 # df.plot()
 # plt.title(data.title)
 # plt.show()
-# /home/young/Pictures/2019_05_07_07:22:23.png
+# https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_07:22:23.png
 
 # ================================================================================
 # c data: time-series data on Luteinizing Hormone 
@@ -58,7 +58,7 @@ import matplotlib.pyplot as plt
 # df.plot(x="time",y="value")
 # plt.title(data.title)
 # plt.show()
-# /home/young/Pictures/2019_05_07_07:24:15.png
+# https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_07:24:15.png
 
 # ================================================================================
 # c data: seasonality time-series data, Monthly deaths from lung diseases in the UK
@@ -104,7 +104,7 @@ def yearfraction2datetime(yearfraction,startyear=0):
 # df.plot(x="datetime",y="value")
 # plt.title(data.title)
 # plt.show()
-# /home/young/Pictures/2019_05_07_07:32:45.png
+# https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_07:32:45.png
 
 # ================================================================================
 # # c data: time-series data which shows seasonality and increasing trend
@@ -136,6 +136,6 @@ def yearfraction2datetime(yearfraction,startyear=0):
 # df.plot(x="datetime",y="value")
 # plt.title(data.title)
 # plt.show()
-# /home/young/Pictures/2019_05_07_07:36:58.png
+# https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_07:36:58.png
 
 # ================================================================================
