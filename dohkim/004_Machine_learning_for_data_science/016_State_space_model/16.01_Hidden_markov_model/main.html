@@ -49,103 +49,456 @@ MathJax.Hub.Config({
 </script>
    </HEAD>
    <BODY>
+
 <xmp>
-
-https://datascienceschool.net/view-notebook/d18fae471dd5463bb5fc06d24dabfdc9/
-
-================================================================================
-* Independent mixture model
-* Suppose one continuous random variable
-* Suppose that continuous random variable has multiple continuous probability distributions
-* Independent mixture model selects one continuous probability distribution
-from multiple continuous probability distributions
-* When selecting continuous probability distribution,
-independent mixture model uses independent discrete probability distribution
+https://datascienceschool.net/view-notebook/ea4584bde04140368950ee50ef038833/
 
 ================================================================================
-$$$p(x) \\
-= \sum\limits_{i=1}^{m} P(C=i) \times P(X=x|C=i) \\
-= \sum\limits_{i=1}^{m} \delta_i p_i(x)$$$
+- Suppose you know probability distribution function p(X) of random variable
 
-* $$$p(x)$$$: distribution of entire independet mixure
-* $$$p_i(x)$$$: each individual probability distribution (each component) which consisits of entire independent mixture
-* $$$\delta_i$$$: mixing parameter, probability of specific $$$p_i(x)$$$ is selected 
-from all components during specific time, discrete probability distribution
+- You will learn how to generate samples which follow that probability distribution function
+by using following methods
 
-================================================================================
-* Bernoulli-Gaussian mixture model
-
-* Bernoulli-Gaussian mixture model selects one continuous Gaussian normal distribution
-from multiple continuous Gaussian normal distributions 
-based on value of Bernoulli random variable
+* uniform distribution
+* inverse transform
+* rejection sampling
+* importance sampling
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_05_06_13:50:33.png' alt=''><xmp>
+Python's random number generator is actually pseudo random number generator
+which uses uniform distribution
 
-* Observation: occurred value from Bernoulli random variable
+================================================================================
+* Basic probability distribution functions have its math equations
 
-* $$$p_1(x)$$$ and $$$p_2(x)$$$: 2 difference Gaussian normal distributions
+* So, you can use inverse transform to generate samples
 
-* active component: selected Gaussian normal distributions ($$$p_1(x)$$$ or $$$p_2(x)$$$)
+================================================================================
+1. Create uniform distribution function by using Python algorithm
+2. Create x numbers from uniform distribution function
+3. Assign all x numbers into monotonous increasing function f(x)
+4. Get y values
+5. Suppose random variable Y which has set of y values
+
+* $$$F_Y(y)=f^{-1}(x)$$$
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_05_06_22:02:07.png' alt=''><xmp>
+
+================================================================================
+* Rejection sampling
+
+- Suppose you have target probability distribution p(x) which you want to have
+
+- Supposee there is probability distribution q(x) which is similar to p(x)
+
+- But q(x) is easier to generate samples than q(x)
+
+- Generate samples from q(x)
+
+- You decide whether you throw extracted sample from q(x) away or not, 
+by using probability $$$\frac{p(z)}{kq(z)}$$$
+
+- k is scaling constant to make $$$kq(x)\ge p(x)$$$
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_05_06_22:06:01.png' alt=''><xmp>
+
+================================================================================
+* Inference expectation value
+
+* You can inference "expectation value" of probability distribution.
+
+* It's the reason why you want to create samples from probability distribution
+because you can inference expectation value of that probability distribution via sample
+
+================================================================================
+* Suppose you have probability distribution p(X) which you want to analyze
+
+* Expectation value of p(X) is $$$\text{E}[f(X)] = \int f(x)p(x)dx$$$
+
+* How to calculate (or inference) expectation value?
+
+* Use monte carlo integration when you have N samples $$$\{ x_1, \ldots, x_N \}$$$
+$$$\text{E}[f(X)] \approx \dfrac{1}{N} \sum_{i=1}^N f(x_i)$$$
+
+* Error becomes smaller as you have larger N
+
+================================================================================
+* Importance sampling
+
+- Suppose your goal is only to generate samples to calculate expectation value
+
+- Then you can use importance sampling 
+
+- Importance sampling  = generating samples + monte carlo integration for calculating expectation value
+
+================================================================================
+Step
+
+- Create similar distribution q(x) which satisfies $$$kq(x)>p(x)$$$
+
+- Calculate expectation value using following equation
+$$$\text{E}[f(X)] 
+= \int f(x)p(x)dx  \\
+= \int f(x)\dfrac{p(x)}{q(x)} q(x) dx  \\
+\approx \dfrac{1}{N} \sum_{i=1}^N f(x_i)\dfrac{p(x_i)}{q(x_i)}$$$
+
+================================================================================
+* $$$\dfrac{p(x_i)}{q(x_i)}$$$ is called importance 
+because it is used as weight for samples
+
+* There is less samples thrown away than rejection sampling 
+which threw away 80% of samples in above example.
 
 ================================================================================
 * Markov chain
 
-* Discrete-time based probability process
+- Suppose time series probability procedure
 
-* Markov chain has markov characteristic
+- Suppose that time series probability procedure has K finite states
 
-* $$$P(C_{t+1}|C_t,\cdots,C_1) = P(C_{t+1}|C_t)$$$
+- If probability distribution $$$p(x_t) depends on p(x_{t-1}) and p(x_t|x_{t-1})$$$
+this time series probability procedure is called "Markov chain"
 
-================================================================================
-* Transition probatility: probability of A moving from i-state to j-state during time t
-
-* $$$\gamma_{i\to j}(t) = P(C_{s+t}=j|C_{s}=i)$$$
+- Note that "Markov chain" is different from "linear chain Markov network"
 
 ================================================================================
-* Transition probability matrix
-* It displays all transition probatilities for all possible cases
+Let's apply "law of the total probability" on discrete state Markov chain
 
-* $$$\Gamma(t)= \{\gamma_{i\to j}(t)\}$$$
-* $$$\Gamma=\Gamma(1)$$$
+Then, following is true.
 
-================================================================================
-* Transition probatility matrix by using "Chapman-Kolmogorov equation"
-* $$$\Gamma(t+u) = \Gamma(t) \times \Gamma(u)$$$
-
-* $$$t+u$$$: summed time from t and u
+$$$p(x_{t}) = \sum_{x_{t-1}} p(x_t, x_{t-1}) = \sum_{x_{t-1}} p(x_t | x_{t-1}) p(x_{t-1})$$$
 
 ================================================================================
-* Hidden markov model
+$$$p(x_t)$$$ is category distribution, you can express it as row vector $$$p_t$$$
 
-* Variant case from independent mixture model
+then, you can convert $$$p(x_{t}) = \sum_{x_{t-1}} p(x_t, x_{t-1}) = \sum_{x_{t-1}} p(x_t | x_{t-1}) p(x_{t-1})$$$ to following matrix form
+$$$p_t=p_{t-1}T$$$
 
-* $$$C_t$$$ is markov chain and discrete probability process
-$$$C_t$$$ selects one continuous probability distribution from independent mixture model
-
-* Being selected continuous probability distributions $$$X_t$$$ are dependent 
-on value of discrete probatility process $$$C_t$$$ at time $$$t$$$
-
-* But you can't measure value of discrete probatility process $$$C_t$$$ at time $$$t$$$ 
-You can only measure value of continuous probability distributions $$$X_t$$$
+$$$T$$$: transition matrix, $$$K\times K$$$ matrix, conditional probability
+$$$T_{ij}=P(x_t=j|x_{t-1}=i)$$$
 
 ================================================================================
-$$$P(C_t \mid |C_{t-1}, \cdots, C_1) = P(C_t \mid C_{t-1})$$$
-
-$$$P(X_t \mid X_t, \cdots, X_1, C_t, \cdots, C_1) = P(X_t \mid C_t)$$$
-
-================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/004_Machine_learning_for_data_science/pics/2019_05_06_14:11:09.png' alt=''><xmp>
+If transition matrix is symmetric matrix, 
+Markov chain is called "reversible Markov chain" 
+or you say Markov chain satisfies "detailed balance condition"
 
 ================================================================================
-* Decode
+These Markov chain always converges into same distribution $$$p_{\infty}$$$
+regardless of initial condition $$$p_0$$$ as time t goes by.
 
-* You inference value of discrete random variable in observed hidden markov model
-based on values of continuous random variable 
+$$$p_{t'} = p_{t'+1} = p_{t'+2} = p_{t'+3} = \cdots = p_{\infty}$$$
 
-* Viterbi algorithm is most much used algorithm 
-to inference value of discrete random variable in observed hidden markov model
+$$$t'$$$: time after convergence
 
+After reaching to convergence state,
+samples $$$\{x_{t'}, x_{t'+1}, x_{t'+1}, \ldots, x_{t'+N} \}$$$ are independent values 
+which come from same probability distribution
+
+================================================================================
+MCMC
+
+Markov Chain Monte Carlo generates samples using Markov chain.
+
+You first create Markov chain for Markov chain's convergence distribution to have p(x) 
+
+Then, you run this Markov chain for $$$t^{'}$$$ hours,
+after that, you can get samples in distribution you want.
+
+================================================================================
+Metropolis-Hastings Sampling
+
+Metropolis-Hastings Sampling is used to generate sample as part method of MCMC.
+
+Metropolis-Hastings Sampling is similar to rejection sampling
+but MH uses conditional distribution $$$q(x^*|x_t)$$$ instead of unconditional distribution $$$q(x)$$$
+for calculation distribution.
+
+MH generally uses Gaussian distribution which has expectation value $$$x_t$$$
+
+$$$q(x^*|x_t)=N(x^*|x_t,\sigma^2)$$$
+
+================================================================================
+How to generate samples using Metropolis-Hastings
+
+- if $$$t=0$$$, randomly generate $$$x_t$$$
+- generate sampe $$$x^*$$$ from distribution $$$q(x^*|x_t=x_t)$$$ where samples can be generated
+- According to following probability p, select x_{t+1} for x^*
+Following probability p is called Metropolis-Hastings criterion
+
+$$$p = \min \left( 1, \dfrac{p(x^{\ast}) q(x_t \mid x^{\ast})}{p(x_t) q(x^{\ast} \mid x_t)} \right)$$$
+
+If none is selected, newly selected value should be thrown away, you use previous value,
+$$$x_{t+1}=x_t$$$
+- You iterate above step until you have enough number of samples.
+
+================================================================================
+If calculation distribution $$$q(x^*|x_t)$$$ is Gaussian normal distribution,
+if condition x_t and result $$$x^*$$$ are changed, probability is same.
+$$$q(x^{\ast} \mid x_t) = q(x_t \mid x^{\ast})$$$
+
+================================================================================
+In this case, criterion becomes
+$$$p = \min \left( 1, \dfrac{p(x^{\ast})}{p(x_t)} \right)$$$
+which is called "Metropolis criterion"
+
+================================================================================
+According to Metropolis criterion, 
+it tries to make $$$p(x^*)$$$ bigger than $$$p(x_t)$$$
+
+================================================================================
+PyMC3 is used to generate MCMC samples and is used to perform Bayesian inference.
+
+PyMC3 can use GPU
+
+================================================================================
+
+</xmp>
+<!-- # @ Code
+# If you already installed MKL library, you first need to execute this
+import os
+os.environ["MKL_THREADING_LAYER"]="GNU"
+
+# ================================================================================
+import pymc3 as pm -->
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># @ Code</span>
+<span style="color: #888888"># If you already installed MKL library, you first need to execute this</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">os</span>
+os<span style="color: #333333">.</span>environ[<span style="background-color: #fff0f0">&quot;MKL_THREADING_LAYER&quot;</span>]<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;GNU&quot;</span>
+
+<span style="color: #888888"># ================================================================================</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">pymc3</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">pm</span>
+</pre></div>
+<xmp>
+
+================================================================================
+Step of usage:
+- Create Model class. Instance of this class is used like session in TensorFlow
+
+- Create symbolic random variable.
+
+- Create sampler instance like Metropolis, HamiltonianMC, NUTS
+
+- Generate sample by using sampe()
+
+================================================================================
+</xmp>
+<!-- # @ Code
+# c cov: covariance matrix
+cov=np.array([[1.,1.5],[1.5,4]])
+# c mu: mean value
+mu=np.array([1,-1])
+
+# ================================================================================
+# Create Model scope
+with pm.Model() as model:
+  # c x: instance of multivariate Gaussian normal distribution
+  x = pm.MvNormal('x',mu=mu,cov=cov,shape=(1,2))
+
+  # c step: instance of Metropolis
+  step = pm.Metropolis()
+
+  # @ Execute generating 1000 sample
+  trace = pm.sample(1000, step)
+
+# ================================================================================
+import warnings
+warnings.simplefilter("ignore")
+
+pm.traceplot(trace)
+plt.show()
+
+plt.scatter(trace['x'][:, 0, 0], trace['x'][:, 0, 1])
+plt.show() -->
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># @ Code</span>
+<span style="color: #888888"># c cov: covariance matrix</span>
+cov<span style="color: #333333">=</span>np<span style="color: #333333">.</span>array([[<span style="color: #6600EE; font-weight: bold">1.</span>,<span style="color: #6600EE; font-weight: bold">1.5</span>],[<span style="color: #6600EE; font-weight: bold">1.5</span>,<span style="color: #0000DD; font-weight: bold">4</span>]])
+<span style="color: #888888"># c mu: mean value</span>
+mu<span style="color: #333333">=</span>np<span style="color: #333333">.</span>array([<span style="color: #0000DD; font-weight: bold">1</span>,<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>])
+
+<span style="color: #888888"># ================================================================================</span>
+<span style="color: #888888"># Create Model scope</span>
+<span style="color: #008800; font-weight: bold">with</span> pm<span style="color: #333333">.</span>Model() <span style="color: #008800; font-weight: bold">as</span> model:
+  <span style="color: #888888"># c x: instance of multivariate Gaussian normal distribution</span>
+  x <span style="color: #333333">=</span> pm<span style="color: #333333">.</span>MvNormal(<span style="background-color: #fff0f0">&#39;x&#39;</span>,mu<span style="color: #333333">=</span>mu,cov<span style="color: #333333">=</span>cov,shape<span style="color: #333333">=</span>(<span style="color: #0000DD; font-weight: bold">1</span>,<span style="color: #0000DD; font-weight: bold">2</span>))
+
+  <span style="color: #888888"># c step: instance of Metropolis</span>
+  step <span style="color: #333333">=</span> pm<span style="color: #333333">.</span>Metropolis()
+
+  <span style="color: #888888"># @ Execute generating 1000 sample</span>
+  trace <span style="color: #333333">=</span> pm<span style="color: #333333">.</span>sample(<span style="color: #0000DD; font-weight: bold">1000</span>, step)
+
+<span style="color: #888888"># ================================================================================</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">warnings</span>
+warnings<span style="color: #333333">.</span>simplefilter(<span style="background-color: #fff0f0">&quot;ignore&quot;</span>)
+
+pm<span style="color: #333333">.</span>traceplot(trace)
+plt<span style="color: #333333">.</span>show()
+
+plt<span style="color: #333333">.</span>scatter(trace[<span style="background-color: #fff0f0">&#39;x&#39;</span>][:, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>], trace[<span style="background-color: #fff0f0">&#39;x&#39;</span>][:, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>])
+plt<span style="color: #333333">.</span>show()
+</pre></div>
+<xmp>
+
+================================================================================
+Bayesian Estimation using MCMC
+
+$$$P(\theta \mid x_{1},\ldots,x_{N}) \propto P(x_{1},\ldots,x_{N} \mid \theta)  P(\theta)$$$
+
+$$$P(\theta)$$$: Beta
+$$$P(x_1,\cdots,x_N|\theta)$$$: Binomial
+
+</xmp>
+<!-- # @ Code
+theta0=0.7
+
+# @ Set seed number
+np.random.seed(0)
+
+# c x_data1: generated 10 data which follow bernoulli distribution
+x_data1=sp.stats.bernoulli(theta0).rvs(10)
+print(x_data1)
+# array([1, 0, 1, 1, 1, 1, 1, 0, 0, 1])
+
+# @ create model scope
+with pm.Model() as model:
+  theta=pm.Beta('theta',alpha=1,beta=1)
+
+  x=pm.Bernoulli('x',p=theta,observed=x_data1)
+
+  start=pm.find_MAP()
+
+  step=pm.NUTS()
+
+  trace1=pm.sample(2000,step=step,start=start)
+
+pm.traceplot(trace1)
+plt.show()
+
+pm.plot_posterior(trace1)
+plt.xlim(0, 1)
+plt.show() -->
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># @ Code</span>
+theta0<span style="color: #333333">=</span><span style="color: #6600EE; font-weight: bold">0.7</span>
+
+<span style="color: #888888"># @ Set seed number</span>
+np<span style="color: #333333">.</span>random<span style="color: #333333">.</span>seed(<span style="color: #0000DD; font-weight: bold">0</span>)
+
+<span style="color: #888888"># c x_data1: generated 10 data which follow bernoulli distribution</span>
+x_data1<span style="color: #333333">=</span>sp<span style="color: #333333">.</span>stats<span style="color: #333333">.</span>bernoulli(theta0)<span style="color: #333333">.</span>rvs(<span style="color: #0000DD; font-weight: bold">10</span>)
+<span style="color: #007020">print</span>(x_data1)
+<span style="color: #888888"># array([1, 0, 1, 1, 1, 1, 1, 0, 0, 1])</span>
+
+<span style="color: #888888"># @ create model scope</span>
+<span style="color: #008800; font-weight: bold">with</span> pm<span style="color: #333333">.</span>Model() <span style="color: #008800; font-weight: bold">as</span> model:
+  theta<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>Beta(<span style="background-color: #fff0f0">&#39;theta&#39;</span>,alpha<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>,beta<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>)
+
+  x<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>Bernoulli(<span style="background-color: #fff0f0">&#39;x&#39;</span>,p<span style="color: #333333">=</span>theta,observed<span style="color: #333333">=</span>x_data1)
+
+  start<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>find_MAP()
+
+  step<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>NUTS()
+
+  trace1<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>sample(<span style="color: #0000DD; font-weight: bold">2000</span>,step<span style="color: #333333">=</span>step,start<span style="color: #333333">=</span>start)
+
+pm<span style="color: #333333">.</span>traceplot(trace1)
+plt<span style="color: #333333">.</span>show()
+
+pm<span style="color: #333333">.</span>plot_posterior(trace1)
+plt<span style="color: #333333">.</span>xlim(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>)
+plt<span style="color: #333333">.</span>show()
+</pre></div>
+<xmp>
+
+================================================================================
+Bayesian Linear Regression using MCMC
+
+</xmp>
+<!-- # @ Code
+from sklearn.datasets import make_regression
+
+# @ Create data for regression task
+# 100 samples, 1 feature
+x,y_data,coef=make_regression(n_samples=100,n_features=1,bias=0,noise=20,coef=True,random_state=1)
+x = x.flatten()
+
+# ================================================================================
+print(coef)
+# array(80.71051956)
+
+# ================================================================================
+plt.scatter(x, y_data)
+plt.show()
+
+# ================================================================================
+# Create Model scope
+with pm.Model() as m:
+
+  w=pm.Normal('w',mu=0,sd=50)
+  b=pm.Normal('b',mu=0,sd=50)
+  esd=pm.HalfCauchy('esd',5)
+  y=pm.Normal('y',mu=w*x+b,sd=esd,observed=y_data)
+
+  start = pm.find_MAP()
+  step = pm.NUTS()
+  trace1 = pm.sample(10000, step=step, start=start)
+
+# logp = -448.82, ||grad|| = 6.8486: 100%|██████████| 37/37 [00:00<00:00, 1599.20it/s]  
+# Multiprocess sampling (4 chains in 4 jobs)
+# NUTS: [esd, b, w]
+# Sampling 4 chains: 100%|██████████| 42000/42000 [00:16<00:00, 2477.73draws/s]
+
+# ================================================================================
+pm.traceplot(trace1)
+plt.show()
+
+# ================================================================================
+pm.summary(trace1) -->
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888"># @ Code</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #0e84b5; font-weight: bold">sklearn.datasets</span> <span style="color: #008800; font-weight: bold">import</span> make_regression
+
+<span style="color: #888888"># @ Create data for regression task</span>
+<span style="color: #888888"># 100 samples, 1 feature</span>
+x,y_data,coef<span style="color: #333333">=</span>make_regression(n_samples<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">100</span>,n_features<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>,bias<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>,noise<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">20</span>,coef<span style="color: #333333">=</span><span style="color: #008800; font-weight: bold">True</span>,random_state<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>)
+x <span style="color: #333333">=</span> x<span style="color: #333333">.</span>flatten()
+
+<span style="color: #888888"># ================================================================================</span>
+<span style="color: #007020">print</span>(coef)
+<span style="color: #888888"># array(80.71051956)</span>
+
+<span style="color: #888888"># ================================================================================</span>
+plt<span style="color: #333333">.</span>scatter(x, y_data)
+plt<span style="color: #333333">.</span>show()
+
+<span style="color: #888888"># ================================================================================</span>
+<span style="color: #888888"># Create Model scope</span>
+<span style="color: #008800; font-weight: bold">with</span> pm<span style="color: #333333">.</span>Model() <span style="color: #008800; font-weight: bold">as</span> m:
+
+  w<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>Normal(<span style="background-color: #fff0f0">&#39;w&#39;</span>,mu<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>,sd<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">50</span>)
+  b<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>Normal(<span style="background-color: #fff0f0">&#39;b&#39;</span>,mu<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>,sd<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">50</span>)
+  esd<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>HalfCauchy(<span style="background-color: #fff0f0">&#39;esd&#39;</span>,<span style="color: #0000DD; font-weight: bold">5</span>)
+  y<span style="color: #333333">=</span>pm<span style="color: #333333">.</span>Normal(<span style="background-color: #fff0f0">&#39;y&#39;</span>,mu<span style="color: #333333">=</span>w<span style="color: #333333">*</span>x<span style="color: #333333">+</span>b,sd<span style="color: #333333">=</span>esd,observed<span style="color: #333333">=</span>y_data)
+
+  start <span style="color: #333333">=</span> pm<span style="color: #333333">.</span>find_MAP()
+  step <span style="color: #333333">=</span> pm<span style="color: #333333">.</span>NUTS()
+  trace1 <span style="color: #333333">=</span> pm<span style="color: #333333">.</span>sample(<span style="color: #0000DD; font-weight: bold">10000</span>, step<span style="color: #333333">=</span>step, start<span style="color: #333333">=</span>start)
+
+<span style="color: #888888"># logp = -448.82, ||grad|| = 6.8486: 100%|██████████| 37/37 [00:00&lt;00:00, 1599.20it/s]  </span>
+<span style="color: #888888"># Multiprocess sampling (4 chains in 4 jobs)</span>
+<span style="color: #888888"># NUTS: [esd, b, w]</span>
+<span style="color: #888888"># Sampling 4 chains: 100%|██████████| 42000/42000 [00:16&lt;00:00, 2477.73draws/s]</span>
+
+<span style="color: #888888"># ================================================================================</span>
+pm<span style="color: #333333">.</span>traceplot(trace1)
+plt<span style="color: #333333">.</span>show()
+
+<span style="color: #888888"># ================================================================================</span>
+pm<span style="color: #333333">.</span>summary(trace1)
+</pre></div>
+<xmp>
 
 </xmp>
    </BODY>
