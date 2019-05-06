@@ -54,8 +54,9 @@ MathJax.Hub.Config({
 https://datascienceschool.net/view-notebook/86c3c9c806c14534bbbf58e5c31dbf09/
 
 ================================================================================
-* When you know some of random variables in probabilistic model,
-you can find "other random variables"
+* When you know some random variables in probabilistic model,
+you can find "value of other random variables"
+
 * And this finding is called "inference"
 
 ================================================================================
@@ -73,14 +74,77 @@ you can find "other random variables"
 * Each random variable can have $$$\{0,1,2\}$$$ representing low, medium, high
 
 ================================================================================
-probabilistic graph model like Bayesian network and Markov network 
+* Question
+
+1. Probability distribution of C?
+* Find probability distribution $$$P(C)$$$
+
+2-1. What score will have largest probability?
+2-2. When good A is given, what score will have largest probability?
+* Find conditional probability distribution $$$P(C|A=2)$$$
+
+3. When low B and good C are given, what status of A will be?
+* Find conditional probability distribution $$$P(A|B=0,C=2)$$$
+
+================================================================================
+* Probabilistic graph model like Bayesian network and Markov network 
 uses "variable elimination" and "belief propagation" to perform inference
 
 ================================================================================
-Variable elimination
+* Joint probability of above example: $$$P(A,B,C)=P(A) \times P(B|A) \times P(C|B)$$$
+
+================================================================================
+* When you know probability distribution of C,
+you can find probability distribution of B
+
+$$$P(B=0) \\
+= \sum\limits_{A} [P(B=0|A) \times P(A)] \\
+= P(B=0|A=0)P(A=0) + P(B=0|A=1)P(A=1) + P(B=0|A=2)P(A=2)$$$
+
+* You can use same calculation for the cases of $$$B=1$$$ and $$$B=2$$$
+
+================================================================================
+* Let's calculate probability distribution of C
+
+$$$P(C) = \sum\limits_{A,B} P(C|B)P(B|A)P(A)$$$
+
+* $$$\sum\limits_{A,B}$$$: all possible combinations which A and B can have
+* $$$\sum\limits_{A,B}= \sum\limits_{A} \sum\limits_{B} $$$
+
+* You can calculate P(C=0) as follow
+$$$P(C=0) \\
+= P(C=0|B=0)P(B=0|A=0)P(A=0) + \\
+\;\;P(C=0|B=0)P(B=0|A=1)P(A=1) + \\
+\;\;P(C=0|B=0)P(B=0|A=2)P(A=2) + \\
+\;\;P(C=0|B=1)P(B=1|A=0)P(A=0) + \\
+\;\;P(C=0|B=1)P(B=1|A=1)P(A=1) + \\
+\;\;P(C=0|B=1)P(B=1|A=2)P(A=2) + \\
+\;\;P(C=0|B=2)P(B=2|A=0)P(A=0) + \\
+\;\;P(C=0|B=2)P(B=2|A=1)P(A=1) + \\
+\;\;P(C=0|B=2)P(B=2|A=2)P(A=2)$$$
+
+* Let's use factorization on above equation
+$$$P(C=0) \\
+= P(C=0|B=0) \big( P(B=0|A=0)P(A=0) + P(B=0|A=1)P(A=1) + P(B=0|A=2)P(A=2) \big) + \\
+\;\;P(C=0|B=1) \big( P(B=1|A=0)P(A=0) + P(B=1|A=1)P(A=1) + P(B=1|A=2)P(A=2) \big) + \\
+\;\;P(C=0|B=2) \big( P(B=2|A=0)P(A=0) + P(B=2|A=1)P(A=1) + P(B=2|A=2)P(A=2) \big) \\
+= P(C=0|B=0) P(B=0) + \\
+\;\;P(C=0|B=1) P(B=1) + \\
+\;\;P(C=0|B=2) P(B=2)$$$
+
+* Conclusion:
+If you're in state where probability distribution of B is already calculated,
+effect of probability distribution of A is disappear
+
+$$$P(C) = \sum\limits_{B} [P(C|B)\times P(B)]$$$
+
+================================================================================
+* Variable elimination which you saw from right above
 
 * You calculate probability distribution
-* from random variable which you already know along the network model
+* from "random variable which you already know" to "value of other randome variables" 
+along the entire network model
+* this is called "variable elimination" cause you're removing variables step by step
 
 ================================================================================
 Belief propagation (message passing)
