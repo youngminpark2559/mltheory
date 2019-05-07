@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================
+https://datascienceschool.net/view-notebook/5e2ee247518f47a6ba2d0894b33c73a3/
+
+================================================================================
+result=Bernoulli_trial(trial)
+
+set_of_result={val1,val2}
+
+================================================================================
+Bernoulli random variable $$$\subset$$$ Discrete random variable
+
+value=Bernoulli_random_variable(result_from_trial)
+set_of_value={0,1}
+
+================================================================================
+Probability density function $$$Bern(x;\mu)$$$ of Bernoulli random variable
+
+$$$\text{Bern}(x;\mu) = 
+\begin{cases} 
+\mu   & \text{if }x=1, \\
+1-\mu & \text{if }x=0
+\end{cases}$$$
+
+* $$$\mu$$$ : parameter, probability of 1 occuring
+* $$$x$$$: variable
+
+* Code
+value=Bernoulli_RN(result_from_trial)
+print("value",value)
+# 0 or 1
+
+
+prob_val=PDF_of_Bernoulli_RV(value)
+print("prob_val",prob_val)
+# mu or 1-mu
+
+================================================================================
+PDF of PDF of Bernoulli RV
+
+$$$\text{Bern}(x;\mu) = \mu^x(1-\mu)^{(1-x)}$$$
+
+================================================================================
+If a random variable X occurs by driving force of PDF of Bernoulli RV,
+you can say RV X follows Bernoulli distribution
+
+$$$X \sim Bern(x;\mu)$$$
+
+================================================================================
+PMF of Bernoulli random variable
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/002_Math_for_data_science/006_Probability_distribution/pics/2019_05_07_17:34:38.png' alt=''><xmp>
+
+$$$P(x=0)=0.4$$$
+$$$P(x=1)=0.6$$$
+
+================================================================================
+Simulation: is to generate samples which will be into random variable
+
+================================================================================
+val1=Bernoulli_random_variable(result1_from_trial1)
+val2=Bernoulli_random_variable(result2_from_trial2)
+# ...
+val100=Bernoulli_random_variable(result100_from_trial100)
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/002_Math_for_data_science/006_Probability_distribution/pics/2019_05_07_17:36:14.png' alt=''><xmp>
+
+================================================================================
+Moments of Bernoulli distribution
+
+* $$$E[X]=\mu$$$
+
+val_1=Bernoulli_RN(result_1_from_trial_1)
+...
+val_n=Bernoulli_RN(result_n_from_trial_n)
+
+mu=mean(val_1,...,val_n)
+
+================================================================================
+$$$Var[X]=\mu(1-\mu)$$$
+
+================================================================================
+Parameter estimation
+* You get sample from population
+* You analyze sample
+* You estimate parameters (mean, var, std) of population
+
+================================================================================
+$$$\hat{\mu} = \dfrac{\sum_{i=1}^N x_i}{N}= \dfrac{N_1}{N}$$$
+
+N=number_of_sample
+N_1=number_of_1_occured
+
+pred_mean_of_pop=mean(N_1,N)
+
+================================================================================
+How to use Bernoulli distribution
+
+1. Frequentist usage
+- Input: categorical values like 0 or 1, True or False
+- Bernoulli distribution decribes ratio of event occuring
+
+2. Bayesian usage
+- Output data: categorical values like spam or ham
+- Which output value has more large likelihood?
+
+================================================================================
+* You get 10 emails
+* It turned out 6 emails are spam
+* Likelihood of coming email is spam is 60%
+
+* Above situation can be described by Bernoulli distribution which has $$$\mu=0.6$$$
+$$$P_Y=Bern(y;\mu=0.6)$$$
+* $$$Y$$$: random variable, 0: ham, 1: spam
+
+================================================================================
+* Spam email will more likely have some words
+* Suppose 4 words which spam email likes to contain
+* Suppose email x, x contains 1st and 3rd word
+$$$x = \begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix}$$$
+
+* If you have multiple emails, you can write
+$$$X =
+\begin{bmatrix} 
+1 & 0 & 1 & 0 \\
+1 & 1 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 \\
+1 & 1 & 0 & 0 \\
+1 & 1 & 0 & 1 \\
+\end{bmatrix}$$$
+
+================================================================================
+Pattern of spam email
+
+$$$(X_1,X_2,,X_3,X_4)$$$
+$$$X$$$: Bernoulli random variable
+
+$$$X_1 \sim Bern(x_1;\mu_1)$$$: probability of spam containing word $$$x_1$$$
+$$$X_2 \sim Bern(x_2;\mu_2)$$$: probability of spam containing word $$$x_2$$$
+$$$X_3 \sim Bern(x_3;\mu_3)$$$: probability of spam containing word $$$x_3$$$
+$$$X_4 \sim Bern(x_4;\mu_4)$$$: probability of spam containing word $$$x_4$$$
+
+================================================================================
+You can calculate parameter by using above feature vectors
+$$$\hat{\mu}_1 = \frac{5}{6}$$$
+$$$\hat{\mu}_2 = \frac{4}{6}$$$
+$$$\hat{\mu}_3 = \frac{3}{6}$$$
+$$$\hat{\mu}_4 = \frac{3}{6}$$$
+
+</xmp>
+   </BODY>
+</HTML>
