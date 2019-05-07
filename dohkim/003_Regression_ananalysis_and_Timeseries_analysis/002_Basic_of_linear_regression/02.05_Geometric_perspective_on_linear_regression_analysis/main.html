@@ -94,6 +94,82 @@ is_perp(vector_space,residual_vec)
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_14:56:34.png' alt=''><xmp>
 
 ================================================================================
+b=Ta
+
+* Code
+scope:linear vector space
+  transformed_vector_b=transform_mat*vector_a
+
+================================================================================
+$$$\epsilon = M y$$$
+$$$\hat{y} = H y$$$
+
+* Code
+scope:linear vector space 
+  residual_vec=transform_mat_M*label_vec_y
+  pred_vec_y=transform_mat_H*label_vec_y
+
+================================================================================
+$$$e 
+= y - \hat{y} \\
+= y - Xw \\
+= y - X(X^TX)^{-1}X^Ty \\
+= (I - X(X^TX)^{-1}X^T)y \\
+= My$$$
+
+$$$M = I - X(X^TX)^{-1}X^T$$$
+M: residual matrix
+
+================================================================================
+$$$\hat{y} 
+=y - e \\
+=y - My \\
+=(I - M)y \\
+=X(X^TX)^{-1}X^T y \\
+=Hy$$$
+
+$$$H = X(X^TX)^{-1}X^T$$$
+H: projection matrix, hat matrix, influence matrix
+
+================================================================================
+Characteristics of residual matrix and projection matrix
+
+(1) Symetric matrix
+$$$M^T=M$$$
+$$$H^T=H$$$
+
+inv(M)=M
+inv(H)=H
+ 
+(2) idempotent matrix
+$$$M^2=M, M^3=M, \cdots$$$
+$$$H^2=M, H^3=M, \cdots$$$
+
+pow(M,2)=M
+pow(M,3)=M
+pow(H,2)=H
+pow(H,3)=H
+
+(3) M and H are perpendual
+$$$MH=HM=0$$$
+
+mul(M,H)==mul(H,M)==0
+# True
+ 
+(4) M and X are perpendual
+$$$MX=0$$$
+
+mul(M,X)==0
+# True
+ 
+(5) Multiply X by H doesn't change X
+HX=X
+
+================================================================================
+Remember
+$$$y^Ty = \hat{y}^T \hat{y}+ e^T e$$$
+
+pow(y,2)=pow(pred_y,2)+pow(residual_vec,2)
 
 </xmp>
    </BODY>
