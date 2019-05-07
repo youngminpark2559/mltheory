@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/ff9458c7156c4961b012c60e5fc97301/
+
+================================================================================
+* You almost can't perform linear regression analysis on following data
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_19:37:31.png' alt=''><xmp>
+
+================================================================================
+* When you perform "linear regression analysis" on "non-linear data"
+you can use "linear basis function model" instead of using non-linear model
+
+================================================================================
+* General linear regression model
+$$$y_i = \sum\limits_{i=1}^{D}w_ix_x = w^Tx$$$
+
+* Number of dim of trainable param w = dim of feature vector
+$$$x\in \mathbb{R}^{D} \Leftrightarrow w\in \mathbb{R}^{D}$$$
+
+================================================================================
+* Linear basis function models
+
+* You don't directly perform linear combination on x
+
+* You convert x via basis function to make new feature vector
+
+* You perform linear regression model on new feature vector
+
+* So, new dim of feature vector = dim of trainable param w
+
+$$$\phi(\cdot): \mathbb{R}^{D} \rightarrow \mathbb{R}^{M}$$$, then, $$$w \in \mathbb{R}^{M}$$$
+
+$$$y_i = \sum\limits_{j=1}^{M}w_j \phi_j(x) = w^T \phi(x)$$$
+
+================================================================================
+* Multinomial regression
+
+* Multinomial regression has basis function as multinomial function
+$$$1, x, x^2, \cdots, x^M$$$
+
+* $$$y = w_0 + w_1x + w_2x^2+\cdots+w_Mx^M$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_19:56:21.png' alt=''><xmp>
+
+================================================================================
+Overfitting
+
+* When capacity of network is too big than dimension of feature vector
+* When features in feature vector are not independet
+
+In above situation, right answer can be multiple
+
+================================================================================
+Problem of overfitting
+
+* With new feature data, it creates large error
+* When train data comes, trainable parameters change largely
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_19:59:58.png' alt=''><xmp>
+
+================================================================================
+      
+</xmp>
+   </BODY>
+</HTML>
