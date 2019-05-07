@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/e6ef730b7a3b4be7be4ff028d39d67f7/
+
+================================================================================
+* $$$\hat{y}$$$ is expressed by linear combination
+* $$$\hat{y} = w_1x_1 + w_2x_2 + \cdots + w_Nx_N$$$
+
+* If all columns are linear independent,
+$$$\hat{y}$$$ should be located in vector space
+which has basis vector composed of each column of $$$c_1,\cdots,c_M$$$
+
+================================================================================
+$$$\hat{y}=X\omega$$$
+* $$$X$$$: multiple feature vectors
+* $$$\omega$$$: trainable parameters
+* $$$\hat{y}$$$: prediction
+
+$$$= [c_1, \cdots, c_M] \begin{bmatrix} \omega_1\\\vdots\\\omega_M \end{bmatrix}$$$
+
+$$$= \omega_1c_1 + \cdots + \omega_Mc_M$$$
+
+================================================================================
+* Residual vector $$$\epsilon$$$
+
+* $$$\epsilon = y-\hat{y}$$$
+
+* \hat{y} is vector which minimizes $$$\epsilon$$$, 
+which is nearest to $$$y$$$
+
+* Residual vector \epsilon $$$\perp$$$ vector space
+
+* y_hat_vector,residual_vec=projection_to_vector_space(y_vector)
+
+vector_space
+  basis_vectors=[c_1,...,c_M]
+
+is_perp(vector_space,residual_vec)
+# True
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_07_14:56:34.png' alt=''><xmp>
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
