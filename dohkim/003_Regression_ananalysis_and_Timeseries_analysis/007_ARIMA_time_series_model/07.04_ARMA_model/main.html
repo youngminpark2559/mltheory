@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/9cbbfed6d6f34f02a2cdaa422706be91/
+
+================================================================================
+* Code
+ARMA(p,q) model = Characteristics of AR(p) model + Characteristics of MA(q) model
+
+================================================================================
+$$$Y_t = 
+-\phi_1 Y_{t-1} -\phi_2 Y_{t-2} -\cdots -\phi_p Y_{t-p} 
++ \epsilon_t + \theta_1 \epsilon_{t-1} +\theta_2 \epsilon_{t-2} \cdots  +\theta_q \epsilon_{t-q}$$$
+
+* Code
+previous_values_of_myself
+print(len(previous_values_of_myself))
+# p
+
+previous_white_noises
+print(len(previous_white_noises))
+# q
+
+current_val=ARMA_model(previous_values_of_myself,previous_white_noises)
+
+================================================================================
+* Code
+
+cond1=Condition for ARMA(p,q) to be stationarity status
+cond2=Condition for AR(p) to be stationarity status
+
+cond1==cond2
+# True
+
+thetas=Get_coefficient_theta_from_MA(q)
+res=does_thetas_affect_stationarity_status_on_ARMA(p,q)
+print(res)
+# False
+
+================================================================================
+* ARMA(p,q) model
+$$$Y_t = 
+-\phi_1 Y_{t-1} -\phi_2 Y_{t-2} -\cdots -\phi_p Y_{t-p} 
++ \epsilon_t + \theta_1 \epsilon_{t-1} +\theta_2 \epsilon_{t-2} \cdots  +\theta_q \epsilon_{t-q}$$$
+
+* ARMA(p,q) model in linear probabilistic process
+$$$Y_t = \epsilon_t + \psi_1 \epsilon_{t-1} + \psi_2 \epsilon_{t-2} + \cdots$$$
+
+* $$$\psi$$$ are like
+$$$\psi_1 = \theta_1 -\phi_1 \\
+\psi_2 = \theta_2 - \phi_2 -\phi_1 \psi_1 \\
+\vdots \\
+\psi_j = \theta_j -\phi_p\psi_{j-p} -\phi_2 \psi_{p-1} + \cdots  -\phi_1 \psi_{j-1}$$$
+
+* Autocorrelation coefficient of ARMA(p,q) model
+$$$\rho_k = -\phi_1 \rho_{k-1} - \cdots - \phi_p\rho_{k-p}$$$
+
+================================================================================
+By using above equations, you can find ARMA model wrt given Autocorrelation coefficient function
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_08_07:01:19.png' alt=''><xmp>
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/003_Regression_ananalysis_and_Timeseries_analysis/pics/2019_05_08_07:01:40.png' alt=''><xmp>
+
+================================================================================
+* Code
+linear_probabilistic_process=convert(AR(p)_model)
+
+AR_model_in_infinite_dimension=convert(MA(q)_model)
+
+================================================================================
+* Code
+
+if AR_model_in_infinite_dimension satisties stationarity_status_condition:
+  print("original MA(q) model is invertibile")
+else:
+  print("original MA(q) model is not invertibile")
+
+================================================================================
+
+ret=number of MA model which has "given autocorrelation coefficient function"
+print(ret)
+# Multiples
+
+ret=number of MA model which satisfies "invertibile"
+print(ret)
+# 1
+
+</xmp>
+   </BODY>
+</HTML>
