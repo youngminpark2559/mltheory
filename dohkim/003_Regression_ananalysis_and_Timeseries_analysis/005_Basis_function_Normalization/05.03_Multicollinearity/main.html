@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/36176e580d124612a376cf29872cd2f0/
+
+================================================================================
+* Multicolinearity: Partial independent variables = combination of other independent variables
+
+* Multicolinearity occurs when independent variables have strong correlations
+
+* Having correlations between independent variables violates the condition
+that covariance matrix of independent variables should be full rank
+
+================================================================================
+* Following shows "correlations" between independent variables
+
+/home/young/Pictures/2019_05_09_06:06:48.png
+
+================================================================================
+* When "multicolinearity" exists, 
+conditional number of covariance matrix of independent variables increases
+
+* High conditional number can lead to overfitting
+
+* You can reduce conditional number by performing scaling
+
+================================================================================
+* If independent variables depend on each other, overfitting occurs
+
+* To fix it,
+1. remove dependent variables by using "feature selection"
+2. remove dependent element by using PCA
+3. use regularization
+
+================================================================================
+* How to select most dependent variable
+
+* VIF (Variance Inflation Factor)
+
+* VIF of ith independent variable
+$$$\text{VIF}_i = \frac{\sigma^2}{(n-1)\text{Var}[X_i]}\cdot \frac{1}{1-R_i^2}$$$
+
+* If ith variable more depends on, VIF increases
+      
+</xmp>
+   </BODY>
+</HTML>
