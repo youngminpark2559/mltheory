@@ -1,1 +1,145 @@
-f
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================
+In previous lectures, you learned "how to estimate probability density function of population 
+using parameters of samples from population"
+
+================================================================================
+Now, you will not suppose "probability density function" as Gaussian distribution shape
+
+You will suppose arbitrary shape.
+
+Then, you can't use parameters to estimate PDF
+
+================================================================================
+Likelihood: density of each class, $$$p(x|\omega_i)$$$
+
+Previous chapters:
+1. You supposed you know likelihood which is PDF of specific class (you used MLE)
+2. You supposed you know parametric shape of likelihood (parametric estimation)
+
+================================================================================
+* You won't suppose the shape of PDF
+
+* You will estimate PDF via sample
+
+================================================================================
+* Non parametric PDF estimation
+
+- Histogram
+- Kernel density estimation
+- k-NNR
+
+================================================================================
+Sample data
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_08_16:18:03.png' alt=''><xmp>
+
+Population data's PDF which is composed of multiples classes
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_08_16:19:37.png' alt=''><xmp>
+
+PDF: $$$P(x_1,x_2|\omega_i)$$$
+
+================================================================================
+* Histogram
+* It decribes density of data
+* You separate data by fixed intervals
+* You count frequency of data in each interval
+* High frequency -> Tall vertical bar
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_08_16:24:22.png' alt=''><xmp>
+
+================================================================================
+* To get probability value, you can use following
+$$$P_{H}(x) = \frac{1}{N} \frac{\text{height of bin}}{\text{width of bin}}$$$
+
+* Advantage:
+- Easy to write
+
+* Disadvantage:
+- Final shape from density estimation depends on "starting position of the bins"
+- Density can look "not continous"
+But it's not actuallly "discontinuity", it just look "discontinuity" due to interval of bin
+- Curse of dimention: more dimension creates more number of bins
+Then, most of bins become empty, resulting "discontinuity-like looking"
+- So, Histogram is not useful for practical analysis
+but it's useful for rapid visualization
+
+================================================================================
+* Example
+
+12 data:
+2.1, 2.4, 2.3, 2.4, 2.47, 2.7, 2.6, 2.65, 3.3, 3.39, 3.8, 3.87
+
+* Find Histogram
+- width of big: 0.5
+- Interval: 1.0 - 1.5, 2.0 - 2.5, ...
+
+* Code
+Y=[2.1, 2.4, 2.3, 2.4, 2.47, 2.7, 2.6, 2.65, 3.3, 3.39, 3.8, 3.87]
+X=[0.25:0.5:5]
+N=HIST(Y,X)
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_08_16:44:19.png' alt=''><xmp>
+
+Y=[2.1, 2.4, 2.3, 2.4, 2.47, 2.7, 2.6, 2.65, 3.3, 3.39, 3.8, 3.87]
+X=[0.5:0.5:5]
+N=HIST(Y,X)
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_08_16:45:15.png' alt=''><xmp>
+
+================================================================================
+
+      
+</xmp>
+   </BODY>
+</HTML>
