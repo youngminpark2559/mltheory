@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+https://datascienceschool.net/view-notebook/6927b0906f884a67b0da9310d3a581ee/
+
+================================================================================
+* Bag of Words
+
+* Word dictionary: "I", "am", "a", "boy", "girl"
+
+* Word: index
+"I":0
+"am":1
+"a":2
+"boy":3
+"girl":4
+
+* Sentence to vector
+"I am a girl" = [1 1 1 0 1]
+
+================================================================================
+* Word embedding: make a float values for one word in the text
+
+* Following is 2D embedding example
+
+* Word: 2D vector
+"I":[0.3 0.2]
+"am":[0.1 0.8]
+"a":[0.5 0.6]
+"boy":[0.2 0.9]
+"girl":[0.4 0.7]
+
+================================================================================
+* Operation on word vectors to express one entire text
+- Concatenation
+- Averaging
+
+================================================================================
+* Create word embedding
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/005_Deep_learning_for_data_science/pics/2019_05_09_06:31:57.png' alt=''><xmp>
+
+* Suppose V number of words in dictionary
+
+* One word is expressed by V-dim vector
+
+* Encode input and output word by BOW way
+
+* Perform one-hot-encoding on word vector x
+
+* $$$h=\sigma(Wx)$$$
+- $$$h$$$: hidden vector
+- $$$W$$$: trainable parameter
+- $$$x$$$: input word vector
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/005_Deep_learning_for_data_science/pics/2019_05_09_06:47:30.png' alt=''><xmp>
+
+================================================================================
+* Embedding word vectors have following characteristics
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/005_Deep_learning_for_data_science/pics/2019_05_09_06:48:42.png' alt=''><xmp>
+
+================================================================================
+NLP probelm
+
+* single word context: one word is given, predict next word
+* multi word context: words are given, predicts words
+
+* Example,
+- Target words: the quick brown fox jumped over the lazy dog
+- When 3 words (the, quick, brown) are given, you need to predict "fox"
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/dohkim/005_Deep_learning_for_data_science/pics/2019_05_09_06:57:45.png' alt=''><xmp>
+
+* Embedding matrix is used in common for 3 input words
+
+================================================================================
+* Skip gram embedding
+
+* one word is give, you predict words
+
+================================================================================
+* Word2vec
+
+</xmp>
+   </BODY>
+</HTML>
