@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+This is note I wrote as I was take following lecture
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
+
+================================================================================
+Multivariate Gaussian probability density function
+
+$$$f_X(X)=\dfrac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}
+\exp \left[ -\frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \right]$$$
+
+Input X: n dimensional feature vector, $$$X \in \mathbb{R}^n$$$
+
+probability density of feature vector is Gaussian shape  
+
+$$$|\Sigma|$$$: determinant of covariance matrix
+
+================================================================================
+Suppose it's Gaussian probability density function,
+and criterions when you classify are ML, MAP, Bayes criterion
+
+================================================================================
+MAP (maximum a posteriori) decision function is 
+
+$$$g_i(x) \\ = P(\omega_i|x) \\ = \dfrac{P(x|\omega_i)P(\omega_i)}{P(x)} \\ = \frac{1}{(2\pi)^{n/2} |\Sigma_i|^{1/2}} \exp \left -\frac{1}{2} (X-\mu_i)^T \Sigma_i^{-1}(X-\mu_i) \right P(\omega_i) \frac{1}{P(x)}$$$
+
+Goal: you find posterior probability
+$$$\text{posterior probability } = P(\omega_i|x)$$$, 
+when x is given, probability of class $$$\omega_i$$$ occurring
+
+$$$g_i(x)$$$: decision function
+
+$$$\dfrac{P(x|\omega_i)P(\omega_i)}{P(x)}$$$: you get this 
+by using Bayes rule on posterior probability $$$P(\omega_i|x)$$$
+
+$$$P(\omega_i)$$$: prior probability
+
+$$$P(x|\omega_i)$$$: likelihood= probability density function of given random variable
+
+So, you put $$$f_X(X)=\dfrac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}} \text{exp} \left[ -\frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \right]$$$
+into $$$P(x|\omega_i)$$$
+
+================================================================================
+You remove constant terms ($$$P(x), 2\pi$$$)
+
+$$$g_i(x)= |\Sigma_i|^{-1/2} \exp\left[ -\frac{1}{2} (x-\mu_i)^T \Sigma_i^{-1}(x-\mu_i) \right] P(\omega_i) \frac{1}{P(x)}$$$
+
+================================================================================
+You use natural log to use $$$\log{(ABC)}=\log{A}+\log{B}+\log{C}$$$
+
+$$$g_i(x)=-\frac{1}{2} (x-\mu_i)^T \Sigma_i^{-1} (x-\mu_i) - 
+\frac{1}{2}\log{(|\Sigma_i|)}+\log{P(\omega_i)}$$$
+
+7
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>
