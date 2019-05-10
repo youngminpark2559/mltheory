@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/968c34fd6b404fcab12cbbbfd36418a2/
+
+================================================================================
+* Optimization
+
+* output_data=function_A(input_data)
+* Find input_data which minimizes (or maximizes) output_data
+
+================================================================================
+* Grid search
+
+input_data_in_interval=cut_to_specific_range(large_input_data)
+
+for one_input_data in input_data_in_interval:
+  output_data=function_A(one_input_data)
+
+  is output_data is mimimum?
+    break
+  else:
+    continue
+
+* Grid search takes much time when input variable has too many values
+
+================================================================================
+* Numerical optimization
+
+* It gets output from function, by using small number of calculation
+* Steepest gradient method
+* Newton method (upgraded from steepest gradient method)
+
+================================================================================
+* Optimization has "constraints"
+
+* Equality constraint
+- Input data should satisfy specific simultaneous equations (as constraint)
+
+* Inequality constraint
+- Input data should satisfy specific simultaneous inequalities (as constraint)
+
+================================================================================
+* How to solve optimization problem with equality constraint
+
+- Use Lagrange multiplier
+
+================================================================================
+* How to solve optimization problem with inequality constraint
+
+- Use KKT condition
+
+================================================================================
+Practical optimization problems
+
+- Linear programming (LP problem)
+- Quadratic programming (QP problem)
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
