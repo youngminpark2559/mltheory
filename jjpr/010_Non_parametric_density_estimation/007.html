@@ -51,18 +51,13 @@ MathJax.Hub.Config({
    <BODY>
 
 <xmp>
+http://www.kocw.net/home/search/kemView.do?kemId=1189957
 
 ================================================================================
-k-NNR 방식으로 probability density estimation 을 하는 방법을 이용해서 bayes classifier 를 쉽게 apply 할 수 있는 방법을 알게 되었다. bayes classifier 을 일반적으로 사용한다면, 주어진 sample 이 있을 때, 그 중 에서 sample $x_{u}$ 가 class i 에 속할 posterior probability 을 구할때, $x_{u}$ 가 발생할 확률 normalization constant 분의 $\omega_{i}$ 가 나올 prior probability 곱하기 $\omega_{i}$ 에서 $x_{u}$ 가 나올 likelihood 이다.
-$P(\omega_{i}|x_{u}) = \frac{P(x|\omega_{i}) P(\omega_{i})}{P(x)}$
+estimated_PDF=probability_density_estimation_using_k_NNR(sample_data,bayes_classifer_func)
 
-
-probability_density_estimation_using_k_NNR(bayes_classifer_func)
-
+================================================================================
 * Bayes classifer
-
-posterior_probability=$$$P(\omega_i|x)$$$
-
 $$$P(\omega_i|x) \\
 = \frac{P(x|\omega_i) P(\omega_i)}{P(x)}$$$
 * $$$P(x|\omega_i)$$$: likelihood
