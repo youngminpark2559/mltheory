@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+================================================================================
+k-NNR 방식으로 probability density estimation 을 하는 방법을 이용해서 bayes classifier 를 쉽게 apply 할 수 있는 방법을 알게 되었다. bayes classifier 을 일반적으로 사용한다면, 주어진 sample 이 있을 때, 그 중 에서 sample $x_{u}$ 가 class i 에 속할 posterior probability 을 구할때, $x_{u}$ 가 발생할 확률 normalization constant 분의 $\omega_{i}$ 가 나올 prior probability 곱하기 $\omega_{i}$ 에서 $x_{u}$ 가 나올 likelihood 이다.
+$P(\omega_{i}|x_{u}) = \frac{P(x|\omega_{i}) P(\omega_{i})}{P(x)}$
+
+
+probability_density_estimation_using_k_NNR(bayes_classifer_func)
+
+* Bayes classifer
+
+posterior_probability=$$$P(\omega_i|x)$$$
+
+$$$P(\omega_i|x) \\
+= \frac{P(x|\omega_i) P(\omega_i)}{P(x)}$$$
+* $$$P(x|\omega_i)$$$: likelihood
+* $$$P(\omega_i)$$$: prior probability
+
+$$$= \dfrac{\frac{k_i}{N_iV}\frac{N_i}{N}}{\frac{k}{NV}}$$$
+* Likelihood $$$P(x|\omega_i)$$$ is PDF
+* You can try estimate Likelihood $$$P(x|\omega_i)$$$ by using k-NNR
+* Likelihood $$$P(x|\omega_i)$$$ by using k-NNR is written: $$$P(x|\omega_i)=\frac{k_i}{N_iV}$$$
+* Unconditional density $$$P(x)$$$ is estimated into $$$P(x)=\frac{k}{NV}$$$ via k-NNR
+* Prior probability $$$P(\omega_i)$$$ is approximated into $$$P(\omega_i)=\frac{N_i}{N}$$$ via k-NNR
+
+$$$= \frac{k_i}{k}$$$
+* $$$k_i$$$: number of sample in ith class
+* $$$k$$$: number of all sample in specific region
+
+* Meaning: by using relative frequency (non parametric density estimation), 
+you can predict "class $$$\omega_i$$$" for given feature data $$$x$$$
+
+================================================================================
+* Non parametric density estimation
+
+* Pros
+- Easy analysis
+- Easy implementation
+- When infinite number of samples are given, this is optimal method
+- Considers surrounding samples also around sample, so it creates adaptive results
+- Easy parallel processing
+
+* Cons
+- Large data should be stored into memory
+- Large computation time
+- Vulnerable by curse of dimension
+Curse of dimension: more empty spaces, estimating PDF can be incorrect at those areas
+
+================================================================================
+* k: "how many sample" should be "involved" into "given volumne"
+
+* $$$k=1$$$, 1-NNR
+* $$$k>1$$$, k-NNR
+
+================================================================================
+* Large k
+* Pros
+- smoothed decision boundary
+- KDE: non smooth decision boundary (which can be resolved by using smooth kernel)
+- Supplies probabilistic information
+Large k, almost becomes PDF
+
+* Cons
+- Since too many samples are considered into one "volume", local information is removed
+(only creates generalized result)
+- Much computation
+
+</xmp>
+   </BODY>
+</HTML>
