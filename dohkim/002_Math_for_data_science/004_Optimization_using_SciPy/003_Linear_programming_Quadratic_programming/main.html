@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+
+<xmp>
+
+https://datascienceschool.net/view-notebook/0fca28c71c13460fb7168ee2adb9a8be/#list_comment
+
+==============================================================================================================
+* Linear programming
+
+* Minimize and maximize "linear model" which has "equality and inequality equations"
+
+* Objective function in linear programming
+$$$\arg_x\min c^{T}x$$$
+
+* Equality constraint as linear simultaneous equation
+$$$Ax=b$$$
+
+* Inequality constraint for elements
+$$$x \ge 0$$$
+
+================================================================================
+* LP in canonical form (expanded version from LP)
+
+$$$\arg_x \min c^T x$$$
+$$$Ax \le b$$$
+$$$x \ge 0$$$
+
+================================================================================
+* Example 
+
+* Objective function
+$$$-3x_1-5x_2$$$ 
+
+* Constraints: 
+* $$$-x_1 \;\;\;\;\;\;\; \le -100$$$
+* $$$\;\;\;\;\;\;\; -x_2 \le -100$$$
+* $$$x_1 \; + \; 2x_2 \le 500$$$
+* $$$4x_1  + \; 5x_2 \le 9800$$$
+* $$$x_1 \;\;\;\;\;\;\; \ge 0$$$
+* $$$\;\;\;\;\;\;\; x_2 \ge 0$$$
+
+================================================================================
+* Represent above problem as linear programming
+
+* Objective function as linear programming
+$$$\min_x c^Tx$$$ 
+$$$\min_x 
+\begin{bmatrix}
+-3 && -5
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}$$$
+
+* Constraint as linear programming
+$$$\begin{bmatrix}
+-1 && 0\\0 && -1\\1 && 2\\4 && 5
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}
+\le
+\begin{bmatrix}
+-100\\-100\\500\\9800
+\end{bmatrix}$$$
+
+$$$\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}
+\ge
+\begin{bmatrix}
+0\\0
+\end{bmatrix}$$$
+
+================================================================================
+Linear programming by using SciPy
+
+sp.optimize.linprog(c,A,b)
+c: coefficient vector of objective function
+A: coefficient matrix representing equality constraint
+b: constant vector representing equality constraint
+
+================================================================================
+* Code
+
+import scipy.optimize
+
+A=np.array([[-1,0],[0,-1],[1,2],[4,5]])
+b=np.array([-100,-100,500,9800])
+c=np.array([-3,-5])
+
+result=sp.optimize.linprog(c,A,b)
+result
+#      con: array([], dtype=float64)
+#      fun: -1400.0
+#  message: 'Optimization terminated successfully.'
+#      nit: 3
+#    slack: array([ 200.,    0.,    0., 8100.])
+#   status: 0
+#  success: True
+#        x: array([300., 100.])
+
+================================================================================
+* Quadratic programming is to minimize "quadratic form" 
+which has "equality and inequality constraints"
+
+* Objective function
+$$$\arg_x\min \dfrac{1}{2}x^TQx + c^Tx$$$
+
+* Equality and inequality constrants
+$$$Ax = b$$$
+$$$x \ge 0$$$
+
+================================================================================
+* Example 
+
+* Objective function
+$$$x_1^2 + x_2^2$$$
+$$$\arg_x\min (x_1^2 + x_2^2)$$$ 
+
+* Equality constraint
+$$$x_1 + x_2 - 1 = 0$$$ 
+
+================================================================================
+* Quadratic form with constraint
+$$$\arg\min_x
+\dfrac{1}{2}
+\begin{bmatrix}
+x_1 & x_2
+\end{bmatrix}
+\begin{bmatrix}
+2 & 0\\0 & 2
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}
++ 
+\begin{bmatrix}
+0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix}$$$
+
+* Equality constraint
+$$$\begin{bmatrix}
+1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x_1\\x_2
+\end{bmatrix} = 1$$$
+
+================================================================================
+Solve QP problem by using CvxOpt
+
+from cvxopt import matrix, solvers
+
+Q=matrix(np.diag([2.0,2.0]))
+c=matrix(np.array([0.0,0.0]))
+A=matrix(np.array([[1.0,1.0]]))
+b=matrix(np.array([[1.0]]))
+
+sol=solvers.qp(Q,c,A=A,b=b)
+np.array(sol['x'])
+# array([[0.5],
+#        [0.5]])
+
+</xmp>
+   </BODY>
+</HTML>
