@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=qSNMQdVMW2U&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=50
+
+================================================================================
+Binary variable (select one from 0,1): binomial distribution
+
+Multi variable (select one from 0,1,3,4,5,6): multinomial distribution
+
+================================================================================
+* Binomial distribution
+
+* K=6
+* X=(0,0,1,0,0,0), 3rd one is selected
+* $$$\sum\limits_{k} x_k = 1$$$
+
+* $$$P(X|\mu) = \\prod\limits_{k=1}^{K} \mu_k^{x_k}$$$
+* $$$\mu_k$$$: probability of you selecting kth option
+* $$$\mu_k\ge 0$$$
+* $$$\sum\limits_{k} \mu_k = 1$$$
+
+================================================================================
+* multinomial distribution
+
+$$$P(X|\mu)
+= \sum\limits_{n=1}^{N}
+\sum\limits_{k=1}^{K} \mu_{k}^{x_{nk}}$$$
+* 2 sums: joint probability
+
+$$$= \sum\limits_{k=1}^{K}\mu_k^{\sum\limits_{n=1}^{N} x_{nk}}$$$
+* Suppose $$$m_k = \sum\limits_{n=1}^{N}x_{nk}$$$
+
+$$$= \prod\limits_{k=1}^{K} \mu_k^{m_k}$$$
+
+* Imagine 25 number of 4-options-questions
+
+================================================================================
+* MLE: Maximize $$$P(X|\mu) = \prod\limits_{k=1}^{K} \mu_k^{m_k}$$$
+* Constraint: $$$\mu_k \ge 0$$$, $$$\sum\limits_{k}\mu_k =1$$$
+
+</xmp>
+   </BODY>
+</HTML>
