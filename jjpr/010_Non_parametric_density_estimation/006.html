@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+================================================================================
+* k-NNR is not ultimately precise
+* It's hard to say it's actual PDF
+
+* Usage of k-NNR
+- It can be used with Bayes classifier
+- It can induce simple approximation from Bayes classifier
+
+================================================================================
+* N number of samples
+* multiple classes 
+* $$$N_{i}$$$: sample from class $$$\omega_i$$$
+
+* Your goal: classify $$$x_{u}$$$ into $$$\omega_{1}$$$ or $$$\omega_{2}$$$
+
+* Dimension of feature: N
+* Space for N dimension: hyper sphere
+
+* Suppose specific volumn V contains k number of samples
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:07:56.png' alt=''><xmp>
+
+* Red dots: samples
+* Green dots: unknown data
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:08:40.png' alt=''><xmp>
+
+* Suppose volume V
+* Count involved samples
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:09:20.png' alt=''><xmp>
+
+* k=4
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:09:54.png' alt=''><xmp>
+
+* Suppose 2 samples (2 green dots) are from ith class $$$\omega_i$$$
+* $$$k_i=2$$$
+
+================================================================================
+* Approximated likelihood via k-NNR
+$$$P(x|\omega_i)=\frac{k_i}{N_iV}$$$
+
+* Approximated unconditional density $$$P(x)= \frac{k}{NV}$$$
+
+* Approximated prior probability $$$P(\omega_i)=\frac{N_i}{N}$$$
+
+================================================================================
+* Conclusion
+
+* Your ultimate goal is to calculate posterior probability $$$P(\omega|x)$$$
+which can be calculated via Bayes theorem
+
+* $$$P(\omega|x)$$$ can be approximated via k-NNR
+$$$$$$P(\omega|x) 
+= \dfrac{P(x|\omega_i)P(\omega_i)}{P(x)} \\
+= \dfrac{\frac{k_i}{N_iV} \frac{N_i}{N} }{\frac{k}{NV}} \\
+= \dfrac{k_i}{k}$$$
+
+================================================================================
+* Example
+
+* One V contains 6 entire samples in that region
+
+* 2 samples are from class $$$\omega_i$$$
+
+* $$$P(\omega|x) = \frac{2}{6}$$$
+
+================================================================================
+* Summary
+
+* You are given unknow data
+* Set contant k, suppose k=5
+* Draw volume
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:22:39.png' alt=''><xmp>
+* Calculate each posterior probability value
+$$$\frac{4}{5}, \frac{1}{5}, \frac{0}{5}$$$
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:23:19.png' alt=''><xmp>
+* Classify unknown data into class $$$\omega_1$$$
+
+* Even if you used k-NNR method, result is same with the case 
+where you use Bayes classifier
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:26:17.png' alt=''><xmp>
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/010_Non_parametric_density_estimation/pics/2019_05_11_16:26:31.png' alt=''><xmp>
+
+* All same except for k
+* Too large k, or bad k result in bad result
+
+</xmp>
+   </BODY>
+</HTML>
