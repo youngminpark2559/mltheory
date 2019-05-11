@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=UIsqrP6cxtg&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=49
+
+================================================================================
+* Expectation and maximization (EM) algorithm
+* iteratively optimize latent variables to minimize objective function
+* E->M->E->M->...
+
+================================================================================
+* Expectation
+* random centroids
+* calculates expectation value of log likelihood which can be created by given parameters
+* assigns 100 black points into nearest centroids
+* optimizes $$$r_{nk}$$$
+
+================================================================================
+* Maximization
+* Maximize parameters (like centroids)
+* update centroids by using mean value from assigned points
+
+================================================================================
+$$$r_{nk}$$$
+* 0 or 1
+* if data is not assigned, it's 0
+* if data is assigned, it's 1
+* discrete variable
+
+================================================================================
+* $$$\mu_{k}$$$
+
+* how to optimize $$$\mu_k$$$?
+
+* Perform differentiation
+
+$$$\frac{d J}{d\mu_k}
+= \frac{d}{d\mu_k}
+\sum\limits_{n=1}^{N}
+\sum\limits_{k=1}^{K} r_{nk}||x_n - \mu_k||^2$$$
+* differentiation is wrt $$$\mu_k$$$
+* $$$\sum\limits_{k=1}^{K}$$$ can be removed
+
+$$$= \frac{d}{d\mu_k} \sum\limits_{n=1}^{N} r_{nk} ||x_n - \mu_k||^2$$$
+* Perform differentiation
+
+$$$= \sum\limits_{n=1}^{N} -2r_{nk} (x_n-\mu_k)$$$
+* Spread terms
+
+$$$-2(- \sum\limits_{n=1}^{N} r_{nk} \mu_{k} + \sum\limits_{n=1}^{N} r_{nk}x_n )=0$$$
+
+You can find $$$\mu_k$$$
+$$$\mu_k = \dfrac{\sum\limits_{n=1}^{N} r_{nk}x_n}{\sum\limits_{n=1}^{N}r_{nk}}$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/008_K-Means_Clustering_and_Gaussian_Mixture_Model/pics/2019_05_11_21:03:47.png' alt=''><xmp>
+
+================================================================================
+* Limitation of K-means algorithm
+
+* K is uncertain
+- Bayesian non-parametric
+
+* Initial centroids
+- random, mean, etc
+
+* limitation on distance metrics
+- Euclidean distance is limited
+- All dimension has same importance
+- But y-axis-latent-factor can be more important
+- That case is not good with Euclidean distance (circle)
+
+* Hard clustering ($$$r_{nk}=\{0,1\}$$$) issue
+- Red class: 50%, Blue class: 50%
+
+================================================================================
+* Gaussian mixture model
+- 3,4 are fixed
+
+</xmp>
+   </BODY>
+</HTML>
