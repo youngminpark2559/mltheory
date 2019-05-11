@@ -1,1 +1,114 @@
-a
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=RF9eUtW4wsw&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=49&t=0s
+
+================================================================================
+K-Means algorithm
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/008_K-Means_Clustering_and_Gaussian_Mixture_Model/pics/2019_05_11_20:07:09.png' alt=''><xmp>
+
+* Suppose there are black 100 points
+
+* Suppose there are 3 latent factors which makes 100 observations
+
+* You should classify 100 black points into 3 classes
+
+* Centroids of each class are not given
+
+* Your goal is to find those centroids for 3 classes
+
+================================================================================
+* K-nearest neighbor algorithm
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/008_K-Means_Clustering_and_Gaussian_Mixture_Model/pics/2019_05_11_20:08:54.png' alt=''><xmp>
+
+* Supervised learning
+* Suppose there is unknown point in the circle
+* Find nearest k neighbors
+* 6 neighbors are found
+* 4 are red, 2 are blues
+* You classify unknown data to red class
+
+================================================================================
+* K-means algorithm
+
+* Set K number of centroids
+* Assign 100 points to nearest centroids
+
+================================================================================
+* Then, you get
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/008_K-Means_Clustering_and_Gaussian_Mixture_Model/pics/2019_05_11_20:14:01.png' alt=''><xmp>
+
+================================================================================
+$$$J = \sum\limits_{n=1}^{N} 
+\sum\limits_{k=1}^{K} r_{nk} ||x_n - \mu_k||^2$$$
+
+* $$$\mu_k$$$: location of kth centroid, unknown, you should figure out
+* $$$x_n$$$: 100 black points
+* $$$r_{nk}$$$: 1 or 0, unknown, you should figure out
+
+* Minimize J
+
+================================================================================
+* Variables for K-means clustering are 2 ($$$r_{nk},\mu_k$$$)
+
+* You can use iterative optimization
+Optimize model wrt $$$r_{nk}$$$
+Optimize "updataed model via $$$r_{nk}$$$" wrt $$$\mu_k$$$
+Optimize "updataed model via $$$\mu_k$$$" wrt $$$r_{nk}$$$
+     
+</xmp>
+   </BODY>
+</HTML>
