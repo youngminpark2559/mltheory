@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+================================================================================
+Researchers was trying to induce a linear algebric way,
+which could satisfy following conditions:
+- preserve variance of high dimenstion feature vector data
+- reduce dimension of feature vector
+
+Researchers could find the PCA
+
+================================================================================
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-05 07-54-17.png' alt=''><xmp>"><xmp>
+
+* 2D feature vector data
+* feat_vec1=[height=170,weight=60]
+* Mean of data is located in center (red dot)
+
+================================================================================
+* Variance can be described by "covariance matrix $$$\Sigma$$$"
+
+$$$\Sigma = \begin{bmatrix} \sigma_1^2&&c_{12}\\c_{12}&&\sigma_2^2 \end{bmatrix}$$$
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/012_Reducing_dimension_using_PCA/pics/2019_05_14_16:18:53.png' alt=''><xmp>
+
+
+
+================================================================================
+* Covariance matrix is square matrix
+
+* Square matrix has eigenvector and eigenvalue
+$$$\Sigma = \begin{bmatrix} u_1&&u_2 \end{bmatrix} \times 
+\begin{bmatrix} \lambda_1&&0\\0&&\lambda_1 \end{bmatrix} \times 
+\begin{bmatrix} u_1\\u_2 \end{bmatrix}$$$
+
+* $$$\begin{bmatrix} u_1&&u_2 \end{bmatrix}$$$: eigenvector of $$$\Sigma$$$
+* $$$\begin{bmatrix} \lambda_1&&0\\0&&\lambda_1 \end{bmatrix}$$$: eigenvalues (in matrix) of $$$\Sigma$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/jjpr/012_Reducing_dimension_using_PCA/pics/2019_05_14_17:17:22.png' alt=''><xmp>
+
+* Direction of axis is eigenvector $$$\begin{bmatrix} u_1&&u_2 \end{bmatrix}$$$
+* Length of axis is eigenvalue
+* one eigenvalue > the other eigenvalue
+
+================================================================================
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-05 08-16-17.png' alt=''><xmp>"><xmp>
+
+================================================================================
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-05 08-19-41.png' alt=''><xmp>"><xmp>
+
+
+* Reduce 2D feature vector into 1D feature vector
+* Variance of 2D feature vector data is preserved
+* 2D feature vector data is projected onto axis $$$u_1$$$
+
+================================================================================
+</xmp><img src="https://raw.githubusercontent.com/youngmtool/mltheory/master/jjpr/pic/2018-06-05 08-20-51.png' alt=''><xmp>"><xmp>
+
+* When you use axis $$$u_2$$$
+* variance of 2D feature vector data is not preserved
+
+================================================================================
+* Steps of dimensionality reduction using PCA
+- Find covariance matrix of feature vector data
+- Find eigenvalue and eigenvector of covariance matrix
+- Find largest eigenvalue to find a direction of principal components
+- Project feature vector data onto the found axis
+
+=================================================================
+* 3D feature vector data can be represented by 3 axes
+* 10D feature vector data into 4D feature vector data means reducing number of axes from 10 to 4
+
+================================================================================
+* N number of D dimension feature vector data $$$x_n$$$
+
+* Find (D,D) covariance matrix $$$\Sigma$$$
+
+* $$$\mu=\dfrac{1}{N} \sum\limits_{n=1}^{N} x_n$$$
+
+* $$$\Sigma=\dfrac{1}{N-1} \sum\limits_{n=1}^{N} (x_n-\mu)(x_n-\mu)^T$$$
+
+* Eigenvalue analysis
+$$$\Sigma = U\Lambda U^T = \begin{bmatrix} u_1&&u_2&&\cdots&&u_D \end{bmatrix}
+\begin{bmatrix} \lambda_1&&0&&0\\0&&\ddots&&0\\0&&0&&\lambda_D \end{bmatrix}
+\begin{bmatrix} u_1\\u_2\\\vdots\\u_D \end{bmatrix}$$$
+
+* From D number of eigenvalues, select M number of largest eigenvalues $$$\{\lambda_1,\lambda_2,\cdots,\lambda_M\}$$$
+
+* Create transformation matrix $$$W$$$ by using $$$u$$$ and $$$\lambda$$$
+
+* Feature vector into lower dimension
+$$$y=W^Tx$$$
+
+</xmp>
+   </BODY>
+</HTML>
