@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=EPlrYy9KuNU&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=58
+
+================================================================================
+Main questions on HMM
+
+When you have topology from "Bayesian network", "HMM", or "M"
+
+you can have following questions
+
+Q1. Evaluation question
+when you have $$$\pi,a,b,X$$$
+$$$\pi$$$: paramter which is used to define initial latent state z
+$$$a$$$: probabilities which are used for moving z
+$$$b$$$: emission probabilities
+$$$X$$$: observation from random variable
+
+$$$P(X|M,\pi,a,b)$$$
+HMM will have distribution, and X is generated
+How that observation X is likely?
+$$$M$$$: HMM structure
+
+Q2. Decoding question
+When you have $$$\pi,a,b,X$$$
+
+Find $$$\arg_{z}\max P(Z|X,M,\pi,a,b)$$$
+$$$M$$$: HMM structure
+$$$X$$$: observed data
+$$$\pi,a,b$$$: parameters
+
+Find sequence of most likely latent factor which explain data x
+
+Q3. Learning question
+When you have X
+
+Find $$$\arg_{\pi,a,b} \max P(X|M,\pi,a,b)$$$
+
+Parameter inference learning task
+
+Similarily, in GMM, you have only X,
+then, you could find "mixture components", "probabilities of selecting mixtures"
+
+================================================================================
+When you have train data (X and M), how can you know $$$\pi,a,b$$$
+
+/home/young/Pictures/2019_05_20_06:52:29.png
+
+L: loaded dice (unfair dice)
+F: fair dice
+
+LLLLLFFF...: latent factor which only casino dealer knows
+1234253....: observation you can see
+
+================================================================================
+$$$P(\text{L} \rightarrow \text{L}) 
+= P(z_{t+1}=\text{L} | z_t = \text{L}) = a$$$
+
+$$$ P(x_{t}=1 | z_t = \text{L}) = b$$$
+
+================================================================================
+How to calculate?
+
+Use MLE, MAP, by counting events
+
+Then, you can find $$$\pi,a,b$$$ when you have X and M
+
+================================================================================
+HMM can be Bayesian network
+
+================================================================================
+Suppose you have X and Z
+
+then, you can calculate $$$\pi,a,b$$$ using MLE, MAP with X and Z
+
+* If you have joint probability $$P(X,Z)$$,
+you can use Bayesian network in useful way
+
+* In Bayesian network, you use "factorization" by using Bayesian network's topology
+
+* $$$P(X,Z) 
+= P(\{x_1,\cdots,x_t,z_1,\cdots,z_t\})
+= P(z_1)\times P(x_1|z_1) \times P(z_2|z_1) \times P(x_2|z_2) \times P(z_3|z_2) \times P(x_3|z_3)$$$
+$$$P(x_1|z_1)$$$: emission probability
+$$$P(z_2|z_1)$$$: transition probability
+
+$$$= \pi_{idx(z_1=1)} b_{idx(x_1=1),idx(z_1=1)} a_{idx(z_1=1),idx(z_2=1)\cdots}$$$
+
+================================================================================
+Suppose you know parameters $$$\pi,a,b$$$
+
+When using L, probability of ocurring 1,2,3,4,5 is $$$\dfrac{1}{10}$$$
+When using L, probability of ocurring 6 is $$$\dfrac{5}{10}$$$
+
+$$$L\rightarrow L$$$: 70%
+Casino dealer use 70% of L
+
+================================================================================
+$$$P(166,LLL)$$$
+$$$166$$$: observation
+$$$LLL$$$: Z
+
+$$$= \frac{1}{2} \times \frac{1}{10} \times \frac{7}{10} \times \frac{1}{2} \times \frac{7}{10} \times \frac{1}{2}$$$
+$$$\frac{1}{2}$$$: initial state probability (just assume)
+$$$\frac{1}{10}$$$: prob of ocurring 1
+$$$\frac{7}{10}$$$: use L
+
+$$$ = 0.0061$$$
+
+================================================================================
+$$$P(166,FFF)$$$
+$$$166$$$: observation
+$$$LLL$$$: Z
+
+$$$=\frac{1}{2} \times \frac{1}{6} \times \frac{1}{2} \times \frac{1}{6} \times \frac{1}{2} \times \frac{1}{6}$$$
+$$$\frac{1}{2}$$$: initial state probability (just assume)
+$$$\frac{1}{10}$$$: prob of ocurring 1
+$$$\frac{1}{2}$$$: use F from F
+
+$$$=5.7870e_{04}$$$
+
+================================================================================
+$$$P(166,FFF)$$$ is more likely
+
+================================================================================
+You know $$$X$$$ but don't know $$$Z$$$
+
+In GMM, you perform marginalize out wrt $$$Z$$$
+$$$P(X|\theta) = \sum\limits_{z} P(X,Z|\theta)$$$
+
+In HMM, you can marginalize out wrt $$$Z$$$
+$$$P(X|\pi,a,b) = \sum\limits_{Z} P(X,Z|\theta)$$$
+
+$$$P(X) = \sum\limits_{Z} P(X,Z)$$$
+find $$$P(X)$$$
+remove $$$Z$$$ by summing wrt $$$Z$$$
+
+$$$Z$$$ is random variables: $$$z_1,\cdots,z_t$$$
+$$$= \sum\limits_{z_1} \cdots \sum\limits_{z_t} P(x_1,\cdots,x_t,z_1,\cdots,z_t)$$$
+
+Perform factorization
+$$$= \sum\limits_{z_1} \cdots \sum\limits_{z_t} \pi_{z_1} \prod_{t=2}^T a_{z_{t-1},z_t} \prod_{t=1}^{T} b_{z_t,x_t}$$$
+
+Factorization without constraint
+$$$P(A,B,C) = P(A)P(B|A)P(C|A,B)$$$
+
+================================================================================
+$$$P(x_1,\cdots,x_t,z_t^k=1)$$$
+$$$x_1,\cdots,x_t$$$: all observations
+$$$z_t^k=1$$$: latent factor at t
+
+/home/young/Pictures/2019_05_20_08:03:16.png
+
+Marginalized out.
+
+$$$\sum\limits_{\pi_{t-1}} P(x_1,\cdots,x_{t-1},x_t,z_{t-1},z_t^k=1)$$$
+
+================================================================================
+Conclusion
+
+Complicated form
+$$$P(x_1,\cdots,x_t,z_t^k=1)$$$
+
+into simplified form
+$$$P(x_1,\cdots,x_t,z_t^k=1) = \alpha_t^k = b_{k,x_t} \sum\limits_{i} \alpha_{t-1}^i \alpha_{i,k}$$$
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
