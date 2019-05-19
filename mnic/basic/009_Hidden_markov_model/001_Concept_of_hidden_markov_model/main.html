@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=GJW6trVTDWM&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=57
+
+================================================================================
+/home/young/Pictures/2019_05_06_23:59:04.png
+
+* No time information
+* It contains spatial information
+* 3 clusters
+
+* What if points move based on time?
+* Then, how should Gaussian mixture model change?
+
+================================================================================
+/home/young/Pictures/2019_05_07_00:00:57.png
+
+* Value at yesterday and value at today has relationship
+
+================================================================================
+/home/young/Pictures/2019_05_07_00:06:00.png
+
+* Gaussian mixture model in plate notation
+* $$$N$$$: N number of data point which is expressed via x
+* $$$z$$$: latent factor which classifies N number of data point into which clusters 
+* $$$\pi, \mu, \sigma$$$: parameters, contributes z and x
+
+================================================================================
+/home/young/Pictures/2019_05_20_05:38:40.png
+
+Unfolded version
+
+* If parameter $$$\pi$$$ is fixed,
+$$$z_1,z_2,\cdots,z_N$$$ are independent
+* So, it's not good to expressen "time"
+
+================================================================================
+/home/young/Pictures/2019_05_20_05:40:39.png
+
+* Change graphical model
+* Parameter $$$\pi$$$ affects $$$z_1$$$
+* Observe $$$x_1$$$
+* $$$z_1$$$ affects $$$z_2$$$
+* This graphical model can model the change of latent factor in terms of time
+
+================================================================================
+Hidden markov model is the model which considers GMM in terms of temporal causality
+
+Hidden markov model = dynamic clustering
+
+================================================================================
+/home/young/Pictures/2019_05_20_05:48:53.png
+
+================================================================================
+/home/young/Pictures/2019_05_20_05:49:08.png
+
+$$$P(x_1|z_1)$$$
+
+Modeling discrete case of x: use binomial function
+Modeling continuous case of x: use Gaussian function
+
+================================================================================
+$$$x_1,x_2,\cdots,x_T$$$: observations (data points) which has temporal causality
+
+$$$x_1$$$ is the thing before $$$x_2$$$
+
+================================================================================
+Latent state z
+
+k number of time groups
+
+Continuous latent factor: Kalman filter
+
+================================================================================
+/home/young/Pictures/2019_05_20_05:54:24.png
+
+* Initial state probabilities
+$$$P(z_1) \sim Mult(\{\pi_1,\pi_2,\cdots,\pi_N\})$$$
+
+Latent factor $$$z_1$$$ is sampled from Multinomial distribution 
+which has parameter $$$\pi$$$
+
+* So, you should run (know, define) parameter $$$\pi$$$ 
+to use hidden markov model
+
+================================================================================
+/home/young/Pictures/2019_05_20_05:57:54.png
+
+* Transition probabilities
+$$$P(z_t|z_{t-1}^i=1) \sim Mult(\{\alpha_{i,1},\alpha_{i,2},\cdots,\alpha_{i,k}\})$$$
+
+$$$z_{t-1}^i=1$$$: z's time cluster at previous time
+$$$z_t$$$: z's time cluster at current time
+
+* Parameter $$$\alpha$$$
+
+* $$$P(z_t^j=1|z_{t-1}^i=1) = \alpha_{i,j}$$$
+$$$z_{t-1}^i=1$$$: z in ith cluster is given
+$$$z_t^j=1$$$: z in jth cluster
+
+================================================================================
+/home/young/Pictures/2019_05_20_06:03:29.png
+
+
+* Emission probabilities
+
+$$$P(x_t|z_t^i=1) \sim Mult(b_{i,1},\cdots,b_{i,m}) \sim f(x_t|\theta_t)$$$
+
+* $$$z_t^i$$$: z in ith cluster is given
+* $$$x_t$$$ observation x is what?
+* You suppose you deal with discrete case, 
+* So, use Multinomial function
+* parameter b for Multinomial function
+
+$$$P(x_t^j=1|z_t^i=1) = b_{i,j}$$$
+$$$z$$$ in ith cluster is given
+probability of you see jth observation
+
+================================================================================
+/home/young/Pictures/2019_05_20_06:07:16.png
+      
+</xmp>
+   </BODY>
+</HTML>
