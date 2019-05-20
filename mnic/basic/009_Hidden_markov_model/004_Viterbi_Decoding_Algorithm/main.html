@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* 
+img {
+ width:900px;
+}
+*/
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=O1U2NWaSYn4&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=60
+
+================================================================================
+/home/young/Pictures/2019_05_20_10:11:06.png
+
+Forward probability $$$\times$$$ backward probability
+/home/young/Pictures/2019_05_20_10:13:43.png
+
+================================================================================
+Why did you create forward and backward probabilities?
+
+For representing 
+/home/young/Pictures/2019_05_20_10:14:31.png
+
+Joint probability
+Prob of latent factor z in k-th cluster at time t
+Prob of X
+
+================================================================================
+Forward and backward probabilities can be written in detail (recursive form)
+/home/young/Pictures/2019_05_20_10:16:30.png
+
+$$$\alpha_t^k$$$ reduces $$$\alpha_{t-1}^i$$$
+And you use parameter a and b (emission and transition probabilities)
+
+$$$\beta_{t+1}^i$$$: start with $$$t+1$$$, so it's also reduction in size from $$$\beta_{t}^k$$$
+And you also use a and b
+
+================================================================================
+/home/young/Pictures/2019_05_20_10:20:17.png
+
+This becomes joint prob of "latent variable wrt specific time t" and X
+
+================================================================================
+Joint prob means you can use conditional prob
+
+================================================================================
+/home/young/Pictures/2019_05_20_10:22:02.png
+
+Problem:
+you observe all Xs
+But observations are used for one z
+
+But you want to assign most probable assignment into all hidden labels Zs
+
+================================================================================
+So, this is lack for above ultimate goal
+/home/young/Pictures/2019_05_20_10:23:39.png
+
+This is called "decoding question"
+
+================================================================================
+Viterbi decoding algorithm
+
+/home/young/Pictures/2019_05_20_10:24:34.png
+
+$$$k^*$$$: most probable assignment of specific cluster k
+$$$P(z^k=1|X)$$$: all observations Xs are given, prob of z^k ocurring
+
+If you configure normalize term well, you can make following
+/home/young/Pictures/2019_05_20_10:27:14.png
+
+================================================================================
+Now, you need to model entire sequence of Z
+
+How to do it? Use dynamic programming
+
+Fill Z values from left to right by using memorization tables
+
+Perform retrace and get most probable likelihood Z sequence
+/home/young/Pictures/2019_05_20_10:29:25.png
+
+================================================================================
+/home/young/Pictures/2019_05_20_10:30:26.png
+
+See 
+/home/young/Pictures/2019_05_20_10:30:43.png
+$$$x_1,\cdots,x_{t-1}$$$: all observations up to time $$$t-1$$$
+$$$z_1,\cdots,z_{t-1}$$$: all latent variables up to time $$$t-1$$$
+$$$x_t$$$: observation at time t
+$$$z_t^k=1$$$: your goal to do, let's assign z into specific cluster k
+
+================================================================================
+/home/young/Pictures/2019_05_20_10:33:20.png
+
+Change z values to maximize P
+
+You get maximal prob P, and it's $$$V_t^k$$$
+
+================================================================================
+Do process
+
+/home/young/Pictures/2019_05_20_10:35:46.png
+
+================================================================================
+See this
+
+/home/young/Pictures/2019_05_20_10:37:04.png
+
+/home/young/Pictures/2019_05_20_10:37:23.png
+
+$$$V_t^k$$$ becomes "repeating problem form"
+
+You can use dynamic programming for "repeating problem form"
+
+================================================================================
+Car assembly line in the factory
+
+/home/young/Pictures/2019_05_20_10:39:10.png
+
+left 2,4: starting point
+right 3,2: ending point
+
+Each number means took-time in minutes
+
+When time is predicted too much, line can be transfered from A to B or B to A
+
+================================================================================
+Which routes would be the best?
+
+/home/young/Pictures/2019_05_20_10:42:05.png
+
+2+7=9
+4+8=12
+
+================================================================================
+Find optimial route
+
+/home/young/Pictures/2019_05_20_10:44:52.png
+
+================================================================================
+Let's above process in terms of probability
+
+You want to know $$$V_t^k$$$
+
+$$$V_t^k$$$ is assignment by performing joint of time and states
+
+Let's save 2 information of $$$V_t^k$$$ 
+
+1. Trace information
+2. probabilities information
+
+================================================================================
+Initialize Viterbi algorithm
+
+/home/young/Pictures/2019_05_20_10:52:09.png
+
+Peform iteration to growth V
+
+/home/young/Pictures/2019_05_20_10:53:28.png
+You can calculate $$$V_t^k$$$ from $$$V_{t-1}^i$$$
+
+You already know parameters a and b
+
+================================================================================
+Which assignment is the best?
+
+Information on it is saved in trace
+
+/home/young/Pictures/2019_05_20_10:54:56.png
+
+================================================================================
+You access T (entire sequence) from t
+
+/home/young/Pictures/2019_05_20_10:55:58.png
+
+================================================================================
+Issue of Viterbi decoding algorith
+
+* Frequent underflow problem
+In real world, time step is large
+
+But following a,b,V are all probabilities [0,1]
+/home/young/Pictures/2019_05_20_10:57:49.png
+Small values are multipled continuously
+
+* To resolve it, calculate it in log domain
+And multiplication is converted into summation
+
+================================================================================
+Summary
+
+1. You have $$$\pi,a,b,X$$$
+2. You get new sequence
+3. You can do "most probable assignment" into new sequence
+
+</xmp>
+   </BODY>
+</HTML>
