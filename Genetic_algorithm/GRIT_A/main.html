@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://www.youtube.com/watch?v=aQn2t9FUs3U
+
+================================================================================
+Genetic algorithm
+
+- 1975, John Holland
+- Mimics evolution
+- Global optimization search method
+
+================================================================================
+/home/young/Pictures/2019_05_26_21:09:40.png
+
+- You have "search space"
+
+- You get "population"
+
+- You select some of selections
+
+- You perform "cross over"
+
+- You get "mutation"
+
+- You get "reproduction"
+
+- You perform substitution into "population"
+
+- You evaluate whether "population" satisfies the goal 
+by using "fitness evaluation"
+
+- Iterate above steps
+
+================================================================================
+Components of genetic algorithm
+
+Computational environment
+  - Population
+    - Set of input data
+    - Binary encoding, value encoding, tree encoding
+  - Genome
+    - Expresses genome of population
+    - Binary string, constant string, float string
+  - Generation
+    - Period of birth and death of genes
+  - Fitness function
+    - Evaluates how population (which you want to optimize) is fit to the given problem
+
+Algorithm
+  - Selection
+    - Selects "chromosome"
+    - "chromosome" is used for "cross over"
+    - roulette wheel, ranking, tournament, preserving elite
+  - Cross over
+    - Mix gene of parent
+    - Simple cross over, 2 points cross over, uniform cross over, cycle cross over,
+      Ordered cross over, partial cross over, arithmetic cross over, heuristic cross over
+  - Mutation
+    - Select some of bits
+    - Change those bits
+    - 0.5-1.0% has mutation
+  - Substitution
+    - New gene replaces with old genes
+    - Good gene of parent is preserved
+    - Bad gene of parent is replaced with new gene
+
+================================================================================
+Use case
+
+- Network
+  - Search optimal allocation in wireless network environment
+  - Produce system
+    - Optimal method via simulation in produce line
+  - NP-complete problem (P-NP problem)
+    - Hamilton route problem
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>
