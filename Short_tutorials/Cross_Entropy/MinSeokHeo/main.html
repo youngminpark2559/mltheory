@@ -50,82 +50,106 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
-https://www.youtube.com/watch?v=Jt5BS71uVfI
+
+https://www.youtube.com/watch?v=CdH7U3IjRI8
 
 ================================================================================
-Cross Entropy: 
-- "optimal entropy value" 
-- which is calculated from the information which can be incorrect
-- amount of uncertain information
+Give the milk to the baby
+Baby drink that mile all the time
+So, that milk (input) has "low uncertainty"
+Amount of information (from the milk) who the baby gets is "small"
 
 ================================================================================
-Example of "information which can be incorrect"
-
-- prediction from ML model
-
-================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:51:24.png' alt=''><xmp>
-
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:51:35.png' alt=''><xmp>
-
-Q: estimated probability
-P: true probability
+Give the spicy food to the baby
+Baby has not experience with spicy food
+So, that spicy food (input) has "high uncertainty"
+Amount of information (from the spicy food) who the baby gets is "large"
 
 ================================================================================
-See entropy and cross entropy
-
-Entropy
-$$$H(X) = \sum\limits_{i=1}^{n} \log_2 {\dfrac{1}{p_i}} * p_i$$$
-
-Cross Entropy
-$$$H(P,Q) = \sum\limits_{i=1}^{n} \log_2{ \dfrac{1}{q_i} * p_i }$$$
-
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:54:12.png' alt=''><xmp>
-Probability for true label (?)
-
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:54:44.png' alt=''><xmp>
-Amount of information
+More uncertainty ---> More amount of information you can get
 
 ================================================================================
-Case: prediction value has wrong probability
-gets "infinity value"
+Let's represent "uncertainty" and "amount of information you can get"
+in numerical value by using "shannon entropy"
 
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:55:47.png' alt=''><xmp>
-
-$$$\log_2{\dfrac{1}{0.0}} * 1 
-+ \log_2{\dfrac{1}{1.0}} * 0
-+ \log_2{\dfrac{1}{0.0}} * 0$$$ = infinity
-
-================================================================================
-Case: trained model can release somewhat precise prediction
-
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:57:11.png' alt=''><xmp>
-
-$$$\log_2{\dfrac{1}{0.8}} * 1 
-+ \log_2{\dfrac{1}{0.1}} * 0
-+ \log_2{\dfrac{1}{0.1}} * 0$$$ = 0.32
+Shannon entropy
+$$$H(X) $$$
+$$$= - \sum\limits_{i=1}^{n} (p_i \log_2{p_i})$$$
+$$$= \sum\limits_{i=1}^{n} (p_i -\log_2{p_i})$$$
+$$$= \sum\limits_{i=1}^{n} (p_i \log_2{p_i^{-1}})$$$
+$$$= \sum\limits_{i=1}^{n} (p_i \log_2{\dfrac{1}{p_i}})$$$
 
 ================================================================================
-Case: trained model can release precise prediction
+Expectation value:
+mean value from random variable
 
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_12:59:24.png' alt=''><xmp>
+$$$E[X] = \sum\limits_{i=1}^{k} x_i p_i$$$
 
-$$$\log_2{\dfrac{1}{1.0}} * 1 
-+ \log_2{\dfrac{1}{0.0}} * 0
-+ \log_2{\dfrac{1}{0.0}} * 0$$$ = 0.0
+Entropy fomular:
+$$$H(X) = \sum\limits_{i=1}^{n} (\log_2{\dfrac{1}{p_i}} * p_i)$$$
 
-"Entropy value = Cross Entropy value" in this case
-
-================================================================================
-Cross Entropy $$$\ge$$$ Entropy 
-
-Entropy: information which is derived from "true label"
-Cross Entropy: information which is derived from "true label" and "potentially-incorrect information"
-
-Amount of information 
-Cross Entropy $$$\ge$$$ Entropy 
+- 2 formulars have almost same form
+- amount of information which you can get from the input
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_13:33:24.png' alt=''><xmp>
 
 ================================================================================
+Uncertainty
+=Amount_of_information
+= information_of_milk * probability_of_milk
++ information_of_no_milk * probability_of_no_milk
+
+================================================================================
+Why $$$\log_2{\dfrac{1}{p_i}}$$$ represents "amount of information"?
+
+$$$H(X) = \sum\limits_{i=1}^{n} (\log_2{\dfrac{1}{p_i}} * p_i)$$$
+
+Replace: $$$\log_2{\dfrac{1}{p_i}} = I(x_i)$$$
+
+$$$H(X) = \sum\limits_{i=1}^{n} (I(x_i) * p_i)$$$
+
+High uncertainty: large amount of information
+
+$$$p(x1) > p(x2)$$$ $$$\Rightarrow$$$ $$$I(x1) < I(x2)$$$
+Meaining:
+- probability of x1 occuring is higher than x2
+- uncertainty (amount of information) of x1 is smaller than x2
+
+In conclusion,
+$$$I(x) = \dfrac{1}{p(x)}$$$
+probability of x occuring is low ---> amount of information I(x) becomes large
+
+================================================================================
+2 independent information can be summed
+
+3kg: first information
+5kg: second information
+(3+5)kg
+
+That is, $$$I(x1,x2) = I(x1) + I(x2)$$$
+
+When you have 2 variables, which is multiplied,
+you can use log to separate them
+That is, you use log in entropy 
+
+================================================================================
+Shannon Entropy
+
+$$$H(X) = \sum\limits_{i=1}^{n} (\log_2{\dfrac{1}{p_i}} * p_i) $$$
+
+================================================================================
+Why log base is 2?
+
+Because you can think "information" in "bit unit"
+
+If max entropy is 4, you need 2 bits
+$$$4=2^2$$$
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_14:08:49.png' alt=''><xmp>
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/Short_tutorials/Cross_Entropy/MinSeokHeo/pics/2019_06_15_14:09:17.png' alt=''><xmp>
+4 bits can hold all above information
+
+If max entropy is 2^n, you need n bits
+$$$2^n=2^n$$$
 
 </xmp>
    </BODY>
