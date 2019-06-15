@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+https://www.youtube.com/watch?v=Jt5BS71uVfI
+
+================================================================================
+Cross Entropy: 
+- "optimal entropy value" 
+- which is calculated from the information which can be incorrect
+- amount of uncertain information
+
+================================================================================
+Example of "information which can be incorrect"
+
+- prediction from ML model
+
+================================================================================
+/home/young/Pictures/2019_06_15_12:51:24.png
+
+/home/young/Pictures/2019_06_15_12:51:35.png
+
+Q: estimated probability
+P: true probability
+
+================================================================================
+See entropy and cross entropy
+
+Entropy
+$$$H(X) = \sum\limits_{i=1}^{n} \log_2 {\dfrac{1}{p_i}} * p_i$$$
+
+Cross Entropy
+$$$H(P,Q) = \sum\limits_{i=1}^{n} \log_2{ \dfrac{1}{q_i} * p_i }$$$
+
+/home/young/Pictures/2019_06_15_12:54:12.png
+Probability for true label (?)
+
+/home/young/Pictures/2019_06_15_12:54:44.png
+Amount of information
+
+================================================================================
+Case: prediction value has wrong probability
+gets "infinity value"
+
+/home/young/Pictures/2019_06_15_12:55:47.png
+
+$$$\log_2{\dfrac{1}{0.0}} * 1 
++ \log_2{\dfrac{1}{1.0}} * 0
++ \log_2{\dfrac{1}{0.0}} * 0$$$ = infinity
+
+================================================================================
+Case: trained model can release somewhat precise prediction
+
+/home/young/Pictures/2019_06_15_12:57:11.png
+
+$$$\log_2{\dfrac{1}{0.8}} * 1 
++ \log_2{\dfrac{1}{0.1}} * 0
++ \log_2{\dfrac{1}{0.1}} * 0$$$ = 0.32
+
+================================================================================
+Case: trained model can release precise prediction
+
+/home/young/Pictures/2019_06_15_12:59:24.png
+
+$$$\log_2{\dfrac{1}{1.0}} * 1 
++ \log_2{\dfrac{1}{0.0}} * 0
++ \log_2{\dfrac{1}{0.0}} * 0$$$ = 0.0
+
+"Entropy value = Cross Entropy value" in this case
+
+================================================================================
+Cross Entropy $$$\ge$$$ Entropy 
+
+Entropy: information which is derived from "true label"
+Cross Entropy: information which is derived from "true label" and "potentially-incorrect information"
+
+Amount of information 
+Cross Entropy $$$\ge$$$ Entropy 
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
