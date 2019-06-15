@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+https://www.youtube.com/watch?v=7GBXCD-B6fo
+
+================================================================================
+Which model (from model A and model B) is more precise?
+
+/home/young/Pictures/2019_06_15_11:59:19.png
+
+================================================================================
+Example of perfect prediction model
+
+/home/young/Pictures/2019_06_15_12:00:22.png
+
+Difference of distibutions (distribution of label, distribution of prediction) is 0
+
+================================================================================
+Let's represent "difference of distribution" in numerical values
+---> KL divergence
+
+================================================================================
+Model A's probability distribution about the prediction: $$$Q_A$$$
+
+Model B's probability distribution about the prediction: $$$Q_B$$$
+
+================================================================================
+$$$D_{KL}(P||P) = 0.0$$$
+
+$$$D_{KL}(P||Q_A) = 0.25$$$
+
+$$$D_{KL}(P||Q_B) = 1.85$$$
+
+================================================================================
+Relative entropy:
+
+Criterion: 90 score
+Your score: 93 score
+You have 3 scores more than criterion score
+
+Relative entropy
+= KL divergence
+= "3 scores more than criterion score"
+
+================================================================================
+Cross Entropy(P,Q)
+= exact_bits + extra_bits (uncertainty values) for storing information
+
+Relative_Entropy
+= D(P||Q)
+= Cross_Entropy(P,Q) - Entropy(P)
+= $$$-\sum\limits_{i=1}^{n} (p_i * \log_2{q_i}) + \sum\limits_{i=1}^{n} (p_i * \log_2{p_i})$$$
+
+P: true label
+Q: prediction (?)
+
+================================================================================
+$$$D(P||Q) \ge 0$$$
+
+$$$D(P||Q) \ne D(Q||P)$$$
+
+================================================================================
+Why "KL divergence" is not used as loss function in deep learning?
+
+/home/young/Pictures/2019_06_15_12:14:34.png
+
+- As training goes, weight values in the model changes
+- Prediction Q will also change
+- which means Cross_Entropy(P,Q) changes as training goes
+- Entropy(P) is used as "constant"
+- Therefore, there is no need to use "KL divergence" as loss function
+- You can get same effect but with simpler loss function
+- by using "cross entropy loss function"
+
+
+
+
+</xmp>
+   </BODY>
+</HTML>
