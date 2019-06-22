@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://datascienceschool.net/view-notebook/41138b1b54454caf819d9288d26560c7/
+
+================================================================================
+Linearly dependent
+- N number of vectors
+- $$$x_1,x_2,\cdots,x_N$$$
+- when following is true:
+- $$$c_1 x_1 + c_2 x_2 + \cdots + c_N x_N = 0 $$$
+- c set which satisfies above equation exists
+- exclude this case: $$$c_1=c_2=\codts=c_N=0$$$
+
+Linearly independent
+- N number of vectors
+- $$$x_1,x_2,\cdots,x_N$$$
+- when following is true:
+- $$$c_1 x_1 + c_2 x_2 + \cdots + c_N x_N = 0 $$$
+- c set which satisfies above equation doesn't exist
+- exclude this case: $$$c_1=c_2=\codts=c_N=0$$$
+
+================================================================================
+- Suppose there is N number of vectors
+- Perform linear combination with N number of vectors 
+- Result from linear combination is another vector 
+- All vectors from linear combination are "vector space V"
+- Vector space V's dimension is N (N number of vectors)
+- N number of vectors are "basis vector v"
+
+$$$V = \{ c_1x_1 + \cdots + c_Nx_N \; \vert \; c_1, \ldots, c_N \in \mathbf{R} \}$$$
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
