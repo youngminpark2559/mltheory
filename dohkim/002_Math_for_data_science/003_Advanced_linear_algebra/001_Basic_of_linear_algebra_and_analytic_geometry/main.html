@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+https://datascienceschool.net/view-notebook/dd1680bfbaab414a8d54dc978c6e883a/
+
+================================================================================
+length of vector = norm
+
+$$$||a|| = \sqrt{a^T a } = \sqrt{a_1^2 + \cdots + a_N^2}$$$
+
+================================================================================
+$$$\dfrac{x}{||x||}$$$: unit vector, same direction with $$$\vec{x}$$$
+
+================================================================================
+Linear combination
+- Perform: vector * scalar
+- Perform: sum all results
+
+$$$c_1x_1 + c_2x_2 + \cdots + c_Nx_N$$$
+
+scalar coefficient: $$$c_1, \cdots, c_N$$$
+
+================================================================================
+Euclidean distance
+- Distance between 2 points of vectors
+
+Euclidean distance between vector a and vector b $$$\\$$$
+$$$ = || a - b || \\$$$
+$$$ = \sqrt{\sum_{i=1} (a_i - b_i)^2} \\$$$
+$$$ = \sqrt{\sum_{i=1} ( a_i^2 - 2 a_i b_i + b_i^2 )} \\$$$
+$$$ = \sqrt{\sum_{i=1} a_i^2 + \sum_{i=1} b_i^2 - 2 \sum_{i=1} a_i b_i} \\$$$
+$$$ = \sqrt{\| a \|^2 + \| b \|^2  - 2 a^Tb }$$$
+
+$$$|| a - b ||^2 = || a ||^2 + || b ||^2 - 2 a^T b$$$
+
+================================================================================
+Inner product of vector a and vector b $$$\\$$$
+$$$= a \cdot b \\$$$
+$$$= a^Tb \\$$$
+$$$= ||a||||b|| \cos{\theta} $$$
+
+================================================================================
+Orthogonal between vector a and vector b $$$\\$$$
+$$$= a \perp b \\ $$$
+
+$$$\cos{\theta} = \cos{90^{\circ}} = 0$$$
+
+Therefore, $$$a \cdot b = 0$$$
+
+================================================================================
+- $$$v_1,v_2, \cdots, v_N$$$
+- N number of unit vector, $$$||v_i||=1$$$, $$$v_i^Tv_i = 1$$$
+- If 2 of them are orthogonal in all couple cases
+- $$$v_i^Tv_j = 0 (i\ne j)$$$
+- it's orthonormal
+
+================================================================================
+- If 2 vectors have "similar direction"
+- 2 vectors are similar
+- cosine similarity: cosine angular value between 2 vectors
+
+$$$\text{cosine similarity} = \cos\theta = \dfrac{x^Ty}{\|x\|\|y\|}$$$
+
+================================================================================
+c = a + b 
+
+vector c is "decomposed" into "components" a and b
+
+================================================================================
+line equation using vector 
+
+$$$w = \begin{bmatrix}1 \\ 2\end{bmatrix} $$$
+w: vector w
+
+- Imagine one straight line which passes through point (1,2)
+- and which is perpendicular to vector w
+
+The equation of that straight line
+- $$$ w^T x - ||w||^2 = 0 $$$
+- $$$||w||^2 = 5$$$
+- $$$ \begin{bmatrix}1 & 2\end{bmatrix} \begin{bmatrix}x_1 \\ x_2 \end{bmatrix} - 5 = x_1 + 2x_2 - 5 = 0 $$$
+- $$$x_1 + 2x_2 = 5 $$$
+
+- Distance between this straight line and (0,0)
+- norm of vector w
+- $$$||w|| $$$
+
+================================================================================
+Distance between straight line $$$w^Tx - ||w||^2 = 0$$$ and $$$x^{'}$$$ which is not on the line
+
+$$$ \dfrac{\left|w^Tx' - \|w\|^2 \right|}{\|w\|} $$$
+
+If straight line is $$$w^Tx - w_0 = 0$$$,
+distance is $$$\dfrac{\left|w^Tx' - w_0 \right|}{\|w\|} $$$ 
+
+</xmp>
+   </BODY>
+</HTML>
