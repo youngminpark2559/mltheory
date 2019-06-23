@@ -1,1 +1,136 @@
-g
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+This is notes which I wrote as I was taking video lecture originated from
+https://www.youtube.com/watch?v=3S8P3U2ti2A&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=70
+
+================================================================================
+/home/young/Pictures/2019_06_23_18:33:55.png
+
+================================================================================
+What is the Gibbs sampling used for?
+
+/home/young/Pictures/2019_06_23_18:36:09.png
+
+/home/young/Pictures/2019_06_23_18:36:26.png
+
+================================================================================
+Bayesian network ---> factorization
+
+/home/young/Pictures/2019_06_23_18:37:45.png
+
+$$$\alpha, \beta$$$: prior knowledge, constant
+
+================================================================================
+Perform factorization on following plate notation
+/home/young/Pictures/2019_06_23_18:39:09.png
+
+/home/young/Pictures/2019_06_23_18:39:23.png
+
+$$$P(\phi_i;\beta) = P(\phi_i|\beta)P(\beta)$$$
+
+================================================================================
+/home/young/Pictures/2019_06_23_18:40:47.png
+
+/home/young/Pictures/2019_06_23_18:41:00.png
+
+================================================================================
+Graphical model
+/home/young/Pictures/2019_06_23_18:42:37.png
+
+Factorization using joint
+/home/young/Pictures/2019_06_23_18:43:02.png
+
+================================================================================
+To make above joint equation simpler, remove $$$\theta$$$ and $$$\phi$$$
+
+/home/young/Pictures/2019_06_23_18:43:49.png
+
+================================================================================
+To remove $$$\theta$$$ and $$$\phi$$$, you need to use "marginalize out"
+
+/home/young/Pictures/2019_06_23_18:46:05.png
+
+================================================================================
+About $$$\phi$$$
+/home/young/Pictures/2019_06_23_18:47:56.png
+/home/young/Pictures/2019_06_23_18:48:20.png
+
+About $$$\theta$$$
+/home/young/Pictures/2019_06_23_18:48:46.png
+
+/home/young/Pictures/2019_06_23_18:48:59.png
+2 independant integrations
+
+================================================================================
+/home/young/Pictures/2019_06_23_18:54:07.png
+
+================================================================================
+So far, you performed following
+/home/young/Pictures/2019_06_23_18:50:13.png
+
+================================================================================
+What is the $$$\phi$$$?
+/home/young/Pictures/2019_06_23_18:52:08.png
+
+================================================================================
+/home/young/Pictures/2019_06_23_18:59:49.png
+
+================================================================================
+What you have done so far?
+
+From (1) and (2), you removed intergrations as much as you could
+
+</xmp>
+   </BODY>
+</HTML>
