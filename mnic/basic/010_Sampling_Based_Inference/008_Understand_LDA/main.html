@@ -1,1 +1,108 @@
-f
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+This is notes which I wrote as I was taking video lecture originated from
+https://www.youtube.com/watch?v=AFIO92N9xm4&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz
+
+================================================================================
+/home/young/Pictures/2019_06_23_17:24:58.png
+
+================================================================================
+w: observation, words
+
+z: you assign "words" into cluster by using z
+word --z--> topic
+$$$z$$$ is modeled by Multinomial distribution
+
+N: number of entire words in one document (for example, 100 words in one document)
+
+M: number of entire documents (for example, 10 documents)
+
+$$$\theta$$$: document --$$$\theta$$$ --> topic
+$$$\theta$$$ is modeled by Multinomial distribution
+
+$$$\alpha$$$: prior for $$$\theta$$$
+$$$\alpha$$$ is modeld by Dirichlet distribution (with respect to $$$\theta$$$)
+
+$$$K$$$: number of topic which user can configure
+
+$$$\phi$$$: probability of "word" showing in each topic
+
+$$$\beta$$$: prior knowledge
+
+================================================================================
+/home/young/Pictures/2019_06_23_17:37:48.png
+
+================================================================================
+/home/young/Pictures/2019_06_23_17:39:20.png
+
+$$$\alpha$$$: topics Dirichlet distribution with respect to entire corpus
+
+Multinomial distibution $$$\theta$$$ is generated from Dirichlet distribution prior $$$\alpha$$$
+
+================================================================================
+/home/young/Pictures/2019_06_23_17:42:20.png
+
+================================================================================
+/home/young/Pictures/2019_06_23_17:43:14.png
+
+================================================================================
+/home/young/Pictures/2019_06_23_17:43:27.png
+
+================================================================================
+
+
+
+</xmp>
+   </BODY>
+</HTML>
