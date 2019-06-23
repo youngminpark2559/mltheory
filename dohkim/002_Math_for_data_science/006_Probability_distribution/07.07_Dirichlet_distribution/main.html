@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+Original source
+https://datascienceschool.net/view-notebook/e0508d3b7dd6427eba2d35e1f629d3de/
+
+================================================================================
+vals=univariate_random_variable_Bayesian_model(beta_distribution)
+vals: [0,1]
+
+vals=multivariate_random_variable_Bayesian_model(dirichlet_distribution)
+vals: [0,1]
+
+================================================================================
+Constraint of Dirichlet distribution
+val1=random_variable_1
+val2=random_variable_2
+val3=random_variable_3
+
+val1+val2+val3=1
+
+================================================================================
+Random_variable_A $$$\sim$$$ Dirichlet_distribution_K=3
+
+Sample_1: (0.2,0.3,0.5)
+Sample_2: (0.5,0.5,0)
+Sample_3: (1,0,0)
+
+================================================================================
+PDF of Dirichlet distribution
+
+$$$ \text{Dir}(x_1, x_2, \cdots, x_K; \alpha_1, \alpha_2, \cdots, \alpha_K) 
+= \frac{1}{\mathrm{B}(\alpha_1, \alpha_2, \cdots, \alpha_K)} \prod_{i=1}^K x_i^{\alpha_i - 1} $$$
+
+$$$\alpha_1, \alpha_2, \cdots, \alpha_K$$$: parameter vector of dirichlet_distribution
+$$$\mathrm{B}(\alpha_1, \alpha_2, \cdots, \alpha_K)$$$: Beta function
+
+Beta function
+$$$\mathrm{B}(\alpha_1, \alpha_2, \cdots, \alpha_K) = \frac{\prod_{i=1}^K \Gamma(\alpha_i)} {\Gamma\bigl(\sum_{i=1}^K \alpha_i\bigr)}$$$
+
+================================================================================
+beta_distribution = dirichlet_distribution_K=2
+
+================================================================================
+Moments of Dirichlet distribution
+
+$$$\alpha = \sum\limits \alpha_k$$$
+
+- Expectation value
+$$$E[x_k] = \dfrac{\alpha_k}{\alpha}$$$
+
+- Mod
+$$$\dfrac{\alpha_k-1}{\alpha-K}$$$
+
+- Variance
+$$$Var[x_k] = \dfrac{\alpha_k(\alpha-\alpha_k)}{\alpha^2(\alpha+1)}$$$
+
+================================================================================
+
+</xmp>
+   </BODY>
+</HTML>
