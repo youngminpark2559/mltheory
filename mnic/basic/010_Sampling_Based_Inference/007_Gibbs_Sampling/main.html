@@ -1,1 +1,88 @@
-f
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+
+This is notes which I wrote as I was taking video lecture originated from
+https://www.youtube.com/watch?v=Q9EYGw5QbHc&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz
+
+================================================================================
+Gibbs sampling: special case of M-H algirhtm
+
+================================================================================
+Gibbs sampling algorithm
+
+# Latent random variable z
+# Suppose z can be respresented 
+# by full joint distribution of M number of states (or latent variables) (?)
+$$$p(z)=p(z_1,\cdots,z_M)$$$
+
+state=$$${z_i:i=1,\cdots,M}$$$
+
+# Initialize M number of z
+$$${z_i:1,\cdots,M}$$$
+
+For loop: $$$\tau=1,\cdots,T$$$
+  # Update the model (which is composed of M number of latent variables?) 
+  # by using only "one sampled variable "
+  # Remaining latent variables are considered as "observed evidences"
+  Sample $$$z_1^{(\tau+1)} \sim p(z_1|z_2^{(\tau)},z_3^{(\tau)},\cdots,z_M^{(\tau)})$$$
+
+  # Use updated $$$z_1^{(\tau+1)}$$$
+  Sample $$$z_2^{(\tau+1)} \sim p(z_2|z_1^{(\tau+1)},z_3^{(\tau)},\cdots,z_M^{(\tau)})$$$
+
+  Sample $$$z_j^{(\tau+1)} \sim p(z_j|z_1^{(\tau+1)},\cdots,z_{j-1}^{(\tau+1)},z_{j+1}^{(\tau)},z_{M}^{(\tau)})$$$
+
+  Sample $$$z_M^{(\tau+1)} \sim p(z_M|z_1^{(\tau+1)},z_2^{(\tau+1)},\cdots,z_{M-1}^{(\tau+1)})$$$
+
+</xmp>
+   </BODY>
+</HTML>
