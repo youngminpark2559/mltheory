@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+img {
+ width:900px;
+}
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+https://datascienceschool.net/view-notebook/87b67dafd7544e3380af278ff4f22d77/
+
+================================================================================
+9.1 Estimate parameters
+
+Assumption of data analysis:
+data_you_want_to_analyze=realize_event_by_random_variable(event)
+
+================================================================================
+Intensity of your interest:
+Distribution of random_variable > data_you_want_to_analyze
+
+================================================================================
+Within probabilisitic_perspective:
+  inferenced_distribution=inference_distribution_of_random_variable(data)
+
+================================================================================
+distributions_list=[bernoulli,binomial,gaussian_normal,other_basic_distributions]
+
+If distributions_you_want_to_know is in distributions_list:
+  # 2 steps to know distribution from data
+  
+  inspected_distribution=inspect_data_to_know_kind_of_distribution(data)
+
+  inferenced_parameter_values=inference_parameter_of_the_found_distribution(data,inspected_distribution)
+
+================================================================================
+Task: find distribution kind:
+  if data is 0 or 1:
+    distribution=bernoulli_distribution
+  elif data is categorical values:
+    distribution=category_distribution
+  elif data is 0<=float<=1:
+    distribution=beta_distribution
+  elif data is 0 or positive_vallue:
+    distribution=gamma_distribution or F_distribution
+  elif data follows student_t_dist and gaussian_normal_dist:
+    ret=normality_test(data)
+
+    if ret==0:
+      distribution=student_t_dist
+    elif ret==1:
+    distribution=gaussian_normal_dist
+
+================================================================================
+estimated_parameter=parameter_estimation(data,found_distribution)
+
+estimated_parameter has highest likelihood for parameter
+
+================================================================================
+parameter_estimation_methods=[
+  method_of_moment,maximum_likelihood_estimation,Bayesian_estimation]
+
+================================================================================
+Assumption:
+moment of sample data == moment of probability distribution
+
+1st moment (mean)
+
+$$$\mu = \text{E}[X] \triangleq \bar{x} = \dfrac{1}{N} \sum_{i=1}^N x_i $$$
+
+$$$N$$$: number of data
+$$$x_i$$$: sample data
+$$$\mu$$$: inferenced mean parameter (by using sample data) of probability distribution
+
+================================================================================
+2nd moment (variance)
+
+$$$ \sigma^2 = \text{E}[(X-\mu)^2] \triangleq \bar{s}^2 = \dfrac{1}{N-1} \sum_{i=1}^N (x_i - \bar{x})^2 $$$
+
+$$$\sigma^2$$$: inferenced variance parameter (by using sample data) of probability distribution
+
+================================================================================
+Inference parameter $$$\mu$$$ of Bernoulli distribution by using moment method
+
+$$$N_1$$$: number of data "1"
+
+$$$ \text{E}[X] = \mu \triangleq \bar{x} = \dfrac{1}{N} \sum_{i=1}^N x_i  = \dfrac{N_1}{N} $$$
+param_mu=estimate_parameter(sample_data)
+
+================================================================================
+mean_param,variance_param=estimate_parameters_using_moment_method(data)
+
+$$$ \text{E}[X] = \mu \triangleq \bar{x} = \dfrac{1}{N} \sum_{i=1}^N x_i $$$
+mean_param=estimate_mean_param(data,num_of_data)
+
+$$$ \text{E}[(X-\mu)^2] = \sigma^2 \triangleq s^2 = \dfrac{1}{N-1} \sum_{i=1}^N (x_i - \bar{x})^2 $$$
+variance_param=estimate_variance_param(data,num_of_data)
+
+Parameters of normal distribution are defined by "moment"
+
+================================================================================
+param_a,param_b=estimate_param_using_moment_method(data)
+
+You should solve following non-linear simultaneous equation
+
+$$$ \text{E}[X] = \dfrac{a}{a+b} \triangleq \bar{x}  $$$
+$$$ \text{E}[(X-\mu)^2] = \dfrac{ab}{(a+b)^2(a+b+1)} \triangleq s^2 $$$
+
+You can get the solution
+
+$$$ a = \bar{x} \left( \frac{\bar{x} (1 - \bar{x})}{s^2} - 1 \right) $$$
+$$$ b = (1 - \bar{x}) \left( \frac{\bar{x} (1 - \bar{x})}{s^2} - 1 \right) $$$
+
+================================================================================
+Create following beta distribution
+- Parameters: a=15,b=15
+- 100 data which follows beta distribution
+
+np.random.seed(0)
+x = sp.stats.beta(15, 12).rvs(1000)
+sns.distplot(x, kde=False, norm_hist=True)
+plt.title("Histogram plot which is plotted by using 1000 number of sample data which follows beta distribution")
+plt.show()
+/home/young/Pictures/2019_07_01_19:45:36.png
+
+================================================================================
+- Estimate parameters a and b of beta distribution
+- by using 1000 number of sample data which follows beta distribution
+
+def estimate_beta(x):
+    x_bar = x.mean()
+    s2 = x.var()
+    a = x_bar * (x_bar * (1 - x_bar) / s2 - 1)
+    b = (1 - x_bar) * (x_bar * (1 - x_bar) / s2 - 1)
+    return a, b
+
+params = estimate_beta(x)
+print(params)
+# (15.455080715555846, 12.292335248133712)
+
+================================================================================
+Estimated beta distribution
+
+xx = np.linspace(0, 1, 1000)
+sns.distplot(x, kde=False, norm_hist=True)
+plt.plot(xx, sp.stats.beta(params[0], params[1]).pdf(xx))
+plt.title("Histogram: actual data, Curve line: estimated PDF of beta distribution")
+plt.show()
+/home/young/Pictures/2019_07_01_19:47:33.png
+
+</xmp>
+   </BODY>
+</HTML>
