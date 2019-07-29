@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* 
+img {
+ width:900px;
+}
+*/
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+This is personal study note
+Copyright and original reference:
+https://www.youtube.com/watch?v=gchgZ2zp8uo&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=61
+
+================================================================================
+3 research questions in HMM
+  - Evaluation question
+  - Decoding question
+    - Almost supervised learning
+    - Forward probability
+    - Backward probability
+    - Viterbi decoding algorithm
+  - Learning question
+    - Unsupervised learning for HMM: Baum-Welch algorithm (= EM algorithm)
+    - Only observation sequence X is give
+    - Parameters $$$\pi,a,b$$$ are not give
+  
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/005_Baum-welch_algorithm/pics/2019_07_29_16:03:04.png' alt=''><xmp>
+
+text = crawl_twitter_text(twiter)
+
+text: X
+
+================================================================================
+$$$\pi,a,b$$$
+  - Parameters in HMM
+
+Forward algorithm for evaluation(params=[pi,a,b])
+
+Viterbi algorithm for decoding(params=[pi,a,b])
+
+================================================================================
+pi,a,b=know parameters(info1=Latent factor information Z, info2=Observation sequence X)
+
+================================================================================
+get(Latent factor information Z) is hard. 
+
+================================================================================
+Real world case
+
+you have $$$X$$$
+
+Inference $$$Z, \pi, a, b$$$
+
+================================================================================
+hat: estimated value
+
+$$$\pi$$$,a,b=estimate parameters(infomation=X)
+
+optimaly estimated Z=find most probable Z.by Viterbi decoding(information=[X,$$$\pi$$$,a,b])
+
+================================================================================
+Step1:
+  fix(Z)
+  optimized_params=optimize_estimation(\bar{\pi},\bar{a},\bar{b})
+
+Step2:
+  fix(optimized_params)
+  optimized_Z=optimize_estimation(Z)
+
+while True:
+  Step1()
+  Step2()
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/005_Baum-welch_algorithm/pics/2019_07_29_16:13:42.png' alt=''><xmp>
+
+================================================================================
+randomly_initialize(parameters=[$$$\pi$$$,a,b])
+
+Expectation_step:
+  $$$\pi$$$,a,b=estimate_parameters(X)
+
+  prob=get_probability_value(P(Z|X,$$$\theta=\pi,a,b$$$))
+
+  Z=prob
+
+Maximization step:
+  optimized_params=optimize($$$\pi$$$,a,b)
+
+while True:
+   Expectation_step()
+   Maximization_step()
+
+================================================================================
+EM algorithm for HMM
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/005_Baum-welch_algorithm/pics/2019_07_29_16:20:06.png' alt=''><xmp>
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/005_Baum-welch_algorithm/pics/2019_07_29_16:23:25.png' alt=''><xmp>
+
+</xmp>
+   </BODY>
+</HTML>
