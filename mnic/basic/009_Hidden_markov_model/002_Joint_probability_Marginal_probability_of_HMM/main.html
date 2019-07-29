@@ -60,7 +60,7 @@ Forward probability
 Backward probability
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_12:25:48.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_12:25:48.png' alt=''><xmp>
 
 $$$\pi$$$: parameter which is used to affect "first latent factor z"
 $$$a$$$: transition probability of "state"
@@ -97,7 +97,7 @@ And you found (inferenced) "mixture components", "probability of selecting mixtu
 This is "learning question"
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_12:37:21.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_12:37:21.png' alt=''><xmp>
 
 You can see Z
 
@@ -117,7 +117,7 @@ Decoding question: unsupervised learnig
 When you have "train data" (X and M), how can you know parameters $$$\pi,a,b$$$
 ---> Essentially it's counting method
 
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_12:41:11.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_12:41:11.png' alt=''><xmp>
 
 ================================================================================
 L: loaded dice (which is unfair dice)
@@ -153,7 +153,7 @@ What you saw:
   - You can calculate parameters $$$\pi, a, b$$$
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:02:12.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_13:02:12.png' alt=''><xmp>
 
 ================================================================================
 HMM can be "Bayesian network"
@@ -241,7 +241,7 @@ But evaluating all cases takes much time
 For this, you should use another method
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:21:43.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_13:21:43.png' alt=''><xmp>
 
 - Now, your question is "observation X" is given
 inference best likely latent factor Z
@@ -286,7 +286,7 @@ $$$P(A,B,C) = P(A)P(B|A)P(C|A,B)$$$
 
 ================================================================================
 By using above "factorization", "following complex form" should be changed into simple recursive form
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:31:14.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_13:31:14.png' alt=''><xmp>
 
 ================================================================================
 First, you should consider "partial joint probability" than "full joint probability"
@@ -295,7 +295,7 @@ $$$P(x_1,\cdots,x_t,z_t^k=1)$$$
   - $$$x_1,\cdots,x_t$$$: all observations are in the joint distribution
   - $$$z_t^k=1$$$: only latent factor at time t is in the joint distribution
 
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:34:50.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_13:34:50.png' alt=''><xmp>
 
 Remaining parts are marginalized out
 
@@ -307,7 +307,7 @@ Note that $$$z_{t-1}$$$ from $$$\sum\limits_{z_{t-1}}$$$
 $$$\sum\limits_{z_{t-1}} P(x_1,\cdots,x_{t-1},x_t,z_{t-1},z_t^k=1)$$$
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:38:58.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_probability_Marginal_probability_of_HMM/pics/2019_07_29_13:38:58.png' alt=''><xmp>
 
 Apply above "factorization" on it
 

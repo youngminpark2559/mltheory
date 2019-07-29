@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>My first HTML document</TITLE>
+      <style rel="stylesheet" type="text/css">
+body {
+ font-size: 20px;
+ 
+ margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 80px;
+    margin-left: 100px;
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 80px;
+    padding-left: 80px;
+    
+    line-height:35px;
+}
+/* img {
+ width:900px;
+} */
+</style>
+      <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    "HTML-CSS" : {
+        availableFonts : ["STIX"],
+        preferredFont : "STIX",
+        webFont : "STIX-Web",
+        imageFont : null
+    }
+});
+</script>
+     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js" type="text/javascript">    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$$$','$$$'] ],
+                   displayMath: [ ['$$$$','$$$$'] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
+   </HEAD>
+   <BODY>
+<xmp>
+This is personal study note
+Copyright and original reference:
+https://www.youtube.com/watch?v=Rt6_3_GEbCY&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=59
+
+================================================================================
+In HMM, decoding problem is complicated from factorization on full joint probability
+
+In decoding problem:
+   too complicated equation = factorize(full joint probability distribution)
+
+   recursive but simple form = trick(too complicated equation)
+
+================================================================================
+solve.by_recursion(repeating problem)
+
+solve.by_dynamic_programming(repeating problem)
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/003_Recursion_and_Dynamic_programming_on_repeating_problem_Forward_probability_Backward_probability_in_HMM/pics/2019_07_29_14:08:09.png' alt=''><xmp>
+
+computation.recycle(recurrences with overlapping subinstances)
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/003_Recursion_and_Dynamic_programming_on_repeating_problem_Forward_probability_Backward_probability_in_HMM/pics/2019_05_20_08:43:22.png' alt=''><xmp>
+
+F(): fibonacci sequence
+
+F(4) = F(3) + F(2) = ....
+
+F(3): 1 compuation
+F(2): 2 compuations
+F(1): 3 compuations
+F(0): 2 compuations
+
+repeating problem.solve.by_using(recursive calculation)
+: too much computation and time by iterative computation
+
+================================================================================
+Then, use "dynamic programming"
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/003_Recursion_and_Dynamic_programming_on_repeating_problem_Forward_probability_Backward_probability_in_HMM/pics/2019_07_29_14:14:47.png' alt=''><xmp>
+
+================================================================================
+Recursion: top down
+Dynamic programming bottom up 
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/003_Recursion_and_Dynamic_programming_on_repeating_problem_Forward_probability_Backward_probability_in_HMM/pics/2019_05_20_08:46:05.png' alt=''><xmp>
+
+================================================================================
+Recursion uses stackframe
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/003_Recursion_and_Dynamic_programming_on_repeating_problem_Forward_probability_Backward_probability_in_HMM/pics/2019_05_20_08:46:30.png' alt=''><xmp>
+
+================================================================================
+Dynamic programming uses memorization table
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/003_Recursion_and_Dynamic_programming_on_repeating_problem_Forward_probability_Backward_probability_in_HMM/pics/2019_05_20_08:46:51.png' alt=''><xmp>
+
+================================================================================
+Forward probability calculation
+
+$$$\alpha_t^k$$$: forward probability
+
+dimension: time $$$\times$$$ states
+
+================================================================================
+Forward algorithm
+
+  - X and $$$\alpha_t^k$$$ is give, Z is unknown
+  - Forward algorithm answers "evaluation question"
+
+================================================================================
+Forward algorithm
+
+  - Initialize forward probability at time 1 (caculate forward probability in bottom like bottom-up dynamic programming)
+  $$$\alpha_1^k = b_{k,x_1} \pi_k$$$
+
+  - Use iterative fomular
+  - Iterate until time T to grow $$$\alpha_1$$$ to $$$\alpha_T$$$
+  $$$a_t^k = b_{k,x_t} \sum\limits_{i} \alpha_{t-1}^i \alpha_{i,k}$$$
+
+  - returns $$$\sum\limits_{i} \alpha_T^i$$$
+  - It is answer for evaluation question
+
+================================================================================
+Proof of correctness
+
+$$$\sum\limits_{i} \alpha_T^i \\
+= \sum\limits_{i} P(x_1,\cdots,x_T,z_T^i=1) \\
+= P(x_1,\cdots,x_t)$$$
+
+================================================================================
+Where memorization table is used?
+  - When calculating forward probability $$$\alpha_t^k$$$
+
+================================================================================
+Limitation of the forward probability
+
+Suppose your goal is to inference $$$z_2$$$ by using forward probability
+
+inferenced probability for $$$z_2$$$ = forward probability (information=[x_1,x_2])
+
+================================================================================
+Limitation: 
+inferenced probability for $$$z_2$$$ is affected by also $$$x_3$$$
+
+================================================================================
+Backward probability
+
+inferenced latent factor $$$z_2$$$ = inference latent factor.use.backward probability(information=[x_1,x_2,x_3,...])
+
+================================================================================
+Backward probability
+
+inference latent factor z_2 = backward probability(information=whole sequence X)
+
+================================================================================
+Forward probability
+
+inference latent factor z_2 = backward probability(information=[x_1, x_2])
+
+
+
+</xmp>
+   </BODY>
+</HTML>
