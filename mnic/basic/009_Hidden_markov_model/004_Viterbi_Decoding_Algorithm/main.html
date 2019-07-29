@@ -52,8 +52,20 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
+This is personal study note
+Copyright and original reference:
+https://www.youtube.com/watch?v=O1U2NWaSYn4&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz
 
-https://www.youtube.com/watch?v=O1U2NWaSYn4&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=60
+================================================================================
+There is no application with only forward probability and backward probability
+
+================================================================================
+For decoding problem
+  - Viterbi decoding algorithm
+
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_07_29_15:36:46.png' alt=''><xmp>
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_05_20_10:11:06.png' alt=''><xmp>
@@ -67,12 +79,11 @@ Why did you create forward and backward probabilities?
 For representing 
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_05_20_10:14:31.png' alt=''><xmp>
 
-Joint probability
-Prob of latent factor z in k-th cluster at time t
-Prob of X
+It is joint probability between
+prob of latent factor z in k-th cluster at time t and prob of X
 
 ================================================================================
-Forward and backward probabilities can be written in detail (recursive form)
+Forward and backward probabilities can be written in detail (recursive form, repeating problem)
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_05_20_10:16:30.png' alt=''><xmp>
 
 $$$\alpha_t^k$$$ reduces $$$\alpha_{t-1}^i$$$
@@ -97,6 +108,7 @@ you observe all Xs
 But observations are used for one z
 
 But you want to assign most probable assignment into all hidden labels Zs
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_07_29_15:41:15.png' alt=''><xmp>
 
 ================================================================================
 So, this is lack for above ultimate goal
@@ -110,7 +122,7 @@ Viterbi decoding algorithm
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_05_20_10:24:34.png' alt=''><xmp>
 
 $$$k^*$$$: most probable assignment of specific cluster k
-$$$P(z^k=1|X)$$$: all observations Xs are given, prob of z^k ocurring
+$$$P(z^k=1|X)$$$: all observations Xs are given, prob of $$$z^k$$$ ocurring
 
 If you configure normalize term well, you can make following
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/004_Viterbi_Decoding_Algorithm/pics/2019_05_20_10:27:14.png' alt=''><xmp>
@@ -235,9 +247,8 @@ And multiplication is converted into summation
 ================================================================================
 Summary
 
-1. You have $$$\pi,a,b,X$$$
-2. You get new sequence
-3. You can do "most probable assignment" into new sequence
+When $$$\pi,a,b,X$$$ are given
+inference whole latent factor sequence Z? using Viterbi decoding algorithm
 
 </xmp>
    </BODY>
