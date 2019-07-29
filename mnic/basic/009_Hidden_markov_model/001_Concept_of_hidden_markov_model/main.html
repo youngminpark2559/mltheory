@@ -50,80 +50,162 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
+This is personal study note
 
-https://www.youtube.com/watch?v=GJW6trVTDWM&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=57
+Copyright and original reference:
+www.youtube.com/watch?v=GJW6trVTDWM&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz
 
 ================================================================================
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_06:18:16.png' alt=''><xmp>
+Gaussian Mixture Model
+  - In 2D, multiple points 
+  - GMM finds clusters of those points
+  - GMM can be used in 2D, 3D, 4D, ...
 
-* No time information
-* It contains spatial information
+================================================================================
+Space and time are different thing
+
+time
+  - irreversible
+
+How you can model some algorithm with adding "time" component
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_10:47:48.png' alt=''><xmp>
+
+- How HMM can be expressed?
+- HMM can also be expressed by graphical model
+- What is the major research questions in HMM?
+- To inspect research questions with HMM, you should know how to calculate probabilities, how to inference probabilities 
+- Link HMM with previous lectures
+- EM algorithm (which is used for GMM) is also used for HMM
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_10:52:06.png' alt=''><xmp>
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_10:53:23.png' alt=''><xmp>
+
+* Not considering "time information"
+* It contains "spatial information"
 * 3 clusters
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_06:18:52.png' alt=''><xmp>
 
-* What if points move based on time?
-* Then, how should Gaussian mixture model change?
+* What if points move based on time flow?
+* Then, how should Gaussian Mixture Model change?
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_06:19:15.png' alt=''><xmp>
 
-* Value at yesterday and value at today has relationship
+* "Moving point in time flow" is shown in various fields
+* "Value at yesterday" and "value at today" has relationship
+* In other words, "value at yesterday" affects "value at today"
+* And there can be latent driving force (random variable) which moves those values
 
 ================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_10:57:12.png' alt=''><xmp>
+
+* Latent driving force can be changed, resulting in different value-pattern
+
+================================================================================
+Question:
+It will be good if there is "time series based mixture model"
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_10:59:23.png' alt=''><xmp>
+
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_06:20:29.png' alt=''><xmp>
 
-* Gaussian mixture model in plate notation
+* Gaussian Mixture Model in plate notation
 * $$$N$$$: N number of data point which is expressed via x
-* $$$z$$$: latent factor which classifies N number of data point into which clusters 
+* $$$z$$$: latent factor which classifies N number of data point into clusters 
 * $$$\pi, \mu, \sigma$$$: parameters, contributes z and x
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_05:38:40.png' alt=''><xmp>
 
-Unfolded version
+Unfolded view
 
-* If parameter $$$\pi$$$ is fixed,
-$$$z_1,z_2,\cdots,z_N$$$ are independent
-* So, it's not good to expressen "time"
+* Parameter $$$\pi$$$ (which is modeled by multinomial distribution) affects latent factor z
+* If parameter $$$\pi$$$ is fixed value, $$$z_1,z_2,\cdots,z_N$$$ are independent
+* So, that case will not be good to expressen "time"
+* So, above graphical model should be changed
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_05:40:39.png' alt=''><xmp>
 
-* Change graphical model
-* Parameter $$$\pi$$$ affects $$$z_1$$$
-* Observe $$$x_1$$$
-* $$$z_1$$$ affects $$$z_2$$$
-* This graphical model can model the change of latent factor in terms of time
+* Parameter $$$\pi$$$ affects $$$z_1$$$ (which is latent factor at time 1)
+* $$$x_1$$$ is observed
+* $$$z_1$$$ affects $$$z_2$$$ (next latent factor to consider "time information")
+* This graphical model can model "the change of latent factors" in terms of time flow
 
 ================================================================================
-Hidden markov model is the model which considers GMM in terms of temporal causality
+"Hidden markov model" is the model where you considers GMM with "temporal causality"
 
-Hidden markov model = dynamic clustering
+Hidden Markov Model = dynamic clustering
 
 ================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_11:07:09.png' alt=''><xmp>
+
+================================================================================
+HMM in graphical model
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_05:48:53.png' alt=''><xmp>
+
+observarions: $$$ x_1, x_2, x_3$$$
+
+observation: discret or continuous
+
+Observation in GMM: continuous
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_05:49:08.png' alt=''><xmp>
 
-$$$P(x_1|z_1)$$$
+Above relation is modeled by $$$P(x_1|z_1)$$$
 
-Modeling discrete case of x: use binomial function
-Modeling continuous case of x: use Gaussian function
+Probability function P uses Gaussian normal distribution: continuous random variable is modeled
+
+Probability function P uses binomial or multinomial distribution: discrete random variable is modeled
+
+Probability distribution is your choice
 
 ================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_11:12:25.png' alt=''><xmp>
 $$$x_1,x_2,\cdots,x_T$$$: observations (data points) which has temporal causality
 
 $$$x_1$$$ is the thing before $$$x_2$$$
 
 ================================================================================
+Each x can have multiple observations
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_11:13:20.png' alt=''><xmp>
+
+In other words, it means x can be as vector
+
+================================================================================
+Latent (invisible) factor z
 Latent state z
 
-k number of time groups
+Suppose there is k number of dynamical time groups
 
-Continuous latent factor: Kalman filter
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_11:17:27.png' alt=''><xmp>
+
+Suppose x_1 is involved in "1 time group"
+Suppose there is no trend-change (no latent factor change)
+Suppose x_2 is involved in "1 time group"
+Suppose there is trend-change (latent factor change)
+Suppose x_2 is involved in "2 time group"
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_11:19:19.png' alt=''><xmp>
+
+K elements: K number of components
+
+================================================================================
+Continuous latent factor from HMM case: Kalman filter method
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_11:20:48.png' alt=''><xmp>
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_05:54:24.png' alt=''><xmp>
@@ -131,47 +213,70 @@ Continuous latent factor: Kalman filter
 * Initial state probabilities
 $$$P(z_1) \sim Mult(\{\pi_1,\pi_2,\cdots,\pi_N\})$$$
 
-Latent factor $$$z_1$$$ is sampled from Multinomial distribution 
-which has parameter $$$\pi$$$
-
-* So, you should run (know, define) parameter $$$\pi$$$ 
-to use hidden markov model
+  - First latent factor $$$z_1$$$ is sampled from Multinomial distribution 
+  - That multinomial distribution has parameter $$$\pi$$$
+  - That means, to train HMM, you should infer that $$$\pi$$$
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_05:57:54.png' alt=''><xmp>
 
 * Transition probabilities
-$$$P(z_t|z_{t-1}^i=1) \sim Mult(\{\alpha_{i,1},\alpha_{i,2},\cdots,\alpha_{i,k}\})$$$
+  - probability of $$$z_1$$$ to $$$z_2$$$
+  - $$$P(z_t|z_{t-1}^i=1) \sim Mult(\{\alpha_{i,1},\alpha_{i,2},\cdots,\alpha_{i,k}\})$$$
+    - at previous time, z is involved in 1, at current time, probability of cluster of z
+    - $$$z_{t-1}^i=1$$$: z's time cluster at previous time
+    - $$$z_t$$$: z's time cluster at current time
+    - Parameter $$$\alpha$$$ in Mult
 
-$$$z_{t-1}^i=1$$$: z's time cluster at previous time
-$$$z_t$$$: z's time cluster at current time
-
-* Parameter $$$\alpha$$$
-
-* $$$P(z_t^j=1|z_{t-1}^i=1) = \alpha_{i,j}$$$
-$$$z_{t-1}^i=1$$$: z in ith cluster is given
-$$$z_t^j=1$$$: z in jth cluster
+  - Other form
+    - $$$P(z_t^j=1|z_{t-1}^i=1) = \alpha_{i,j}$$$
+    $$$z_{t-1}^i=1$$$: z in i-th cluster is given
+    $$$z_t^j=1$$$: z in j-th cluster
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_06:03:29.png' alt=''><xmp>
 
-
-* Emission probabilities
+- Above edge is modeled by "emission probabilities"
 
 $$$P(x_t|z_t^i=1) \sim Mult(b_{i,1},\cdots,b_{i,m}) \sim f(x_t|\theta_t)$$$
 
-* $$$z_t^i$$$: z in ith cluster is given
-* $$$x_t$$$ observation x is what?
-* You suppose you deal with discrete case, 
-* So, use Multinomial function
-* parameter b for Multinomial function
+* $$$z_t^i$$$: latent factor z (in i-th cluster) is given
+* $$$x_t$$$ visible observation x
+  * Since you suppose that you deal with discrete case, 
+  * you use Multinomial function to model x
+  * b is parameter for Multinomial function
+  * m number of possible discrete observations
 
-$$$P(x_t^j=1|z_t^i=1) = b_{i,j}$$$
-$$$z$$$ in ith cluster is given
-probability of you see jth observation
+* How $$$b_{i,j}$$$ is modeled
+  - $$$P(x_t^j=1|z_t^i=1) = b_{i,j}$$$
+    - $$$z_t^i=1$$$ z: (in ith cluster) is given
+    - probability of j-th observation
 
 ================================================================================
 </xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_05_20_06:07:16.png' alt=''><xmp>
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_12:00:18.png' alt=''><xmp>
+- Suppose A, B, C, D are latent factors
+- State A ---> State B ---> State C .... based on probability, state changes
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/001_Concept_of_hidden_markov_model/pics/2019_07_29_12:00:53.png' alt=''><xmp>
+- Each state can express 1 or 2 as observations based on probability
+
+================================================================================
+Example
+
+State: professor is in anger
+
+You: you can't actually know professor's mind (state, and state is hidden)
+And via, for example, facial expression of professor, you can see the observation emitted from professor's mind state
+
+- (Mind) state of professor (latent factor z) can change (or does transition as time goes)
+
+- Professor's facial expression always looks changing
+But (inner mind of professor) latent factor can stay in same state
+
+- In conclusion, the main characterisitc of HMM is that 
+as time goes, "latent factors z" and "observations which are emited from latent factor z" are separated
 
 </xmp>
    </BODY>
