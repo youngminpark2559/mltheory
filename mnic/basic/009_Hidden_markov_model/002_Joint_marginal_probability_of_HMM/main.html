@@ -19,9 +19,9 @@ body {
     
     line-height:35px;
 }
-img {
+/* img {
  width:900px;
-}
+} */
 </style>
       <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -50,92 +50,144 @@ MathJax.Hub.Config({
    </HEAD>
    <BODY>
 <xmp>
-
+This is personal study note
+Copyright and original reference:
 https://www.youtube.com/watch?v=EPlrYy9KuNU&list=PLbhbGI_ppZISMV4tAWHlytBqNq1-lb8bz&index=58
 
 ================================================================================
-Main questions on HMM
-
-When you have topology from "Bayesian network", "HMM", or "M"
-
-you can have following questions
-
-Q1. Evaluation question
-when you have $$$\pi,a,b,X$$$
-$$$\pi$$$: paramter which is used to define initial latent state z
-$$$a$$$: probabilities which are used for moving z
-$$$b$$$: emission probabilities
-$$$X$$$: observation from random variable
-
-$$$P(X|M,\pi,a,b)$$$
-HMM will have distribution, and X is generated
-How that observation X is likely?
-$$$M$$$: HMM structure
-
-Q2. Decoding question
-When you have $$$\pi,a,b,X$$$
-
-Find $$$\arg_{z}\max P(Z|X,M,\pi,a,b)$$$
-$$$M$$$: HMM structure
-$$$X$$$: observed data
-$$$\pi,a,b$$$: parameters
-
-Find sequence of most likely latent factor which explain data x
-
-Q3. Learning question
-When you have X
-
-Find $$$\arg_{\pi,a,b} \max P(X|M,\pi,a,b)$$$
-
-Parameter inference learning task
-
-Similarily, in GMM, you have only X,
-then, you could find "mixture components", "probabilities of selecting mixtures"
+Following algorithms are important to HMM
+Forward probability
+Backward probability
 
 ================================================================================
-When you have train data (X and M), how can you know $$$\pi,a,b$$$
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_12:25:48.png' alt=''><xmp>
 
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_05_20_06:52:29.png' alt=''><xmp>
+$$$\pi$$$: parameter which is used to affect "first latent factor z"
+$$$a$$$: transition probability of "state"
+$$$b$$$: emission probability of "observation" from "state"
+$$$X$$$: observation, dataset observed based on emission probability
 
-L: loaded dice (unfair dice)
+================================================================================
+Q1. Evaluation question
+  - When you have $$$\pi,a,b,X$$$
+  - you can create HMM structure
+  - From HMM, observation X is generated
+  - That observation is how much likelike observation? (evaluate that observation)
+
+================================================================================
+Q2. Decoding question
+  - When you have $$$\pi,a,b,X$$$
+  - you also have observation X, HMM structure M
+  - Find sequence Z of most likely latent factor z
+  - Suppose you have data (observation)
+  - Which latent factor z (or flow of z) can explain observation in best way?
+
+================================================================================
+Q3. Learning question
+  - When you have X (observation like professor's facial expression)
+  - You don't know parameters $$$\pi, a, b$$$
+  - Find parameters $$$\pi, a, b$$$ which maximize probability of given data X
+  - That is, inference parameters, learn parameters
+
+================================================================================
+In GMM, you also have only X (data)
+
+And you found (inferenced) "mixture components", "probability of selecting mixtures"
+
+This is "learning question"
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_12:37:21.png' alt=''><xmp>
+
+You can see Z
+
+But Z should be marginalized out, but Z is invisible
+
+So, alternatively, you should use "EM algorithm" also for HMM like GMM case
+
+================================================================================
+Decoding question: supervised learnig
+  - All parameters (as true dataset) are given
+  - Against given X dataset, find most likely parameter Z
+
+Decoding question: unsupervised learnig
+  - like dynamic clustering
+
+================================================================================
+When you have "train data" (X and M), how can you know parameters $$$\pi,a,b$$$
+---> Essentially it's counting method
+
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_12:41:11.png' alt=''><xmp>
+
+================================================================================
+L: loaded dice (which is unfair dice)
 F: fair dice
 
-LLLLLFFF...: latent factor which only casino dealer knows
-1234253....: observation you can see
+LLLLLFFF...: "latent factor z" which only casino dealer knows in his mind
+1234253....: "observation x" you can see
+
+dataset=create_dataset(above_information)
+
+perform_supervised_learning(dataset)
 
 ================================================================================
-$$$P(\text{L} \rightarrow \text{L}) 
-= P(z_{t+1}=\text{L} | z_t = \text{L}) = a$$$
+$$$P(\text{L} \rightarrow \text{L}) = P(z_{t+1}=\text{L} | z_t = \text{L}) = a$$$
 
+Transition probability: state L at time t ---> state L at time t+1
+
+================================================================================
 $$$ P(x_{t}=1 | z_t = \text{L}) = b$$$
 
-================================================================================
-How to calculate?
+observation number is 1 at time t = emit_observatioin(state is L at time t)
 
-Use MLE, MAP, by counting events
+================================================================================
+How to calculate probabilities a and b?
+
+Use MLE, MAP by counting events
 
 Then, you can find $$$\pi,a,b$$$ when you have X and M
 
 ================================================================================
-HMM can be Bayesian network
+What you saw:
+  - When dataset (X) and model M are given
+  - You can calculate parameters $$$\pi, a, b$$$
 
 ================================================================================
-Suppose you have X and Z
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:02:12.png' alt=''><xmp>
 
-then, you can calculate $$$\pi,a,b$$$ using MLE, MAP with X and Z
+================================================================================
+HMM can be "Bayesian network"
 
-* If you have joint probability $$P(X,Z)$$,
-you can use Bayesian network in useful way
+================================================================================
+Suppose you have X (observation) and Z (latent factor or state)
 
-* In Bayesian network, you use "factorization" by using Bayesian network's topology
+$$$pi$$$, a, b = calculate_parameters(method=[MLE or MAP], observation=X, latent_factor=Z)
 
-* $$$P(X,Z) 
-= P(\{x_1,\cdots,x_t,z_1,\cdots,z_t\})
+================================================================================
+* If you have "full joint probability" like $$P(X,Z)$$, you can use "Bayesian network" in useful way
+
+================================================================================
+* In Bayesian network, you can use "factorization" by using "Bayesian network's topology"
+
+================================================================================
+* Factoize $$$P(X,Z)$$$
+
+$$$P(X,Z) = \\
+= P(x_1,\cdots,x_t,z_1,\cdots,z_t) \\
 = P(z_1)\times P(x_1|z_1) \times P(z_2|z_1) \times P(x_2|z_2) \times P(z_3|z_2) \times P(x_3|z_3)$$$
-$$$P(x_1|z_1)$$$: emission probability
-$$$P(z_2|z_1)$$$: transition probability
 
-$$$= \pi_{idx(z_1=1)} b_{idx(x_1=1),idx(z_1=1)} a_{idx(z_1=1),idx(z_2=1)\cdots}$$$
+$$$P(x_1|z_1)$$$: emission probability of observation $$$x_1$$$ from latent factor $$$z_1$$$
+$$$P(z_2|z_1)$$$: transition probability from current latent factor $$$z_1$$$ to next latent factor $$$z_2$$$
+
+================================================================================
+Meaning:
+
+$$$P(X,Z)$$$ is well factorized by "emission probability" and "transition probability"
+
+================================================================================
+You can write above notation using parameters $$$\pi,a,b$$$
+
+$$$= \pi_{idx(z_1=1)} \times b_{idx(x_1=1),idx(z_1=1)} \times a_{idx(z_1=1),idx(z_2=1)} \times \cdots$$$
 
 ================================================================================
 Suppose you know parameters $$$\pi,a,b$$$
@@ -147,64 +199,117 @@ $$$L\rightarrow L$$$: 70%
 Casino dealer use 70% of L
 
 ================================================================================
-$$$P(166,LLL)$$$
+Example of calculation "joint probability"
+
+$$$P(166,LLL)$$$: how much likely is this situation?
 $$$166$$$: observation
 $$$LLL$$$: Z
 
-$$$= \frac{1}{2} \times \frac{1}{10} \times \frac{7}{10} \times \frac{1}{2} \times \frac{7}{10} \times \frac{1}{2}$$$
-$$$\frac{1}{2}$$$: initial state probability (just assume)
-$$$\frac{1}{10}$$$: prob of ocurring 1
-$$$\frac{7}{10}$$$: use L
+$$$= \frac{1}{2} \times \frac{1}{10} \times \frac{7}{10} \times \frac{1}{2} \times \frac{7}{10} \times \frac{1}{2} \\$$$
+
+$$$\frac{1}{2}$$$: $$$\pi$$$? (just randomly assume)
+$$$\frac{1}{10}$$$: probability of "1" ocurring 
+$$$\frac{7}{10}$$$: use L from L
 
 $$$ = 0.0061$$$
 
 ================================================================================
-$$$P(166,FFF)$$$
+$$$P(166,FFF)$$$: how much likely is this situation?
 $$$166$$$: observation
 $$$LLL$$$: Z
 
-$$$=\frac{1}{2} \times \frac{1}{6} \times \frac{1}{2} \times \frac{1}{6} \times \frac{1}{2} \times \frac{1}{6}$$$
+$$$=\frac{1}{2} \times \frac{1}{6} \times \frac{1}{2} \times \frac{1}{6} \times \frac{1}{2} \times \frac{1}{6} \\$$$
+
 $$$\frac{1}{2}$$$: initial state probability (just assume)
-$$$\frac{1}{10}$$$: prob of ocurring 1
+$$$\frac{1}{10}$$$: prob of "1" ocurring
 $$$\frac{1}{2}$$$: use F from F
 
-$$$=5.7870e_{04}$$$
+$$$=5.7870e-{04}$$$: very low probability
 
 ================================================================================
-$$$P(166,FFF)$$$ is more likely
+Conclusion:
+Situation $$$P(166,FFF)$$$ is more likely
 
 ================================================================================
-You know $$$X$$$ but don't know $$$Z$$$
+But possible scenario: $$$2^3$$$
+2*2*2, x x x
 
-In GMM, you perform marginalize out wrt $$$Z$$$
+You evaluated only 2 cases
+
+But evaluating all cases takes much time
+
+For this, you should use another method
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:21:43.png' alt=''><xmp>
+
+- Now, your question is "observation X" is given
+inference best likely latent factor Z
+
+- Decoding question
+
+================================================================================
+Ultimately, in real case, you only know observation data X, you don't know latent factor Z
+
+================================================================================
+In GMM:
+  marginalize_out.wrt(Z)
+
+you perform marginalize out wrt $$$Z$$$
 $$$P(X|\theta) = \sum\limits_{z} P(X,Z|\theta)$$$
+
+================================================================================
+In HMM:
+  marginalize_out.wrt(Z)
 
 In HMM, you can marginalize out wrt $$$Z$$$
 $$$P(X|\pi,a,b) = \sum\limits_{Z} P(X,Z|\theta)$$$
 
+================================================================================
 $$$P(X) = \sum\limits_{Z} P(X,Z)$$$
-find $$$P(X)$$$
-remove $$$Z$$$ by summing wrt $$$Z$$$
 
-$$$Z$$$ is random variables: $$$z_1,\cdots,z_t$$$
+# To remove Z
+perform_summation(P(X,Z)).wrt(Z)
+
+  - Z is multiple random variables (multiple latent factors) = $$$\{z_1,z_2,\cdots,z_t\}$$$
+
+================================================================================
+Full joint distribution form
 $$$= \sum\limits_{z_1} \cdots \sum\limits_{z_t} P(x_1,\cdots,x_t,z_1,\cdots,z_t)$$$
 
 Perform factorization
 $$$= \sum\limits_{z_1} \cdots \sum\limits_{z_t} \pi_{z_1} \prod_{t=2}^T a_{z_{t-1},z_t} \prod_{t=1}^{T} b_{z_t,x_t}$$$
 
-Factorization without constraint
+================================================================================
+Possible factorization even without constraint
 $$$P(A,B,C) = P(A)P(B|A)P(C|A,B)$$$
 
 ================================================================================
+By using above "factorization", "following complex form" should be changed into simple recursive form
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:31:14.png' alt=''><xmp>
+
+================================================================================
+First, you should consider "partial joint probability" than "full joint probability"
+
 $$$P(x_1,\cdots,x_t,z_t^k=1)$$$
-$$$x_1,\cdots,x_t$$$: all observations
-$$$z_t^k=1$$$: latent factor at t
+  - $$$x_1,\cdots,x_t$$$: all observations are in the joint distribution
+  - $$$z_t^k=1$$$: only latent factor at time t is in the joint distribution
 
-</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_05_20_08:03:16.png' alt=''><xmp>
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:34:50.png' alt=''><xmp>
 
-Marginalized out.
+Remaining parts are marginalized out
 
-$$$\sum\limits_{\pi_{t-1}} P(x_1,\cdots,x_{t-1},x_t,z_{t-1},z_t^k=1)$$$
+================================================================================
+From above equation, only one latent factor $$$z_{t-1}$$$ is introduced
+
+Note that $$$z_{t-1}$$$ from $$$\sum\limits_{z_{t-1}}$$$
+
+$$$\sum\limits_{z_{t-1}} P(x_1,\cdots,x_{t-1},x_t,z_{t-1},z_t^k=1)$$$
+
+================================================================================
+</xmp><img src='https://raw.githubusercontent.com/youngminpark2559/mltheory/master/mnic/basic/009_Hidden_markov_model/002_Joint_marginal_probability_of_HMM/pics/2019_07_29_13:38:58.png' alt=''><xmp>
+
+Apply above "factorization" on it
 
 ================================================================================
 Conclusion
